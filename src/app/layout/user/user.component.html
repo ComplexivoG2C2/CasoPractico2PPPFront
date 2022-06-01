@@ -1,0 +1,154 @@
+
+<section class="bst-section">
+
+  <mat-toolbar class="mat-bar">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()" >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+      <mat-icon>exit</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
+      <div class="contenedor-perfil">
+        <div class="imagem-mat" style="background-image:url({{persona.urlFoto}})" referrerpolicy="no-referrer"></div>
+        <div>
+          <h4>{{rolnombre}}</h4>
+          <h4>{{persona.nombrescompletos}}</h4>
+          <br>
+        </div>
+      </div>
+
+      <ng-container>
+
+        <div [ngSwitch]="persona.rol">
+
+          <div class="list-group" *ngSwitchCase="'AUT'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Coordinador de Vinculación
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/cordinadorvinculacion']"
+                      routerLinkActive="active">-Nueva Asignación</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/vercordinadorvinculacion']"
+                      routerLinkActive="active">-Asignación Actual</button>
+            </mat-expansion-panel>
+          </div>
+<!--Cordinado de VC-->
+          <div class="list-group" *ngSwitchCase="'CV'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+         .....................
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
+                      routerLinkActive="active">-Anexo  ....</button>
+              <button mat-button class="id-menus" [routerLink]="['',persona.nombrescompletos]"
+                      routerLinkActive="active">-Firmar ...</button>
+            </mat-expansion-panel>
+          </div>
+
+
+<!--Cordinado de Carrera-->
+          <div class="list-group" *ngSwitchCase="'CC'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                 coordinadorrrr
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
+                      routerLinkActive="active">-Nueva Asignación</button>
+            </mat-expansion-panel>
+          </div>
+
+<!--Tutor academico-->
+          <div class="list-group" *ngSwitchCase="'TA'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                .....jhhhh
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
+                      routerLinkActive="active">-///////////////////</button>
+
+
+            </mat-expansion-panel>
+          </div>
+ <!--Tutor empresarial-->
+          <div class="list-group" *ngSwitchCase="'TE'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+             .....hhh
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
+                      routerLinkActive="active">-............</button>
+
+              </mat-expansion-panel>
+          </div>
+ <!--Resposanle de PPP-->
+          <div class="list-group" *ngSwitchCase="'RPPP'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                 .....
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="[' ',persona.cedula]"
+                      routerLinkActive="active">-.....</button>
+            </mat-expansion-panel>
+          </div>
+<!--Estudiante-->
+          <div class="list-group" *ngSwitchCase="'EST'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Solicitud
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
+                      routerLinkActive="active">-.....</button>
+            </mat-expansion-panel>
+          </div>
+
+        </div>
+      </ng-container>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+
+  </mat-drawer-container>
+  <app-footer></app-footer>
+
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</section>

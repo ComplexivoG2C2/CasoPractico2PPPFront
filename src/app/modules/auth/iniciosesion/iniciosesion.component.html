@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div>
+
+  <div *ngIf="habilitar == true">
+    <div class="contenedor">
+      <mat-card class="example-card">
+        <mat-card-subtitle>Practicas Preprofesionales</mat-card-subtitle>
+        <mat-card-title>INICIAR SESIÓN</mat-card-title>
+        <mat-card-content>
+          <br>
+          <p class="mensaje">Bienvenidos a la plataforma de "PRACTICAS PREPROFESIONALES"
+            del Instituto Superior Tecnológico Del Azuay. </p>
+          <p class="mensaje">Para ingresar debe
+            pertenecer a la comunidad educativa</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-raised-button color="primary"  (click)="signInWithGoogle()">Ingresar</button>
+        </mat-card-actions>
+        <mat-card-content>
+          <br>
+          <p class="mensaje">En el caso de ser una empresa externa</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-raised-button color="primary"  >Ingresar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="habilitar == false">
+    <div class="contenedor">
+      <mat-card class="example-card">
+        <mat-card-subtitle>Practicas Preprofesionales</mat-card-subtitle>
+        <mat-card-title>REGISTRARSE</mat-card-title>
+        <mat-card-content>
+          <br>
+          <p style="text-align: justify">A los miembros que ingresan por primera vez a la plataforma de Gestion de Practicas Preprofesionales ,
+            se deben identificar, por ello es necesario que ingrese su número de cédula.</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <form class="example-form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>CÉDULA</mat-label>
+            <input type="text" matInput [formControl]="cedulaFormControl" [errorStateMatcher]="matcher"
+                   placeholder="Ex. 0123456789" (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" [(ngModel)]="userRequest.cedula">
+
+            <mat-error *ngIf="cedulaFormControl.hasError('pattern') && !cedulaFormControl.hasError('required')">
+              Cedula Invalida
+            </mat-error>
+            <mat-error *ngIf="cedulaFormControl.hasError('required')">
+              Cédula es <strong>requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="create()">Ingresar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader">
+    <div>
+      <img src="assets/images/bienve.gif" width="300">
+    </div>
+  </div>
+
+</ng-container>
+</body>
+</html>
+
