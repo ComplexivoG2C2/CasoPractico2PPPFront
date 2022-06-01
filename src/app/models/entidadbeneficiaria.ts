@@ -17,5 +17,5 @@ export class Entidadbeneficiaria {
   correoAdministrador?:string;
   descripcionEmpresa?:string;
   fecha_inicio_periodo?:Date;
-  fecha_fin_periodo?:Date;
+  fecha_fin_periodo?:Date; //commit
 }
