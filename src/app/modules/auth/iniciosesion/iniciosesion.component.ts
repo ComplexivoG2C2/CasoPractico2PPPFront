@@ -122,7 +122,7 @@ export class IniciosesionComponent implements OnInit {
       }
     )
   }
-
+//rama oscar
   //Metodo de ocultar y mostrar componetes.
   setHabilitar(habilitar:boolean):void{
     this.habilitar=(this.habilitar==true)? false: true;
