@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+//probando
 export class IniciosesionService {
   private urlEndPoint:string='http://localhost:8080/api/auth';
 
