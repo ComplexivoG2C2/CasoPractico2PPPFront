@@ -8,8 +8,10 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
-      <mat-icon>exit</mat-icon>
+    <img src="/assets/images/logooo.png" alt="10px" height="50px">
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="material-icons teal-color" aria-label="Example icon-button with heart icon" (click)="logout()">
+      <mat-icon>settings_power</mat-icon>
     </button>
   </mat-toolbar>
 
@@ -27,21 +29,12 @@
       <ng-container>
 
         <div [ngSwitch]="persona.rol">
-
+ <!--Admin-->
           <div class="list-group" *ngSwitchCase="'AUT'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Coordinador de Vinculación
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/cordinadorvinculacion']"
-                      routerLinkActive="active">-Nueva Asignación</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/vercordinadorvinculacion']"
-                      routerLinkActive="active">-Asignación Actual</button>
-            </mat-expansion-panel>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/cordinadorvinculacion']"
+                      routerLinkActive="active">> Asignar Coordinacion de Vinculación</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/vercordinadorvinculacion']"
+                      routerLinkActive="active">> Ver Asignación Actual</button>
           </div>
 <!--Cordinado de VC-->
           <div class="list-group" *ngSwitchCase="'CV'">

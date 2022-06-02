@@ -6,15 +6,18 @@ import {RouterModule, Routes} from "@angular/router";
 import {BienvenidaComponent} from "./bienvenida/bienvenida.component";
 import {MaterialFileInputModule} from "ngx-material-file-input";
 import { Anexo1Component } from './anexo1/anexo1.component';
+import { AsignarcordinadorvincComponent } from './asignarcordinadorvinc/asignarcordinadorvinc.component';
+import { VercordinadorvincComponent } from './vercordinadorvinc/vercordinadorvinc.component';
 
 
 const routes: Routes = [
-  {
-    path: 'bienvenida',
+  {path: 'bienvenida',
     component: BienvenidaComponent
-  },
-  {
-    path: 'anexo1',
+  },{path:'cordinadorvinculacion',
+    component:AsignarcordinadorvincComponent
+  },{path:'vercordinadorvinculacion',
+    component:VercordinadorvincComponent
+  },{ path: 'anexo1',
     component: Anexo1Component
   }
 
@@ -23,7 +26,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     BienvenidaComponent,
-    Anexo1Component
+    Anexo1Component,
+    AsignarcordinadorvincComponent,
+    VercordinadorvincComponent
   ],
   imports: [
     CommonModule,
