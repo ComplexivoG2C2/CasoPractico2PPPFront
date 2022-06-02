@@ -1,4 +1,4 @@
-export class Entidadbeneficiaria {
+export class Empresa{
   id?:number;
   idEntidad?:number;
   nombre?:String;

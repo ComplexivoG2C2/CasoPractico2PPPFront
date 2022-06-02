@@ -1,10 +1,23 @@
 footer{
   color: rgb(255, 183, 0);
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   width:100%;
   height:200px;
   background: rgba(2, 0, 0, 0.78);
+}
+strong.letras{
+  color: white;
+  text-align: start;
+}
+a.letrass{
+  color: white;
+  text-align: start;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.espacio{
+  color: #020000C6;
 }

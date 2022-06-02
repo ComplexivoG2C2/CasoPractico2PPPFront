@@ -6,8 +6,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {BienvenidaComponent} from "./bienvenida/bienvenida.component";
 import {MaterialFileInputModule} from "ngx-material-file-input";
 import { Anexo1Component } from './anexo1/anexo1.component';
-import { Anexo2Component } from './anexo2/anexo2.component';
-import {MatStepperModule} from '@angular/material/stepper';
+
 
 const routes: Routes = [
   {
@@ -17,19 +16,14 @@ const routes: Routes = [
   {
     path: 'anexo1',
     component: Anexo1Component
-  },
-  {
-    path: 'anexo2',
-    component: Anexo2Component
   }
+
 ]
 
 @NgModule({
   declarations: [
     BienvenidaComponent,
-    Anexo1Component,
-    Anexo2Component,
-
+    Anexo1Component
   ],
   imports: [
     CommonModule,
@@ -37,8 +31,7 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialFileInputModule,
-    MatStepperModule
+    MaterialFileInputModule
   ],
   exports: [RouterModule]
 })
