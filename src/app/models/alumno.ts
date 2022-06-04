@@ -1,4 +1,5 @@
 export class Alumno {
+  //comit
   cedula?:String;
   primerApellido?:String;
   segundoApellido?:String;
