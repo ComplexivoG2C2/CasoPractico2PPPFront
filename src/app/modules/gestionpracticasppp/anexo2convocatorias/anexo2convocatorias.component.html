@@ -1,0 +1,138 @@
+<mat-stepper orientation="vertical" [linear]="isLinear"#stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Resgistro</ng-template>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>CREACION DE UNA EMPRESA</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre de la Empresa</mat-label>
+            <input matInput formControlName="nombre"  required [(ngModel)]="empresa.nombre">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Ciudad</mat-label>
+            <input matInput formControlName="ciudad"  required [(ngModel)]="empresa.ciudad">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion"  required [(ngModel)]="empresa.direccion">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Téléfono</mat-label>
+            <input matInput formControlName="telefono" placeholder="Ex. (+593)12456789"
+                   (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.telefonoEmpresa">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="correo" placeholder="Ex. empresa@gmail.com" required [(ngModel)]="empresa.emailEmpresa">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Ex. La entidad es una...." [(ngModel)]="empresa.descripcionEmpresa" name="descripcionEmpresa"></textarea>
+          </mat-form-field>
+
+
+        </mat-card-content>
+        <div>
+          <button mat-button matStepperNext color="primary">Siguiente</button>
+        </div>
+      </mat-card>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Datos de la empresa">
+    <form [formGroup]="secondFormGroup">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>EMPRESA</mat-card-title>
+          <mat-card-subtitle>....</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+
+          <h3>INFORMACIÓN DEL REPRESENTANTE</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombres y Apellidos</mat-label>
+            <input matInput formControlName="nombre" required [(ngModel)]="empresa.representante">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Cédula</mat-label>
+            <input matInput formControlName="cedula" placeholder="Ex. 1234567890"
+                   (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.celularRepresentante">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="correo" placeholder="Ex. representante@gmail.com" required [(ngModel)]="empresa.emailRepresentante">
+          </mat-form-field>
+          <h3>INFORMACIÓN DE LA EMPRESA</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombres completos</mat-label>
+            <input matInput formControlName="nombre1" required [(ngModel)]="empresa.nombreAdministrador">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Cédula</mat-label>
+            <input matInput formControlName="cedula1"
+                   (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.cedulaAdministrador">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="correo1" placeholder="Ex. admino@gmail.com" required [(ngModel)]="empresa.correoAdministrador">
+          </mat-form-field>
+
+
+
+
+        </mat-card-content>
+        <div>
+          <button mat-button matStepperPrevious color="warn">Atras</button>
+          <button mat-button matStepperNext color="primary">Siguente</button>
+        </div>
+      </mat-card>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finalizar</ng-template>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>EMPRESA</mat-card-title>
+        <mat-card-subtitle>Creación de la Entidad Beneficiaria</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+
+
+
+
+        <h3><strong>INFORMACIÓN DE LA EMPRESA</strong></h3>
+        <h4><strong>Nombre: </strong>{{empresa.nombre}}</h4>
+        <h4><strong>Ciudad: </strong>{{empresa.ciudad}}</h4>
+        <h4><strong>Dirección: </strong>{{empresa.direccion}}</h4>
+        <h4><strong>Teléfono: </strong>{{empresa.telefonoEmpresa}}</h4>
+        <h4><strong>Correo: </strong>{{empresa.emailEmpresa}}</h4>
+        <h4><strong>Descripción:</strong>{{empresa.descripcionEmpresa}}</h4>
+        <h3><strong>INFORMACIÓN DEL REPRESENTANTE DE LA EMPRESA</strong></h3>
+        <h4><strong>Nombre:</strong> {{empresa.representante}}</h4>
+        <h4><strong>Cédula: </strong>{{empresa.celularRepresentante}}</h4>
+        <h4><strong>Correo: </strong>{{empresa.celularRepresentante}}</h4>
+        <h3><strong>INFORMACIÓN DEL ADMINISTRADOR DE LA EMPRESA</strong></h3>
+        <h4><strong>Nombre: </strong>{{empresa.nombreAdministrador}}</h4>
+        <h4><strong>Cédula: </strong>{{empresa.cedulaAdministrador}}</h4>
+        <h4><strong>Correo:</strong> {{empresa.correoAdministrador}}</h4>
+
+
+
+
+      </mat-card-content>
+      <div>
+        <button mat-button matStepperPrevious color="warn">Atrás</button>
+        <button mat-raised-button color="primary" (click)="crearEmpresa(empresa)">Registrar</button>
+      </div>
+    </mat-card>
+  </mat-step>
+</mat-stepper>

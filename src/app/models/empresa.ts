@@ -1,11 +1,11 @@
 export class Empresa{
   id?:number;
-  idEntidad?:number;
+  idEmpresa?:number;
   nombre?:String;
   representante?:String;
-  emailEntidad?:String;
+  emailEmpresa?:String;
   emailRepresentante?:String;
-  telefonoEntidad?:String;
+  telefonoEmpresa?:String;
   celularRepresentante?:String;
   fechaCreacion?:Date;
   idCoordinador?:number;

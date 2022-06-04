@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class Anexo1Component implements OnInit {
 
   constructor() { }
-//rama
+
   ngOnInit(): void {
   }
 

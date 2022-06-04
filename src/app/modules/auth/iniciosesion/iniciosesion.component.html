@@ -13,22 +13,21 @@
   <div *ngIf="habilitar == true">
     <div class="contenedor">
       <mat-card class="example-card">
-        <mat-card-subtitle>Practicas Preprofesionales</mat-card-subtitle>
         <mat-card-title>INICIAR SESIÓN</mat-card-title>
         <mat-card-content>
           <br>
           <p class="mensaje">Bienvenidos a la plataforma de "PRACTICAS PREPROFESIONALES"
             del Instituto Superior Tecnológico Del Azuay. </p>
-          <p class="mensaje">Para ingresar debe
-            pertenecer a la comunidad educativa</p>
+          <p class="mensaje">En el caso de pertenecer a la comunidad educativa</p>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
-          <button mat-raised-button color="primary"  (click)="signInWithGoogle()">Ingresar</button>
+          <button mat-raised-button color="primary"  (click)="signInWithGoogle()">
+            <img class="tamanoimagen" src="assets/images/google3.png" /> > Continuar con Google</button>
         </mat-card-actions>
         <mat-card-content>
           <br>
-          <p class="mensaje">En el caso de ser una empresa externa</p>
+          <p class="mensaje">En el caso de ser una empresa</p>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
