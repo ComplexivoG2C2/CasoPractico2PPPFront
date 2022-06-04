@@ -8,12 +8,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {UserComponent} from "./layout/user/user.component";
 import {FooterComponent} from "./layout/footer/footer.component";
 import {MaterialModule} from "../material/material.module";
+import { PrincipalComponent } from './modules/principal/principal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    FooterComponent
+    FooterComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,
