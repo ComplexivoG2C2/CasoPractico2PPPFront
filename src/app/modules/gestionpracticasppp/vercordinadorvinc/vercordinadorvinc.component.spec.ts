@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Anexo2Component } from './anexo2.component';
+import { VercordinadorvincComponent } from './vercordinadorvinc.component';
 
-describe('Anexo2Component', () => {
-  let component: Anexo2Component;
-  let fixture: ComponentFixture<Anexo2Component>;
+describe('VercordinadorvincComponent', () => {
+  let component: VercordinadorvincComponent;
+  let fixture: ComponentFixture<VercordinadorvincComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Anexo2Component ]
+      declarations: [ VercordinadorvincComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Anexo2Component);
+    fixture = TestBed.createComponent(VercordinadorvincComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
