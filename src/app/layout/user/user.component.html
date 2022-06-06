@@ -32,9 +32,7 @@
  <!--Admin-->
           <div class="list-group" *ngSwitchCase="'AUT'">
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/cordinadorvinculacion']"
-                      routerLinkActive="active">> Asignar Coordinacion de Vinculación</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/vercordinadorvinculacion']"
-                      routerLinkActive="active">> Ver Asignación Actual</button>
+                      routerLinkActive="active">> Asignar Coordinador Vinculación</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo1',persona.cedula,persona.nombrescompletos]"
                     routerLinkActive="active">> Anexo 1 plantilla</button>
           </div>
@@ -53,21 +51,19 @@
               <button mat-button class="id-menus" [routerLink]="['',persona.nombrescompletos]"
                       routerLinkActive="active">-Firmar ...</button>
             </mat-expansion-panel>
+            <br>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"
+                      routerLinkActive="active">-Crear</button>
           </div>
 
 
 <!--Cordinado de Carrera-->
           <div class="list-group" *ngSwitchCase="'CC'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                 coordinadorrrr
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
-                      routerLinkActive="active">-Nueva Asignación</button>
-            </mat-expansion-panel>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/nuevoresponsableppp',persona.cedula]"
+                      routerLinkActive="active">> Asignar Reposable de Practicas</button>
+
           </div>
 
 <!--Tutor academico-->
@@ -128,7 +124,24 @@
             </mat-expansion-panel>
           </div>
 
+          <!--Empresa-->
+          <div class="list-group" *ngSwitchCase="'null'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </div>
+
+
         </div>
+
+
+
+
+
       </ng-container>
     </mat-drawer>
 

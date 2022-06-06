@@ -9,6 +9,12 @@ import { Anexo1Component } from './anexo1/anexo1.component';
 import { AsignarcordinadorvincComponent } from './asignarcordinadorvinc/asignarcordinadorvinc.component';
 import { VercordinadorvincComponent } from './vercordinadorvinc/vercordinadorvinc.component';
 import { Anexo2convocatoriasComponent } from './anexo2convocatorias/anexo2convocatorias.component';
+import { NuevoresponsablepppComponent } from './nuevoresponsableppp/nuevoresponsableppp.component';
+import { VerresponsableComponent } from './verresponsable/verresponsable.component';
+import { CrearempresaComponent } from './crearempresa/crearempresa.component';
+import { VerempresaComponent } from './verempresa/verempresa.component';
+import { BienvenidaempresaComponent } from './bienvenidaempresa/bienvenidaempresa.component';
+
 
 
 const routes: Routes = [
@@ -22,7 +28,17 @@ const routes: Routes = [
     component: Anexo1Component
   },{ path: 'anexo2convocatorias/:id',
     component: Anexo2convocatoriasComponent
-  }
+  },{ path: 'nuevoresponsableppp/:cedula',
+    component: NuevoresponsablepppComponent
+  },{ path: 'verresponsableppp/:cedula',
+    component: VerresponsableComponent
+  },{path:'crearempresa/:id',
+    component:CrearempresaComponent
+  }, {path:'verempresa',
+    component:VerempresaComponent
+  },{path:'bienvenidaempresa',
+    component:BienvenidaempresaComponent
+  },
 
 ]
 
@@ -32,7 +48,12 @@ const routes: Routes = [
     Anexo1Component,
     AsignarcordinadorvincComponent,
     VercordinadorvincComponent,
-    Anexo2convocatoriasComponent
+    Anexo2convocatoriasComponent,
+    NuevoresponsablepppComponent,
+    VerresponsableComponent,
+    CrearempresaComponent,
+    VerempresaComponent,
+    BienvenidaempresaComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +61,7 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
   ],
   exports: [RouterModule]
 })

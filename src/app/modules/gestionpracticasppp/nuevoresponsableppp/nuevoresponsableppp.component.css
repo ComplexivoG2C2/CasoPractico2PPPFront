@@ -5,6 +5,7 @@
 .mat-form-field {
   margin-left: 0px;
 }
+
 .mat-list-option:hover {
   color: #ffffff;
   cursor: pointer;
@@ -16,7 +17,7 @@
   color: #090000;
 }
 .example-card {
-  max-width: 90%;
+  max-width: 95%;
   position: center;
   margin: 0 auto;
   border-radius: 5px;
@@ -38,11 +39,14 @@
 }
 
 .im{
- width: 100%;
+  width: 100%;
 }
 .im::placeholder{
-  color: #333333;
+  color: #f5a600;
 }
+
+
+
 
 
 
