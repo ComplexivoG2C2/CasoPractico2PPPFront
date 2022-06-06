@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <script src="loginemp.js"></script>
+  <form class="login"  [formGroup]="loginForm">
+    <p class="title">Login</p>
+    <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empresa.emailEmpresa"  autofocus>
+    <i class="fa fa-user"></i>
+    <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empresa.clave">
+    <i class="fa fa-key"></i>
+    <button (click)="login2(empresa)">
+      <i class="spinner"></i>
+      <span class="state"  >login</span>
+    </button>
+  </form>
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader">
+      <div>
+
+      </div>
+    </div>
+
+  </ng-container>
+</div>

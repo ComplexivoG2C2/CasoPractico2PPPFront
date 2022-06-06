@@ -18,7 +18,6 @@ export class AsignarcordinadorvincComponent implements OnInit {
   isLinear = true;
   myControl = new FormControl();
   firstFormGroup!: FormGroup;
-  secondFormGroup!: FormGroup;
   cordinador:CordinadorVinculacion[]=[];
   cordinadorselect:CordinadorVinculacion=new CordinadorVinculacion();
   filteredOptions?: Observable<CordinadorVinculacion[]>;
@@ -29,10 +28,9 @@ export class AsignarcordinadorvincComponent implements OnInit {
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required],
     });
+
     this.cordinadorvinculacionService.getCordinadorVinculacion().subscribe(data=>{
       this.isexist=data.filter(value => value.estado==true).length==0
       this.cordinador=data;

@@ -8,6 +8,7 @@ import {MaterialFileInputModule} from "ngx-material-file-input";
 import { Anexo1Component } from './anexo1/anexo1.component';
 import { AsignarcordinadorvincComponent } from './asignarcordinadorvinc/asignarcordinadorvinc.component';
 import { VercordinadorvincComponent } from './vercordinadorvinc/vercordinadorvinc.component';
+import { Anexo2convocatoriasComponent } from './anexo2convocatorias/anexo2convocatorias.component';
 
 
 const routes: Routes = [
@@ -17,8 +18,10 @@ const routes: Routes = [
     component:AsignarcordinadorvincComponent
   },{path:'vercordinadorvinculacion',
     component:VercordinadorvincComponent
-  },{ path: 'anexo1',
+  },{ path: 'anexo1/:cedula/:nombres',
     component: Anexo1Component
+  },{ path: 'anexo2convocatorias/:id',
+    component: Anexo2convocatoriasComponent
   }
 
 ]
@@ -28,7 +31,8 @@ const routes: Routes = [
     BienvenidaComponent,
     Anexo1Component,
     AsignarcordinadorvincComponent,
-    VercordinadorvincComponent
+    VercordinadorvincComponent,
+    Anexo2convocatoriasComponent
   ],
   imports: [
     CommonModule,

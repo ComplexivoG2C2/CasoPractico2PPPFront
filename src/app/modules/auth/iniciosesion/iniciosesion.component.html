@@ -31,7 +31,8 @@
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
-          <button mat-raised-button color="primary"  >Ingresar</button>
+<!--          <button mat-raised-button color="primary"  >Ingresar</button>-->
+          <button mat-raised-button color="primary" [routerLink]="['/auth/loginempresa']" routerLinkActive="active">Ingresar</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -44,8 +45,7 @@
         <mat-card-title>REGISTRARSE</mat-card-title>
         <mat-card-content>
           <br>
-          <p style="text-align: justify">A los miembros que ingresan por primera vez a la plataforma de Gestion de Practicas Preprofesionales ,
-            se deben identificar, por ello es necesario que ingrese su número de cédula.</p>
+          <p style="text-align: justify"> Ingrese su número de cédula.</p>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <form class="example-form">

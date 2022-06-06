@@ -1,0 +1,10 @@
+.example-card {
+  width: 80%;
+  margin: 0 auto;
+  background: #e8e8e8;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+

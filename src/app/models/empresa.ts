@@ -1,9 +1,9 @@
-export class Empresa{
+export class Empresa {
   id?:number;
-  idEmpresa?:number;
   nombre?:String;
   representante?:String;
   emailEmpresa?:String;
+  clave?:String;
   emailRepresentante?:String;
   telefonoEmpresa?:String;
   celularRepresentante?:String;
@@ -12,10 +12,5 @@ export class Empresa{
   nombreCoordinador?:string;
   ciudad?:string;
   direccion?:string;
-  nombreAdministrador?:string;
-  cedulaAdministrador?:string;
-  correoAdministrador?:string;
   descripcionEmpresa?:string;
-  fecha_inicio_periodo?:Date;
-  fecha_fin_periodo?:Date; //commit
 }

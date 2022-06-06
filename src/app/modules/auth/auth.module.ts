@@ -7,17 +7,22 @@ import {MaterialModule} from "../../../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
+import { LoginempresaComponent } from './loginempresa/loginempresa.component';
 
 const routes: Routes = [
   {
     path: 'inicio_sesion',
     component: IniciosesionComponent
+  },{
+    path: 'loginempresa',
+    component: LoginempresaComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    IniciosesionComponent
+    IniciosesionComponent,
+    LoginempresaComponent
   ],
   exports:[RouterModule],
   imports: [
@@ -36,7 +41,8 @@ const routes: Routes = [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '1011592573922-clhlkvnc4o7p2sedec68brull2t3qmb1.apps.googleusercontent.com'
+              '371406246655-jr38sv71j7pog0vmatbqu6e2oiik9lc8.apps.googleusercontent.com'
+
             )
           }
         ]

@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 
-
 @Component({
-  selector: 'app-bienvenida',
-  templateUrl: './bienvenida.component.html',
-  styleUrls: ['./bienvenida.component.css']
+  selector: 'app-bienvenidaempresa',
+  templateUrl: './bienvenidaempresa.component.html',
+  styleUrls: ['./bienvenidaempresa.component.css']
 })
-export class BienvenidaComponent implements OnInit {
+export class BienvenidaempresaComponent implements OnInit {
 
-  constructor( ) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
 
   hol() {
     Swal.fire({
@@ -27,5 +24,4 @@ export class BienvenidaComponent implements OnInit {
       showCloseButton: true
     })
   }
-
 }
