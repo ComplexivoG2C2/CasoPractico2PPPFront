@@ -64,10 +64,10 @@ export class CrearempresaComponent implements OnInit {
             title: 'Éxito',
             text: 'Empresa Registrada',
             icon: 'success',
-            iconColor :'#17550c',
-            color: "#0c3255",
-            confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            iconColor :'#0088ff',
+            color: "#000509",
+            confirmButtonColor:"#0083fd",
+            background: "#faf9f9",
           })
           this.router.navigate(['/panelusuario/gestionpracticasppp/verempresa']);
         },err=>{
@@ -75,9 +75,9 @@ export class CrearempresaComponent implements OnInit {
             title: 'Ha surgido un error',
             text: "Hubo un error.",
             icon: 'warning',
-            color: "#0c3255",
-            confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            color: "#000203",
+            confirmButtonColor:"#0089fd",
+            background: "#fdfdfd",
           })
         }
       )

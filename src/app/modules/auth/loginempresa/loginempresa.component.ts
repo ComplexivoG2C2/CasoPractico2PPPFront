@@ -35,19 +35,31 @@ export class LoginempresaComponent implements OnInit {
 
   login2(empresa:Empresa) {
     this.iniciosesionService.Login2(this.empresa).subscribe(data => {
-
         sessionStorage.setItem('user', JSON.stringify(data));
         console.log(data)
         this.router.navigate(['/panelusuario/gestionpracticasppp/bienvenidaempresa']);
       }, err => {
         Swal.fire({
-          title: 'Usuario y/o constraseña incorrectos',
-          text: err.error.message,
-          icon: 'warning',
-          color: "#0c3255",
-          confirmButtonColor: "#0c3255",
-          background: "#fb2d8a",
+          title: 'Email o constraseña incorrectos',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
         })
+
+
+      // Swal.fire({
+      //   title: 'Custom animation with Animate.css',
+      //   showClass: {
+      //     popup: 'animate__animated animate__fadeInDown'
+      //   },
+      //   hideClass: {
+      //     popup: 'animate__animated animate__fadeOutUp'
+      //   }
+      // })
+      //
       }
     )
 

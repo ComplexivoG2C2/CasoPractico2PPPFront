@@ -1,12 +1,8 @@
 <div *ngIf="issloading==false">
-
-
   <mat-stepper orientation="vertical" [linear]="isLinear"#stepper>
-
     <mat-step [stepControl]="firstFormGroup" [completed]="isexist">
       <form [formGroup]="firstFormGroup">
         <mat-card class="example-card">
-
           <div class="cc3">
             <div class="left3">
               <strong style="color: #c3c4c4;font-size: 18px"> El Coordinador de Vinculacion debe cumplir con las siguientes funcionalidades:</strong><br>
@@ -14,7 +10,6 @@
               <strong style="color: #00b1ff">✓</strong>Registrar los convenios de prácticas, <br>
               <strong style="color: #00b1ff">✓</strong>generar los informes de acreditación de aquellos estudiantes que cumplieron de forma satisfactoria con las prácticas <br>
               <strong style="color: #00b1ff">✓</strong>Debe también permitir consultar los estados de los procesos de prácticas que se estén ejecutando<br>
-
             </div>
             <div class="right3">
               <mat-card-header>
