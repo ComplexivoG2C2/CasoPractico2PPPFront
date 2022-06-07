@@ -13,23 +13,27 @@
   <div *ngIf="habilitar == true">
     <div class="contenedor">
       <mat-card class="example-card">
+        <img style="align-content: start" src="assets/images/logooo.png"width="200" height="60">
+        <mat-divider inset></mat-divider>
+        <br>
         <mat-card-title>INICIAR SESIÓN</mat-card-title>
         <mat-card-content>
           <br>
           <p class="mensaje">Bienvenidos a la plataforma de "PRACTICAS PREPROFESIONALES"
             del Instituto Superior Tecnológico Del Azuay. </p>
+          <mat-divider inset></mat-divider>
+          <br>
           <p class="mensaje">En el caso de pertenecer a la comunidad educativa</p>
         </mat-card-content>
-        <mat-divider inset></mat-divider>
         <mat-card-actions>
           <button mat-raised-button color="primary"  (click)="signInWithGoogle()">
             <img class="tamanoimagen" src="assets/images/google3.png" /> > Continuar con Google</button>
         </mat-card-actions>
         <mat-card-content>
+          <mat-divider inset></mat-divider>
           <br>
           <p class="mensaje">En el caso de ser una empresa</p>
         </mat-card-content>
-        <mat-divider inset></mat-divider>
         <mat-card-actions>
 <!--          <button mat-raised-button color="primary"  >Ingresar</button>-->
           <button mat-raised-button color="primary" [routerLink]="['/auth/loginempresa']" routerLinkActive="active">Ingresar</button>

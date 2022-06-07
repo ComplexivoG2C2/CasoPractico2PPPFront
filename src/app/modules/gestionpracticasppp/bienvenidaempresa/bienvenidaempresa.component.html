@@ -8,23 +8,44 @@
   <title>Document</title>
 </head>
 <body>
+
+
 <mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>PLATAFORMA DE GESTION DE PRACTICAS PREPROFESIONALES</mat-card-title>
-    <mat-card-subtitle>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="assets/images/ICO.png" alt="20px" width="200px">
-  <mat-card-content>
-    <p style="text-align: justify">
-      Las prácticas pre profesionales corresponde a actividades de carácter formativo por medio de las cuales los estudiantes ponen en práctica los conocimientos, habilidades y aptitudes adquiridas en un entorno de trabajo real. Esta actividad contribuye de manera integral en la formación del estudiante, ya que le permite adquirir experiencia en el campo laboral, desarrollar criterios profesionales y en la toma de decisiones.
-      Dentro del ISTA, la prácticas pre profesionales se encuentran como uno de los subprocesos a cargo de la Coordinación de Vinculación con la Sociedad, instancia que registra, controla y da seguimiento a todo el proceso. Además, se consideran dos procedimientos para cumplir con  el requisito de prácticas pre profesionales considerando la naturaleza de cada carrera:
-    </p>
-
-
-  </mat-card-content>
-  <mat-card-actions>
-  </mat-card-actions>
-</mat-card>
+    <table>
+      <tr aria-colspan="3">
+    <td colspan="3">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>PLATAFORMA DE GESTION DE PRACTICAS PREPROFESIONALES</mat-card-title>
+          <mat-card-subtitle>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="assets/images/ICO.png" alt="20"width="200">
+        <mat-card-content>
+          <p style="text-align: justify">
+            Las prácticas pre profesionales corresponde a actividades de carácter formativo por medio de las cuales los estudiantes ponen en práctica los conocimientos, habilidades y aptitudes adquiridas en un entorno de trabajo real. Esta actividad contribuye de manera integral en la formación del estudiante, ya que le permite adquirir experiencia en el campo laboral, desarrollar criterios profesionales y en la toma de decisiones.
+            Dentro del ISTA, la prácticas pre profesionales se encuentran como uno de los subprocesos a cargo de la Coordinación de Vinculación con la Sociedad, instancia que registra, controla y da seguimiento a todo el proceso. Además, se consideran dos procedimientos para cumplir con  el requisito de prácticas pre profesionales considerando la naturaleza de cada carrera:
+          </p>
+        </mat-card-content>
+    </td>
+      </tr>
+  <tr aria-colspan="3">
+    <td colspan="1">
+          <button style="width: 100%" mat-raised-button color="primary"
+                  [routerLink]="['/panelusuario/gestionpracticasppp/nuevasolicitud']"
+                  routerLinkActive="active"
+          >Emitir Solicitud</button>
+    </td>
+    <td colspan="1">
+        <button style="width: 100%" mat-raised-button color="primary"
+                [routerLink]="['/panelusuario/gestionpracticasppp/versolicitud']"
+                routerLinkActive="active"
+        >Ver solicitudes</button>
+    </td>
+    <td colspan="1">
+        <button style="width: 100%" mat-raised-button color="primary">Informes</button>
+    </td>
+    </tr>
+    </table>
+      </mat-card>
 </body>
 </html>

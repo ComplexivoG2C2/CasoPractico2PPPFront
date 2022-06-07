@@ -1,69 +1,105 @@
-<p>crearempresa works!</p>
-<mat-stepper [linear]="isLinear" #stepper>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
 
+
+    <form [formGroup]="firstFormGroup">
+      <button style="width: 80%" mat-raised-button color="primary"
+              [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"
+              routerLinkActive="active"
+      >Ver todas las empresas</button>
       <mat-card class="example-card">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>EMPRESAS</mat-card-title>
-          <br>
-          <button mat-button style="color:#0081f6;" [routerLink]="['/panelusuario/proyectovinculacion/verentidadesbenefiarias']" routerLinkActive="active">Ver todas las empresas</button>
+
+
         </mat-card-header>
-        <mat-card-content>
 
+        <mat-card-content>
           <mat-divider></mat-divider>
+
           <br>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Nombre de la Empresa</mat-label>
-            <input matInput formControlName="nombre"   required [(ngModel)]="empresa.nombre">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput   formControlName="correo" placeholder="ppp@gmail.com" required [(ngModel)]="empresa.emailEmpresa">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Clave Asignada</mat-label>
-            <input matInput type="password" formControlName="clave" placeholder="******" required [(ngModel)]="empresa.clave">
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Descripción</mat-label>
-            <textarea matInput formControlName="descripcion" [(ngModel)]="empresa.descripcionEmpresa" name="descripcionEmpresa"></textarea>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Ciudad</mat-label>
-            <input matInput formControlName="ciudad"  required [(ngModel)]="empresa.ciudad">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Dirección</mat-label>
-            <input matInput formControlName="direccion"  required [(ngModel)]="empresa.direccion">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Téléfono</mat-label>
-            <input matInput formControlName="telefono" placeholder="(+593)000000000"
-                   (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.telefonoEmpresa">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Nombres del Representante</mat-label>
-            <input matInput formControlName="nombrer"   required [(ngModel)]="empresa.representante">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Cédula del Representante </mat-label>
-            <input matInput formControlName="cedular"
-                   (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.celularRepresentante">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="correor" placeholder="ppp@gmail.com" required [(ngModel)]="empresa.emailRepresentante">
-          </mat-form-field>
+          <p class="title">REGISTRO DE EMPRESAS</p>
 
+
+<table>
+  <tr style="margin-top: 0px">
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre de la Empresa</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre de la Empresa"  required [(ngModel)]="empresa.nombre"  autofocus>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Email Empresarial</mat-label>
+        <input matInput   formControlName="correo" placeholder="Email de la Empresa" required [(ngModel)]="empresa.emailEmpresa" autofocus>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Credencial de acceso</mat-label>
+        <input matInput type="password" formControlName="clave" placeholder="Asignar contraseña" required [(ngModel)]="empresa.clave" autofocus>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+    <td colspan="3">
+      <mat-form-field appearance="outline">
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput formControlName="descripcion" placeholder="Descripcion de la empresa" [(ngModel)]="empresa.descripcionEmpresa" name="descripcionEmpresa" autofocus></textarea>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr style="margin-top: 0px">
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Ciudad</mat-label>
+        <input matInput formControlName="ciudad"  required [(ngModel)]="empresa.ciudad">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Direccion</mat-label>
+        <input matInput formControlName="direccion"  required [(ngModel)]="empresa.direccion">
+      </mat-form-field>
+
+    </td>
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="telefono" placeholder="(+593)000000000"
+               (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.telefonoEmpresa">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr style="margin-top: 0px">
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Representante</mat-label>
+        <input matInput formControlName="nombrer"   required [(ngModel)]="empresa.representante">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="outline">
+        <mat-label>Cedula del Representante</mat-label>
+        <input matInput formControlName="cedular"
+               (keypress)="omit_special_char($event)" (keypress)="omit_max_char($event)" required [(ngModel)]="empresa.celularRepresentante">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field appearance="outline" style="border: #1c2023">
+        <mat-label>E-mail del Representante</mat-label>
+        <input matInput formControlName="correor" placeholder="ppp@gmail.com" required [(ngModel)]="empresa.emailRepresentante">
+      </mat-form-field>
+    </td>
+  </tr>
+
+</table>
 
 
         </mat-card-content>
-        <div>
-          <button mat-button matStepperNext color="primary">Siguiente</button>
-        </div>
+          <button style="width: 40%" mat-raised-button matStepperNext color="primary">Next</button>
       </mat-card>
     </form>
   </mat-step>
@@ -72,30 +108,43 @@
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>EMPRESA</mat-card-title>
+
       </mat-card-header>
       <mat-card-content>
 
         <mat-divider></mat-divider>
-        <br>
-         <strong>INFORMACIÓN</strong>
-         <strong>Nombre: </strong>{{empresa.nombre}}<br>
-        <strong>Clave: </strong>{{empresa.clave}}<br>
-        <strong>Descripción:</strong>{{empresa.descripcionEmpresa}}<br>
-        <strong>Correo: </strong>{{empresa.emailEmpresa}}<br>
-        <strong>Ciudad: </strong>{{empresa.ciudad}}<br>
-         <strong>Dirección: </strong>{{empresa.direccion}}<br>
-        <strong>Teléfono: </strong>{{empresa.telefonoEmpresa}}<br>
-       <br>
-         <strong>INFORMACIÓN DEL REPRESENTANTE</strong><br>
-         <strong>Nombre:</strong> {{empresa.representante}}<br>
-        <strong>Cédula: </strong>{{empresa.celularRepresentante}}<br>
-        <strong>Correo: </strong>{{empresa.celularRepresentante}}
+        <table>
+          <th style="padding: 5px">
+            <strong>INFORMACIÓN DE LA EMPRESA</strong>
+          </th>
+          <th style="padding: 5px">-</th>
+          <th style="padding: 5px">
+            <strong>INFORMACIÓN DEL REPRESENTANTE</strong>
+          </th>
+          <tr>
+            <td style="padding: 5px">
+              <strong>Nombre: </strong>{{empresa.nombre}}<br>
+              <strong>Clave: </strong>{{empresa.clave}}<br>
+              <strong>Descripción:</strong>{{empresa.descripcionEmpresa}}<br>
+              <strong>Correo: </strong>{{empresa.emailEmpresa}}<br>
+              <strong>Ciudad: </strong>{{empresa.ciudad}}<br>
+              <strong>Dirección: </strong>{{empresa.direccion}}<br>
+              <strong>Teléfono: </strong>{{empresa.telefonoEmpresa}}<br>
+            </td>
+            <td style="padding: 5px">
+              <strong>Nombre:</strong> {{empresa.representante}}<br>
+              <strong>Cédula: </strong>{{empresa.celularRepresentante}}<br>
+              <strong>Correo: </strong>{{empresa.celularRepresentante}}
+            </td>
+          </tr>
+        </table>
+
+
 
       </mat-card-content>
       <div>
-        <button mat-button matStepperPrevious color="warn">Atrás</button>
-        <button mat-raised-button color="primary" (click)="crearEmpresa(empresa)">Registrar</button>
+        <button mat-raised-button matStepperPrevious color="warn">Atrás</button>
+        <button mat-raised-button color="primary" (click)="crearEmpresa(empresa)">Registrar Empresa</button>
       </div>
     </mat-card>
   </mat-step>

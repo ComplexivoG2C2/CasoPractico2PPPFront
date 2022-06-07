@@ -1,1 +1,84 @@
-<p>verempresa works!</p>
+<div *ngIf="issloading==false">
+  <mat-card>
+    <mat-card-title>EMPRESAS REGISTRADAS</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>BUSCAR POR: NOMBRE (EMPRESA/REPRESENTANTE), CEDULA, CIUDAD</mat-label>
+      <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <div *ngIf="isexist">
+    <div *ngFor="let e of filteredOptions | async">
+      <mat-card class="example-card">
+        <mat-card-header>
+
+          <span class="example-spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+<!--            ///falta el editar-->
+            <button mat-menu-item [routerLink]="['/panelusuario/gestionpracticasppp/editarempresa',e.id]">
+              <mat-icon color="primary">edit</mat-icon>
+              <span>Modificar</span>
+            </button>
+            <button mat-menu-item (click)="eliminarEntidad(e)">
+              <mat-icon color="warn">delete_forever</mat-icon>
+              <span>Eliminar</span>
+            </button>
+          </mat-menu>
+        </mat-card-header>
+        <mat-card-content>
+          <table class="table-borderless">
+            <th ></th>
+            <th></th>
+            <th style="background: #455a64;color: white">INFORMACION</th>
+            <th></th>
+            <th style="background: #455a64;color: white">REPRESENTANTE</th>
+            <tr aria-colspan="5">
+              <td colspan="1" style="background: #455a64;color: white">
+                <mat-card-title style="padding: 5px">{{e.nombre}}</mat-card-title>
+              </td>
+              <td colspan="1">
+                <p style="color: white">--------
+                </p>
+              </td>
+              <td colspan="1">
+                <strong>Nombre: </strong>{{e.nombre}}<br>
+                <strong>Fecha de creacion: </strong>{{e.fechaCreacion | date:"longDate"}}<br>
+                <strong>E-mail: </strong>{{e.emailEmpresa}}<br>
+                <strong>Télefono de Contacto: </strong>{{e.telefonoEmpresa}}<br>
+                <strong>Ciudad: </strong>{{e.ciudad}}
+              </td>
+              <td colspan="1">
+                <p style="color: white">--------
+                </p>
+              </td>
+              <td colspan="1">
+                <strong>Nombre del Representante: </strong>{{e.representante}}<br>
+                <strong>Cédula del Representante: </strong>{{e.celularRepresentante}}<br>
+                <strong>Correo del Representante:</strong> {{e.emailRepresentante}}
+              </td>
+            </tr>
+          </table>
+
+
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen aun empresas registradas</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+  </div>
+</ng-container>
+
