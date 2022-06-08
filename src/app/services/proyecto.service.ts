@@ -19,7 +19,7 @@ export class ProyectoService {
   }
 
   saveSolicitudes(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
-    console.log(proyectos);
+    //console.log(proyectos);
     return this.http.post<Solicitudproyecto>(this.urlEndPoint+"/save",proyectos,{headers: this.httpHeaders})
   }
 
