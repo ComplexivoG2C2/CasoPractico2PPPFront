@@ -17,6 +17,8 @@ import { BienvenidaempresaComponent } from './bienvenidaempresa/bienvenidaempres
 import 'animate.css';
 import { NuevasolicitudComponent } from './nuevasolicitud/nuevasolicitud.component';
 import { VersolicutudesComponent } from './versolicutudes/versolicutudes.component';
+import {Anexo3Component} from "./anexo3/anexo3.component";
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 const routes: Routes = [
@@ -44,6 +46,8 @@ const routes: Routes = [
     component:NuevasolicitudComponent
   },{path:'versolicitud',
     component:VersolicutudesComponent
+  },{path:'anexo3/:cedula',
+    component:Anexo3Component
   }
 
 ]
@@ -61,7 +65,8 @@ const routes: Routes = [
     VerempresaComponent,
     BienvenidaempresaComponent,
     NuevasolicitudComponent,
-    VersolicutudesComponent
+    VersolicutudesComponent,
+    Anexo3Component
   ],
   imports: [
     CommonModule,
@@ -70,6 +75,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     MaterialFileInputModule,
+    MatTabsModule,
   ],
   exports: [RouterModule]
 })

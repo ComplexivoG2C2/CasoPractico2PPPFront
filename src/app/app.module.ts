@@ -8,6 +8,7 @@ import {UserComponent} from "./layout/user/user.component";
 import {FooterComponent} from "./layout/footer/footer.component";
 import {MaterialModule} from "../material/material.module";
 import { EmpComponent } from './layout/emp/emp.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EmpComponent } from './layout/emp/emp.component';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
