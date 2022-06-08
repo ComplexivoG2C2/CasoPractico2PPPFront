@@ -81,6 +81,9 @@ export class UserComponent implements OnInit,AfterViewInit {
     if(rol==null){
       return "EMPRESA";
     }
+    if(rol=="EMP"){
+      return "EMPRESA";
+    }
     return "Si rol";
   }
   logout():void{
