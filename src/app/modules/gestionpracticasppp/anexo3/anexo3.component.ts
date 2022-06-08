@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Anexo3} from "../../../models/anexo3";
 import {Anexo3Service} from "../../../services/anexo3.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,6 +16,11 @@ export class Anexo3Component implements OnInit {
   issloading = true;
   isexist?: boolean
   cedula?: String;
+  isLinear = true;
+  thirdFormGroup!: FormGroup;
+  fourFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
+  firstFormGroup!: FormGroup;
 
   anexo3enproceso: Anexo3[] = [];
   anexo3aceptados: Anexo3[] = [];
@@ -36,6 +41,10 @@ export class Anexo3Component implements OnInit {
     })
 
     this.issloading = false;
+    this.firstFormGroup = this._formBuilder.group({});
+    this.secondFormGroup=this._formBuilder.group({});
+    this.thirdFormGroup=this._formBuilder.group({});
+    this.fourFormGroup=this._formBuilder.group({});
 
 
   }
