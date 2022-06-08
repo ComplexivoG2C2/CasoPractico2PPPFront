@@ -36,7 +36,7 @@ export class LoginempresaComponent implements OnInit {
   login2(empresa:Empresa) {
     this.iniciosesionService.Login2(this.empresa).subscribe(data => {
         sessionStorage.setItem('user', JSON.stringify(data));
-        console.log(data)
+        console.log(data+'lllllllllllllll')
         this.router.navigate(['/panelusuario/gestionpracticasppp/bienvenidaempresa']);
       }, err => {
         Swal.fire({
