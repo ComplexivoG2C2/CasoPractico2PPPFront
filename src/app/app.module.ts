@@ -8,17 +8,13 @@ import {UserComponent} from "./layout/user/user.component";
 import {FooterComponent} from "./layout/footer/footer.component";
 import {MaterialModule} from "../material/material.module";
 import { EmpComponent } from './layout/emp/emp.component';
-import { EmpresaComponent } from './modules/gestionpracticasppp/empresa/empresa.component';
-import { TutorEmpresarialComponent } from './modules/gestionpracticasppp/tutor-empresarial/tutor-empresarial.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     FooterComponent,
-    EmpComponent,
-    EmpresaComponent,
-    TutorEmpresarialComponent
+    EmpComponent
   ],
   imports: [
     BrowserModule,

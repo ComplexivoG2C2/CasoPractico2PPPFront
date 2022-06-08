@@ -14,6 +14,7 @@ import { VerresponsableComponent } from './verresponsable/verresponsable.compone
 import { CrearempresaComponent } from './crearempresa/crearempresa.component';
 import { VerempresaComponent } from './verempresa/verempresa.component';
 import { BienvenidaempresaComponent } from './bienvenidaempresa/bienvenidaempresa.component';
+import 'animate.css';
 import { NuevasolicitudComponent } from './nuevasolicitud/nuevasolicitud.component';
 import { VersolicutudesComponent } from './versolicutudes/versolicutudes.component';
 
