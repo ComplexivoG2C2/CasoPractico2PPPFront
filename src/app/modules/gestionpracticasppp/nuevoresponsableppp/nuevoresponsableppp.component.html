@@ -1,0 +1,272 @@
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical" [linear]="isLinear"#stepper>
+    <mat-step [stepControl]="firstFormGroup" [completed]="isexist">
+      <form [formGroup]="firstFormGroup" >
+        <mat-card class="example-card">
+
+          <div class="cc3">
+            <div class="left3">
+              <strong style="color: #c3c4c4;font-size: 18px"> El Responsable de Prácticas Preprofesionales debe cumplir con las siguientes funcionalidades:</strong><br>
+              <br>
+              <strong style="color: #00b1ff">✓</strong>Crear la convocatoria (A2). <br>
+              <strong style="color: #00b1ff">✓</strong> Realizar la selección de Estudiantes (A4), tomando en cuenta los parámetros de validación. <br>
+              <strong style="color: #00b1ff">✓</strong> Designar al tutor académico (A6).<br>
+              <strong style="color: #00b1ff">✓</strong> Generar el Acta de reunión (A7).<br>
+              <strong style="color: #00b1ff">✓</strong>Notificar al Estudiante (A8) y al Tutor Académico (A8.1).<br>
+              <strong style="color: #00b1ff">✓</strong> Consultas y reportes (Empresas, Estudiantes, Tutores).<br>
+            </div>
+            <div class="right3">
+              <mat-card-header>
+                <br>
+                <strong style="font-size: 20px">Asignacion del Responsable de Prácticas Preprofesionales</strong>
+                <br> <br>
+              </mat-card-header>
+              <br>
+              <mat-form-field appearance="legacy" style="width: 100%" >
+                <mat-label style="color: #020000">BUSCAR..</mat-label>
+                <input class="im" matInput  placeholder="POR: CEDULA/ NOMBRES/ APELLIDOS" [formControl]="myControl">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+              <br>
+              <mat-card-content>
+
+                <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                  <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionDocente($event)" formControlName="secondCtrl" required>
+                    <mat-list-option *ngFor="let se of filteredOptions | async" [value]="se" class="example-item">
+                      <div style="font-size: 14px"><strong>Cédula:</strong>{{se.cedula}}  > <strong>Nombres:</strong>{{se.nombres_completo}}</div>
+                    </mat-list-option>
+                  </mat-selection-list>
+                </cdk-virtual-scroll-viewport>
+
+                <br>
+                <mat-divider></mat-divider>
+                <div style="background: #e5e5e5">
+
+                  <strong style="color: #043e6e; font-size: 14px">Establezca un periodo de tiempo: </strong>
+                  <mat-form-field appearance="outline" style="width: 40%;align-content: end">
+
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="docentesselect.fecha_inicio_periodo">
+                      <input matEndDate formControlName="end" placeholder="Finalizacion" [(ngModel)]="docentesselect.fecha_fin_periodo">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+                  <strong style="color: #043e6e; font-size: 14px"> ></strong>
+                  <div>
+                    <button mat-button matStepperNext *ngIf="isexist else isexiste" color="primary">Siguente</button>
+                    <ng-template #isexiste>
+                      <button mat-button style="color:#0081f6;" [routerLink]="['/panelusuario/gestionpracticasppp/verresponsableppp',cedula]"routerLinkActive="active">Ya existe una signacion... Ver Detalles</button>
+                    </ng-template>
+                  </div>
+                </div>
+
+
+              </mat-card-content>
+            </div>
+          </div>
+
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel></ng-template>
+      <mat-card class="example-card">
+        <mat-card-header style="background: white">
+          <mat-card-title >Responsable de prácticas Preprofesionales</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+          <table class="table" style="border: 1px solid">
+            <tr colspan="3">
+              <td colspan="1" nowrap>
+                <strong>Informacion del Docente:</strong>
+              </td>
+              <td colspan="1" nowrap>
+                <strong> Carreras que interviene:</strong>
+              </td>
+              <td colspan="1" nowrap>
+                <strong>Materias Inpartidas:</strong>
+              </td>
+            </tr>
+            <tr aria-colspan="3">
+              <td colspan="1">
+                <strong style="font-size: 12px">Cédula:</strong> {{docentesselect.cedula}}<br>
+                <strong style="font-size: 12px">Nombres y Apellidos:</strong> {{docentesselect.nombres_completo}}<br>
+                <strong style="font-size: 12px">Título:</strong> {{docentesselect.titulo}}<br>
+                <strong style="font-size: 12px">Periódo de Asignacion: </strong>{{docentesselect.fecha_inicio_periodo | date:"longDate"}}--{{docentesselect.fecha_fin_periodo | date:"longDate"}}<br>
+              </td>
+              <td colspan="1">
+                  <div style="font-size: 12px" *ngFor="let carreras of docentesselect.carreas">
+                    <strong>*</strong>{{carreras.nombrecarrera}}
+                  </div>
+              </td>
+              <td colspan="1">
+                  <div style="font-size: 12px"  *ngFor="let meterias of docentesselect.materias">
+                    <strong>*</strong>{{meterias.nombre}}
+                  </div>
+
+              </td>
+            </tr>
+          </table>
+
+
+
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div>
+          <button mat-button matStepperPrevious color="accent">Atrás</button>
+          <button mat-flat-button (click)="guardarResaposableppp(docentesselect)">Finalizar</button>
+        </div>
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+  </div>
+</ng-container>
+
+
+
+
+
+<!--<div *ngIf="issloading==false">-->
+<!--  <mat-stepper [linear]="isLinear" #stepper>-->
+<!--    <mat-step [completed]="isexist">-->
+<!--      <form [formGroup]="firstFormGroup">-->
+<!--        <ng-template matStepLabel>Información de Cargo</ng-template>-->
+<!--        <mat-card class="example-card">-->
+<!--          <mat-card-header>-->
+<!--            <mat-card-title>Responsable de prácticas de Servicio Comunitario</mat-card-title>-->
+<!--          </mat-card-header>-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <br>-->
+<!--          <mat-card-content>-->
+<!--        -->
+<!--            -->
+<!--            -->
+<!--            -->
+<!--            -->
+<!--            -->
+<!--            <div>-->
+<!--              <button mat-button matStepperNext *ngIf="isexist else isexiste" color="primary">Siguente</button>-->
+<!--              <ng-template #isexiste>-->
+<!--                <button mat-button  color="warn" [routerLink]="['/panelusuario/proyectovinculacion/verresponsable',cedula]"routerLinkActive="active">Ya existe un resposable para esta carrera. Ver Más.</button>-->
+<!--              </ng-template>-->
+<!--            </div>-->
+<!--          </mat-card-content>-->
+<!--        </mat-card>-->
+<!--      </form>-->
+<!--    </mat-step>-->
+<!--    <mat-step [stepControl]="secondFormGroup" label="Seleccionar nuevo encargado">-->
+<!--      <form [formGroup]="secondFormGroup">-->
+<!--        <mat-card class="example-card">-->
+<!--          <mat-card-header>-->
+<!--            <mat-card-title>Responsable de prácticas de Servicio Comunitario</mat-card-title>-->
+<!--          </mat-card-header>-->
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>BUSCAR DOCENTE</mat-label>-->
+<!--            <input matInput  placeholder="FILTRAR" [formControl]="myControl">-->
+<!--            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+<!--          </mat-form-field>-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <mat-card-content>-->
+<!--            <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">-->
+<!--              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionDocente($event)" formControlName="secondCtrl" required>-->
+<!--                <mat-list-option *ngFor="let shoe of filteredOptions | async" [value]="shoe" class="example-item">-->
+<!--                  Cédula:{{shoe.cedula}}   Nombres:{{shoe.nombres_completo}} Carga Laboral:{{shoe.docente_tipo_tiempo}}-->
+<!--                </mat-list-option>-->
+<!--              </mat-selection-list>-->
+<!--            </cdk-virtual-scroll-viewport>-->
+<!--            <br>-->
+<!--            <p>-->
+<!--              <strong>Docente seleccionado: </strong>{{docentesselect.nombres_completo}}-->
+<!--            </p>-->
+<!--            <mat-form-field appearance="fill" style="width: 100%">-->
+<!--              <mat-label>PERIÓDO DE ASIGNACIÓN</mat-label>-->
+<!--              <mat-date-range-input [rangePicker]="picker">-->
+<!--                <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="docentesselect.fecha_inicio_periodo">-->
+<!--                <input matEndDate formControlName="end" placeholder="Final" [(ngModel)]="docentesselect.fecha_fin_periodo">-->
+<!--              </mat-date-range-input>-->
+<!--              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--              <mat-date-range-picker #picker></mat-date-range-picker>-->
+<!--            </mat-form-field>-->
+<!--            <mat-divider></mat-divider>-->
+<!--            <br>-->
+<!--            <div>-->
+<!--              <button mat-button matStepperPrevious color="warn">Atrás</button>-->
+<!--              <button mat-button matStepperNext color="primary">Siguente</button>-->
+<!--            </div>-->
+<!--          </mat-card-content>-->
+<!--        </mat-card>-->
+<!--      </form>-->
+<!--    </mat-step>-->
+<!--    <mat-step>-->
+<!--      <ng-template matStepLabel>Confirmar</ng-template>-->
+<!--      <mat-card class="example-card">-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>Responsable de prácticas de Servicio Comunitario</mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-divider></mat-divider>-->
+<!--        <br>-->
+<!--        <mat-card-content>-->
+<!--          <h2 title> El Responsable de prácticas de Servicio Comunitario es el encargado de:-->
+<!--            <h3 display-3>1. Crear convocatorias.</h3>-->
+<!--            <h3 display-3>2. Proceso de selección.</h3>-->
+<!--            <h3 display-3>3. Delegación de estudiantes a docentes.</h3>-->
+<!--            <h3 display-3>4. Gestiones diversas.</h3>-->
+<!--          </h2>-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <h2><strong>INFORMACIÓN:</strong></h2>-->
+<!--          <h3><strong>Cédula:</strong> {{docentesselect.cedula}}</h3>-->
+<!--          <h3><strong>Nombres:</strong> {{docentesselect.nombres_completo}}</h3>-->
+<!--          <h3><strong>Título:</strong> {{docentesselect.titulo}}</h3>-->
+<!--          <h3><strong>Apellidos:</strong> {{docentesselect.docente_tipo_tiempo}} </h3>-->
+<!--          <h3><strong>Periódo: </strong>{{docentesselect.fecha_inicio_periodo | date:"longDate"}}&#45;&#45;{{docentesselect.fecha_fin_periodo | date:"longDate"}} </h3>-->
+<!--          <mat-expansion-panel (opened)="panelOpenState = true"-->
+<!--                               (closed)="panelOpenState = false">-->
+<!--            <mat-expansion-panel-header>-->
+<!--              <mat-panel-title>-->
+<!--                MATERIAS:-->
+<!--              </mat-panel-title>-->
+<!--            </mat-expansion-panel-header>-->
+<!--            <div *ngFor="let meterias of docentesselect.materias">-->
+<!--              <p><strong>Nombre: </strong>{{meterias.nombre}}</p>-->
+<!--            </div>-->
+<!--          </mat-expansion-panel>-->
+<!--          <br>-->
+<!--          <mat-expansion-panel (opened)="panelOpenState = true"-->
+<!--                               (closed)="panelOpenState = false">-->
+<!--            <mat-expansion-panel-header>-->
+<!--              <mat-panel-title>-->
+<!--                CARRERAS:-->
+<!--              </mat-panel-title>-->
+<!--            </mat-expansion-panel-header>-->
+<!--            <div *ngFor="let carreras of docentesselect.carreas">-->
+<!--              <p><strong>Nombre: </strong>{{carreras.nombrecarrera}}</p>-->
+<!--            </div>-->
+<!--          </mat-expansion-panel>-->
+<!--        </mat-card-content>-->
+<!--        <mat-divider></mat-divider>-->
+<!--        <br>-->
+<!--        <div>-->
+<!--          <button mat-button matStepperPrevious color="accent">Atrás</button>-->
+<!--          <button mat-flat-button (click)="guardarResaposableppp(docentesselect)">Finalizar</button>-->
+<!--        </div>-->
+<!--      </mat-card>-->
+<!--    </mat-step>-->
+<!--  </mat-stepper>-->
+<!--</div>-->
+<!--<ng-container *ngIf="issloading">-->
+<!--  <div class="bss-loader" style="margin: auto;">-->
+
+<!--      <mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
+
+<!--  </div>-->
+<!--</ng-container>-->

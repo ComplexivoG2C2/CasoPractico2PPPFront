@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <title>Document</title>
+</head>
+<body>
+
+<div class="contenedor">
+  <script src="loginemp.js"></script>
+  <form class="login"  [formGroup]="loginForm">
+    <img src="assets/images/logooo.png"width="200" height="60">
+    <br>
+
+    <br>
+    <button mat-button  color="primary"   ><mat-icon>first_page</mat-icon></button>
+    <p class="title">Login</p>
+    <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empresa.emailEmpresa"  autofocus>
+    <i class="fa fa-user"></i>
+    <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empresa.clave">
+
+    <i class="fa fa-key"></i>
+    <button (click)="login2(empresa)">
+      <i class="spinner"></i>
+      <span class="state"  >Iniciar Sesion</span>
+    </button>
+
+
+  </form>
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader">
+      <div>
+
+      </div>
+    </div>
+
+  </ng-container>
+</div>
+</body>
+</html>

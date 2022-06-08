@@ -1,0 +1,46 @@
+<section class="bst-section">
+
+  <mat-toolbar class="mat-bar">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="example-spacer"></span>
+
+    <img src="/assets/images/logooo.png" alt="10px" height="50px">
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="material-icons teal-color" aria-label="Example icon-button with heart icon">
+      <mat-icon>settings_power</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
+      <div class="contenedor-perfil">
+
+          <br>
+        </div>
+
+      <ng-container>
+
+    vvvv
+
+
+      </ng-container>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+
+  </mat-drawer-container>
+  <app-footer></app-footer>
+
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</section>

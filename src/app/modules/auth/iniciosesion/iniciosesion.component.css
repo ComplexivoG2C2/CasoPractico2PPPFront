@@ -1,17 +1,23 @@
 body {
   background-color: #ffdd90;
-  background-image: url('src/assets/images/fondoista.jpg');
+  background-image: url('src/assets/images/fondo55.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
 }
+
 .contenedor{
-  padding-top: 13%;
+  padding-top: 5%;
 }
 .example-card {
-  max-width: 400px;
+  box-shadow: 12px 12px 12px #7e7e7e;
+  max-width: 450px;
+  height: 550px;
   margin: 0 auto;
+  border-radius: 8px;
+  border: 1px solid #676767;
   text-align: center;
+  background: #f8f8f8;
 }
 
 .example-form {
@@ -34,6 +40,16 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 99999;
+}
+button{
+  width: 90%;
+  height: 50px;
+}
+.tamanoimagen{
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid;
 }
 
 .mensaje{

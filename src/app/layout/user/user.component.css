@@ -10,15 +10,16 @@
 }
 
 .mat-bar{
-  color: white;
-  background-color: #272e56;
+  color: #0e0000;
+  background-color: #fbc02d;
   height: 100%;
+  border: 1px solid #00080e;
 }
 .example-spacer {
   flex: 1 1 auto;
 }
 .imagem-mat{
-  border: 5px solid #fbc02d;
+  border: 5px solid #ffffff;
   border-radius: 100%;
   width:95px;
   height:95px;
@@ -54,10 +55,17 @@
   margin-top: 5px;
   width: 100%;
   white-space:normal;
-  color: #888888;
-  border: 1px solid #050000;
-  border-inline: 5px solid #000507;
+  color: #b8ccd2;
+  border: 1px solid #455a64;
+  border-inline: 5px solid #455a64;
   writing-mode: horizontal-tb;
+  text-align: start;
+}
+
+.id-menus:hover {
+  color: #ffc200;
+  cursor: pointer;
+  background: #043e6e;
 }
 .list-group{
   padding-left: 1.5px;
@@ -67,3 +75,4 @@ mat-expansion-panel-header{
   height: auto;
   min-height: 60px;
 }
+

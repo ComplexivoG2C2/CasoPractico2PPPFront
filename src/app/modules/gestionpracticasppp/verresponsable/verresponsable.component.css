@@ -1,0 +1,8 @@
+.example-card {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #078300;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}

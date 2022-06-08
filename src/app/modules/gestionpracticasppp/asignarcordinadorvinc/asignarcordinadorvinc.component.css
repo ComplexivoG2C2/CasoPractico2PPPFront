@@ -1,0 +1,168 @@
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-left: 0px;
+}
+.mat-list-option:hover {
+  color: #ffffff;
+  cursor: pointer;
+  background: #043e6e;
+}
+
+.mat-card-header {
+  background: #e5e5e5;
+  color: #090000;
+}
+.example-card {
+  max-width: 90%;
+  position: center;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-viewport {
+  height: 200px;
+  width: 100%;
+}
+
+.example-item {
+  height: 50px;
+}
+.colorselec{
+  background: #ffc200;
+  height: 20px;
+}
+
+.im{
+ width: 100%;
+}
+.im::placeholder{
+  color: #333333;
+}
+
+
+
+
+
+
+
+
+
+@import url('https://rsms.me/inter/inter-ui.css');
+::selection {
+  background: #2D2F36;
+}
+
+::-moz-selection {
+  background: #2D2F36;
+}
+@media (max-width: 767px) {
+  .page {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+div.cc3 {
+  display: flex;
+  height: 80%;
+  margin: 0 auto;
+  margin-top: 1px;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
+}
+
+.left3 {
+  background: #455a64;
+  height: calc(100% - 5%);
+  margin-top: 0;
+  padding-bottom: 50px;
+  color: white;
+  padding: 8px;
+  position: relative;
+  font-size: 14px;
+  width: 30%;
+  border-radius: 4px;
+}
+.right3 {
+  background: #ffffff;
+  box-shadow: 0px 0px 40px 16px rgba(114, 114, 114, 0.22);
+  color: #020000;
+  position: relative;
+  padding: 10px;
+  width: 70%;
+  font-size: 12px;
+  height: 80%;
+  border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+  .left {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+}
+div.ll {
+  font-size: 30px;
+  font-weight: 900;
+  margin: 50px 40px 40px;
+  color: #ffffff;
+}
+div.eula {
+  color: #00f604;
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+@media (max-width: 767px) {
+  .right {
+    flex-shrink: 0;
+    height: 100%;
+    width: 100%;
+    max-height: 350px;
+  }
+}
+svg {
+  position: absolute;
+  width: 320px;
+}
+path {
+  fill: none;
+  stroke: url(#linearGradient);;
+  stroke-width: 4;
+  stroke-dasharray: 240 1386;
+}
+
+table.tablas {
+  margin: 20px;
+  position: center;
+}
+
+label.labelblack {
+  color: #030000;
+  font-size: 18px;
+  height: 5px;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
+
+dvi.formulariobuscar{
+  margin: 20px;
+}
+

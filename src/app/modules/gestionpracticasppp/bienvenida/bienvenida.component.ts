@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 
+
 @Component({
   selector: 'app-bienvenida',
   templateUrl: './bienvenida.component.html',
@@ -8,10 +9,12 @@ import Swal from "sweetalert2";
 })
 export class BienvenidaComponent implements OnInit {
 
-  constructor() { }
+  constructor( ) {
+  }
 
   ngOnInit(): void {
   }
+
 
   hol() {
     Swal.fire({

@@ -1,0 +1,14 @@
+.mat-stepper-vertical{
+  margin-top: 8px;
+}
+.example-card {
+  margin: 0 auto;
+  max-width: 600px;
+}
+mat-form-field{
+  width: 100%;
+}
+
+.example-header-image {
+  background-size: cover;
+}
