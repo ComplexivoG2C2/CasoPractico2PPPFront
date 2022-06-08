@@ -5,11 +5,11 @@ export class Solicitudproyecto {
   nombre?:string;
   lineaaccion?:string;
   codigocarrera?:string;
-  carrera?:string;
+  carrera?:String;
   estado?:boolean;
   fechaat?:string;
   empresa?:number;
-  nombreresponsable?:string
+  nombreresponsable?:String;
   nombretutoremp?:String;
   responsablePPP?:Number;
   documento?:String;

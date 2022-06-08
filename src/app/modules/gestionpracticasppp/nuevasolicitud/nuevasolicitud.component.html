@@ -1,1 +1,129 @@
-<p>nuevasolicitud works!</p>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+
+
+    <form [formGroup]="firstFormGroup">
+<!--      <button style="width: 80%" mat-raised-button color="primary"-->
+<!--              [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"-->
+<!--              routerLinkActive="active"-->
+<!--      >Ver todas las empresas</button>-->
+      <div align="center" style="font-size: large">
+        <p class="title">Crear Solicitud de Practicas</p>
+      </div>
+      <mat-card class="example-card">
+        <mat-card-header>
+
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <table>
+            <tr style="margin-top: 0px">
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="fecha" placeholder="Fecha"   [(ngModel)]="proyecto.fechaat"  autofocus>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Carrera destinada:</mat-label>
+<!--                  <input matInput   formControlName="carrera" placeholder="CARRERA" required [(ngModel)]="anexo.nombreCarrera" autofocus>-->
+                  <mat-select formControlName="carrera" placeholder="CARRERA"  [(ngModel)]="proyecto.codigocarrera" (selectionChange)="obtenerResponsable($event)">
+                    <mat-option value="TDS">Desarrollo de Software</mat-option>
+                    <mat-option value="ADS">Analisis de Sistemas</mat-option>
+                    <mat-option value="BD">Big Data</mat-option>
+                    <mat-option value="ED">Entrenamiento Deportivo</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Numero de estudiantes</mat-label>
+                  <input matInput type="number" formControlName="numeroEst" placeholder="Numero de Estudiantes"   [(ngModel)]="proyecto.particpantes" autofocus>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr >
+<!--               <td colspan="3">-->
+<!--                  <mat-form-field appearance="outline" style="width: 100%" >-->
+<!--                    <mat-label>Actividades a Desarrollar:</mat-label>-->
+<!--                    <textarea matInput formControlName="actividades" placeholder="ACTIVIDADES"  [(ngModel)]="proyecto.actividadeslistProyectos" name="descripcionEmpresa" autofocus></textarea>-->
+<!--                  </mat-form-field>-->
+<!--                </td>-->
+
+            </tr>
+            <tr style="margin-top: 0px">
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha de Inicio:</mat-label>
+                  <input matInput [matDatepicker]="picker2" formControlName="fechaI" placeholder="Fecha de Inicio"   [(ngModel)]="proyecto.fechaInicio"  autofocus>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </td>
+
+            </tr>
+            <tr style="margin-top: 0px">
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Titulo</mat-label>
+                  <input matInput formControlName="titulo"   [(ngModel)]="proyecto.lineaaccion">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput formControlName="responsable" placeholder="Responsable"  [(ngModel)]="proyecto.nombreresponsable">
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+        </mat-card-content>
+        <button style="width: 40%" mat-raised-button matStepperNext color="primary">Next</button>
+      </mat-card>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-divider></mat-divider>
+        <table>
+          <th style="padding: 5px">
+            <strong>INFORMACIÓN DE LA SOLICITUD</strong>
+          </th>
+          <th style="padding: 5px">-</th>
+          <tr>
+            <td style="padding: 5px">
+              <strong>Fecha: </strong> {{proyecto.fechaat}}<br>
+              <strong>Carrera: </strong>{{proyecto.codigocarrera}}<br>
+              <strong>Estudiantes:</strong>{{proyecto.particpantes}}<br>
+              <strong>Actividades: </strong>{{proyecto.actividadeslistProyectos}}<br>
+              <strong>Fecha de Inicio: </strong>{{proyecto.fechaInicio}}<br>
+              <strong>Nombre Responsable:</strong>{{proyecto.lineaaccion}}  {{proyecto.nombreresponsable}} {{anexo.nombreDelegado}}<br>
+            </td>
+          </tr>
+        </table>
+      <button style="width: 40%" mat-raised-button matStepperNext color="primary" (click)="almacenarSolicitud()">Next</button>
+
+
+      </mat-card-content>
+      <div>
+<!--        <button mat-raised-button matStepperPrevious color="warn">Atrás</button>-->
+<!--        <button mat-raised-button color="primary" (click)="crearEmpresa(empresa)">Registrar Empresa</button>-->
+      </div>
+    </mat-card>
+  </mat-step>
+</mat-stepper>
