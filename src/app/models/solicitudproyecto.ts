@@ -1,4 +1,4 @@
-export class Proyectos {
+export class Solicitudproyecto {
   id?:number;
   particpantes?:Number;
   codigo?:string;
@@ -8,12 +8,11 @@ export class Proyectos {
   carrera?:string;
   estado?:boolean;
   fechaat?:string;
-  entidadbeneficiaria?:number;
+  empresa?:number;
   nombreresponsable?:string
-  nombredirector?:String;
+  nombretutoremp?:String;
   responsablePPP?:Number;
-  objetivoGeneral?:String;
-  alcanceTerritorial?:String;
+  documento?:String;
   programaVinculacion?:String;
   coordinadorCedula?:String;
   plazoEjecucion?:String;
