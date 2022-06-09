@@ -1,6 +1,6 @@
 export class Solicitudproyecto {
   id?:number;
-  particpantes?:Number;
+  participantes?:Number;
   codigo?:string;
   nombre?:string;
   lineaaccion?:string;
@@ -9,9 +9,13 @@ export class Solicitudproyecto {
   estado?:boolean;
   fechaat?:string;
   empresa?:Number;
+  //DE PRACTICAS
   nombreresponsable?:String
   nombretutoremp?:String;
   responsablePPP?:Number;
+
+  //responsable de la convocatoria
+  nombreremp?:String;
   documento?:String;
   programaVinculacion?:String;
   coordinadorCedula?:String;

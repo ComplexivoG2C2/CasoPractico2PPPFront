@@ -44,7 +44,7 @@
               <td>
                 <mat-form-field appearance="outline">
                   <mat-label>Numero de estudiantes</mat-label>
-                  <input matInput type="number" formControlName="numeroEst" placeholder="Numero de Estudiantes"   [(ngModel)]="proyecto.particpantes" autofocus>
+                  <input matInput type="number" formControlName="numeroEst" placeholder="Numero de Estudiantes"   [(ngModel)]="proyecto.participantes">
                 </mat-form-field>
               </td>
             </tr>
@@ -55,7 +55,6 @@
               <!--                    <textarea matInput formControlName="actividades" placeholder="ACTIVIDADES"  [(ngModel)]="proyecto.actividadeslistProyectos" name="descripcionEmpresa" autofocus></textarea>-->
               <!--                  </mat-form-field>-->
               <!--                </td>-->
-
             </tr>
             <tr style="margin-top: 0px">
               <td>
@@ -181,7 +180,7 @@
               <strong>Empresa: </strong> {{empresas.nombre}}<br>
               <strong>Fecha: </strong> {{proyecto.fechaat}}<br>
               <strong>Carrera: </strong>{{proyecto.codigocarrera}}<br>
-              <strong>Estudiantes:</strong>{{proyecto.particpantes}}<br>
+              <strong>Estudiantes:</strong>{{proyecto.participantes}}<br>
               <strong>Actividades: </strong>{{proyecto.actividadeslistProyectos}}<br>
               <strong>Fecha de Inicio: </strong>{{proyecto.fechaInicio}}<br>
               <strong>Nombre Responsable:</strong>{{proyecto.lineaaccion}}  {{proyecto.nombreresponsable}} <br>
@@ -189,8 +188,6 @@
           </tr>
         </table>
         <button style="width: 40%" mat-raised-button matStepperNext color="primary" (click)="almacenarSolicitud()">Next</button>
-
-
       </mat-card-content>
       <div>
         <!--        <button mat-raised-button matStepperPrevious color="warn">Atrás</button>-->
