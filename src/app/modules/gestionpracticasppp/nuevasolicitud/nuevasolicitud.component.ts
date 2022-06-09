@@ -9,10 +9,35 @@ import {EmpresaService} from "../../../services/empresa.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {CarrerasService} from "../../../services/carreras.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {Resposableppp} from "../../../models/resposableppp";
 import {Carreras} from "../../../models/carreras";
 import {MatSelectChange} from "@angular/material/select";
 import {DateAdapter} from "@angular/material/core";
+
+import Docxtemplater from "docxtemplater";
+
+// @ts-ignore
+import PizZip from "pizzip";
+// @ts-ignore
+import PizZipUtils from "pizzip/utils/index.js";
+// @ts-ignore
+import { saveAs } from "file-saver";
+import {DatePipe} from "@angular/common";
+
+function loadFile(url:any, callback:any) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
+function getBase64(file: any) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
+
+
+
 
 @Component({
   selector: 'app-nuevasolicitud',
@@ -27,6 +52,7 @@ export class NuevasolicitudComponent implements OnInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+  thirdFormGroup!: FormGroup;
   empresa?:String;
   ide?:Number;
   empresas: Empresa = new Empresa();
@@ -88,6 +114,9 @@ export class NuevasolicitudComponent implements OnInit {
       fecha: [''],
     });
     this.secondFormGroup = this._formBuilder.group({
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      docx:['',Validators.required]
     });
 
 
@@ -185,4 +214,117 @@ export class NuevasolicitudComponent implements OnInit {
       })
     });
   }
+
+
+
+
+
+
+
+
+
+  subirDocumento(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        //console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.proyecto.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.proyecto.documento=docx+"";
+        }
+      })
+    }
+  }
+
+  generarDocumento() {
+    var p:Solicitudproyecto=this.obtenerDatos();
+    //console.log(anexo61)
+    var pipe:DatePipe = new DatePipe('en-US')
+    loadFile("  https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo1.docx", function(
+      // @ts-ignore
+      error,
+      // @ts-ignore
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+
+      doc.setData({
+        fecha:pipe.transform(p.fechaat,'dd/MM/yyyy'),
+        responsablePPP:p.responsablePPP,
+        nombreCarrera:p.carrera,
+        nombreEmpresa:p.empresa,
+        nEstudiantes:p.particpantes,
+        tb:p.actividadesEmpresaProyecto,
+        fechaInicio:pipe.transform(p.fechaInicio,'dd/MM/yyyy'),
+        solicitanteNombre:p.nombreresponsable,
+        solicitanteCargo:p.lineaaccion,
+
+        /////todos los datos que se quieran enviar
+      });
+      try {
+        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        // @ts-ignore
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+                error,
+                key
+              ) {
+                // @ts-ignore
+                error[key] = value[key];
+                return error;
+              },
+              {});
+          }
+          return value;
+        }
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
+        // @ts-ignore
+        if (error.properties && error.properties.errors instanceof Array) {
+          // @ts-ignore
+          const errorMessages = error.properties.errors
+            // @ts-ignore
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          //console.log("errorMessages", errorMessages);
+          // errorMessages is a humanly readable message looking like this :
+          // 'The tag beginning with "foobar" is unopened'
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "Anexo1.docx");
+    });
+  }
+
+
+
+
+
+
+
+
+
 }
