@@ -5,11 +5,11 @@ export class Solicitudproyecto {
   nombre?:string;
   lineaaccion?:string;
   codigocarrera?:string;
-  carrera?:string;
+  carrera?:String;
   estado?:boolean;
   fechaat?:string;
-  empresa?:number;
-  nombreresponsable?:string
+  empresa?:Number;
+  nombreresponsable?:String
   nombretutoremp?:String;
   responsablePPP?:Number;
   documento?:String;
@@ -20,7 +20,7 @@ export class Solicitudproyecto {
   fechaFin?:Date;
   actividadeslistProyectos?: actividadeslistProyectos[];
   docentesDelegados?:DocentesDelegados[];
-  objetivosEspecificosProyecto?:ObjetivosEspeciicoslistProyecto[]
+  actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[]
   ///
   requisitoslistProyectos?:  requisitoslistProyectos[];
   docenteApoyoResponse?:DocenteApoyoResponse[];
@@ -33,7 +33,7 @@ export class actividadeslistProyectos {
 export class requisitoslistProyectos {
   descripcion?: string;
 }
-export class ObjetivosEspeciicoslistProyecto{
+export class ActividadesEmpresalistProyecto{
   descripcion?: String;
 }
 export class DocenteApoyoResponse{

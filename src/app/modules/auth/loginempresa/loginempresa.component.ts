@@ -15,7 +15,7 @@ export class LoginempresaComponent implements OnInit {
   isLinear = true;
   loginForm!: FormGroup;
   issloading=true;
-  empresa:Empresa= new Empresa();
+  empre:Empresa= new Empresa();
   email?:String;
 //Obtiene los datos del inicio de sesión
   public empresaRequest: Empresa = new Empresa();
@@ -33,11 +33,11 @@ export class LoginempresaComponent implements OnInit {
     });
   }
 
-  login2(empresa:Empresa) {
-    this.iniciosesionService.Login2(this.empresa).subscribe(data => {
-        sessionStorage.setItem('user', JSON.stringify(data));
+  login2(empre:Empresa) {
+    this.iniciosesionService.Login2(this.empre).subscribe(data => {
+        sessionStorage.setItem('empre', JSON.stringify(data));
         console.log(data+'lllllllllllllll')
-        this.router.navigate(['/panelusuario/gestionpracticasppp/bienvenidaempresa']);
+        this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
       }, err => {
         Swal.fire({
           title: 'Email o constraseña incorrectos',
@@ -49,26 +49,10 @@ export class LoginempresaComponent implements OnInit {
           }
         })
 
-
-      // Swal.fire({
-      //   title: 'Custom animation with Animate.css',
-      //   showClass: {
-      //     popup: 'animate__animated animate__fadeInDown'
-      //   },
-      //   hideClass: {
-      //     popup: 'animate__animated animate__fadeOutUp'
-      //   }
-      // })
-      //
       }
     )
 
   }
 
-
-
-  irsignup():void{
-    this.router.navigate(['/auth/signup']);
-  }
 
 }
