@@ -159,6 +159,7 @@ export class NuevasolicitudComponent implements OnInit {
     this.proyecto.carrera = this.carreraNombre;
     this.proyecto.actividadesEmpresaProyecto=this.rows.getRawValue();
     this.proyecto.empresa = this.ide;
+    this.proyecto.nombreremp=this.empresas.representante;
     console.log(this.proyecto.empresa+"vkjhgftgyhujikcosc ")
     this.proyecto.responsablePPP = this.res;
     console.log(this.proyecto.responsablePPP+"vkjhgfcdfvssscscsccssc ")
@@ -188,11 +189,10 @@ export class NuevasolicitudComponent implements OnInit {
 
 
   almacenarSolicitud() {
-    console.log("Almacenar")
-    this.obtenerDatos()
+    this.proyecto=this.obtenerDatos()
     this.proyectoS.saveSolicitudes(this.proyecto).subscribe(value => {
       console.log(this.obtenerDatos()+"activiadedess");
-      console.log("entra" + this.proyectoS);
+      console.log("entrarrrrrrrrrr" + this.proyectoS.saveSolicitudes(this.proyecto));
       Swal.fire({
         title: 'Exito',
         text: 'Solicitud enviada',
@@ -262,13 +262,13 @@ export class NuevasolicitudComponent implements OnInit {
 
       doc.setData({
         fecha:pipe.transform(p.fechaat,'dd/MM/yyyy'),
-        responsablePPP:p.responsablePPP,
+        responsablePPP:p.nombreresponsable,
         nombreCarrera:p.carrera,
         nombreEmpresa:p.empresa,
-        nEstudiantes:p.particpantes,
+        nEstudiantes:p.participantes,
         tb:p.actividadesEmpresaProyecto,
         fechaInicio:pipe.transform(p.fechaInicio,'dd/MM/yyyy'),
-        solicitanteNombre:p.nombreresponsable,
+        solicitanteNombre:p.nombreremp,
         solicitanteCargo:p.lineaaccion,
 
         /////todos los datos que se quieran enviar
