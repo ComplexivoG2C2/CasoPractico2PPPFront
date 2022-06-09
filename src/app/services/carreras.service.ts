@@ -11,6 +11,7 @@ export class CarrerasService {
 
   private urlEndPoint:string='http://localhost:8080/api/carreras';
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['user']).token})
+  private httpHeadersempresa = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['empre']).token})
 
   constructor(private http:HttpClient) { }
 
@@ -21,5 +22,8 @@ export class CarrerasService {
   }
   getCarrerabyCodigo(codigo:String):Observable<Carreras>{
     return this.http.get(this.urlEndPoint+"/nombre/"+codigo,{headers: this.httpHeaders}).pipe(map(Response => Response as Carreras))
+  }
+  getCarrerabyCodigoempresa(codigo:String):Observable<Carreras>{
+    return this.http.get(this.urlEndPoint+"/nombre/"+codigo,{headers: this.httpHeadersempresa}).pipe(map(Response => Response as Carreras))
   }
 }

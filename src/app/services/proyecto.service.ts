@@ -11,6 +11,7 @@ export class ProyectoService {
 
   private urlEndPoint:string='http://localhost:8080/api/solicitudproyectos';
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['user']).token})
+  private httpHeadersempresa = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['empre']).token})
 
   constructor(private http:HttpClient) { }
 
@@ -20,7 +21,7 @@ export class ProyectoService {
 
   saveSolicitudes(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
     //console.log(proyectos);
-    return this.http.post<Solicitudproyecto>(this.urlEndPoint+"/save",proyectos,{headers: this.httpHeaders})
+    return this.http.post<Solicitudproyecto>(this.urlEndPoint+"/save",proyectos,{headers: this.httpHeadersempresa})
   }
 
   updateSolicitudes(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{

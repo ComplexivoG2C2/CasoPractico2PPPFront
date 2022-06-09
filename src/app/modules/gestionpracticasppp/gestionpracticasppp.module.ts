@@ -17,6 +17,7 @@ import { BienvenidaempresaComponent } from './bienvenidaempresa/bienvenidaempres
 import 'animate.css';
 import { NuevasolicitudComponent } from './nuevasolicitud/nuevasolicitud.component';
 import { VersolicutudesComponent } from './versolicutudes/versolicutudes.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 const routes: Routes = [
@@ -40,7 +41,7 @@ const routes: Routes = [
     component:VerempresaComponent
   },{path:'bienvenidaempresa',
     component:BienvenidaempresaComponent
-  },{path:'nuevasolicitud',
+  },{path:'nuevasolicitud/:id/:nombres',
     component:NuevasolicitudComponent
   },{path:'versolicitud',
     component:VersolicutudesComponent
@@ -69,6 +70,7 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
     MaterialFileInputModule,
   ],
   exports: [RouterModule]

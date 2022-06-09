@@ -11,6 +11,7 @@ export class ResponsablepppService {
 
   private urlEndPoint:string='http://localhost:8080/api/docentes';
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['user']).token})
+  private httpHeadersempresa = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['empre']).token})
 
   constructor(private http:HttpClient) { }
 
@@ -46,4 +47,10 @@ export class ResponsablepppService {
   getResposablepppbyCarrera(codigoCarrera:String):Observable<Docentes>{
     console.log(codigoCarrera)
     return this.http.get(this.urlEndPoint+"/responsable/"+codigoCarrera,{headers: this.httpHeaders}).pipe(map(Response => Response as Docentes))
-  }}
+  }
+  getResposablepppbyCarreraempresa(codigoCarrera:String):Observable<Docentes>{
+    console.log(codigoCarrera)
+    return this.http.get(this.urlEndPoint+"/responsable/"+codigoCarrera,{headers: this.httpHeadersempresa}).pipe(map(Response => Response as Docentes))
+  }
+
+}
