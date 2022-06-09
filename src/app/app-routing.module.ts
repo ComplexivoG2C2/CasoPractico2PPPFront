@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {UserComponent} from "./layout/user/user.component";
-import { PrincipalComponent} from "./modules/principal/principal.component";
 
 const routes: Routes = [
-  {path: "inicio", component:PrincipalComponent},
   {path:'',redirectTo:'/auth/inicio_sesion',pathMatch:'full'},
   {path:'auth',
     loadChildren:()=>
