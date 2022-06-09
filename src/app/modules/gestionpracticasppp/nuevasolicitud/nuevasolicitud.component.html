@@ -130,6 +130,36 @@
   </mat-step>
 
 
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" >
+
+      <mat-card class="example-card">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-subtitle>Genrar Documento</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+
+          <div>
+            <button mat-raised-button color="primary" (click)="generarDocumento()">Generar Solicitud</button>
+            <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+              <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+              </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <div style="text-align: end">
+          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+          <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+        </div>
+      </mat-card>
+    </form>
+  </mat-step>
+
+
+
 
 
   <mat-step>
