@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
-import {ActividadesEmpresalistProyecto, Solicitudproyecto} from "../../../models/solicitudproyecto";
+import {Solicitudproyecto} from "../../../models/solicitudproyecto";
 import {Empresa} from "../../../models/empresa";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FechaService} from "../../../services/fecha.service";
 import {EmpresaService} from "../../../services/empresa.service";
-import {ProyectoService} from "../../../services/proyecto.service";
-import {CarrerasService} from "../../../services/carreras.service";
-import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {Carreras} from "../../../models/carreras";
 import {MatSelectChange} from "@angular/material/select";
 import {DateAdapter} from "@angular/material/core";
 
 import Docxtemplater from "docxtemplater";
-
+import * as moment from 'moment';
 // @ts-ignore
 import PizZip from "pizzip";
 // @ts-ignore
@@ -22,6 +17,10 @@ import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
 import {DatePipe} from "@angular/common";
+import {FechaempService} from "../../../services/fechaemp.service";
+import {CarreraempService} from "../../../services/carreraemp.service";
+import {ProyectoempService} from "../../../services/proyectoemp.service";
+import {ResponsablepppempService} from "../../../services/responsablepppemp.service";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -36,16 +35,11 @@ function getBase64(file: any) {
 }
 
 
-
-
-
 @Component({
   selector: 'app-nuevasolicitud',
   templateUrl: './nuevasolicitud.component.html',
   styleUrls: ['./nuevasolicitud.component.css']
 })
-
-
 
 export class NuevasolicitudComponent implements OnInit {
 
@@ -60,25 +54,18 @@ export class NuevasolicitudComponent implements OnInit {
   rows: FormArray;
   itemForm?: FormGroup;
   public nombre?:String;
-  omit_special_char(event: { charCode: any; }) {
-    var k;
-    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
-    return ((k >= 48 && k <= 57));
-  }
-
-  omit_max_char(event: { target: any; }) {
-    var k;
-    k = event.target.value.length;  //         k = event.keyCode;  (Both can be used)
-    console.log(k)
-    return (k <= 9);
-  }
+  codigo?: String;
 
   listaCarreras?: String;
   siglas?: String;
+  nombresolicitante?:String;
+ cargosolicitante?:String;
 
-  constructor(private router: Router, private fechaService: FechaService, private activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder, private empresaService: EmpresaService,
-              private carreras: CarrerasService, private proyectoS: ProyectoService, private responsable: ResponsablepppService,
+
+  fechaactual?:Date;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
+              private _formBuilder: FormBuilder,private fechaempService:FechaempService,
+              private carrerasService: CarreraempService, private proyectoS: ProyectoempService, private responsable: ResponsablepppempService,
               private empresaS: EmpresaService,
               private _adapter: DateAdapter<any>,) {
     this._adapter.setLocale('es-ec');
@@ -98,20 +85,25 @@ export class NuevasolicitudComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       let nombre = params['nombres']
+      let nombresolicitante = params['nombresolicitante']
+      let cargosolicitante = params['cargosolicitante']
       this.nombre=nombre;
-      this.empresas.idCoordinador = id;
-
       this.ide=id;
+      this.nombresolicitante=nombresolicitante
+      this.cargosolicitante=cargosolicitante
       console.log(this.ide)
     })
+    this.fechaempService.getSysdate().subscribe(value => {
+      this.fechaactual=value.fecha;
+    })
+
     this.firstFormGroup = this._formBuilder.group({
-      descripcion: [''],
-      responsable: [''],
-      titulo: [''],
-      fechaI: [''],
-      numeroEst: [''],
-      carrera: [''],
-      fecha: [''],
+
+      plazo:['', Validators.required],
+      carrera: ['',Validators.required],
+      numeroEst: ['',Validators.required],
+      start: ['', Validators.required],
+      end: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
     });
@@ -122,13 +114,7 @@ export class NuevasolicitudComponent implements OnInit {
 
     this.secondFormGroup.get("items_value")?.setValue("yes");
     this.secondFormGroup.addControl('rows', this.rows);
-//     this.carreras.getCarreras().subscribe(value1 => {
-//   //@ts-ignore
-//       this.listaCarreras=value1.filter(value2 => value2.codigo == value[0].codigo)[0].nombre
-// //@ts-ignore
-//       this.siglas=value1.filter(value2=>value2.codigo == value[0].codigo)[0].codigo
-//       console.log(value1+"Value")
-//     });
+
   }
 
 
@@ -146,42 +132,57 @@ export class NuevasolicitudComponent implements OnInit {
     });
   }
 
+  refresh(){
+    window.location.reload();
+  }
+  meses?:String;
+
+  obtnerMeses(){
+    let ini = moment(this.firstFormGroup?.getRawValue().start);
+    let fin = moment(this.firstFormGroup?.getRawValue().end);
+    let diff = fin.diff(ini, 'months');
+    this.proyecto.plazoEjecucion=diff+' Meses'
+  }
 
 
-
-  proyecto2: Solicitudproyecto = new Solicitudproyecto();
   res?:number;
-  abc?: String;
+  variableresponsable?: String;
 
   obtenerDatos(): Solicitudproyecto {
     this.proyecto.estado = false;
-    this.proyecto.nombreresponsable = this.abc;
-    this.proyecto.carrera = this.carreraNombre;
     this.proyecto.actividadesEmpresaProyecto=this.rows.getRawValue();
+    // @ts-ignore
     this.proyecto.empresa = this.ide;
-    this.proyecto.nombreremp=this.empresas.representante;
-    console.log(this.proyecto.empresa+"vkjhgftgyhujikcosc ")
-    this.proyecto.responsablePPP = this.res;
-    console.log(this.proyecto.responsablePPP+"vkjhgfcdfvssscscsccssc ")
+    // @ts-ignore
+    this.proyecto.nombresolicitante=this.nombresolicitante;
+    // @ts-ignore
+    this.proyecto.cargosolicitante=this.cargosolicitante;
+    this.proyecto.fechaat=this.fechaactual;
+    // @ts-ignore
+    this.proyecto.nombreempresa=this.nombre;
+    console.log(this.proyecto.nombreempresa+"nombre de la emrpesa ")
+
     return this.proyecto;
   }
 
-  carrera?: String;
-  carreraNombre?: String;
-  carreraModel: Carreras = new Carreras();
+
+
 
   obtenerResponsable(event: MatSelectChange) {
     console.log("entraResponsable")
-    this.carrera = this.proyecto.codigocarrera;
-    this.responsable.getResposablepppbyCarreraempresa(this.carrera + "").subscribe(value => {
-      // @ts-ignore
-      this.res = value.id
-      this.abc = value.nombres_completo;
+    this.codigo = this.proyecto.codigocarrera;
+
+    this.responsable.getResposablepppbyCarrera(this.codigo+"").subscribe(data=>{
+      this.proyecto.responsablePPP=data.id;
+      console.log("id:"+this.proyecto.responsablePPP)
+      this.proyecto.nombreresponsable=data.nombres_completo;
+      console.log("nombre:"+this.proyecto.nombreresponsable)
+
     });
 
-    this.carreras.getCarrerabyCodigoempresa(this.carrera + "").subscribe(value => {
-      this.carreraModel = value
-      this.carreraNombre = value.nombre;
+    this.carrerasService.getCarrerabyCodigo(this.codigo + "").subscribe(value => {
+      this.proyecto.carrera=value.nombre;
+      console.log("nombre carrera:"+this.proyecto.carrera)
     });
 
 
@@ -189,38 +190,31 @@ export class NuevasolicitudComponent implements OnInit {
 
 
   almacenarSolicitud() {
-    this.proyecto=this.obtenerDatos()
-    this.proyectoS.saveSolicitudes(this.proyecto).subscribe(value => {
-      console.log(this.obtenerDatos()+"activiadedess");
-      console.log("entrarrrrrrrrrr" + this.proyectoS.saveSolicitudes(this.proyecto));
+    var proyecto=this.obtenerDatos()
+    this.proyectoS.saveSolicitudes(proyecto).subscribe(value => {
+      console.log("entrarrrrrrrrrr" + this.proyectoS.saveSolicitudes(proyecto));
       Swal.fire({
-        title: 'Exito',
-        text: 'Solicitud enviada',
-        icon: 'success',
-        iconColor: '#0064ff',
-        color: "#050000",
-        confirmButtonColor: "#0085ff",
-        background: "#ffffff",
+        title: 'Solicitud enviada',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
       })
     }, error => {
       Swal.fire({
-        title: 'Error',
-        text: '...' + error.error.message,
-        icon: 'error',
-        iconColor: '#007cff',
-        color: "#090000",
-        confirmButtonColor: "#0081ff",
-        background: "#ffffff",
+        title: 'No se pudo enviar',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
       })
+      window.location.reload();
     });
   }
-
-
-
-
-
-
-
 
 
   subirDocumento(file:FileList){
@@ -245,10 +239,10 @@ export class NuevasolicitudComponent implements OnInit {
   }
 
   generarDocumento() {
-    var p:Solicitudproyecto=this.obtenerDatos();
-    //console.log(anexo61)
+    var proyecto:Solicitudproyecto=this.obtenerDatos();
+    console.log(proyecto)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("  https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo1.docx", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo1.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -261,15 +255,15 @@ export class NuevasolicitudComponent implements OnInit {
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
 
       doc.setData({
-        fecha:pipe.transform(p.fechaat,'dd/MM/yyyy'),
-        responsablePPP:p.nombreresponsable,
-        nombreCarrera:p.carrera,
-        nombreEmpresa:p.empresa,
-        nEstudiantes:p.participantes,
-        tb:p.actividadesEmpresaProyecto,
-        fechaInicio:pipe.transform(p.fechaInicio,'dd/MM/yyyy'),
-        solicitanteNombre:p.nombreremp,
-        solicitanteCargo:p.lineaaccion,
+        fecha:pipe.transform(proyecto.fechaat,'dd/MM/yyyy'),
+        responsablePPP:proyecto.nombreresponsable,
+        nombreCarrera:proyecto.carrera,
+        nombreEmpresa:proyecto.nombreempresa,
+        nEstudiantes:proyecto.participantes,
+        tb5:proyecto.actividadesEmpresaProyecto,
+        fechaInicio:pipe.transform(proyecto.fechaInicio,'dd/MM/yyyy'),
+        solicitanteNombre:proyecto.nombresolicitante,
+        solicitanteCargo:proyecto.cargosolicitante,
 
         /////todos los datos que se quieran enviar
       });
@@ -318,13 +312,6 @@ export class NuevasolicitudComponent implements OnInit {
       saveAs(out, "Anexo1.docx");
     });
   }
-
-
-
-
-
-
-
 
 
 }

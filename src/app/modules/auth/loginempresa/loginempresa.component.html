@@ -22,12 +22,12 @@
     <br>
     <button mat-button  color="primary"   ><mat-icon>first_page</mat-icon></button>
     <p class="title">Login</p>
-    <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empre.emailEmpresa"  autofocus>
+    <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empresaRequest.emailEmpresa"  autofocus>
     <i class="fa fa-user"></i>
-    <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empre.clave">
+    <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empresaRequest.clave">
 
     <i class="fa fa-key"></i>
-    <button (click)="login2(empre)">
+    <button (click)="login2(empresaRequest)">
       <i class="spinner"></i>
       <span class="state"  >Iniciar Sesion</span>
     </button>

@@ -1,0 +1,226 @@
+<div *ngIf="issloading==false">
+  <div *ngIf="isexist">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <div align="center" style="font-size: large">
+            <p class="title">Lista de Solicitudes Empresariales</p>
+          </div>
+          <mat-card class="example-card">
+
+            <mat-form-field appearance="legacy" style="width: 70%" >
+              <mat-label style="color: #020000">BUSCAR.</mat-label>
+              <input class="im" matInput  placeholder="BUSCAR POR: NOMBRE EMPRESA/ FECHA DE SOLICITUD" [formControl]="myControlconvocatoria">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <cdk-virtual-scroll-viewport style="height: 200px" appendOnly itemSize="50" class="example-viewport">
+                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                  <mat-list-option *ngFor="let shoe of filteredOptionsconvocatoria | async" [value]="shoe"  class="example-item">
+                    Nombre: {{shoe.nombreEmpresa}} || {{shoe.empresa}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </cdk-virtual-scroll-viewport>
+              <br>
+              <p>
+                <strong>Proyecto seleccionado: </strong>{{solicitudproyectoselect.nombreEmpresa}}
+              </p>
+              <mat-divider></mat-divider>
+              <br>
+              <div>
+                <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" >
+        <form [formGroup]="secondFormGroup">
+          <div align="center" style="font-size: large">
+            <p class="title">Emision de Convocatoria</p>
+          </div>
+          <mat-card class="example-card">
+
+            <mat-card-content>
+              <div>
+                <strong>CICLO Y FECHA MAXIMA DE RECEPCION</strong>
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Seleccione el ciclo</mat-label>
+                  <mat-select formControlName="ciclo" [(ngModel)]="anexo2.ciclo">
+                    <mat-option value="PRIMER">PRIMERO</mat-option>
+                    <mat-option value="SEGUNDO">SEGUNDO</mat-option>
+                    <mat-option value="TERCERO">TERCERO</mat-option>
+                    <mat-option value="CUARTO">CUARTO</mat-option>
+                    <mat-option value="QUINTO">QUINTO</mat-option>
+                    <mat-option value="SEXTO">SEXTO</mat-option>
+                    <mat-option value="SEPTIMO">SEPTIMO</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div>
+                  <mat-form-field appearance="fill" style="width: 100%">
+                    <mat-label>Correo de docente</mat-label>
+                    <input matInput formControlName="correo"  [(ngModel)]="anexo2.emailDocente">
+                  </mat-form-field>
+                </div>
+                <mat-form-field appearance="fill" style="width: 100%;">
+                  <mat-label>Fecha maxima de recepción</mat-label>
+                  <input matInput formControlName="fecharesepcion" [matDatepicker]="picker" [(ngModel)]="anexo2.fechaMaxRecepcion" [min]="solicitudproyectoselect.fechaInicio" [max]="solicitudproyectoselect.fechaFin">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div style="align-content: center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+          <mat-step [stepControl]="addForm">
+            <form [formGroup]="addForm">
+
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab>
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Actividades Y Requisitos que se requieren para el proceso de practicas Preprofesionales</mat-card-title>
+              <mat-card-subtitle>Actividades a desarrollar</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="addForm">
+                <div style="margin-top: 15px">
+
+                  <mat-grid-tile colspan="3" >
+                    <button mat-fab color="primary" (click)="onAddRow('')" *ngIf="addForm.get('rows')"><mat-icon>add_circle</mat-icon></button>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="3" *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Actividad  {{index}}</mat-label>
+                      <input matInput  [formControl]="row.get('descripcion')"  placeholder="Ex. Realizar..." [required]>
+                    </mat-form-field>
+                    <span class="example-spacer"></span>
+                    <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="3">
+                    <div>
+                      <button type="submit" style="width: 45%" mat-raised-button color="primary" (click)="agregarActividades(proyecto)" [disabled]="addForm.invalid">Agregar actividades a la convocatoria</button>
+                      <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button> </div>
+                  </mat-grid-tile>
+                </div>
+              </mat-grid-list>
+
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="REQUISTOS">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>REQUISITOS DEL PROYECTO (MATERIAS)</mat-card-title>
+
+            </mat-card-header>
+            <mat-card-content>
+              <div id ="contenedor">
+                <div id ="izquierda">
+                  <mat-form-field appearance="outline" style="width: 90%">
+                    <mat-label>BUSCAR MATERIAS</mat-label>
+                    <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  </mat-form-field>
+                  <br>
+                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                    <div *ngFor="let materias of filteredOptions | async">
+                      <mat-card style="margin-top: 3px" class="example-card">
+                        {{materias.nombre}}
+                        <button mat-button color="primary" (click)="addMaterias(materias)">Agregar
+                          <mat-icon matBadgeColor="warn">keyboard_arrow_right</mat-icon>
+                        </button>
+                      </mat-card>
+                    </div>
+                  </cdk-virtual-scroll-viewport>
+                </div>
+                <div id ="derecha">
+                  <mat-form-field appearance="outline" style="width: 90%">
+                    <mat-label>BUSCAR MATERIAS</mat-label>
+                    <input matInput  placeholder="FILTRAR">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  </mat-form-field>
+                  <br>
+                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                    <div *ngFor="let materias of seleccionmaterias">
+                      <mat-card style="margin-top: 3px" class="example-card">
+                        {{materias.nombre}}
+                        <button mat-button color="warn" (click)="removeMaterias(materias)">
+                          <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
+                          Remover
+                        </button>
+                      </mat-card>
+                    </div>
+                  </cdk-virtual-scroll-viewport>
+                </div>
+              </div>
+              <br>
+              <div style="text-align: center">
+                <button type="submit" style="width: 45%" mat-raised-button color="primary" (click)="agregarMaterias(proyecto)">Agregar requisitos a la convocatoria</button>
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button> </div>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+          </mat-card>
+        </mat-tab>
+      </mat-tab-group>
+
+        </form>
+
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Confirmar</ng-template>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Información Final</mat-card-title>
+            <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <br>
+            <mat-card-content>
+              <h2 title> La convocatoria será enviada a los estudiantes que pertenecen a la
+                carrera:</h2>
+              <mat-divider></mat-divider>
+              <h2><strong>INFORMACIÓN:</strong></h2>
+              <h3><strong>Convocatoria Nª: </strong>{{anexo2.numeroConvocatoria}}</h3>
+              <h3><strong>Proyecto: </strong>{{anexo2.nombreProyecto}}</h3>
+              <h3><strong>Responsable: </strong>{{anexo2.nombreResponsable}}</h3>
+              <h3><strong>Carrera: </strong>{{anexo2.carrera}} </h3>
+              <h3><strong>Fecha máxima de postulación: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}</h3>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <br>
+            <div>
+              <button mat-button matStepperPrevious color="primary">Atrás</button>
+              <button mat-flat-button   color="warn">Crear</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-step>
+    </mat-stepper>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen convocatorias creadas actualmente.</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+

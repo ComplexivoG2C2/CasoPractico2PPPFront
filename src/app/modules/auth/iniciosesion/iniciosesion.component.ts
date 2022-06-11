@@ -68,6 +68,7 @@ export class IniciosesionComponent implements OnInit {
         this.iniciosesionService.Login(this.userRequest).subscribe(
           data=>{
             sessionStorage.clear;
+            console.log(sessionStorage.clear+"login limpiar usuario")
             if(data.rol=="DOC"){
               Swal.fire({
                 title: 'Error',
@@ -75,10 +76,11 @@ export class IniciosesionComponent implements OnInit {
                 icon: 'warning',
                 color: "#0c3255",
                 confirmButtonColor:"#0c3255",
-                background: "#fbc02d",
+                background: "#fafaf9",
               })
             }else{
               sessionStorage.setItem('user', JSON.stringify(data));
+              console.log(sessionStorage.setItem('user', JSON.stringify(data))+"login tokrn usuario")
               this.router.navigate(['/panelusuario/gestionpracticasppp/bienvenida']);
             }
           },
@@ -96,6 +98,7 @@ export class IniciosesionComponent implements OnInit {
     this.iniciosesionService.Signup(this.userRequest).subscribe(
       data => {
         sessionStorage.clear;
+        console.log(sessionStorage.clear+'user sign up limpiar token')
         if(data.rol=="DOC"){
           Swal.fire({
             title: 'Error',
@@ -103,10 +106,11 @@ export class IniciosesionComponent implements OnInit {
             icon: 'warning',
             color: "#0c3255",
             confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            background: "#ffffff",
           })
         }else{
           sessionStorage.setItem('user', JSON.stringify(data));
+          console.log(data.nombrescompletos+'user sign up token'+ sessionStorage.setItem('user', JSON.stringify(data)))
           this.router.navigate(['/panelusuario/gestionpracticasppp/bienvenida']);
         }
       },
@@ -117,7 +121,7 @@ export class IniciosesionComponent implements OnInit {
           icon: 'warning',
           color: "#0c3255",
           confirmButtonColor:"#0c3255",
-          background: "#fbc02d",
+          background: "#ffffff",
         })
       }
     )

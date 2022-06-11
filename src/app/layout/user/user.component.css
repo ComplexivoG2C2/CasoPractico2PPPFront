@@ -61,14 +61,22 @@
   writing-mode: horizontal-tb;
   text-align: start;
 }
+.itemsdemenu{
+  width: 100%;
+  background: #455a64;
+  text-align: start;
+}
 
 .id-menus:hover {
   color: #ffc200;
   cursor: pointer;
   background: #043e6e;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
 }
 .list-group{
-  padding-left: 1.5px;
+  padding-left: 1.5px; background: #455a64;
 }
 
 mat-expansion-panel-header{

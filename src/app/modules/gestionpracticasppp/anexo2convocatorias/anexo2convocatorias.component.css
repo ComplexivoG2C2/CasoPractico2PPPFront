@@ -1,14 +1,28 @@
-.mat-stepper-vertical{
+.mat-stepper-horizontal {
   margin-top: 8px;
 }
-.example-card {
-  margin: 0 auto;
-  max-width: 600px;
+
+.mat-form-field {
+  margin-top: 16px;
 }
-mat-form-field{
+.example-card {
+  max-width: 100%;
+  position: center;
+  margin: 0 auto;
+}
+.example-header-image {
+
+  background-size: cover;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-viewport {
+  height: 100px;
   width: 100%;
 }
 
-.example-header-image {
-  background-size: cover;
+.example-item {
+  margin-top: 15px;
+  height: 300px;
 }

@@ -15,7 +15,6 @@ export class LoginempresaComponent implements OnInit {
   isLinear = true;
   loginForm!: FormGroup;
   issloading=true;
-  empre:Empresa= new Empresa();
   email?:String;
 //Obtiene los datos del inicio de sesión
   public empresaRequest: Empresa = new Empresa();
@@ -24,20 +23,27 @@ export class LoginempresaComponent implements OnInit {
   constructor(private iniciosesionService: IniciosesionService, private activatedRoute: ActivatedRoute,
               private router: Router, private _formBuilder: FormBuilder) {
   }
-
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+      this.issloading=false;
+    },2000)
+  }
   ngOnInit(): void {
-
     this.loginForm= this._formBuilder.group({
       emailEmpresa:['', Validators.required],
       clave:['', Validators.required],
     });
   }
 
-  login2(empre:Empresa) {
-    this.iniciosesionService.Login2(this.empre).subscribe(data => {
-        sessionStorage.setItem('empre', JSON.stringify(data));
-        console.log(data+'lllllllllllllll')
+  login2(emp:Empresa) {
+    this.iniciosesionService.Login2(this.empresaRequest).subscribe(
+      data => {
+        sessionStorage.clear;
+        console.log(sessionStorage.clear+"limpiar 1 empresa")
+        sessionStorage.setItem('emp', JSON.stringify(data));
+        console.log(data.emailEmpresa+'empresa login token'+sessionStorage.setItem('emp', JSON.stringify(data)))
         this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
+
       }, err => {
         Swal.fire({
           title: 'Email o constraseña incorrectos',
