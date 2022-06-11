@@ -104,5 +104,8 @@
       }
     }
   },
-  "defaultProject": "complexivoc2"
+  "defaultProject": "complexivoc2",
+  "cli": {
+    "analytics": "ee76423c-acd3-4b68-b0c6-eeb41a83719f"
+  }
 }

@@ -9,13 +9,17 @@ import {UserComponent} from "./layout/user/user.component";
 import {FooterComponent} from "./layout/footer/footer.component";
 import {MaterialModule} from "../material/material.module";
 import { PrincipalComponent } from './modules/principal/principal.component';
+import { CardsComponent } from './modules/principal/cards/cards.component';
+import { InstitucionComponent } from './modules/principal/institucion/institucion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     FooterComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    CardsComponent,
+    InstitucionComponent
   ],
   imports: [
     BrowserModule,
