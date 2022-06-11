@@ -15,7 +15,7 @@ export class IniciosesionService {
   constructor(private http:HttpClient) { }
 
   Login(userRequest: User):Observable<User>{
-    console.log(userRequest.cedula)
+    console.log(userRequest)
     return this.http.post<User>(this.urlEndPoint+"/login",userRequest)
   }
   Signup(userRequest: User):Observable<User>{
@@ -23,7 +23,8 @@ export class IniciosesionService {
     return this.http.post<User>(this.urlEndPoint+"/signup",userRequest)
   }
   Login2(empresaRequest: Empresa):Observable<Empresa>{
-    console.log(empresaRequest.emailEmpresa)
+    console.log('email'+empresaRequest.emailEmpresa)
+    console.log("nombre"+empresaRequest.nombre)
     return this.http.post<Empresa>(this.urlEndPoint+"/login2",empresaRequest)
   }
 }

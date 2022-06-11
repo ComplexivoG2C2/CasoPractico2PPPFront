@@ -23,7 +23,8 @@ export class AsignarcordinadorvincComponent implements OnInit {
   filteredOptions?: Observable<CordinadorVinculacion[]>;
 
 
-  constructor(private router: Router,private _formBuilder: FormBuilder, private fb: FormBuilder,private cordinadorvinculacionService:CordinadorvinculacionService) { }
+  constructor(private router: Router,private _formBuilder: FormBuilder,
+              private fb: FormBuilder,private cordinadorvinculacionService:CordinadorvinculacionService) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -64,16 +65,21 @@ export class AsignarcordinadorvincComponent implements OnInit {
 
 
   guardarcordinadorvinc(docente:CordinadorVinculacion):void{
+
     Swal.fire({
-      title: 'Confirmación',
-      text: "Oprima el boton Aceptar para terminar la Asignacion.",
-      icon: 'warning',
+      title: 'Confirme su Asignacion',
       showCancelButton: true,
-      color: "#ffffff",
+      color: "#030000",
       confirmButtonColor:"#0086ff",
-      background: "#455a64",
+      background: "#ffffff",
       cancelButtonColor: '#dda733',
-      confirmButtonText: 'Aceptar'
+      confirmButtonText: 'Aceptar',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
     }).then((result) => {
       if (result.isConfirmed) {
         this.cordinadorvinculacionService.existCordinadorVinculacion(docente.cedula+"").subscribe(data=>{
@@ -82,45 +88,47 @@ export class AsignarcordinadorvincComponent implements OnInit {
             this.cordinadorvinculacionService.updateCordinadorVinculacion(docente).subscribe(datau=>{
               Swal.fire({
                 title: 'Asignado Correctamente',
-                text: 'El docente ha sido asignado.',
-                icon: 'success',
-                iconColor :'#0088ff',
-                color: "#f7f7fa",
-                confirmButtonColor:"#0c3255",
-                background: "#455a64",
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
               })
               this.router.navigate(['/panelusuario/gestionpracticasppp/vercordinadorvinculacion']);
             },err => {
               Swal.fire({
-                title: 'Ha surgido un error',
-                text: "error",
-                icon: 'warning',
-                color: "#f9fafc",
-                confirmButtonColor:"#0c3255",
-                background: "#455a64",
+                title: 'error',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
               })
             })
           }else{
             docente.estado=true;
             this.cordinadorvinculacionService.saveCordinadorVinculacion(docente).subscribe(datau=>{
               Swal.fire({
-                title: 'Listo',
-                text: 'Se a completado la asignacion',
-                icon: 'success',
-                iconColor :'#007cff',
-                color: "#fcfcfc",
-                confirmButtonColor:"#0c3255",
-                background: "#455a64",
+                title: 'Asignacion completada',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
               })
               this.router.navigate(['/panelusuario/gestionpracticasppp/vercordinadorvinculacion']);
             },err => {
               Swal.fire({
-                title: 'Ha surgido un error',
-                text: "error",
-                icon: 'warning',
-                color: "#f6f6f6",
-                confirmButtonColor:"#0c3255",
-                background: "#455a64",
+                title: 'error',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
               })
             })
           }

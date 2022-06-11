@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 import {CordinadorVinculacion} from "../../../models/cordinadorvinculacion";
-import {FechaService} from "../../../services/fecha.service";
 import {Router} from "@angular/router";
 import {CordinadorvinculacionService} from "../../../services/cordinadorvinculacion.service";
 
@@ -14,7 +13,7 @@ export class VercordinadorvincComponent implements OnInit {
   issloading=true;
   isexist?:boolean
   docente:CordinadorVinculacion = new CordinadorVinculacion();
-  constructor(private fechaService:FechaService,private router: Router,private cordinadorvinculacionService:CordinadorvinculacionService) { }
+  constructor( private router: Router,private cordinadorvinculacionService:CordinadorvinculacionService) { }
   ngAfterViewInit(): void {
     setTimeout(()=>{
 

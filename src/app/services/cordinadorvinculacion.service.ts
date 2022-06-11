@@ -12,9 +12,9 @@ export class CordinadorvinculacionService {
 
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage["user"]).token})
 
-  constructor(private http:HttpClient) {
-    console.log(JSON.parse(sessionStorage["user"]).token)
-  }
+  constructor(private http:HttpClient) {console.log(JSON.parse(sessionStorage["user"]).token)}
+
+
   getCordinadorVinculacion():Observable<CordinadorVinculacion[]>{
     return this.http.get(this.urlEndPoint+"/all/docentes",{headers: this.httpHeaders}).pipe(map(
       data => data as CordinadorVinculacion[]

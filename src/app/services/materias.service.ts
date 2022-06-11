@@ -15,10 +15,7 @@ export class MateriasService {
 
   private urlEndPoint: string = 'http://localhost:8080/api/materias';
 
-  private httpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + JSON.parse(sessionStorage["user"]).token
-  })
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(sessionStorage["user"]).token})
 
 
   constructor(private http: HttpClient) {
