@@ -1,12 +1,7 @@
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-
-
     <form [formGroup]="firstFormGroup">
-      <!--      <button style="width: 80%" mat-raised-button color="primary"-->
-      <!--              [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"-->
-      <!--              routerLinkActive="active"-->
-      <!--      >Ver todas las empresas</button>-->
+
       <div align="center" style="font-size: large">
         <p class="title">Crear Solicitud de Practicas</p>
       </div>
@@ -15,77 +10,56 @@
 
         </mat-card-header>
 
-        <mat-card-content>
-          <mat-divider></mat-divider>
-          <br>
-          <table>
-            <tr style="margin-top: 0px">
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha</mat-label>
-                  <input matInput [matDatepicker]="picker" formControlName="fecha" placeholder="Fecha"   [(ngModel)]="proyecto.fechaat"  autofocus>
-                  <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-card-content>
+            <mat-grid-list cols="2" rowHeight="7:1">
+
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width1" appearance="outline">
+                  <mat-label>Fecha de Inicio y de Fin del programa de Practicas</mat-label>
+                  <mat-date-range-input [rangePicker]="picker" >
+                    <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="proyecto.fechaInicio">
+                    <input matEndDate formControlName="end" placeholder="Fin" [(ngModel)]="proyecto.fechaFin">
+                  </mat-date-range-input>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
                 </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
+
+                <button mat-raised-button color="primary"  (click)="obtnerMeses()">></button>
+
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field style="width: 50%;align-content: start" appearance="outline">
+                  <mat-label>Plazo de ejecución en meses</mat-label>
+                  <input matInput formControlName="plazo"  [(ngModel)]="proyecto.plazoEjecucion" [readonly]="true">
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field  class="example-full-width" appearance="outline">
                   <mat-label>Carrera destinada:</mat-label>
-                  <!--                  <input matInput   formControlName="carrera" placeholder="CARRERA" required [(ngModel)]="anexo.nombreCarrera" autofocus>-->
+                  <!--<input matInput   formControlName="carrera" placeholder="CARRERA" required [(ngModel)]="anexo.nombreCarrera" autofocus>-->
                   <mat-select formControlName="carrera" placeholder="CARRERA"  [(ngModel)]="proyecto.codigocarrera" (selectionChange)="obtenerResponsable($event)">
-                    <mat-option value="TDS">Desarrollo de Software</mat-option>
-                    <mat-option value="ADS">Analisis de Sistemas</mat-option>
+                    <mat-option value="TDS">Tecnologia Superior en Desarrollo de Software</mat-option>
+                    <mat-option value="ADS">Tecnologia Superior en Analisis de Sistemas</mat-option>
                     <mat-option value="BD">Big Data</mat-option>
-                    <mat-option value="ED">Entrenamiento Deportivo</mat-option>
+                    <mat-option value="ED">Tecnologia Superior en Entrenamiento Deportivo</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Numero de estudiantes</mat-label>
-                  <input matInput type="number" formControlName="numeroEst" placeholder="Numero de Estudiantes"   [(ngModel)]="proyecto.participantes">
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr >
-              <!--               <td colspan="3">-->
-              <!--                  <mat-form-field appearance="outline" style="width: 100%" >-->
-              <!--                    <mat-label>Actividades a Desarrollar:</mat-label>-->
-              <!--                    <textarea matInput formControlName="actividades" placeholder="ACTIVIDADES"  [(ngModel)]="proyecto.actividadeslistProyectos" name="descripcionEmpresa" autofocus></textarea>-->
-              <!--                  </mat-form-field>-->
-              <!--                </td>-->
-            </tr>
-            <tr style="margin-top: 0px">
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha de Inicio:</mat-label>
-                  <input matInput [matDatepicker]="picker2" formControlName="fechaI" placeholder="Fecha de Inicio"   [(ngModel)]="proyecto.fechaInicio"  autofocus>
-                  <mat-hint>DD/MM/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-              </td>
+              </mat-grid-tile>
 
-            </tr>
-            <tr style="margin-top: 0px">
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Titulo</mat-label>
-                  <input matInput formControlName="titulo"   [(ngModel)]="proyecto.lineaaccion">
+              <mat-grid-tile>
+                <mat-form-field style="width: 50%;align-content: start" appearance="outline">
+                  <mat-label>Numero de estudiantes solicitados</mat-label>
+                  <input matInput type="number" min="1" max="50" formControlName="numeroEst"   [(ngModel)]="proyecto.participantes">
                 </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Nombre</mat-label>
-                  <input matInput formControlName="responsable" placeholder="Responsable"  [(ngModel)]="proyecto.nombreresponsable">
-                </mat-form-field>
-              </td>
-            </tr>
-          </table>
+              </mat-grid-tile>
 
-        </mat-card-content>
-        <button style="width: 40%" mat-raised-button matStepperNext color="primary">Next</button>
+
+            </mat-grid-list>
+          </mat-card-content>
+
+        <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
       </mat-card>
     </form>
   </mat-step>
@@ -95,34 +69,32 @@
 
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup" >
-
+      <div align="center" style="font-size: large">
+        <p class="title">Actividades a Desarrollar</p>
+      </div>
       <mat-card class="example-card">
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-subtitle>Agregar Acitivades</mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <br>
+
         <mat-card-content>
+          <mat-grid-list class="matlistlista" cols="3" rowHeight="5:1">
 
-          <mat-grid-list cols="3" rowHeight="6:1">
+                  <mat-grid-tile colspan="3" >
+                    <button style="width: 30%" mat-raised-button color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')">Agregar<mat-icon>forward</mat-icon></button>
+                  </mat-grid-tile>
 
-              <mat-grid-tile colspan="3" >
-                <button mat-fab color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')"><mat-icon>add_circle</mat-icon></button>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="3" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Objetivo Específico {{index}}</mat-label>
-                  <input matInput [formControl]="row.get('descripcion')" placeholder="........">
-                </mat-form-field>
-                <span class="example-spacer"></span>
-                <button mat-mini-fab color="warn"  style="margin-left: 50px" (click)="onRemoveRow(index)"><mat-icon>delete_sweep</mat-icon></button>
-              </mat-grid-tile>
+                  <mat-grid-tile colspan="3" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput [formControl]="row.get('descripcion')" placeholder="Actividad # {{index}}">
+                    </mat-form-field>
+                    <span class="example-spacer"></span>
+                    <button mat-raised-button color="accent"  style="margin-left: 50px" (click)="onRemoveRow(index)"><mat-icon>keyboard_return</mat-icon></button>
+                  </mat-grid-tile>
+
           </mat-grid-list>
         </mat-card-content>
         <mat-divider></mat-divider>
-        <br>
-        <div style="text-align: end">
-          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
-          <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+        <div style="text-align: center">
+          <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+          <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
         </div>
       </mat-card>
     </form>
@@ -131,27 +103,46 @@
 
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup" >
-
+      <div align="center" style="font-size: large">
+        <p class="title">Generar el Documento</p>
+      </div>
       <mat-card class="example-card">
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-subtitle>Genrar Documento</mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <br>
         <mat-card-content>
+          <table class="tabladedoscolumnas">
+            <th style="padding: 5px" colspan="1">
+              <strong>Verificar Informacion</strong>
+            </th>
+            <th style="padding: 5px" colspan="1">
+              <strong>Subir el documento</strong>
+            </th>
+            <tr aria-colspan="2">
+              <td style="padding: 5px;text-align: start" colspan="1">
+                <strong>Empresa: </strong> {{nombreempresa}}<br>
+                <strong>Nombre del Solicitante:</strong>{{nombresolicitante}}  <br>
+                <strong>Cargo del Solicitante:</strong>{{cargosolicitante}} <br>
+                <strong>Fecha de emision de solicitud: </strong> {{fechaactual | date:"longDate"}}<br>
+                <strong>Carrera a la cual va Dirigido: </strong>{{proyecto.codigocarrera}}<br>
+                <strong>Estudiantes:</strong>{{proyecto.participantes}}<br>
+                <strong>Fecha de Inicio: </strong>{{proyecto.fechaInicio | date:"longDate"}}<br>
+                <strong>Nombre Responsable de Practicas Preprofesionales:</strong>  {{proyecto.nombreresponsable}} <br>
+              </td>
+              <td style="padding: 5px;text-align: start" colspan="1">
+                  <button mat-raised-button color="primary" (click)="generarDocumento()">Generar Solicitud</button>
+                <span class="example-spacer"></span>
+                  <mat-form-field appearance="outline" style="width: 50%; margin-left: 5px" >
+                    <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                  </mat-form-field>
+              </td>
+            </tr>
 
-          <div>
-            <button mat-raised-button color="primary" (click)="generarDocumento()">Generar Solicitud</button>
-            <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
-              <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
-              <mat-icon matSuffix>folder</mat-icon>
-              </mat-form-field>
-          </div>
+          </table>
+
         </mat-card-content>
         <mat-divider></mat-divider>
-        <br>
-        <div style="text-align: end">
-          <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
-          <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+        <div style="text-align: center">
+          <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+          <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="almacenarSolicitud()">Enviar Solicitud</button>
         </div>
       </mat-card>
     </form>
@@ -161,38 +152,4 @@
 
 
 
-  <mat-step>
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-
-      </mat-card-header>
-      <mat-card-content>
-
-        <mat-divider></mat-divider>
-        <table>
-          <th style="padding: 5px">
-            <strong>INFORMACIÓN DE LA SOLICITUD</strong>
-          </th>
-          <th style="padding: 5px">-</th>
-          <tr>
-            <td style="padding: 5px">
-              <strong>Empresa: </strong> {{empresas.nombre}}<br>
-              <strong>Fecha: </strong> {{proyecto.fechaat}}<br>
-              <strong>Carrera: </strong>{{proyecto.codigocarrera}}<br>
-              <strong>Estudiantes:</strong>{{proyecto.participantes}}<br>
-              <strong>Actividades: </strong>{{proyecto.actividadeslistProyectos}}<br>
-              <strong>Fecha de Inicio: </strong>{{proyecto.fechaInicio}}<br>
-              <strong>Nombre Responsable:</strong>{{proyecto.lineaaccion}}  {{proyecto.nombreresponsable}} <br>
-            </td>
-          </tr>
-        </table>
-        <button style="width: 40%" mat-raised-button matStepperNext color="primary" (click)="almacenarSolicitud()">Next</button>
-      </mat-card-content>
-      <div>
-        <!--        <button mat-raised-button matStepperPrevious color="warn">Atrás</button>-->
-        <!--        <button mat-raised-button color="primary" (click)="crearEmpresa(empresa)">Registrar Empresa</button>-->
-      </div>
-    </mat-card>
-  </mat-step>
 </mat-stepper>

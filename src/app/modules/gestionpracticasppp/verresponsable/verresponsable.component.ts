@@ -48,7 +48,7 @@ export class VerresponsableComponent implements OnInit {
       showCancelButton: true,
       color: "#0c3255",
       confirmButtonColor:"#0c3255",
-      background: "#fbc02d",
+      background: "#fdfcf9",
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar'
     }).then((result) => {
@@ -61,7 +61,7 @@ export class VerresponsableComponent implements OnInit {
             iconColor :'#17550c',
             color: "#0c3255",
             confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            background: "#f5f4f3",
           })
           this.router.navigate(['/panelusuario/proyectovinculacion/nuevoresponsable',this.cedula]);
         },err => {
@@ -71,7 +71,7 @@ export class VerresponsableComponent implements OnInit {
             icon: 'warning',
             color: "#0c3255",
             confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            background: "#ffffff",
           })
         })
       }

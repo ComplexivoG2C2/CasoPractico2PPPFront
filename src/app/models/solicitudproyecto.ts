@@ -3,32 +3,30 @@ export class Solicitudproyecto {
   participantes?:Number;
   codigo?:string;
   nombre?:string;
-  lineaaccion?:string;
+  cargosolicitante?:string;
+  nombresolicitante?:string;
+  nombreempresa?:string;
   codigocarrera?:string;
-  carrera?:String;
+  carrera?:string;
   estado?:boolean;
-  fechaat?:string;
-  empresa?:Number;
-  //DE PRACTICAS
-  nombreresponsable?:String
+  fechaat?:Date;
+  empresa?:number;
+  nombreresponsable?:string
   nombretutoremp?:String;
   responsablePPP?:Number;
-
-  //responsable de la convocatoria
-  nombreremp?:String;
   documento?:String;
-  programaVinculacion?:String;
+
+
   coordinadorCedula?:String;
   plazoEjecucion?:String;
   fechaInicio?:Date;
   fechaFin?:Date;
   actividadeslistProyectos?: actividadeslistProyectos[];
   docentesDelegados?:DocentesDelegados[];
-  actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[]
+  actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[]=[];
   ///
   requisitoslistProyectos?:  requisitoslistProyectos[];
-  docenteApoyoResponse?:DocenteApoyoResponse[];
-}
+  docenteApoyoResponse?:DocenteApoyoResponse[];}
 
 export class actividadeslistProyectos {
   descripcion?: string;
@@ -38,7 +36,7 @@ export class requisitoslistProyectos {
   descripcion?: string;
 }
 export class ActividadesEmpresalistProyecto{
-  descripcion?: String;
+  descripcion?: string;
 }
 export class DocenteApoyoResponse{
   cedula?:String;

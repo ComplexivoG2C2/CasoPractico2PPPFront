@@ -5,6 +5,7 @@ export class Empresa {
   emailEmpresa?:String;
   clave?:String;
   emailRepresentante?:String;
+  titulorepresentante?:String;
   telefonoEmpresa?:String;
   celularRepresentante?:String;
   fechaCreacion?:Date;
@@ -13,4 +14,5 @@ export class Empresa {
   ciudad?:string;
   direccion?:string;
   descripcionEmpresa?:string;
+  token?:string;
 }

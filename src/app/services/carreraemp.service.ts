@@ -6,11 +6,10 @@ import {Carreras} from "../models/carreras";
 @Injectable({
   providedIn: 'root'
 })
-export class CarrerasService {
-
+export class CarreraempService {
 
   private urlEndPoint:string='http://localhost:8080/api/carreras';
-  private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['user']).token})
+  private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['emp']).token});
 
   constructor(private http:HttpClient) { }
 

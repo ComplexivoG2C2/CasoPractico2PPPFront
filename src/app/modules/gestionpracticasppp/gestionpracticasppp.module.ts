@@ -17,37 +17,26 @@ import { BienvenidaempresaComponent } from './bienvenidaempresa/bienvenidaempres
 import 'animate.css';
 import { NuevasolicitudComponent } from './nuevasolicitud/nuevasolicitud.component';
 import { VersolicutudesComponent } from './versolicutudes/versolicutudes.component';
-import {Anexo3Component} from "./anexo3/anexo3.component";
-import { MatTabsModule } from '@angular/material/tabs';
+import {MatDialogModule} from "@angular/material/dialog";
+import { AgregartutoracademicoComponent } from './agregartutoracademico/agregartutoracademico.component';
+import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
 
 
 const routes: Routes = [
-  {path: 'bienvenida',
-    component: BienvenidaComponent
-  },{path:'cordinadorvinculacion',
-    component:AsignarcordinadorvincComponent
-  },{path:'vercordinadorvinculacion',
-    component:VercordinadorvincComponent
-  },{ path: 'anexo1/:cedula/:nombres',
-    component: Anexo1Component
-  },{ path: 'anexo2convocatorias/:id',
-    component: Anexo2convocatoriasComponent
-  },{ path: 'nuevoresponsableppp/:cedula',
-    component: NuevoresponsablepppComponent
-  },{ path: 'verresponsableppp/:cedula',
-    component: VerresponsableComponent
-  },{path:'crearempresa/:id',
-    component:CrearempresaComponent
-  }, {path:'verempresa',
-    component:VerempresaComponent
-  },{path:'bienvenidaempresa',
-    component:BienvenidaempresaComponent
-  },{path:'nuevasolicitud',
-    component:NuevasolicitudComponent
-  },{path:'versolicitud',
-    component:VersolicutudesComponent
-  },{path:'anexo3/:cedula',
-    component:Anexo3Component
+  {path: 'bienvenida', component: BienvenidaComponent
+  },{path:'cordinadorvinculacion', component:AsignarcordinadorvincComponent
+  },{path:'vercordinadorvinculacion', component:VercordinadorvincComponent
+  },{path:'anexo1/:cedula/:nombres', component: Anexo1Component
+  },{path:'anexo2convocatorias/:id', component: Anexo2convocatoriasComponent
+  },{path:'nuevoresponsableppp/:cedula', component: NuevoresponsablepppComponent
+  },{path:'verresponsableppp/:cedula', component: VerresponsableComponent
+  },{path:'crearempresa/:id', component:CrearempresaComponent
+  },{path:'verempresa', component:VerempresaComponent
+  },{path:'bienvenidaempresa', component:BienvenidaempresaComponent
+  },{path:'nuevasolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:NuevasolicitudComponent
+  },{path:'versolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
+  },{path:'anexo2convocatoria/:id/:cedula', component: Anexo2convocatoriasComponent
+  },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
   }
 
 ]
@@ -66,7 +55,8 @@ const routes: Routes = [
     BienvenidaempresaComponent,
     NuevasolicitudComponent,
     VersolicutudesComponent,
-    Anexo3Component
+    AgregartutoracademicoComponent,
+    VerconvocatoriasComponent
   ],
   imports: [
     CommonModule,
@@ -74,8 +64,8 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
     MaterialFileInputModule,
-    MatTabsModule,
   ],
   exports: [RouterModule]
 })

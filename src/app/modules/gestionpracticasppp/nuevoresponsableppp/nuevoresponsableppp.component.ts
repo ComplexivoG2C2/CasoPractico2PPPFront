@@ -63,11 +63,6 @@ export class NuevoresponsablepppComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-
-    }, 1000)
-  }
 
   filter(value: any): Docentes[] {
     const filterValue = value.toLowerCase();

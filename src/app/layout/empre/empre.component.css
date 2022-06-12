@@ -1,27 +1,30 @@
 .bst-section{
   display: grid;
-  position: fixed;
+  position: absolute;
   grid-template-rows: 60px auto 50px;
   width: 100%;
-  height: auto;
+  height: 100%;
   min-height: 500px;
 }
 .bst-footer{
 }
 
 .mat-bar{
-  color: white;
-  background-color:#fbc02d;
+  color: #0e0000;
+  background-color: #fbc02d;
   height: 100%;
+  border: 1px solid #00080e;
 }
 .example-spacer {
   flex: 1 1 auto;
 }
 .imagem-mat{
-  border: 5px solid #fbc02d;
-  border-radius: 50%;
-  width:150px;
-  height:150px;
+  border: 5px solid #ffffff;
+  border-radius: 100%;
+  width:95px;
+  height:95px;
+  background-size: cover;
+  margin: 0 auto;
 }
 .example-sidenav-content {
   padding: 20px 10px;
@@ -29,194 +32,54 @@
 }
 .example-sidenav {
   color: white;
-  background-color: #0c3255;
+  background: #455a64;
   padding-top: 15px;
-  width: 250px;
+  width: 280px;
 }
-
+.bss-loader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
 .contenedor-perfil{
   text-align: center;
 }
 .id-menus{
   margin-top: 5px;
-  width: 200px;
+  width: 100%;
   white-space:normal;
-  color:  #0c3255;
-  border: 1px solid  #0c3255;
-  border-inline: 5px solid  #0c3255;
+  color: #b8ccd2;
+  border: 1px solid #455a64;
+  border-inline: 5px solid #455a64;
   writing-mode: horizontal-tb;
+  text-align: start;
+}
+.itemsdemenu{
+  width: 100%;
+  background: #455a64;
+  text-align: start;
+}
+
+.id-menus:hover {
+  color: #ffc200;
+  cursor: pointer;
+  background: #043e6e;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
 }
 .list-group{
-  padding-left: 1.5px;
+  padding-left: 1.5px; background: #455a64;
 }
 
-mat-toolbar {
-  background: #004a9f;
-  color: white;
-}
-
-mat-sidenav {
-  margin: 16px;
-  width: 240px;
-  border-right: none;
-  background: #002b5c;
-  color: white;
-  border-radius: 10px;
-  padding: 16px;
-  text-align: center;
-}
-
-.content {
-  height: calc(100vh - 100px);
-  border-radius: 20px;
-  margin: 16px;
-  margin-left: 32px;
-  padding: 0px;
-
-  overflow: auto;
-}
-
-mat-sidenav-container {
-  height: calc(100vh - 65px);
-}
-
-.menu-button {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 1rem;
-}
-mat-icon {
-  margin-right: 8px;
-}
-
-
-.avatar {
-  margin-top: 16px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-.name {
-  margin-top: 8px;
-  font-weight: normal;
-}
-
-.designation {
-  margin-top: 2px;
-  font-size: 0.7rem;
-  color: lightgrey;
-}
-
-mat-divider {
-  margin-top: 16px;
-  margin-bottom: 16px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-
-.reddit-icon-svg{
-  height: 50px;
-  padding: 8px 8px 8px 0;
-  width: 50px;
-}
-
-.reddit-text{
-  font-weight: 700;
-  height: 50px;
-  width: 50px;
-}
-.logo{
-  text-decoration: none;
-}
-
-.login, .sign-up{
-  background-color: transparent;
-  border-color: #ffffff;
-  color: #ffffff;
-  fill: #ffffff;
-  border: 1px solid;
-  border-radius: 4px;
-  box-sizing: border-box;
-  text-align: center;
-  letter-spacing: 1px;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  line-height: 24px;
-  text-transform: uppercase;
-  padding: 3px 16px;
-  opacity: 1;
-}
-
-.sign-up{
-  background-color: #fdfdfd;
-  border-color: #030000;
-  color: #2669a6;
-}
-
-.sign-up:hover{
-  opacity: 0.6;
-}
-
-.userdetails{
-  background-color: transparent;
-  border-color: #040d13;
-  color: #234e6e;
-  fill: #092a42;
-  border: 1px solid;
-  border-radius: 4px;
-  box-sizing: border-box;
-  text-align: center;
-  letter-spacing: 1px;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  line-height: 24px;
-  text-transform: uppercase;
-  padding: 3px 16px;
-  opacity: 1;
-  border: 0px;
-}
-
-.userdetails:hover{
-  border: 1px solid;
-}
-/*.bst-section{*/
-/*  display: grid;*/
-/*  position: absolute;*/
-/*  grid-template-rows: 60px auto 50px;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  min-height: 500px;*/
-/*}*/
-.bst-footer{
-}
-.dropdown-item{
-  background-color: #f8f9fa;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.dropdown-item:hover{
-  background-color: #000e17;
-}
-
-.dropdown-menu{
-  background-color: #035cb6;
-}
-
-.account-icon{
-  border-radius: 4px;
-  float: left;
-  margin-right: 5px;
-  max-height: 24px;
-  max-width: 24px;
+mat-expansion-panel-header{
+  height: auto;
+  min-height: 60px;
 }

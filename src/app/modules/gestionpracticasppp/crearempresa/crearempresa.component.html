@@ -93,6 +93,12 @@
         <input matInput formControlName="correor" placeholder="ppp@gmail.com" required [(ngModel)]="empresa.emailRepresentante">
       </mat-form-field>
     </td>
+    <td>
+      <mat-form-field appearance="outline" style="border: #1c2023">
+        <mat-label>Cargo/Titulo del Representante empresarial</mat-label>
+        <input matInput formControlName="titulo" required [(ngModel)]="empresa.titulorepresentante">
+      </mat-form-field>
+    </td>
   </tr>
 
 </table>
@@ -124,7 +130,6 @@
           <tr>
             <td style="padding: 5px">
               <strong>Nombre: </strong>{{empresa.nombre}}<br>
-              <strong>Clave: </strong>{{empresa.clave}}<br>
               <strong>Descripción:</strong>{{empresa.descripcionEmpresa}}<br>
               <strong>Correo: </strong>{{empresa.emailEmpresa}}<br>
               <strong>Ciudad: </strong>{{empresa.ciudad}}<br>
@@ -134,7 +139,7 @@
             <td style="padding: 5px">
               <strong>Nombre:</strong> {{empresa.representante}}<br>
               <strong>Cédula: </strong>{{empresa.celularRepresentante}}<br>
-              <strong>Correo: </strong>{{empresa.celularRepresentante}}
+              <strong>Correo: </strong>{{empresa.emailRepresentante}}
             </td>
           </tr>
         </table>
