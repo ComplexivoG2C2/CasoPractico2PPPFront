@@ -75,10 +75,10 @@ export class Anexo2convocatoriasComponent implements OnInit {
   filteredOptions?: Observable<Materias[]>;
   cedula?:String;
 
-  constructor(private fechaService:FechaService,private carrerasService:CarrerasService,
+  constructor(private router: Router,private fechaService:FechaService,private carrerasService:CarrerasService,
               private responsablepppService:ResponsablepppService,
               private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
-              private entidadbeneficiarioService:EmpresaService,
+              private empresaService:EmpresaService,
               private proyectoService:ProyectoService,
               private materiasService:MateriasService,private anexo2Service:Anexo2Service) {
     //ArrayActividades
@@ -136,7 +136,9 @@ export class Anexo2convocatoriasComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       ciclo:['',Validators.required],
       fecharesepcion:['',Validators.required],
-      correo:['',Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      docx:['',Validators.required]
     });
   }
 
@@ -283,307 +285,173 @@ requisitoslistProyectos:requisitoslistProyectos[]=[];
       })
     });
   }
+
+
+
+
+
+
+
+  obtnerDatosanexo2(proyecto:Solicitudproyecto):Anexo2 {
+    this.actividadesanexo.length=0;
+
+    this.anexo2.numeroConvocatoria =this.numeroConvocatoria;
+    this.anexo2.siglasCarrera=proyecto.codigocarrera;
+    this.anexo2.carrera = proyecto.carrera;
+    this.anexo2.num_proceso=1;
+    this.anexo2.nombreProyecto = proyecto.nombre;
+    this.anexo2.nombreResponsable = proyecto.nombreresponsable;
+    this.anexo2.idProyectoPPP = proyecto.id;
+    this.anexo2.actividades=this.proyecto.actividadeslistProyectos;
+    this.fechaService.getSysdate().subscribe(value => {
+      this.anexo2.anio = this.data.getFullYear()+""
+      this.anexo2.fecha = value.fecha;
+    })
+    this.empresaService.getEmpresaAll().subscribe(value => {
+      this.anexo2.empresa=value.filter(value1 => value1.id=proyecto.empresa)[0].nombre
+    })
+    return this.anexo2
+    console.log("datos"+this.anexo2)
+  }
+
+  subirDocumento(proyecto:Solicitudproyecto,file:FileList){
+    this.obtnerDatosanexo2(proyecto);
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        //console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.anexo2.documento="";
+          Swal.fire(
+            'Error',
+            'El documento es demasiado pesado',
+            'warning'
+          )
+        }else{
+          this.anexo2.documento=docx+"";
+        }
+      })
+    }
+  }
+
+  guardarAnexo2(proyeco:Solicitudproyecto){
+    this.issloading=true;
+    this.anexo2Service.saveAnexo2(this.obtnerDatosanexo2(proyeco)).subscribe(value => {
+      Swal.fire({
+        title: 'Convocatoria enviada',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+      this.issloading=false;
+      this.router.navigate(['/panelusuario/gestionpracticasppp/verconvocatorias',this.cedula]);
+    },error => {
+      if(error.error.message=="...@"){
+        Swal.fire({
+          title: 'enviado..',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+        this.issloading=false;
+        this.router.navigate(['/panelusuario/gestionpracticasppp/verconvocatorias',this.cedula]);
+      }else {
+        Swal.fire({
+          title: 'error',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+        this.issloading=false;
+      }
+    })
+  }
+
+  generarDocumento(proyecto:Solicitudproyecto) {
+    console.log(this.obtnerDatosanexo2(proyecto))
+    var pipe:DatePipe = new DatePipe('en-US')
+    var anexo:Anexo2=this.obtnerDatosanexo2(proyecto);
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo2.docx", function(
+      // @ts-ignore
+      error,
+      // @ts-ignore
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+
+
+      doc.setData({
+        // @ts-ignore
+        fecha:anexo.fecha,
+        siglas: anexo.siglasCarrera,
+        anio: anexo.anio,
+        nro: anexo.numeroConvocatoria,
+        ciclo: anexo.ciclo,
+        carrera: anexo.carrera,
+        empresa: anexo.empresa,
+        tb1: proyecto.actividadeslistProyectos,
+        tb2: proyecto.requisitoslistProyectos,
+        nombre_responsableppp: anexo.nombreResponsable,
+        fecha_max:pipe.transform(anexo.fechaMaxRecepcion,'dd/MM/yyyy'),
+      });
+      try {
+        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        // @ts-ignore
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+                error,
+                key
+              ) {
+                // @ts-ignore
+                error[key] = value[key];
+                return error;
+              },
+              {});
+          }
+          return value;
+        }
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
+        // @ts-ignore
+        if (error.properties && error.properties.errors instanceof Array) {
+          // @ts-ignore
+          const errorMessages = error.properties.errors
+            // @ts-ignore
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          //console.log("errorMessages", errorMessages);
+          // errorMessages is a humanly readable message looking like this :
+          // 'The tag beginning with "foobar" is unopened'
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "Anexo2 "+anexo.nombreResponsable+" Covocatoria Nª"+anexo.numeroConvocatoria+"de"+anexo.carrera+".docx");
+    });
+  }
 }
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//   /////
-//
-//
-//   filterp(value: any): Materias[] {
-//     const filterValue = value.toString().toLowerCase();
-//     return this.materias.filter(option => option.nombre?.toLowerCase().includes(filterValue)
-//       ||option.codigo?.toLocaleLowerCase().includes(filterValue)
-//     );
-//   }
-//   //ArrayActividades
-//   onAddRow(descripcion:String) {
-//     // @ts-ignore
-//     this.rows.push(this.createItemFormGroup(descripcion));
-//   }
-//   onRemoveRow(rowIndex:number){
-//     // @ts-ignore
-//     this.rows.removeAt(rowIndex);
-//   }
-//   createItemFormGroup(descripcion:String): FormGroup {
-//     return this._formBuilder.group({
-//       descripcion:[descripcion, Validators.required],
-//     });
-//   }
-//
-//   addMaterias(materias:Materias){
-//     console.log(materias)
-//     if(this.seleccionmaterias.filter(value => value.codigo==materias.codigo).length==0){
-//       this.seleccionmaterias.push(materias);
-//     }
-//   }
-//   removeMaterias(materias:Materias){
-//     this.seleccionmaterias.forEach((element,index)=>{
-//       if(element.codigo==materias.codigo) this.seleccionmaterias.splice(index,1);
-//     });
-//   }
-//
-//
-//
-//
-//
-//
-//   /////
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//   actividadeslistProyecto:actividadeslistProyectos[]=[];
-//   agregarActividades(proyecto:Solicitudproyecto){
-//     this.actividadeslistProyecto=this.rows.getRawValue();
-//     this.proyectoService.updateActividadesbyIdSolicitudes(Number(proyecto.id),this.actividadeslistProyecto).subscribe( value=>{
-//       Swal.fire({
-//         title: 'Éxito',
-//         text: 'Actividades agregadas.',
-//         icon: 'success',
-//         iconColor :'#17550c',
-//         color: "#0c3255",
-//         confirmButtonColor:"#0c3255",
-//         background: "#fbc02d",
-//       })
-//     },error => {
-//       Swal.fire({
-//         title: 'Ha surgido un error al actualizar actividades',
-//         text: "Hubo un error, contáctese con TICs.",
-//         icon: 'error',
-//         color: "#0c3255",
-//         confirmButtonColor:"#0c3255",
-//         background: "#fbc02d",
-//       })
-//     })
-//   }
-//
-//
-//   requisitoslistProyectos:requisitoslistProyectos[]=[];
-//   agregarMaterias(proyecto:Solicitudproyecto){
-//     this.seleccionmaterias.forEach(value1 => {
-//       this.requisitoslistProyectos.push({
-//         descripcion:value1.nombre+""
-//       })
-//     })
-//     console.log(proyecto.id,this.requisitoslistProyectos)
-//     this.proyectoService.updateRequistosbyIdSolicitudes(Number(proyecto.id),this.requisitoslistProyectos).subscribe( value=>{
-//       Swal.fire({
-//         title: 'Éxito',
-//         text: 'Requisitos agregados.',
-//         icon: 'success',
-//         iconColor :'#17550c',
-//         color: "#0c3255",
-//         confirmButtonColor:"#0c3255",
-//         background: "#fbc02d",
-//       })
-//     },error => {
-//       Swal.fire({
-//         title: 'Ha surgido un error al actualizar requisitos',
-//         text: "Hubo un error, contáctese con TICs.",
-//         icon: 'error',
-//         color: "#0c3255",
-//         confirmButtonColor:"#0c3255",
-//         background: "#fbc02d",
-//       })
-//     })
-//   }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//   obtnerDatos(proyecto:Solicitudproyecto):Anexo2 {
-//
-//     this.anexo2.numeroConvocatoria =this.numeroConvocatoria;
-//     this.anexo2.siglasCarrera=proyecto.codigocarrera;
-//     this.anexo2.carrera = proyecto.carrera;
-//     this.anexo2.num_proceso=1;
-//     this.anexo2.nombreProyecto = proyecto.nombre;
-//     this.anexo2.nombreResponsable = proyecto.nombreresponsable;
-//     this.anexo2.idProyectoPPP = proyecto.id;
-//     this.anexo2.actividades=this.actividadesanexo;
-//     this.fechaService.getSysdate().subscribe(value => {
-//       this.anexo2.anio = this.data.getFullYear()+""
-//       this.anexo2.fecha = value.fecha;
-//     })
-//     this.entidadbeneficiarioService.getEmpresaAll().subscribe(value => {
-//       this.anexo2.empresa=value.filter(value1 => value1.id==proyecto.empresa)[0].nombre
-//     })
-//     return this.anexo2
-//   }
-//
-//   subirDocumento(proyecto:Solicitudproyecto,file:FileList){
-//     this.obtnerDatos(proyecto);
-//     if(file.length==0){
-//     }else{
-//       getBase64(file[0]).then(docx=>{
-//         // @ts-ignore
-//         //console.log(docx.length)
-//         // @ts-ignore
-//         if(docx.length>=10485760){
-//           this.anexo2.documento="";
-//           Swal.fire(
-//             'Error',
-//             'El documento es demasiado pesado',
-//             'warning'
-//           )
-//         }else{
-//           this.anexo2.documento=docx+"";
-//         }
-//       })
-//     }
-//   }
-//
-//   guardarAnexo2(proyeco:Solicitudproyecto){
-//     this.issloading=true;
-//     this.anexo2Service.saveAnexo2(this.obtnerDatos(proyeco)).subscribe(value => {
-//       Swal.fire({
-//         title: 'Éxito',
-//         text: 'La convocatoria ha sido enviada',
-//         icon: 'success',
-//         iconColor :'#17550c',
-//         color: "#0c3255",
-//         confirmButtonColor:"#0c3255",
-//         background: "#fbc02d",
-//       })
-//       this.issloading=false;
-//       this.router.navigate(['/panelusuario/gestionpracticasppp/verconvocatoria',this.cedula]);
-//     },error => {
-//       if(error.error.message=="No se envió el email"){
-//         Swal.fire({
-//           title: 'Error',
-//           text: 'La convocatoria ha sido creada y enviada con éxito, pero no se envió el correo',
-//           icon: 'warning',
-//           iconColor :'#17550c',
-//           color: "#0c3255",
-//           confirmButtonColor:"#0c3255",
-//           background: "#fbc02d",
-//         })
-//         this.issloading=false;
-//         this.router.navigate(['/panelusuario/gestionpracticasppp/verconvocatoria',this.cedula]);
-//       }else {
-//         Swal.fire({
-//           title: 'Ha surgido un error',
-//           text: "Hubo un error",
-//           icon: 'error',
-//           color: "#0c3255",
-//           confirmButtonColor:"#0c3255",
-//           background: "#fbc02d",
-//         })
-//         this.issloading=false;
-//       }
-//
-//     })
-//   }
-//
-//   generarDocumento(proyecto:Solicitudproyecto) {
-//     console.log(this.obtnerDatos(proyecto))
-//     var pipe:DatePipe = new DatePipe('en-US')
-//     var anexo2doc:Anexo2=this.obtnerDatos(proyecto);
-//     loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo2.docx", function(
-//       // @ts-ignore
-//       error,
-//       // @ts-ignore
-//       content
-//     ) {
-//       if (error) {
-//         throw error;
-//       }
-//       const zip = new PizZip(content);
-//       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
-//
-//
-//       doc.setData({
-//         // @ts-ignore
-//         fecha:anexo2doc.fecha,
-//         siglas: anexo2doc.siglasCarrera,
-//         anio: anexo2doc.anio,
-//         num_convocatoria: anexo2doc.numeroConvocatoria,
-//         ciclo: anexo2doc.ciclo,
-//         carrera: anexo2doc.carrera,
-//         nombre_proyeto: anexo2doc.nombreProyecto,
-//         entidad_beneficiaria: anexo2doc.empresa,
-//         actividades: proyecto.actividadeslistProyectos,
-//         nombre_proyecto:anexo2doc.nombreProyecto,
-//         asignatura: proyecto.requisitoslistProyectos,
-//         //Enlistar las asignaturas que necesitarán haber aprobado para ejecutar las actividades
-//         nombre_doc_responsableppp:anexo2doc.nombreResponsable,
-//         email_doc_responsableppp:anexo2doc.emailDocente,
-//         fecha_max:pipe.transform(anexo2doc.fechaMaxRecepcion,'dd/MM/yyyy'),
-//
-//       });
-//       try {
-//         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
-//         doc.render();
-//       } catch (error) {
-//         // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-//         // @ts-ignore
-//         function replaceErrors(key, value) {
-//           if (value instanceof Error) {
-//             return Object.getOwnPropertyNames(value).reduce(function(
-//                 error,
-//                 key
-//               ) {
-//                 // @ts-ignore
-//                 error[key] = value[key];
-//                 return error;
-//               },
-//               {});
-//           }
-//           return value;
-//         }
-//         //console.log(JSON.stringify({ error: error }, replaceErrors));
-//         // @ts-ignore
-//         if (error.properties && error.properties.errors instanceof Array) {
-//           // @ts-ignore
-//           const errorMessages = error.properties.errors
-//             // @ts-ignore
-//             .map(function(error) {
-//               return error.properties.explanation;
-//             })
-//             .join("\n");
-//           //console.log("errorMessages", errorMessages);
-//           // errorMessages is a humanly readable message looking like this :
-//           // 'The tag beginning with "foobar" is unopened'
-//         }
-//         throw error;
-//       }
-//       const out = doc.getZip().generate({
-//         type: "blob",
-//         mimeType:
-//           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-//       });
-//       // Output the document using Data-URI
-//       saveAs(out, "Anexo2 "+anexo2doc.nombreResponsable+" Covocatoria Nª"+anexo2doc.numeroConvocatoria+"de"+anexo2doc.carrera+".docx");
-//     });
-//   }
-// }

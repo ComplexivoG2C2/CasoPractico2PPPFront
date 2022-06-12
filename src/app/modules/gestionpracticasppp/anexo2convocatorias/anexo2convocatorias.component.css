@@ -9,10 +9,17 @@
   max-width: 100%;
   position: center;
   margin: 0 auto;
+  background: #E4EFF3;
 }
 .example-header-image {
 
   background-size: cover;
+}
+.tabladedoscolumnas {
+  margin: 0 auto;
+  max-width: 80%;
+  background: #eaeaea;
+  align-content: center;
 }
 .example-spacer {
   flex: 1 1 auto;

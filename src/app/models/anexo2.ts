@@ -24,19 +24,19 @@ export class MateriasProyecyo{
 
 export class Actividadesanexo {
   descripcion?:String;
-  inicio?:Date;
-  fin?:Date;
+  // inicio?:Date;
+  // fin?:Date;
 }
-export class Fechas{
-  fechae1?:Date;
-  fechae2?:Date;
-
-  fechar1?:Date;
-  fechar2?:Date;
-
-  fechap1?:Date;
-  fechap2?:Date;
-
-  fechan1?:Date;
-  fechan2?:Date;
-}
+// export class Fechas{
+//   fechae1?:Date;
+//   fechae2?:Date;
+//
+//   fechar1?:Date;
+//   fechar2?:Date;
+//
+//   fechap1?:Date;
+//   fechap2?:Date;
+//
+//   fechan1?:Date;
+//   fechan2?:Date;
+// }
