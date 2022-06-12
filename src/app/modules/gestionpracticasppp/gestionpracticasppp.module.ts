@@ -19,22 +19,24 @@ import { NuevasolicitudComponent } from './nuevasolicitud/nuevasolicitud.compone
 import { VersolicutudesComponent } from './versolicutudes/versolicutudes.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { AgregartutoracademicoComponent } from './agregartutoracademico/agregartutoracademico.component';
+import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
 
 
 const routes: Routes = [
   {path: 'bienvenida', component: BienvenidaComponent
   },{path:'cordinadorvinculacion', component:AsignarcordinadorvincComponent
   },{path:'vercordinadorvinculacion', component:VercordinadorvincComponent
-  },{ path:'anexo1/:cedula/:nombres', component: Anexo1Component
-  },{ path:'anexo2convocatorias/:id', component: Anexo2convocatoriasComponent
-  },{ path:'nuevoresponsableppp/:cedula', component: NuevoresponsablepppComponent
-  },{ path:'verresponsableppp/:cedula', component: VerresponsableComponent
+  },{path:'anexo1/:cedula/:nombres', component: Anexo1Component
+  },{path:'anexo2convocatorias/:id', component: Anexo2convocatoriasComponent
+  },{path:'nuevoresponsableppp/:cedula', component: NuevoresponsablepppComponent
+  },{path:'verresponsableppp/:cedula', component: VerresponsableComponent
   },{path:'crearempresa/:id', component:CrearempresaComponent
   },{path:'verempresa', component:VerempresaComponent
   },{path:'bienvenidaempresa', component:BienvenidaempresaComponent
-  },{path:'nuevasolicitud/:id/:nombres/:nombresolicitante/:cargosolicitante', component:NuevasolicitudComponent
-  },{path:'versolicitud/:id/:nombres/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
+  },{path:'nuevasolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:NuevasolicitudComponent
+  },{path:'versolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
   },{path:'anexo2convocatoria/:id/:cedula', component: Anexo2convocatoriasComponent
+  },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
   }
 
 ]
@@ -53,7 +55,8 @@ const routes: Routes = [
     BienvenidaempresaComponent,
     NuevasolicitudComponent,
     VersolicutudesComponent,
-    AgregartutoracademicoComponent
+    AgregartutoracademicoComponent,
+    VerconvocatoriasComponent
   ],
   imports: [
     CommonModule,

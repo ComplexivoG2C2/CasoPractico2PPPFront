@@ -18,14 +18,14 @@
             <mat-card-content>
               <cdk-virtual-scroll-viewport style="height: 200px" appendOnly itemSize="50" class="example-viewport">
                 <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
-                  <mat-list-option *ngFor="let shoe of filteredOptionsconvocatoria | async" [value]="shoe"  class="example-item">
-                    Nombre: {{shoe.nombreEmpresa}} || {{shoe.empresa}}
+                  <mat-list-option *ngFor="let solicitud of filteredOptionsconvocatoria | async" [value]="solicitud"  class="example-item">
+                    <div><strong>Empresa:</strong>  {{solicitud.nombre}}  <strong>> Fecha solicitada:</strong>  {{solicitud.fechaat}} </div>
                   </mat-list-option>
                 </mat-selection-list>
               </cdk-virtual-scroll-viewport>
               <br>
               <p>
-                <strong>Proyecto seleccionado: </strong>{{solicitudproyectoselect.nombreEmpresa}}
+                <strong>Solicitud seleccionada: </strong>{{solicitudproyectoselect.nombre}}
               </p>
               <mat-divider></mat-divider>
               <br>
@@ -37,35 +37,31 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" >
+        <div align="center" style="font-size: large">
+          <p class="title">Ciclo Y Fecha Maxima de Recepcion de Convocatorias</p>
+        </div>
         <form [formGroup]="secondFormGroup">
-          <div align="center" style="font-size: large">
-            <p class="title">Emision de Convocatoria</p>
-          </div>
+
           <mat-card class="example-card">
 
             <mat-card-content>
               <div>
-                <strong>CICLO Y FECHA MAXIMA DE RECEPCION</strong>
+
                 <mat-form-field appearance="fill" style="width: 100%">
                   <mat-label>Seleccione el ciclo</mat-label>
                   <mat-select formControlName="ciclo" [(ngModel)]="anexo2.ciclo">
-                    <mat-option value="PRIMER">PRIMERO</mat-option>
-                    <mat-option value="SEGUNDO">SEGUNDO</mat-option>
-                    <mat-option value="TERCERO">TERCERO</mat-option>
-                    <mat-option value="CUARTO">CUARTO</mat-option>
-                    <mat-option value="QUINTO">QUINTO</mat-option>
-                    <mat-option value="SEXTO">SEXTO</mat-option>
-                    <mat-option value="SEPTIMO">SEPTIMO</mat-option>
+                    <mat-option value="PRIMER">Primer Ciclo</mat-option>
+                    <mat-option value="SEGUNDO">Segundo Ciclo</mat-option>
+                    <mat-option value="TERCERO">Tercer Ciclo</mat-option>
+                    <mat-option value="CUARTO">Cuarto Ciclo</mat-option>
+                    <mat-option value="QUINTO">Quinto Ciclo</mat-option>
+                    <mat-option value="SEXTO">Sexto Ciclo</mat-option>
+                    <mat-option value="SEPTIMO">Septimo Ciclo</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <div>
-                  <mat-form-field appearance="fill" style="width: 100%">
-                    <mat-label>Correo de docente</mat-label>
-                    <input matInput formControlName="correo"  [(ngModel)]="anexo2.emailDocente">
-                  </mat-form-field>
-                </div>
+
                 <mat-form-field appearance="fill" style="width: 100%;">
-                  <mat-label>Fecha maxima de recepción</mat-label>
+                  <mat-label>Fecha maxima de recepción de solicitudes estudiantiles:</mat-label>
                   <input matInput formControlName="fecharesepcion" [matDatepicker]="picker" [(ngModel)]="anexo2.fechaMaxRecepcion" [min]="solicitudproyectoselect.fechaInicio" [max]="solicitudproyectoselect.fechaFin">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
@@ -81,19 +77,19 @@
         </form>
       </mat-step>
           <mat-step [stepControl]="addForm">
-            <form [formGroup]="addForm">
+            <div align="center" style="font-size: large">
+              <p class="title">Actividades Y Requisitos que se requieren para el proceso de practicas Preprofesionales</p>
+            </div>
 
-      <mat-tab-group mat-align-tabs="center">
-        <mat-tab>
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Actividades Y Requisitos que se requieren para el proceso de practicas Preprofesionales</mat-card-title>
-              <mat-card-subtitle>Actividades a desarrollar</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="addForm">
-                <div style="margin-top: 15px">
+            <form [formGroup]="addForm">
+              <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Actividades a desarrollar">
+                  <mat-card class="example-card">
+
+
+                  <mat-card-content>
+                    <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="addForm">
+                      <div style="margin-top: 15px">
 
                   <mat-grid-tile colspan="3" >
                     <button mat-fab color="primary" (click)="onAddRow('')" *ngIf="addForm.get('rows')"><mat-icon>add_circle</mat-icon></button>
@@ -117,13 +113,9 @@
             </mat-card-content>
           </mat-card>
         </mat-tab>
-        <mat-tab label="REQUISTOS">
+        <mat-tab label="Materias Requeridas para poder postular">
           <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>REQUISITOS DEL PROYECTO (MATERIAS)</mat-card-title>
 
-            </mat-card-header>
             <mat-card-content>
               <div id ="contenedor">
                 <div id ="izquierda">
@@ -174,40 +166,62 @@
           </mat-card>
         </mat-tab>
       </mat-tab-group>
-
+              <mat-divider></mat-divider>
+              <div style="text-align: center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
         </form>
 
       </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Confirmar</ng-template>
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup" >
+        <div align="center" style="font-size: large">
+          <p class="title"> La convocatoria será enviada a los estudiantes que pertenecen a la carrera y Cumplan con los Requisitos.</p>
+        </div>
+
+
         <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Información Final</mat-card-title>
-            <mat-card-subtitle>Generar Anexo</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <br>
+
             <mat-card-content>
-              <h2 title> La convocatoria será enviada a los estudiantes que pertenecen a la
-                carrera:</h2>
-              <mat-divider></mat-divider>
-              <h2><strong>INFORMACIÓN:</strong></h2>
-              <h3><strong>Convocatoria Nª: </strong>{{anexo2.numeroConvocatoria}}</h3>
-              <h3><strong>Proyecto: </strong>{{anexo2.nombreProyecto}}</h3>
-              <h3><strong>Responsable: </strong>{{anexo2.nombreResponsable}}</h3>
-              <h3><strong>Carrera: </strong>{{anexo2.carrera}} </h3>
-              <h3><strong>Fecha máxima de postulación: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}</h3>
+
+
+              <table class="tabladedoscolumnas">
+                <th style="padding: 5px" colspan="1">
+                  <strong>Verificar Informacion</strong>
+                </th>
+                <th style="padding: 5px" colspan="1">
+                  <strong>Subir el documento</strong>
+                </th>
+                <tr aria-colspan="2">
+                  <td style="padding: 5px;text-align: start" colspan="1">
+                    <strong>INFORMACIÓN:</strong><br>
+                    <strong>Convocatoria Nª: </strong>{{anexo2.numeroConvocatoria}}<br>
+                    <strong>Acorde con la empresa: </strong>{{anexo2.nombreProyecto}}<br>
+                     <strong>Responsable de practicas Preprofesionales: </strong>{{anexo2.nombreResponsable}}<br>
+                     <strong>Carrera a la cual va dirigida: </strong>{{anexo2.carrera}} <br>
+                     <strong>Fecha máxima de recepcion: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}
+                  </td>
+                  <td style="padding: 5px;text-align: start" colspan="1">
+                    <button mat-raised-button color="primary" (click)="generarDocumento(proyecto)">Generar Convocatoria</button>
+                    <span class="example-spacer"></span>
+                    <mat-form-field appearance="outline" style="width: 50%; margin-left: 5px" >
+                      <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                      <mat-icon matSuffix>folder</mat-icon>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
             </mat-card-content>
             <mat-divider></mat-divider>
             <br>
             <div>
-              <button mat-button matStepperPrevious color="primary">Atrás</button>
-              <button mat-flat-button   color="warn">Crear</button>
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardarAnexo2(proyecto)">Enviar Convocatoria</button>
             </div>
-          </mat-card-content>
         </mat-card>
-      </mat-step>
+          </form>
+        </mat-step>
     </mat-stepper>
   </div>
   <div *ngIf="isexist==false">

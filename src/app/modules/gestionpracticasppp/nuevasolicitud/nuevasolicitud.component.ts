@@ -53,7 +53,7 @@ export class NuevasolicitudComponent implements OnInit {
   proyecto: Solicitudproyecto = new Solicitudproyecto();
   rows: FormArray;
   itemForm?: FormGroup;
-  public nombre?:String;
+  nombreempresa?:String;
   codigo?: String;
 
   listaCarreras?: String;
@@ -84,10 +84,10 @@ export class NuevasolicitudComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
-      let nombre = params['nombres']
+      let nombreempresa = params['nombreempresa']
       let nombresolicitante = params['nombresolicitante']
       let cargosolicitante = params['cargosolicitante']
-      this.nombre=nombre;
+      this.nombreempresa=nombreempresa;
       this.ide=id;
       this.nombresolicitante=nombresolicitante
       this.cargosolicitante=cargosolicitante
@@ -159,7 +159,9 @@ export class NuevasolicitudComponent implements OnInit {
     this.proyecto.cargosolicitante=this.cargosolicitante;
     this.proyecto.fechaat=this.fechaactual;
     // @ts-ignore
-    this.proyecto.nombreempresa=this.nombre;
+    this.proyecto.nombreempresa=this.nombreempresa;
+    // @ts-ignore
+    this.proyecto.nombre=this.nombreempresa;
     console.log(this.proyecto.nombreempresa+"nombre de la emrpesa ")
 
     return this.proyecto;
