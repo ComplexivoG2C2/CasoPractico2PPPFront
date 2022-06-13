@@ -1,4 +1,4 @@
-export class DirectorNombres{
+export class TutorempresarialNombres {
   idProyecto?:Number;
   cedula?:String;
   nombre?:String;

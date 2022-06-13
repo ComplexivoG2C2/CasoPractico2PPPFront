@@ -1,21 +1,18 @@
-export class Entidadbeneficiaria {
+export class Empresa {
   id?:number;
-  idEntidad?:number;
   nombre?:String;
   representante?:String;
-  emailEntidad?:String;
+  emailEmpresa?:String;
+  clave?:String;
   emailRepresentante?:String;
-  telefonoEntidad?:String;
+  titulorepresentante?:String;
+  telefonoEmpresa?:String;
   celularRepresentante?:String;
   fechaCreacion?:Date;
   idCoordinador?:number;
   nombreCoordinador?:string;
   ciudad?:string;
   direccion?:string;
-  nombreAdministrador?:string;
-  cedulaAdministrador?:string;
-  correoAdministrador?:string;
   descripcionEmpresa?:string;
-  fecha_inicio_periodo?:Date;
-  fecha_fin_periodo?:Date; //commit
+  token?:string;
 }

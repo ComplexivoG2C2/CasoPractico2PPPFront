@@ -8,8 +8,10 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
-      <mat-icon>exit</mat-icon>
+    <img src="/assets/images/logooo.png" alt="10px" height="50px">
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="material-icons teal-color" aria-label="Example icon-button with heart icon" (click)="logout()">
+      <mat-icon>settings_power</mat-icon>
     </button>
   </mat-toolbar>
 
@@ -27,52 +29,28 @@
       <ng-container>
 
         <div [ngSwitch]="persona.rol">
-
+ <!--Admin-->
           <div class="list-group" *ngSwitchCase="'AUT'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Coordinador de Vinculación
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/cordinadorvinculacion']"
-                      routerLinkActive="active">-Nueva Asignación</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyectovinculacion/vercordinadorvinculacion']"
-                      routerLinkActive="active">-Asignación Actual</button>
-            </mat-expansion-panel>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/cordinadorvinculacion']"
+                      routerLinkActive="active">> Asignar Coordinador Vinculación</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo1',persona.cedula,persona.nombrescompletos]"
+                    routerLinkActive="active">> Anexo 1 plantilla</button>
           </div>
 <!--Cordinado de VC-->
           <div class="list-group" *ngSwitchCase="'CV'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-         .....................
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
-                      routerLinkActive="active">-Anexo  ....</button>
-              <button mat-button class="id-menus" [routerLink]="['',persona.nombrescompletos]"
-                      routerLinkActive="active">-Firmar ...</button>
-            </mat-expansion-panel>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"
+                      routerLinkActive="active">> Registrar empresas</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"
+                    routerLinkActive="active">> Informe de empresas</button>
           </div>
 
 
 <!--Cordinado de Carrera-->
           <div class="list-group" *ngSwitchCase="'CC'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                 coordinadorrrr
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
-                      routerLinkActive="active">-Nueva Asignación</button>
-            </mat-expansion-panel>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/nuevoresponsableppp',persona.cedula]"
+                      routerLinkActive="active">> Asignar Reposable de Practicas</button>
+
           </div>
 
 <!--Tutor academico-->
@@ -107,16 +85,18 @@
               </mat-expansion-panel>
           </div>
  <!--Resposanle de PPP-->
-          <div class="list-group" *ngSwitchCase="'RPPP'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
+          <div class="list-group"  *ngSwitchCase="'RPPP'" style="background: #455a64;color: white">
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                 .....
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                 Ver Solicitudes de empresas
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <button mat-button class="id-menus" [routerLink]="[' ',persona.cedula]"
-                      routerLinkActive="active">-.....</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo2convocatoria',persona.cedula]"
+                          routerLinkActive="active">> Generar Convocatoria</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verconvocatorias',persona.cedula]"
+                      routerLinkActive="active">> Ver Convocatoria</button>
             </mat-expansion-panel>
           </div>
 <!--Estudiante-->
@@ -128,12 +108,29 @@
                   Solicitud
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
-                      routerLinkActive="active">-.....</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo3',persona.cedula]"
+                      routerLinkActive="active">> Registrar empresas</button>
             </mat-expansion-panel>
           </div>
 
+          <!--Empresa-->
+          <div class="list-group" *ngSwitchCase="'null'">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </div>
+
+
         </div>
+
+
+
+
+
       </ng-container>
     </mat-drawer>
 

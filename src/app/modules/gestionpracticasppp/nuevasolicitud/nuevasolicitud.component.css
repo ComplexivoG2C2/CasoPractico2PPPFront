@@ -1,0 +1,47 @@
+.mat-stepper-vertical {
+  margin-top: 8px;
+  background: #E4EFF3;
+}
+.example-card {
+  margin: 0 auto;
+  width: 60%;
+  max-height: 700px;
+  background: rgba(255, 255, 255, 0.81);
+  border: 1px solid #455a64;
+}
+.example-card2 {
+  margin: 0 auto;
+  width: 70%;
+  max-height: 700px;
+  background: rgba(255, 255, 255, 0.81);
+  border: 1px solid #455a64;
+}
+mat-form-field{
+  width: 100%;
+}
+.matlistlista {
+  margin: 0 auto;
+  max-width: 60%;
+  background: #eaeaea;
+  align-content: center;
+}
+.tabladedoscolumnas {
+  margin: 0 auto;
+  max-width: 100%;
+  background: #ffffff;
+  align-content: center;
+}
+.example-header-image {
+  background-size: cover;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.example-full-width1 {
+  width: 100%;
+}
+.example-full-width2 {
+  width: 20%;
+}
+

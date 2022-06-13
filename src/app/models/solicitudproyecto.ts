@@ -1,31 +1,32 @@
-export class Proyectos {
+export class Solicitudproyecto {
   id?:number;
-  particpantes?:Number;
+  participantes?:Number;
   codigo?:string;
   nombre?:string;
-  lineaaccion?:string;
+  cargosolicitante?:string;
+  nombresolicitante?:string;
+  nombreempresa?:string;
   codigocarrera?:string;
   carrera?:string;
   estado?:boolean;
-  fechaat?:string;
-  entidadbeneficiaria?:number;
+  fechaat?:Date;
+  empresa?:number;
   nombreresponsable?:string
-  nombredirector?:String;
+  nombretutoremp?:String;
   responsablePPP?:Number;
-  objetivoGeneral?:String;
-  alcanceTerritorial?:String;
-  programaVinculacion?:String;
+  documento?:String;
+
+
   coordinadorCedula?:String;
   plazoEjecucion?:String;
   fechaInicio?:Date;
   fechaFin?:Date;
   actividadeslistProyectos?: actividadeslistProyectos[];
   docentesDelegados?:DocentesDelegados[];
-  objetivosEspecificosProyecto?:ObjetivosEspeciicoslistProyecto[]
+  actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[]=[];
   ///
   requisitoslistProyectos?:  requisitoslistProyectos[];
-  docenteApoyoResponse?:DocenteApoyoResponse[];
-}
+  docenteApoyoResponse?:DocenteApoyoResponse[];}
 
 export class actividadeslistProyectos {
   descripcion?: string;
@@ -34,8 +35,8 @@ export class actividadeslistProyectos {
 export class requisitoslistProyectos {
   descripcion?: string;
 }
-export class ObjetivosEspeciicoslistProyecto{
-  descripcion?: String;
+export class ActividadesEmpresalistProyecto{
+  descripcion?: string;
 }
 export class DocenteApoyoResponse{
   cedula?:String;

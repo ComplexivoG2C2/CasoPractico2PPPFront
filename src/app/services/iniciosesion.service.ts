@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/user";
 import {Observable} from "rxjs";
+import {Empresa} from "../models/empresa";
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,16 @@ export class IniciosesionService {
   constructor(private http:HttpClient) { }
 
   Login(userRequest: User):Observable<User>{
-    console.log(userRequest.cedula)
+    console.log(userRequest)
     return this.http.post<User>(this.urlEndPoint+"/login",userRequest)
   }
   Signup(userRequest: User):Observable<User>{
     console.log(userRequest)
     return this.http.post<User>(this.urlEndPoint+"/signup",userRequest)
+  }
+  Login2(empresaRequest: Empresa):Observable<Empresa>{
+    console.log('email'+empresaRequest.emailEmpresa)
+    console.log("nombre"+empresaRequest.nombre)
+    return this.http.post<Empresa>(this.urlEndPoint+"/login2",empresaRequest)
   }
 }

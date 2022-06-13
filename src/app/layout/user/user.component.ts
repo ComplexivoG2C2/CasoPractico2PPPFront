@@ -78,10 +78,14 @@ export class UserComponent implements OnInit,AfterViewInit {
     if(rol=="DOC"){
       return "DOCENTE";
     }
+    if(rol==null){
+      return "EMPRESA";
+    }
     return "Si rol";
   }
   logout():void{
     sessionStorage.clear;
+    console.log("salir usuario "+sessionStorage.clear)
     localStorage.removeItem("user");
     sessionStorage.setItem('user', JSON.stringify(""));
     this.router.navigate(['/auth/inicio_sesion']).then(() => {
