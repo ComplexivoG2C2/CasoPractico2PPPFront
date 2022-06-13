@@ -32,6 +32,9 @@ export class Anexo3Service {
   getDatosAlimnobyCedula(cedula:String):Observable<Alumno>{
     return this.http.get(this.urlEndPoint+"/datosAlumno/"+cedula,{headers:this.httpHeaders}).pipe(map(Response=>Response as Alumno))
   }
+  getDocenteTitulo(codigoCarrera?:String):Observable<Resposable>{
+    return this.http.get("http://localhost:8080/api/docentes/responsable/"+codigoCarrera,{headers: this.httpHeaders}).pipe(map(Response => Response as Resposable))
+  }
 
 
   getanexo3(cedula:String):Observable<Anexo3[]>{

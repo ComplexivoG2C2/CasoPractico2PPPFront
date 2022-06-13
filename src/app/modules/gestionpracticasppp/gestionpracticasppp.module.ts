@@ -20,7 +20,7 @@ import { VersolicutudesComponent } from './versolicutudes/versolicutudes.compone
 import {MatDialogModule} from "@angular/material/dialog";
 import { AgregartutoracademicoComponent } from './agregartutoracademico/agregartutoracademico.component';
 import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
-
+import { Anexo3Component} from "./anexo3/anexo3.component";
 
 const routes: Routes = [
   {path: 'bienvenida', component: BienvenidaComponent
@@ -37,6 +37,7 @@ const routes: Routes = [
   },{path:'versolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
   },{path:'anexo2convocatoria/:id/:cedula', component: Anexo2convocatoriasComponent
   },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
+  },{path:'anexo3/:cedula', component: Anexo3Component
   }
 
 ]
@@ -56,7 +57,8 @@ const routes: Routes = [
     NuevasolicitudComponent,
     VersolicutudesComponent,
     AgregartutoracademicoComponent,
-    VerconvocatoriasComponent
+    VerconvocatoriasComponent,
+    Anexo3Component
   ],
   imports: [
     CommonModule,
