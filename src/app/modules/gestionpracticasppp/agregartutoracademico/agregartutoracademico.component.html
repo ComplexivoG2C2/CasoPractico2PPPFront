@@ -1,1 +1,187 @@
-<p>agregartutoracademico works!</p>
+
+<div *ngIf="issloading==false">
+  <div *ngIf="isexist">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Lista de Solicitudes Empresariales</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+            <div align="center">
+              <mat-form-field appearance="legacy" style="width: 70%" >
+                <mat-label style="color: #020000">BUSCAR.</mat-label>
+                <input class="im" matInput  placeholder="BUSCAR POR: NOMBRE EMPRESA/ FECHA DE SOLICITUD" [formControl]="myControlconvocatoria">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <cdk-virtual-scroll-viewport style="height: 180px" appendOnly itemSize="30" class="example-viewport">
+                <mat-selection-list  #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                  <mat-list-option  *ngFor="let solicitud of filteredOptionsconvocatoria | async" [value]="solicitud"  class="example-item">
+                    <div><strong>Solicitud de la Empresa:</strong>  {{solicitud.nombre}}  <strong>> Emitidad el:</strong>  {{solicitud.fechaat}} </div>
+                  </mat-list-option>
+                </mat-selection-list>
+              </cdk-virtual-scroll-viewport>
+              <br>
+              <p>
+                <strong>Solicitud seleccionada: </strong>{{solicitudproyectoselect.nombre}}
+              </p>
+              <mat-divider></mat-divider>
+              <br>
+              <div>
+                <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup" >
+
+          <mat-card class="example-card">
+
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-content>
+              <div id ="contenedor">
+                <div id ="cabecera">
+                  <h4>Seleccione los Tutores Academicos</h4>
+                  <div id ="izquierda">
+                    <mat-form-field appearance="outline" style="width: 90%">
+                      <mat-label>BUSCAR DOCENTE</mat-label>
+                      <input matInput  placeholder="FILTRAR" [formControl]="myControl1">
+                      <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <br>
+
+                    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                      <div *ngFor="let docente of filteredOptionsapoyo | async">
+                        <mat-card style="margin-top: 1px" class="itemmateria">
+
+
+                          {{docente.cedula}} | {{docente.nombres_completo}}
+
+                          <button mat-button color="primary" (click)="addApoyo(docente)">Agregar
+                            <mat-icon matBadgeColor="warn">keyboard_arrow_right</mat-icon>
+                          </button>
+                        </mat-card>
+                      </div>
+                    </cdk-virtual-scroll-viewport>
+                    <br>
+                  </div>
+                  <div id ="derecha">
+                    <mat-form-field appearance="outline" style="width: 90%">
+                      <mat-label>BUSCAR DOCENTE</mat-label>
+                      <input matInput  placeholder="FILTRAR">
+                      <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <br>
+                    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                      <div *ngFor="let docente of docentesselectApoyo">
+
+                        <mat-card style="margin-top: 1px" class="itemmateria">
+                          {{docente.cedula}} | {{docente.nombres_completo}}
+
+                          <span class="example-spacer"></span>
+                          <button mat-button color="primary" (click)="removeApoyo(docente)">
+                            <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
+                            Quitar
+                          </button>
+                        </mat-card>
+                      </div>
+                    </cdk-virtual-scroll-viewport>
+
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <br>
+            <div style="text-align: end">
+              <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+              <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+            </div>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourFormGroup" >
+        <form [formGroup]="fourFormGroup">
+          <ng-template matStepLabel>Documentos</ng-template>
+          <mat-card class="example-card">
+            <div mat-card-avatar class="example-header-image"></div>
+            <p>{{carrera}}</p>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-content>
+
+              <br>
+              <div *ngFor="let anexo of anexo1">
+                <mat-card class="example-panel">
+                  <div id ="contenedor1">
+                    <div id ="izquierda1">
+                      <h3>Cédula: {{anexo.cedulaDelegado}}
+                        <br> Nombre: {{anexo.nombreDelegado}}
+                      </h3>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <br>
+            <div style="text-align: end">
+              <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+              <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+            </div>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Confirmar</ng-template>
+        <mat-card class="example-card">
+          <mat-card-header>
+          </mat-card-header>
+          <p class="mensaje"><p>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+
+            <strong>INFORMACIÓN:</strong>
+            <strong>Nombre de la empresa: {{proyecto.nombre}}</strong>
+            <strong>Fecha de Inicio: {{proyecto.fechaInicio | date:"longDate"}}</strong>
+            <strong>Fecha de Finalización: {{proyecto.fechaFin | date:"longDate"}}</strong>
+          </mat-card-content>
+
+          <mat-divider></mat-divider>
+          <br>
+          <div style="text-align: end">
+            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
+            <button mat-fab color="primary" (click)="agregartutoresacademicos(proyecto,anexo1)"><mat-icon>save</mat-icon></button>
+          </div>
+        </mat-card>
+      </mat-step>
+    </mat-stepper>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card style="margin: 0 auto; width: 600px;">
+      <mat-card-header style="text-align: start">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Proyecto de vinculación necesita a un Responsable de Prácticas Pre Profesionales</mat-card-title>
+        <mat-card-subtitle>Responsable actual con el cargo</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p> NO EXISTE NINGÚN RESPONSABLE ACTUALMENTE</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

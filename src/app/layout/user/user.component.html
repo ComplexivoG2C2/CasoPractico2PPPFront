@@ -98,7 +98,20 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verconvocatorias',persona.cedula]"
                       routerLinkActive="active">> Ver Convocatoria</button>
             </mat-expansion-panel>
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Tutores Academicos
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
+                      routerLinkActive="active">> Regsitrar tutores Academicos</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
+                      routerLinkActive="active">> Asignar tutores Academicos</button>
+            </mat-expansion-panel>
           </div>
+
 <!--Estudiante-->
           <div class="list-group" *ngSwitchCase="'EST'">
             <mat-expansion-panel (opened)="panelOpenState = true"

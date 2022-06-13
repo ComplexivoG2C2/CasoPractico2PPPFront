@@ -40,6 +40,7 @@ const routes: Routes = [
   },{path:'anexo2convocatoria/:cedula', component: Anexo2convocatoriasComponent
   },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
   },{path:'anexo3/:cedula', component: Anexo3Component
+  },{path:'anexo6/:id/:cedula', component: AgregartutoracademicoComponent
   }
 
 ]
