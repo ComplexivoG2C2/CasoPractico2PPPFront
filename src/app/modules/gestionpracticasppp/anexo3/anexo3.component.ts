@@ -11,7 +11,7 @@ import {FechaService} from "../../../services/fecha.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {MateriasService} from "../../../services/materias.service";
-import {OtrosService} from "../../../services/otros.service";
+import {ExtrasService} from "../../../services/extras.service";
 import {EmpresaService} from "../../../services/empresa.service";
 import Swal from "sweetalert2";
 import { saveAs } from "file-saver";
@@ -75,7 +75,7 @@ export class Anexo3Component implements OnInit {
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,
               private anexo3Service:Anexo3Service,
-              private otrosService:OtrosService,
+              private ExtrasService:ExtrasService,
               private materiasService:MateriasService) { this._adapter.setLocale('es-ec');}
 
 
@@ -99,7 +99,7 @@ export class Anexo3Component implements OnInit {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
       this.cedula=cedula;
-      this.otrosService.getCarrera(cedula).subscribe(value => {
+      this.ExtrasService.getCarrera(cedula).subscribe(value => {
         this.anexo2Service.getAnexo2().subscribe(value1 => {
           this.isexist=value1.filter(value2 => value2.siglasCarrera==value.codigoCarrera).length!=0;
           this.fechaService.getSysdate().subscribe(fecha => {
@@ -202,22 +202,23 @@ export class Anexo3Component implements OnInit {
                           anexo3.documento = docx + '';
                           this.anexo3Service.saveAnexo3(anexo3).subscribe(value2 => {
                             Swal.fire({
-                              title: 'Éxito',
-                              text: 'La solicitud fue enviada de forma existosa, espere su repuesta',
-                              icon: 'success',
-                              iconColor :'#17550c',
-                              color: "#0c3255",
-                              confirmButtonColor:"#0c3255",
-                              background: "#fbc02d",
+                              title: 'Solicitud creada y enviada con exito',
+                              showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                              },
+                              hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                              }
                             })
                           },error => {
                             Swal.fire({
-                              title: 'Ha surgido un error',
-                              text: "Hubo un error, contáctese con TICs.",
-                              icon: 'error',
-                              color: "#0c3255",
-                              confirmButtonColor:"#0c3255",
-                              background: "#fbc02d",
+                              title: 'Error',
+                              showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                              },
+                              hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                              }
                             })
                           })
                           // console.log(anexo3)
@@ -270,7 +271,7 @@ export class Anexo3Component implements OnInit {
   generarDocumento(anex2:Anexo2) {
     //console.log(this.obtnerDatos(anex2))
     var anexo3:Anexo3=this.obtnerDatos(anex2);
-    loadFile("https://raw.githubusercontent.com/Jose-22-ced/VinculacionWeb/master/src/assets/docs/anexo3.docx", function(
+    loadFile("", function(
       // @ts-ignore
       error,
       // @ts-ignore

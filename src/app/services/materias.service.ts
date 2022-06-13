@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Materias, MateriasAlumno} from "../models/materias";
-
-
+// class Materias {
+// }
+//
+// class MateriasAlumno {
+// }
 
 @Injectable({
   providedIn: 'root'
