@@ -1,5 +1,6 @@
-.mat-stepper-horizontal {
+.mat-stepper-vertical {
   margin-top: 8px;
+  background: #E4EFF3;
 }
 
 .mat-form-field {

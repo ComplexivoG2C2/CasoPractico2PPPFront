@@ -20,6 +20,8 @@ import { VersolicutudesComponent } from './versolicutudes/versolicutudes.compone
 import {MatDialogModule} from "@angular/material/dialog";
 import { AgregartutoracademicoComponent } from './agregartutoracademico/agregartutoracademico.component';
 import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
+import { VerestadoconvocatoriasComponent } from './verestadoconvocatorias/verestadoconvocatorias.component';
+import { Anexo3Component } from './anexo3/anexo3.component';
 
 
 const routes: Routes = [
@@ -35,8 +37,9 @@ const routes: Routes = [
   },{path:'bienvenidaempresa', component:BienvenidaempresaComponent
   },{path:'nuevasolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:NuevasolicitudComponent
   },{path:'versolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
-  },{path:'anexo2convocatoria/:id/:cedula', component: Anexo2convocatoriasComponent
+  },{path:'anexo2convocatoria/:cedula', component: Anexo2convocatoriasComponent
   },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
+  },{path:'anexo3/:cedula', component: Anexo3Component
   }
 
 ]
@@ -56,7 +59,9 @@ const routes: Routes = [
     NuevasolicitudComponent,
     VersolicutudesComponent,
     AgregartutoracademicoComponent,
-    VerconvocatoriasComponent
+    VerconvocatoriasComponent,
+    VerestadoconvocatoriasComponent,
+    Anexo3Component
   ],
   imports: [
     CommonModule,

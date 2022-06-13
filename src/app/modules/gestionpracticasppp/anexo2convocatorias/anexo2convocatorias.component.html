@@ -3,23 +3,24 @@
     <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
-          <div align="center" style="font-size: large">
+
+          <ng-template matStepLabel><div align="center" style="font-size: large">
             <p class="title">Lista de Solicitudes Empresariales</p>
-          </div>
+          </div></ng-template>
           <mat-card class="example-card">
-
-            <mat-form-field appearance="legacy" style="width: 70%" >
-              <mat-label style="color: #020000">BUSCAR.</mat-label>
-              <input class="im" matInput  placeholder="BUSCAR POR: NOMBRE EMPRESA/ FECHA DE SOLICITUD" [formControl]="myControlconvocatoria">
-              <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-
+<div align="center">
+  <mat-form-field appearance="legacy" style="width: 70%" >
+    <mat-label style="color: #020000">BUSCAR.</mat-label>
+    <input class="im" matInput  placeholder="BUSCAR POR: NOMBRE EMPRESA/ FECHA DE SOLICITUD" [formControl]="myControlconvocatoria">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
             <mat-divider></mat-divider>
             <mat-card-content>
-              <cdk-virtual-scroll-viewport style="height: 200px" appendOnly itemSize="50" class="example-viewport">
-                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
-                  <mat-list-option *ngFor="let solicitud of filteredOptionsconvocatoria | async" [value]="solicitud"  class="example-item">
-                    <div><strong>Empresa:</strong>  {{solicitud.nombre}}  <strong>> Fecha solicitada:</strong>  {{solicitud.fechaat}} </div>
+              <cdk-virtual-scroll-viewport style="height: 180px" appendOnly itemSize="30" class="example-viewport">
+                <mat-selection-list  #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                  <mat-list-option  *ngFor="let solicitud of filteredOptionsconvocatoria | async" [value]="solicitud"  class="example-item">
+                    <div><strong>Solicitud de la Empresa:</strong>  {{solicitud.nombre}}  <strong>> Emitidad el:</strong>  {{solicitud.fechaat}} </div>
                   </mat-list-option>
                 </mat-selection-list>
               </cdk-virtual-scroll-viewport>
@@ -37,17 +38,17 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" >
-        <div align="center" style="font-size: large">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
           <p class="title">Ciclo Y Fecha Maxima de Recepcion de Convocatorias</p>
-        </div>
+        </div></ng-template>
+
         <form [formGroup]="secondFormGroup">
 
-          <mat-card class="example-card">
+          <mat-card class="example-card2">
 
             <mat-card-content>
-              <div>
-
-                <mat-form-field appearance="fill" style="width: 100%">
+              <div align="center">
+                <mat-form-field appearance="fill" style="width: 60%">
                   <mat-label>Seleccione el ciclo</mat-label>
                   <mat-select formControlName="ciclo" [(ngModel)]="anexo2.ciclo">
                     <mat-option value="PRIMER">Primer Ciclo</mat-option>
@@ -60,7 +61,7 @@
                   </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-form-field appearance="fill" style="width:60%;">
                   <mat-label>Fecha maxima de recepción de solicitudes estudiantiles:</mat-label>
                   <input matInput formControlName="fecharesepcion" [matDatepicker]="picker" [(ngModel)]="anexo2.fechaMaxRecepcion" [min]="solicitudproyectoselect.fechaInicio" [max]="solicitudproyectoselect.fechaFin">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -68,7 +69,7 @@
                 </mat-form-field>
               </div>
 
-              <div style="align-content: center">
+              <div aling="center">
                 <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
                 <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
               </div>
@@ -76,112 +77,116 @@
           </mat-card>
         </form>
       </mat-step>
-          <mat-step [stepControl]="addForm">
-            <div align="center" style="font-size: large">
-              <p class="title">Actividades Y Requisitos que se requieren para el proceso de practicas Preprofesionales</p>
-            </div>
+      <mat-step [stepControl]="addForm">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Actividades a Realizar y Requisitos para postular a la Convocatoria</p>
+        </div></ng-template>
+        <form [formGroup]="addForm">
 
-            <form [formGroup]="addForm">
-              <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Actividades a desarrollar">
-                  <mat-card class="example-card">
+          <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Actividades propuestas">
+              <mat-card class="example-card">
 
 
-                  <mat-card-content>
+                <mat-card-content>
+                  <div align="center">
                     <mat-grid-list cols="3" rowHeight="6:1.10" [formGroup]="addForm">
-                      <div style="margin-top: 15px">
 
-                  <mat-grid-tile colspan="3" >
-                    <button mat-fab color="primary" (click)="onAddRow('')" *ngIf="addForm.get('rows')"><mat-icon>add_circle</mat-icon></button>
-                  </mat-grid-tile>
-                  <mat-grid-tile colspan="3" *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Actividad  {{index}}</mat-label>
-                      <input matInput  [formControl]="row.get('descripcion')"  placeholder="Ex. Realizar..." [required]>
-                    </mat-form-field>
-                    <span class="example-spacer"></span>
-                    <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
-                  </mat-grid-tile>
-                  <mat-grid-tile colspan="3">
-                    <div>
-                      <button type="submit" style="width: 45%" mat-raised-button color="primary" (click)="agregarActividades(proyecto)" [disabled]="addForm.invalid">Agregar actividades a la convocatoria</button>
-                      <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button> </div>
-                  </mat-grid-tile>
-                </div>
-              </mat-grid-list>
 
-            </mat-card-content>
-          </mat-card>
-        </mat-tab>
-        <mat-tab label="Materias Requeridas para poder postular">
-          <mat-card class="example-card">
+                        <mat-grid-tile colspan="3" style="height: 100px">
+                          <div>
+                            <p style="text-align: start">
+                              La siguiente lista de Activicades fueron definidas por la empresa solicitante, En el caso de querer agregar mas Actividades presione el boton "Agregar", caso contrario Agrege directamente las Actividades a la convocatoria presionando el boton "Agregar actividades a la convocatoria"
+                            </p>
+                            <br>
+                            <div align="start">
+                              <button style="width: 30%;margin-left: 12%" mat-raised-button color="primary" (click)="onAddRow('')" *ngIf="addForm.get('rows')">Agregar<mat-icon>arrow_downward</mat-icon></button>
+                              <button type="submit" style="width: 39%;background: #ffc400;margin-left: 12%" mat-raised-button (click)="agregarActividades(proyecto)" [disabled]="addForm.invalid"> <mat-icon>forward</mat-icon>Agregar actividades a la convocatoria </button>
+                            </div>
+                          </div>
+                            </mat-grid-tile>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <mat-grid-tile colspan="3" *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
+                          <mat-form-field class="example-full-widthtabla" appearance="outline">
+                            <mat-label>Actividad  {{index}}</mat-label>
+                            <input matInput  [formControl]="row.get('descripcion')"  placeholder="Actividad..." [required]>
+                          </mat-form-field>
+                          <span class="example-spacer"></span>
+                          <button mat-raised-button color="accent"  style="margin-left: 30px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>keyboard_return</mat-icon></button>
+                            </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+            <mat-tab label="Materias Requeridas para poder postular">
+              <mat-card class="example-card">
 
-            <mat-card-content>
-              <div id ="contenedor">
-                <div id ="izquierda">
-                  <mat-form-field appearance="outline" style="width: 90%">
-                    <mat-label>BUSCAR MATERIAS</mat-label>
-                    <input matInput  placeholder="FILTRAR" [formControl]="myControl">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                  </mat-form-field>
-                  <br>
-                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
-                    <div *ngFor="let materias of filteredOptions | async">
-                      <mat-card style="margin-top: 3px" class="example-card">
-                        {{materias.nombre}}
-                        <button mat-button color="primary" (click)="addMaterias(materias)">Agregar
-                          <mat-icon matBadgeColor="warn">keyboard_arrow_right</mat-icon>
-                        </button>
-                      </mat-card>
+                <mat-card-content>
+                  <div id ="contenedor">
+                    <div id ="izquierda">
+                      <div align="center">
+                        <mat-form-field appearance="outline" style="width: 70%">
+                          <mat-label>BUSCAR MATERIAS</mat-label>
+                          <input matInput  placeholder="Buscar por: Nombre /Codigo de la Materia" [formControl]="myControl">
+                          <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                      </div>
+
+                      <cdk-virtual-scroll-viewport style="height: 220px" appendOnly itemSize="20" class="example-viewport">
+                        <div *ngFor="let materias of filteredOptions | async">
+                          <mat-card style="margin-top: 1px" class="itemmateria">
+                            {{materias.nombre}}
+                            <button mat-button color="primary" style="padding-bottom: 5px" (click)="addMaterias(materias)"  >
+                              <mat-icon matBadgeColor="primary">keyboard_arrow_right</mat-icon>Añadir
+                            </button>
+                          </mat-card>
+                        </div>
+                      </cdk-virtual-scroll-viewport>
                     </div>
-                  </cdk-virtual-scroll-viewport>
-                </div>
-                <div id ="derecha">
-                  <mat-form-field appearance="outline" style="width: 90%">
-                    <mat-label>BUSCAR MATERIAS</mat-label>
-                    <input matInput  placeholder="FILTRAR">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                  </mat-form-field>
-                  <br>
-                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
-                    <div *ngFor="let materias of seleccionmaterias">
-                      <mat-card style="margin-top: 3px" class="example-card">
-                        {{materias.nombre}}
-                        <button mat-button color="warn" (click)="removeMaterias(materias)">
-                          <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
-                          Remover
-                        </button>
-                      </mat-card>
+                    <div id ="derecha">
+                      <br>
+                      <strong>Materias Añadidas</strong>
+                      <br>
+                      <cdk-virtual-scroll-viewport style="height: 200px" appendOnly itemSize="20" class="example-viewport">
+                        <div *ngFor="let materias of seleccionmaterias">
+                          <mat-card style="margin-top: 1px" class="itemmateria">
+                            {{materias.nombre}}
+                            <button mat-button color="warn" (click)="removeMaterias(materias)">
+                              <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
+                              Quitar
+                            </button>
+                          </mat-card>
+                        </div>
+                      </cdk-virtual-scroll-viewport>
+                      <div style="text-align: center">
+                        <br>
+                        <button style="width: 95%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                        <button type="submit" matStepperNext style="width: 95%" mat-raised-button color="primary" (click)="agregarMaterias(proyecto)">Agregar requisitos a la convocatoria</button>
+                      </div>
                     </div>
-                  </cdk-virtual-scroll-viewport>
-                </div>
-              </div>
-              <br>
-              <div style="text-align: center">
-                <button type="submit" style="width: 45%" mat-raised-button color="primary" (click)="agregarMaterias(proyecto)">Agregar requisitos a la convocatoria</button>
-                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button> </div>
-            </mat-card-content>
-            <mat-card-actions>
-            </mat-card-actions>
-          </mat-card>
-        </mat-tab>
-      </mat-tab-group>
-              <mat-divider></mat-divider>
-              <div style="text-align: center">
-                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
-                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
-              </div>
+                  </div>
+                    </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+              </mat-card>
+            </mat-tab>
+          </mat-tab-group>
         </form>
 
       </mat-step>
-        <mat-step [stepControl]="thirdFormGroup">
-          <form [formGroup]="thirdFormGroup" >
-        <div align="center" style="font-size: large">
-          <p class="title"> La convocatoria será enviada a los estudiantes que pertenecen a la carrera y Cumplan con los Requisitos.</p>
-        </div>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup" >
 
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Envio de Convocatoria a los estudiantes que pertenecen a la carrera y cumplen con los Requisitos.</p>
+          </div></ng-template>
 
-        <mat-card class="example-card">
+          <mat-card class="example-card">
 
             <mat-card-content>
 
@@ -198,15 +203,15 @@
                     <strong>INFORMACIÓN:</strong><br>
                     <strong>Convocatoria Nª: </strong>{{anexo2.numeroConvocatoria}}<br>
                     <strong>Acorde con la empresa: </strong>{{anexo2.nombreProyecto}}<br>
-                     <strong>Responsable de practicas Preprofesionales: </strong>{{anexo2.nombreResponsable}}<br>
-                     <strong>Carrera a la cual va dirigida: </strong>{{anexo2.carrera}} <br>
-                     <strong>Fecha máxima de recepcion: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}
+                    <strong>Responsable de practicas Preprofesionales: </strong>{{anexo2.nombreResponsable}}<br>
+                    <strong>Carrera a la cual va dirigida: </strong>{{anexo2.carrera}} <br>
+                    <strong>Fecha máxima de recepcion: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}
                   </td>
                   <td style="padding: 5px;text-align: start" colspan="1">
                     <button mat-raised-button color="primary" (click)="generarDocumento(proyecto)">Generar Convocatoria</button>
                     <span class="example-spacer"></span>
                     <mat-form-field appearance="outline" style="width: 50%; margin-left: 5px" >
-                      <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                      <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento(proyecto,$event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
                       <mat-icon matSuffix>folder</mat-icon>
                     </mat-form-field>
                   </td>
@@ -219,9 +224,9 @@
               <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
               <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardarAnexo2(proyecto)">Enviar Convocatoria</button>
             </div>
-        </mat-card>
-          </form>
-        </mat-step>
+          </mat-card>
+        </form>
+      </mat-step>
     </mat-stepper>
   </div>
   <div *ngIf="isexist==false">
@@ -237,4 +242,3 @@
     </center>
   </div>
 </ng-container>
-

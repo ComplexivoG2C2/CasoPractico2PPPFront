@@ -38,23 +38,10 @@
           </div>
 <!--Cordinado de VC-->
           <div class="list-group" *ngSwitchCase="'CV'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-         .....................
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo2convocatorias',persona.id]"
-                      routerLinkActive="active">> Convocatorias</button>
-              <button mat-button class="id-menus" [routerLink]="['',persona.nombrescompletos]"
-                      routerLinkActive="active">-Firmar ...</button>
-            </mat-expansion-panel>
-            <br>
-
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"
                       routerLinkActive="active">> Registrar empresas</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"
+                    routerLinkActive="active">> Informe de empresas</button>
           </div>
 
 
@@ -106,8 +93,10 @@
                  Ver Solicitudes de empresas
                 </mat-panel-title>
               </mat-expansion-panel-header>
-            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo2convocatoria',persona.id,persona.cedula]"
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo2convocatoria',persona.cedula]"
                           routerLinkActive="active">> Generar Convocatoria</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verconvocatorias',persona.cedula]"
+                      routerLinkActive="active">> Ver Convocatoria</button>
             </mat-expansion-panel>
           </div>
 <!--Estudiante-->
@@ -119,8 +108,8 @@
                   Solicitud
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
-                      routerLinkActive="active">-.....</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo3',persona.cedula]"
+                      routerLinkActive="active">> Registrar empresas</button>
             </mat-expansion-panel>
           </div>
 
