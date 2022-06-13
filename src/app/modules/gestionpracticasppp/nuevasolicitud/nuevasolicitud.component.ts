@@ -149,7 +149,7 @@ export class NuevasolicitudComponent implements OnInit {
   variableresponsable?: String;
 
   obtenerDatos(): Solicitudproyecto {
-    this.proyecto.estado = false;
+    this.proyecto.estado = true;
     this.proyecto.actividadesEmpresaProyecto=this.rows.getRawValue();
     // @ts-ignore
     this.proyecto.empresa = this.ide;

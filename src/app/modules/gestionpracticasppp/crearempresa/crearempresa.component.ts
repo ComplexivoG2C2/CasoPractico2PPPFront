@@ -76,6 +76,7 @@ export class CrearempresaComponent implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
+      this.router.navigate(['/panelusuario/gestionpracticasppp/verempresa']);
     }, error => {
       Swal.fire({
         title: 'No se pudo crear',

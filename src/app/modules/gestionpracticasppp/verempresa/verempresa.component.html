@@ -1,13 +1,14 @@
 <div *ngIf="issloading==false">
-  <mat-card>
-    <mat-card-title>EMPRESAS REGISTRADAS</mat-card-title>
-    <mat-form-field appearance="outline" style="width: 100%">
-      <mat-label>BUSCAR POR: NOMBRE (EMPRESA/REPRESENTANTE), CEDULA, CIUDAD</mat-label>
-      <input matInput  placeholder="FILTRAR" [formControl]="myControl">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </mat-card>
-  <br>
+  <div align="center">
+ <div style="width: 80%">
+   <mat-card-title style="text-align: start">EMPRESAS REGISTRADAS</mat-card-title>
+   <mat-form-field appearance="outline" style="width: 100%">
+     <mat-label>BUSCAR POR: NOMBRE (EMPRESA/REPRESENTANTE), CEDULA, CIUDAD</mat-label>
+     <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+     <mat-icon matSuffix>search</mat-icon>
+   </mat-form-field>
+ </div>
+  </div>
   <div *ngIf="isexist">
     <div *ngFor="let e of filteredOptions | async">
       <mat-card class="example-card">

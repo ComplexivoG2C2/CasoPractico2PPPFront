@@ -1,62 +1,61 @@
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel><div align="center" style="font-size: large">
+        <p class="title">Crear Solicitud para Practicas Preprofesionales</p>
+      </div></ng-template>
 
-      <div align="center" style="font-size: large">
-        <p class="title">Crear Solicitud de Practicas</p>
-      </div>
       <mat-card class="example-card">
         <mat-card-header>
 
         </mat-card-header>
 
           <mat-card-content>
-            <mat-grid-list cols="2" rowHeight="7:1">
-
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width1" appearance="outline">
-                  <mat-label>Fecha de Inicio y de Fin del programa de Practicas</mat-label>
-                  <mat-date-range-input [rangePicker]="picker" >
-                    <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="proyecto.fechaInicio">
-                    <input matEndDate formControlName="end" placeholder="Fin" [(ngModel)]="proyecto.fechaFin">
-                  </mat-date-range-input>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-date-range-picker #picker></mat-date-range-picker>
-                </mat-form-field>
-
-                <button mat-raised-button color="primary"  (click)="obtnerMeses()">></button>
-
-              </mat-grid-tile>
-
-              <mat-grid-tile>
-                <mat-form-field style="width: 50%;align-content: start" appearance="outline">
-                  <mat-label>Plazo de ejecución en meses</mat-label>
-                  <input matInput formControlName="plazo"  [(ngModel)]="proyecto.plazoEjecucion" [readonly]="true">
-                </mat-form-field>
-              </mat-grid-tile>
-
-              <mat-grid-tile>
-                <mat-form-field  class="example-full-width" appearance="outline">
-                  <mat-label>Carrera destinada:</mat-label>
-                  <!--<input matInput   formControlName="carrera" placeholder="CARRERA" required [(ngModel)]="anexo.nombreCarrera" autofocus>-->
-                  <mat-select formControlName="carrera" placeholder="CARRERA"  [(ngModel)]="proyecto.codigocarrera" (selectionChange)="obtenerResponsable($event)">
-                    <mat-option value="TDS">Tecnologia Superior en Desarrollo de Software</mat-option>
-                    <mat-option value="ADS">Tecnologia Superior en Analisis de Sistemas</mat-option>
-                    <mat-option value="BD">Big Data</mat-option>
-                    <mat-option value="ED">Tecnologia Superior en Entrenamiento Deportivo</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-grid-tile>
-
-              <mat-grid-tile>
-                <mat-form-field style="width: 50%;align-content: start" appearance="outline">
-                  <mat-label>Numero de estudiantes solicitados</mat-label>
-                  <input matInput type="number" min="1" max="50" formControlName="numeroEst"   [(ngModel)]="proyecto.participantes">
-                </mat-form-field>
-              </mat-grid-tile>
-
-
-            </mat-grid-list>
+            <table>
+              <tr aria-colspan="3">
+                <td colspan="1">
+                  <mat-form-field class="example-full-width1" appearance="outline">
+                    <mat-label>Fecha de Inicio y de Fin del programa de Practicas</mat-label>
+                    <mat-date-range-input [rangePicker]="picker" >
+                      <input matStartDate formControlName="start" placeholder="Inicio" [(ngModel)]="proyecto.fechaInicio">
+                      <input matEndDate formControlName="end" placeholder="Fin" [(ngModel)]="proyecto.fechaFin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+                </td>
+                <td colspan="1" style="padding-bottom: 19px">
+                  <button mat-raised-button style="background: transparent;height: 50px;  border: 1px solid #455a64"  (click)="obtnerMeses()">></button>
+                </td>
+                <td colspan="1">
+                  <mat-form-field style="width: 100%;align-content: start" appearance="outline">
+                    <mat-label>Plazo de ejecución en meses</mat-label>
+                    <input matInput formControlName="plazo"  [(ngModel)]="proyecto.plazoEjecucion" [readonly]="true">
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr aria-colspan="3">
+                <td colspan="2">
+                  <mat-form-field  class="example-full-width" appearance="outline">
+                    <mat-label>Carrera destinada:</mat-label>
+                    <!--<input matInput   formControlName="carrera" placeholder="CARRERA" required [(ngModel)]="anexo.nombreCarrera" autofocus>-->
+                    <mat-select formControlName="carrera" placeholder="CARRERA"  [(ngModel)]="proyecto.codigocarrera" (selectionChange)="obtenerResponsable($event)">
+                      <mat-option value="TDS">Tecnologia Superior en Desarrollo de Software</mat-option>
+                      <mat-option value="ADS">Tecnologia Superior en Analisis de Sistemas</mat-option>
+                      <mat-option value="TES">Tecnologia Superior en Electricidad</mat-option>
+                      <mat-option value="TSO">Tecnologia Superior en Orden y Seguridad</mat-option>
+                      <mat-option value="ED">Tecnologia Superior en Entrenamiento Deportivo</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td colspan="1">
+                  <mat-form-field style="width: 100%;align-content: start" appearance="outline">
+                    <mat-label>Numero de estudiantes solicitados</mat-label>
+                    <input matInput type="number" min="1" max="50" formControlName="numeroEst"   [(ngModel)]="proyecto.participantes">
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
           </mat-card-content>
 
         <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
@@ -69,19 +68,21 @@
 
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup" >
-      <div align="center" style="font-size: large">
+
+      <ng-template matStepLabel><div align="center" style="font-size: large">
         <p class="title">Actividades a Desarrollar</p>
-      </div>
-      <mat-card class="example-card">
+      </div></ng-template>
+
+      <mat-card class="example-card2">
 
         <mat-card-content>
-          <mat-grid-list class="matlistlista" cols="3" rowHeight="5:1">
+          <mat-grid-list class="matlistlista" cols="2" rowHeight="5:1">
 
-                  <mat-grid-tile colspan="3" >
-                    <button style="width: 30%" mat-raised-button color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')">Agregar<mat-icon>forward</mat-icon></button>
+                  <mat-grid-tile colspan="2" >
+                    <button style="width: 80%" mat-raised-button color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')">Agregar<mat-icon>forward</mat-icon></button>
                   </mat-grid-tile>
 
-                  <mat-grid-tile colspan="3" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+                  <mat-grid-tile colspan="2" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <input matInput [formControl]="row.get('descripcion')" placeholder="Actividad # {{index}}">
                     </mat-form-field>
@@ -103,10 +104,11 @@
 
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup" >
-      <div align="center" style="font-size: large">
+      <ng-template matStepLabel><div align="center" style="font-size: large">
         <p class="title">Generar el Documento</p>
-      </div>
-      <mat-card class="example-card">
+      </div></ng-template>
+
+      <mat-card class="example-card2">
         <mat-card-content>
           <table class="tabladedoscolumnas">
             <th style="padding: 5px" colspan="1">

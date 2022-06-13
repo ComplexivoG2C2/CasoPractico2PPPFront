@@ -99,19 +99,19 @@ export class NuevoresponsablepppComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#ddad33',
       confirmButtonText: 'Aceptar',
-      background: "#fbc02d"
+      background: "#fffdfd"
     }).then((result) => {
       if (result.isConfirmed) {
         this.responsablepppService.saveResposableppp(this.obtnerdatos(docente)).subscribe(value => {
           Swal.fire({
             title: 'Asignación Correcta',
             icon: 'success',
-            iconColor: '#17550c',
-            color: "#0c3255",
+            iconColor: '#0082ff',
+            color: "#090000",
             confirmButtonColor: "#0c3255",
-            background: "#fbc02d",
+            background: "#fdfdfd",
           })
           this.router.navigate(['/panelusuario/gestionpracticasppp/verresponsableppp', this.cedula]);
         }, error => {
@@ -119,9 +119,9 @@ export class NuevoresponsablepppComponent implements OnInit {
             title: 'Ha surgido un error',
             text: "Hubo un error",
             icon: 'warning',
-            color: "#0c3255",
+            color: "#050000",
             confirmButtonColor: "#0c3255",
-            background: "#fbc02d",
+            background: "#f8f8f8",
           })
         })
       }
