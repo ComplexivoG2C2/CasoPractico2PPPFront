@@ -51,7 +51,7 @@ const routes: Routes = [
   ,{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
   },{path:'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
-  },{path:'crearTutorEmpresarial', component: CrearTutorComponent
+  },{path:'crearTutorEmpresarial/:id', component: CrearTutorComponent
 },{path:'listarTutorEmpresarial', component:ListarTutorComponent
 }
 ]

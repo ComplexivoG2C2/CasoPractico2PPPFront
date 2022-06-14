@@ -8,5 +8,5 @@ export class tutorEmpresarial {
   estado?:boolean;
   fechaDesignacion?:Date;
   coordinadorId?:number;
-  empresaId?:String;
+  empresaId?:number;
 }
