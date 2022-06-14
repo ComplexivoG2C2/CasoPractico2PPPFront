@@ -1,20 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {Anexo3} from "../../../models/anexo3";
-import {Anexo2} from "../../../models/anexo2";
-import {Anexo3Service} from "../../../services/anexo3.service";
-import {Anexo2Service} from "../../../services/anexo2.service";
-
 import {ActivatedRoute, Router} from "@angular/router";
-import {FechaService} from "../../../services/fecha.service";
-
-import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {ProyectoService} from "../../../services/proyecto.service";
-import {MateriasService} from "../../../services/materias.service";
-import {ExtrasService} from "../../../services/extras.service";
-import {EmpresaService} from "../../../services/empresa.service";
 import Swal from "sweetalert2";
-import { saveAs } from "file-saver";
+// @ts-ignore
+import { saveAs } from 'file-saver';
 import {DateAdapter} from "@angular/material/core";
 
 
@@ -25,6 +15,15 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 
 import Docxtemplater from "docxtemplater";
+import {Anexo2} from "../../../models/anexo2";
+import {FechaService} from "../../../services/fecha.service";
+import {ProyectoService} from "../../../services/proyecto.service";
+import {ResponsablepppService} from "../../../services/responsableppp.service";
+import {EmpresaService} from "../../../services/empresa.service";
+import {Anexo2Service} from "../../../services/anexo2.service";
+import {Anexo3Service} from "../../../services/anexo3.service";
+import {ExtrasService} from "../../../services/extras.service";
+import {MateriasService} from "../../../services/materias.service";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -37,12 +36,10 @@ function getBase64(file: any) {
     reader.onerror = error => reject(error);
   });
 }
-
 @Component({
   selector: 'app-anexo3',
   templateUrl: './anexo3.component.html',
   styleUrls: ['./anexo3.component.css']
-
 })
 export class Anexo3Component implements OnInit {
 
@@ -75,7 +72,7 @@ export class Anexo3Component implements OnInit {
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,
               private anexo3Service:Anexo3Service,
-              private ExtrasService:ExtrasService,
+              private otrosService:ExtrasService,
               private materiasService:MateriasService) { this._adapter.setLocale('es-ec');}
 
 
@@ -99,7 +96,7 @@ export class Anexo3Component implements OnInit {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
       this.cedula=cedula;
-      this.ExtrasService.getCarrera(cedula).subscribe(value => {
+      this.otrosService.getCarrera(cedula).subscribe(value => {
         this.anexo2Service.getAnexo2().subscribe(value1 => {
           this.isexist=value1.filter(value2 => value2.siglasCarrera==value.codigoCarrera).length!=0;
           this.fechaService.getSysdate().subscribe(fecha => {
@@ -141,8 +138,10 @@ export class Anexo3Component implements OnInit {
         })
       }else{
         this.materiasService.getMateriasbyAlumno(this.cedula+"").subscribe(async value1 => {
+          // @ts-ignore
           for (let i = 0; i < value1.materias!.length; i++) {
             for (let j = 0; j < anexo2.materias!.length; j++) {
+              // @ts-ignore
               if (value1.materias![i].nombre == anexo2.materias![j].nombre) {
                 this.aux2++;
                 console.log('la respuesta es' + this.aux2);
@@ -202,7 +201,7 @@ export class Anexo3Component implements OnInit {
                           anexo3.documento = docx + '';
                           this.anexo3Service.saveAnexo3(anexo3).subscribe(value2 => {
                             Swal.fire({
-                              title: 'Solicitud creada y enviada con exito',
+                              title: 'Solicitud enviada',
                               showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
                               },
@@ -232,12 +231,13 @@ export class Anexo3Component implements OnInit {
 
           } else {
             Swal.fire({
-              title: 'Mensaje',
-              text: 'No cumple con los requisitos para postular, revise el documento por favor".',
-              icon: 'info',
-              color: "#0c3255",
-              confirmButtonColor:"#0c3255",
-              background: "#fbc02d",
+              title: 'No cumple con los requisitos para postular',
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
             })
           }
         })
@@ -271,7 +271,7 @@ export class Anexo3Component implements OnInit {
   generarDocumento(anex2:Anexo2) {
     //console.log(this.obtnerDatos(anex2))
     var anexo3:Anexo3=this.obtnerDatos(anex2);
-    loadFile("", function(
+    loadFile(" ", function(
       // @ts-ignore
       error,
       // @ts-ignore
