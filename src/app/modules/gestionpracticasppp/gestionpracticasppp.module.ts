@@ -22,6 +22,8 @@ import { AgregartutoracademicoComponent } from './agregartutoracademico/agregart
 import { VerconvocatoriasComponent } from './verconvocatorias/verconvocatorias.component';
 import { VerestadoconvocatoriasComponent } from './verestadoconvocatorias/verestadoconvocatorias.component';
 import { Anexo3Component } from './anexo3/anexo3.component';
+import { VersolicitudesestudianteComponent } from './versolicitudesestudiante/versolicitudesestudiante.component';
+import { Anexo8respuestaalestudianteComponent } from './anexo8respuestaalestudiante/anexo8respuestaalestudiante.component';
 
 
 const routes: Routes = [
@@ -42,6 +44,15 @@ const routes: Routes = [
   },{path:'anexo3/:cedula', component: Anexo3Component
   }
 
+
+  ,{path:'anexo6/:id/:cedula', component: AgregartutoracademicoComponent
+  }
+
+
+
+  ,{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
+  },{path:'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
+  }
 ]
 
 @NgModule({
@@ -61,7 +72,9 @@ const routes: Routes = [
     AgregartutoracademicoComponent,
     VerconvocatoriasComponent,
     VerestadoconvocatoriasComponent,
-    Anexo3Component
+    Anexo3Component,
+    VersolicitudesestudianteComponent,
+    Anexo8respuestaalestudianteComponent
   ],
   imports: [
     CommonModule,

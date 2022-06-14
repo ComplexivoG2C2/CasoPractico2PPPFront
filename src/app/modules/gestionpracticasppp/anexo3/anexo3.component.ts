@@ -201,22 +201,23 @@ export class Anexo3Component implements OnInit {
                           anexo3.documento = docx + '';
                           this.anexo3Service.saveAnexo3(anexo3).subscribe(value2 => {
                             Swal.fire({
-                              title: 'Éxito',
-                              text: 'La solicitud fue enviada de forma existosa, espere su repuesta',
-                              icon: 'success',
-                              iconColor :'#17550c',
-                              color: "#0c3255",
-                              confirmButtonColor:"#0c3255",
-                              background: "#fbc02d",
+                              title: 'Solicitud enviada',
+                              showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                              },
+                              hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                              }
                             })
                           },error => {
                             Swal.fire({
-                              title: 'Ha surgido un error',
-                              text: "Hubo un error, contáctese con TICs.",
-                              icon: 'error',
-                              color: "#0c3255",
-                              confirmButtonColor:"#0c3255",
-                              background: "#fbc02d",
+                              title: 'Error',
+                              showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                              },
+                              hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                              }
                             })
                           })
                           // console.log(anexo3)
@@ -230,12 +231,13 @@ export class Anexo3Component implements OnInit {
 
           } else {
             Swal.fire({
-              title: 'Mensaje',
-              text: 'No cumple con los requisitos para postular, revise el documento por favor".',
-              icon: 'info',
-              color: "#0c3255",
-              confirmButtonColor:"#0c3255",
-              background: "#fbc02d",
+              title: 'No cumple con los requisitos para postular',
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
             })
           }
         })

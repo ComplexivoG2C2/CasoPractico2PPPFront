@@ -18,10 +18,13 @@ export class ProyectoService {
   getSolicitudes():Observable<Solicitudproyecto[]>{
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(Response => Response as Solicitudproyecto[]))
   }
-
+  saveSolicitudes(proyectos: Solicitudproyecto): Observable<Solicitudproyecto> {
+    console.log(proyectos);
+    return this.http.post<Solicitudproyecto>(this.urlEndPoint + "/save", proyectos, {headers: this.httpHeaders})
+  }
 
   updateSolicitudes(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
-    //console.log(proyectos);
+    console.log(proyectos);
     return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/update",proyectos,{headers: this.httpHeaders})
   }
 
