@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<mat-card class="example-card">
+  <table>
+    <tr aria-colspan="3">
+      <td colspan="3">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Designacion de Tutores Empresariales</mat-card-title>
+          <mat-card-subtitle>INSTITUTO SUPERIOR TECNOLOGICO DEL AZUAY</mat-card-subtitle>
+        </mat-card-header>
+
+        <div align="center">
+          <img style="height: 60vh; width: auto" mat-card-image src="assets/images/img.png">
+        </div>
+
+        <mat-card-content>
+          <p style="text-align: justify">
+            Las prácticas pre profesionales dentro del ISTA estan supervisadas por dos tutores, uno interno denominado Tutor Academico, y uno externo que es designado por la empresa receptora
+          y cumple el rol de Tutor Empresarial.
+          En esta seccion podemos gestionar dicho rol, creando tutores empesariales para luego designarlos dentro de los procesos de Practicas Preprofesionales de cada una de las empresas</p>
+        </mat-card-content>
+      </td>
+    </tr>
+    <tr aria-colspan="3">
+      <td colspan="1">
+        <button style="width: 100%" mat-raised-button color="primary"
+                [routerLink]="['/panelempresa/gestionpracticasppp/crearTutorEmpresarial']"
+                routerLinkActive="active"
+        >Crear Tutores</button>
+      </td>
+      <td colspan="1">
+        <button style="width: 100%" mat-raised-button color="primary"
+                [routerLink]="['/panelempresa/gestionpracticasppp/listarTutorEmpresarial']"
+                routerLinkActive="active"
+        >Designar Tutores</button>
+      </td>
+      <td colspan="1">
+        <button style="width: 100%" mat-raised-button color="primary">Informes</button>
+      </td>
+    </tr>
+  </table>
+</mat-card>
+</body>
+</html>
