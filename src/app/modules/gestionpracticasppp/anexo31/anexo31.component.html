@@ -1,0 +1,152 @@
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Anexo 3.1</ng-template>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Respuesta a empresa receptora convocatoria desierta</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Detalle para desertar
+          </p>
+          <mat-divider></mat-divider>
+          <br>
+          <!--
+                    <div class="example-container">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Fecha Actual</mat-label>
+                        <input matInput [matDatepicker]="picker1" [formControl]="date">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+
+                      -->
+
+
+          <div class="example-container">
+           <mat-form-field appearance="outline">
+            <mat-label>Fecha Actual</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="fechaS" placeholder="Fecha de Seleccion" [(ngModel)]="anexo3_1.fechaRespuesta" autofocus>
+              <mat-hint>DD/MM/YYYY</mat-hint>
+             <mat-datepicker-toggle matSuffix [for]="picker1">
+              </mat-datepicker-toggle>
+             <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+          <mat-divider></mat-divider>
+          <br>
+
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Titulo</mat-label>
+              <input matInput formControlName="titulo" placeholder="Ejm: Ing./Dr./Sr." [(ngModel)]="anexo3_1.tituloRepresentanteEmp" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Representante de la empresa</mat-label>
+              <input matInput formControlName="nombreRepresentanteE" placeholder="Ejm: Juan Orellana" [(ngModel)]="anexo3_1.nombreRepresentanteEmp" required>
+            </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Cargo</mat-label>
+              <input matInput formControlName="cargo" placeholder="Ejm: Sistemas" [(ngModel)]="anexo3_1.cargoEmpresa" required>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Ingrese la empresa</mat-label>
+            <input matInput formControlName="empresa" placeholder="Ejm: Cooperativa Jep" [(ngModel)]="anexo3_1.nombreEmpresa" required>
+          </mat-form-field>
+
+        </mat-card-content>
+        <button style="width: 40%" mat-raised-button matStepperNext color="primary">Siguiente</button>
+
+      </mat-card>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup" label="Datos de Personal de Entidad">
+    <form [formGroup]="secondFormGroup" >
+      <mat-card class="example-card">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-subtitle>Fecha Emitida la solicitud de la empresa</mat-card-subtitle>
+        <mat-card-content>
+          <div class="example-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha Emitida la solicitud de la empresa<</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="fechaE" placeholder="Fecha de Emision" autofocus>
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker2">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!--
+                    <div class="example-container">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Fecha Emitida la solicitud de la empresa</mat-label>
+                      <input matInput [matDatepicker]="picker2" [formControl]="date">
+                      <mat-hint>MM/DD/YYYY</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+
+                    </div>
+
+                    -->
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Responsable de las PPP</mat-label>
+                      <input matInput formControlName="responsablePPP" placeholder="Ejm: Ing. Juan Espinoza" [(ngModel)]="anexo3_1.nombreResponsable" required>
+                    </mat-form-field>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Carrera</mat-label>
+                      <input matInput formControlName="carrera" placeholder="Ejm: TECNOLOGÍA SUPERIOR EN DESARROLLO DE SOFTWARE" [(ngModel)]="anexo3_1.carrera" required>
+                    </mat-form-field>
+                  </mat-card-content>
+                  <mat-divider></mat-divider>
+                  <br>
+                  <div style="text-align: end">
+                    <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>navigate_before</mat-icon></button>
+                    <button mat-fab matStepperNext color="primary" style="margin-right: 5px"><mat-icon>navigate_next</mat-icon></button>
+                  </div>
+                </mat-card>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="thirdFormGroup">
+              <form [formGroup]="thirdFormGroup" >
+                <mat-card class="example-card">
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-subtitle>Generar Documento</mat-card-subtitle>
+                  <mat-divider></mat-divider>
+                  <br>
+                  <mat-card-content>
+                    <div>
+                      <button mat-raised-button color="primary" (click)="generarDocumento(proyecto)">Generar Desertado</button>
+                      <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                        <ngx-mat-file-input accept="application/pdf"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                        <mat-icon matSuffix>folder</mat-icon>
+                      </mat-form-field>
+                    </div>
+                  </mat-card-content>
+                  <mat-divider></mat-divider>
+                  <br>
+                  <div style="text-align: end">
+                    <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>navigate_before</mat-icon></button>
+                    <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+                  </div>
+                </mat-card>
+              </form>
+            </mat-step>
+
+          </mat-stepper>

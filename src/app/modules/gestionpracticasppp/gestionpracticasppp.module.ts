@@ -19,6 +19,7 @@ import { NuevasolicitudComponent } from './nuevasolicitud/nuevasolicitud.compone
 import { VersolicutudesComponent } from './versolicutudes/versolicutudes.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {Anexo4SeleccionEComponent} from "./anexo4-seleccion-e/anexo4-seleccion-e.component";
+import { Anexo31Component } from './anexo31/anexo31.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,8 @@ const routes: Routes = [
     component:NuevasolicitudComponent
   },{path:'versolicitud',
     component:VersolicutudesComponent
+  },{path:'anexo3_1',
+    component:Anexo31Component
   }
 
 ]
@@ -64,7 +67,8 @@ const routes: Routes = [
     VerempresaComponent,
     BienvenidaempresaComponent,
     NuevasolicitudComponent,
-    VersolicutudesComponent
+    VersolicutudesComponent,
+    Anexo31Component,
   ],
   imports: [
     CommonModule,
