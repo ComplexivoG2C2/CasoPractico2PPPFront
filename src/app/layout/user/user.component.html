@@ -110,6 +110,7 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/respuestaalestudiante',persona.cedula]"
                       routerLinkActive="active">-Firmas de Aceptación</button>
             </mat-expansion-panel>
+<!-- ////-->
             <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header style="background: #455a64;color: white">
@@ -121,6 +122,17 @@
                       routerLinkActive="active">> Regsitrar tutores Academicos</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
                       routerLinkActive="active">> Asignar tutores Academicos</button>
+            </mat-expansion-panel>
+<!--            ///-->
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                 Respuestas a Empresas
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo32y4respuestaaempresa',persona.cedula]"
+                      routerLinkActive="active">> Enviar Respuesta a empresas</button>
             </mat-expansion-panel>
           </div>
 <!--Estudiante-->

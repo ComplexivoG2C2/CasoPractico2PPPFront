@@ -27,6 +27,7 @@ import { Anexo8respuestaalestudianteComponent } from './anexo8respuestaalestudia
 import {CrearTutorComponent} from "./TutorEmpresarial/crear-tutor/crear-tutor.component";
 import {TutorEmpresarialComponent} from "./tutor-empresarial/tutor-empresarial.component";
 import {ListarTutorComponent} from "./TutorEmpresarial/listar-tutor/listar-tutor.component";
+import { Anexo31y4respuestasComponent } from './anexo31y4respuestas/anexo31y4respuestas.component';
 
 
 const routes: Routes = [
@@ -45,14 +46,20 @@ const routes: Routes = [
   },{path:'anexo2convocatoria/:cedula', component: Anexo2convocatoriasComponent
   },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
   },{path:'anexo3/:cedula', component: Anexo3Component
+  },{path:'anexo32y4respuestaaempresa/:cedula', component:Anexo31y4respuestasComponent
+  },{path:'listarTutorEmpresarial', component:ListarTutorComponent
   }
+  //anexo5
+
   ,{path:'anexo6/:id/:cedula', component: AgregartutoracademicoComponent
-  }
-  ,{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
+
+
+  //anexo7
+
+  },{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
   },{path:'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'crearTutorEmpresarial/:id', component: CrearTutorComponent
-},{path:'listarTutorEmpresarial', component:ListarTutorComponent
 }
 ]
 
@@ -78,7 +85,8 @@ const routes: Routes = [
     Anexo8respuestaalestudianteComponent,
     TutorEmpresarialComponent,
     CrearTutorComponent,
-    ListarTutorComponent
+    ListarTutorComponent,
+    Anexo31y4respuestasComponent
   ],
   imports: [
     CommonModule,

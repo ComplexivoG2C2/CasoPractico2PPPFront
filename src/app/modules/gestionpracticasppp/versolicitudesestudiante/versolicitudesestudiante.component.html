@@ -141,14 +141,13 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="convertFile(anexo.documento)">
                   <mat-icon color="warn">download</mat-icon>
-                  <span>Descargar documento</span>
+                  <span>Descargar (A3){{anexo.nombresestudiante}}</span>
                 </button>
               </mat-menu>
             </mat-card-header>
             <mat-card-content>
-              <p><strong>Parelelo: </strong>{{anexo.paralelo}}</p>
+              <p><strong>Paralelo: </strong>{{anexo.paralelo}}</p>
               <p><strong>Fecha Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}</p>
-              <p><strong>Razón: </strong>{{anexo.razon}} </p>
             </mat-card-content>
           </mat-card>
         </div>
