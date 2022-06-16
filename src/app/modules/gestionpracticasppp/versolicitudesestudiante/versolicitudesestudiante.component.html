@@ -1,26 +1,35 @@
 <div *ngIf="issloading==false">
   <div *ngIf="isexist">
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="POR REVISAR">
+      <mat-tab label="Lista de Postulaciones">
         <br>
-        <mat-card>
-          <strong>Filtrar Convocatorias:</strong>
-          <mat-form-field appearance="fill">
-            <mat-label>Seleccionar proyecto:</mat-label>
-            <mat-select (selectionChange)="proyetoFilterp($event.value)">
-              <mat-option value="ND">Ver todos</mat-option>
-              <mat-divider></mat-divider>
-              <mat-option *ngFor="let proyecto of proyecto" [value]="proyecto.nombre">{{proyecto.nombre}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card>
-        <mat-form-field appearance="standard">
-          <mat-label><mat-icon>search</mat-icon> Buscar </mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-        </mat-form-field>
+        <table>
+          <td style="background: white;border:1px solid #fcfcfc">
+            <div align="center">
+              <mat-form-field appearance="outline" style="width: 90%">
+                <mat-label>Seleccione la Convocatoria:</mat-label>
+                <mat-select (selectionChange)="proyetoFilterp($event.value)">
+                  <mat-option value="ND">Ver todos</mat-option>
+                  <mat-divider></mat-divider>
+                  <mat-option *ngFor="let proyecto of proyecto" [value]="proyecto.nombre">{{proyecto.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </td>
+          <td style="background: white;border:1px solid #fcfcfc">
+            <div align="center">
+              <mat-form-field appearance="outline" style="width: 90%">
+                <mat-label>  Buscar por: Nombre/ Cedula del Estudiante o Fecha de postulacion</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </td>
+        </table>
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource" matSort>
+<br>
+        <div class="mat-elevation-z8" >
+          <table style="height: auto" mat-table [dataSource]="dataSource" matSort>
             <!-- Name Column -->
             <ng-container matColumnDef="cedula">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Cédula </th>
@@ -87,68 +96,68 @@
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selecione la pagina"></mat-paginator>
         </div>
       </mat-tab>
-      <mat-tab label="ACEPTADAS">
-        <mat-card>
-          <mat-form-field appearance="outline" style="width: 100%">
+      <mat-tab label="Convocatorias Aceptadas">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
             <mat-label>BUSCAR CONVOCATORIA: </mat-label>
             <input matInput   placeholder="FILTRAR" [formControl]="myControla">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
-        </mat-card>
+        </div>
         <br>
-        <div *ngFor="let anexo of filteredOptionsa | async">
+        <div *ngFor="let anexo of filteredOptionsa | async" align="center">
           <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Proyecto: {{anexo.nombreproyecto}}</mat-card-title>
-              <mat-card-subtitle><strong>Estudiente: </strong>{{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-subtitle>
-              <span class="example-spacer"></span>
-              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="convertFile(anexo.documento)">
-                  <mat-icon color="warn">download</mat-icon>
-                  <span>Descargar documento</span>
-                </button>
-              </mat-menu>
-            </mat-card-header>
+      <table>
+        <tr aria-colspan="4">
+          <td colspan="3" style="width: 80%">
             <mat-card-content>
-              <p><strong>Parelelo: </strong>{{anexo.paralelo}}</p>
-              <p><strong>Fecha Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}</p>
-              <p><strong>Razón: </strong>{{anexo.razon}} </p>
+              <strong>Empresa:</strong> {{anexo.nombreproyecto}} <br>
+              <strong>Estudiante Postulante::</strong> {{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}<br>
+              <strong>Paralelo: </strong>{{anexo.ciclo}}{{anexo.paralelo}}<br>
+              <strong>Fecha que envio la Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}<br>
             </mat-card-content>
+          </td>
+          <td style="padding-left: 10px" colspan="1">
+            <button mat-menu-item (click)="convertFile(anexo.documento)" style="background: #c4e5fc">
+              <span>Descargar documento</span>
+            </button>
+          </td>
+        </tr>
+      </table>
+
           </mat-card>
         </div>
       </mat-tab>
-      <mat-tab label="DENEGADAS">
-        <mat-card>
-          <mat-form-field appearance="outline" style="width: 100%">
+      <mat-tab label="Convocatorias Denegadas">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
             <mat-label>BUSCAR CONVOCATORIA: </mat-label>
             <input matInput   placeholder="FILTRAR" [formControl]="myControlr">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
-        </mat-card>
+        </div>
+
         <br>
-        <div *ngFor="let anexo of filteredOptionsr | async">
+        <div *ngFor="let anexo of filteredOptionsr | async" align="center">
           <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Proyecto: {{anexo.nombreproyecto}}</mat-card-title>
-              <mat-card-subtitle><strong>Estudiante: </strong>{{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}</mat-card-subtitle>
-              <span class="example-spacer"></span>
-              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="convertFile(anexo.documento)">
-                  <mat-icon color="warn">download</mat-icon>
-                  <span>Descargar (A3){{anexo.nombresestudiante}}</span>
-                </button>
-              </mat-menu>
-            </mat-card-header>
-            <mat-card-content>
-              <p><strong>Paralelo: </strong>{{anexo.paralelo}}</p>
-              <p><strong>Fecha Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}</p>
-            </mat-card-content>
+            <table>
+              <tr aria-colspan="4">
+                <td colspan="3" style="width: 80%">
+                  <mat-card-content>
+                    <strong>Empresa:</strong> {{anexo.nombreproyecto}} <br>
+                    <strong>Estudiante Postulante::</strong> {{anexo.nombresestudiante}} {{anexo.apellidosestudiante}}<br>
+                    <strong>Paralelo: </strong>{{anexo.ciclo}}{{anexo.paralelo}}<br>
+                    <strong>Fecha que envio la Solicitud: </strong>{{anexo.fecha_solicitud  | date:"longDate"}}<br>
+                  </mat-card-content>
+                </td>
+                <td style="padding-left: 10px" colspan="1">
+                  <button mat-menu-item (click)="convertFile(anexo.documento)" style="background: #c4e5fc">
+                    <span>Descargar documento</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+
           </mat-card>
         </div>
       </mat-tab>

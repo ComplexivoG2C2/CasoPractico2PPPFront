@@ -22,11 +22,11 @@ td, th {
   width: 10%;
 }
 .example-card {
-  width: 380px;
+  width: 70%;
   float: left;
-  margin-left: 10px;
+  margin-left: 15%;
   margin-bottom: 10px;
-  border: 1px solid  #0c3255;
+  border: 1px solid #000201;
   border-inline: 5px solid  #0c3255;
   writing-mode: horizontal-tb;
 }

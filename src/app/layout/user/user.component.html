@@ -16,7 +16,7 @@
     </button>
   </mat-toolbar>
 
-  <mat-drawer-container autosize>
+  <mat-drawer-container autosize style="background:  #E4EFF3">
     <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
       <div class="contenedor-perfil">
         <div class="imagem-mat" style="background-image:url({{persona.urlFoto}})" referrerpolicy="no-referrer"></div>
@@ -147,7 +147,7 @@
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo3',persona.cedula]"
                       routerLinkActive="active"> Lista de Solicitudes</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/estadosolicitud',persona.cedula]"
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/estadossolicitud',persona.cedula]"
                       routerLinkActive="active"> Solicitudes Enviadas</button>
             </mat-expansion-panel>
           </div>

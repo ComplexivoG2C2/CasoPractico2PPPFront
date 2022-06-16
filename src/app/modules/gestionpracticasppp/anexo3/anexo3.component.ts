@@ -42,56 +42,29 @@ function getBase64(file: any) {
   styleUrls: ['./anexo3.component.css']
 })
 export class Anexo3Component implements OnInit {
-
-  issloading = true;
-  isexist?: boolean
+  issloading=true;
+  isexist?:boolean
   panelOpenState = false;
-  cedula?: String;
-  isLinear = true;
-  thirdFormGroup!: FormGroup;
-  fourFormGroup!: FormGroup;
-  secondFormGroup!: FormGroup;
-  firstFormGroup!: FormGroup;
+  cedula?:String;
   anexo2receptables:Anexo2[]=[];
   anexo2noanexo2receptables:Anexo2[]=[];
 
 
-  // constructor(
-  //   private router: Router,
-  //   private activatedRoute: ActivatedRoute,
-  //   private _formBuilder: FormBuilder,
-  //
-  // ) {}
   constructor(private router: Router,
               private fechaService:FechaService,
               private activatedRoute: ActivatedRoute,
               private proyectoService:ProyectoService,
               private responsablepppService:ResponsablepppService,
               private _formBuilder: FormBuilder,
-              private empresa:EmpresaService,
+              private empresaService:EmpresaService,
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,
               private anexo3Service:Anexo3Service,
               private otrosService:ExtrasService,
-              private materiasService:MateriasService) { this._adapter.setLocale('es-ec');}
+              private materiasService:MateriasService) {
+    this._adapter.setLocale('es-ec');
+  }
 
-
-
-  // ngOnInit(): void {
-  //   this.activatedRoute.params.subscribe(params => {
-  //     let cedula = params['cedula']
-  //     this.cedula = cedula;
-  //     console.log(cedula)
-  //   })
-  //
-  //   this.issloading = false;
-  //   this.firstFormGroup = this._formBuilder.group({});
-  //   this.secondFormGroup=this._formBuilder.group({});
-  //   this.thirdFormGroup=this._formBuilder.group({});
-  //   this.fourFormGroup=this._formBuilder.group({});
-  //
-  //
-  // }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
@@ -113,12 +86,8 @@ export class Anexo3Component implements OnInit {
         // console.log(value)
       })
     })
-    this.issloading = false;
-    this.firstFormGroup = this._formBuilder.group({});
-    this.secondFormGroup=this._formBuilder.group({});
-    this.thirdFormGroup=this._formBuilder.group({});
-    this.fourFormGroup=this._formBuilder.group({});
   }
+
 
   aux: number = 0;
   aux2: number = 0;
@@ -129,19 +98,18 @@ export class Anexo3Component implements OnInit {
     this.anexo3Service.getAnexo3byCedula(this.cedula+"").subscribe(value => {
       if(value.filter(value1 => value1.idProyectoPPP==anexo2.idProyectoPPP).length!=0){
         Swal.fire({
-          title: 'En proceso',
-          text: 'Usted ya se postuló en esta convocatoria, espere su respuesta en el apartado de "Postulaciones".',
-          icon: 'info',
-          color: "#0c3255",
-          confirmButtonColor:"#0c3255",
-          background: "#fbc02d",
+          title: 'En Proceso, Usted ya postulo en esta convocatoria',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
         })
       }else{
         this.materiasService.getMateriasbyAlumno(this.cedula+"").subscribe(async value1 => {
-          // @ts-ignore
           for (let i = 0; i < value1.materias!.length; i++) {
             for (let j = 0; j < anexo2.materias!.length; j++) {
-              // @ts-ignore
               if (value1.materias![i].nombre == anexo2.materias![j].nombre) {
                 this.aux2++;
                 console.log('la respuesta es' + this.aux2);
@@ -154,27 +122,22 @@ export class Anexo3Component implements OnInit {
               allowOutsideClick: false,
               allowEnterKey:false,
               allowEscapeKey:false,
-              title: '¡ATENCIÓN!',
-              text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá: ' +
-                '1. Obtener el anexo\n' +
-                '2. Firmar el anexo y trasnformarlo a PDF '+
-                '3. Regrese a esta pestaña pulsando en "POSTULAR AQUI" \n' +
-                '4. Dar clic en "Continuar Postulación"',
+              title: 'Proceso de Postulacion',
 
-              icon: 'info',
+
               showDenyButton: true,
               showCancelButton: true,
-              cancelButtonText: 'Salir, y continuar después',
-              confirmButtonText: '📑OBTENER ANEXO',
-              denyButtonText: `CONTINUAR POSTULACIÓN 👉`,
+              cancelButtonText: 'Salir',
+              confirmButtonText: 'Descargar Documento',
+              denyButtonText: `Subir Documento`,
               denyButtonColor: "#3cb227",
-              color: "#0c3255",
-              confirmButtonColor: "#0c3255",
-              background: "#fbc02d",
+              color: "#000000",
+              confirmButtonColor: "#0086ff",
+              background: "#ffffff",
             }).then(async (result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                // this.generarDocumento(anexo2);
+                this.generarDocumento(anexo2);
               } else if (result.isDenied) {
                 const {value: file} = await Swal.fire({
                   allowOutsideClick: false,
@@ -182,11 +145,11 @@ export class Anexo3Component implements OnInit {
                   allowEscapeKey:false,
                   showCancelButton: true,
                   confirmButtonText:"Enviar postulación",
-                  color: "#0c3255",
-                  confirmButtonColor: "#3cb227",
-                  background: "#fbc02d",
+                  color: "#090000",
+                  confirmButtonColor: "#0081f6",
+                  background: "#ffffff",
                   title: 'Confirmación',
-                  text: 'Debe subir el anexo en el formato requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir.',
+                  text: 'Debe subir el documento en formato "PDF"',
                   input: 'file',
                   inputAttributes: {
                     'accept': 'application/pdf',
@@ -231,7 +194,7 @@ export class Anexo3Component implements OnInit {
 
           } else {
             Swal.fire({
-              title: 'No cumple con los requisitos para postular',
+              title: 'No cumple los requisitos para postular',
               showClass: {
                 popup: 'animate__animated animate__fadeInDown'
               },
@@ -244,6 +207,7 @@ export class Anexo3Component implements OnInit {
       }
     })
   }
+
   anexo3response:Anexo3 = new Anexo3();
   obtnerDatos(anexo2: Anexo2):Anexo3{
     this.anexo3response.siglas_carrera=anexo2.siglasCarrera;
@@ -268,10 +232,11 @@ export class Anexo3Component implements OnInit {
     this.anexo3response.estado="PN";
     return this.anexo3response;
   }
+
   generarDocumento(anex2:Anexo2) {
     //console.log(this.obtnerDatos(anex2))
     var anexo3:Anexo3=this.obtnerDatos(anex2);
-    loadFile(" ", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo3.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -286,7 +251,7 @@ export class Anexo3Component implements OnInit {
 
       doc.setData({
         titulo:anexo3.titulo_responsable,
-        nombre_resp_vinculacion:anexo3.nombre_responsable,
+        nombre_responsable:anexo3.nombre_responsable,
         siglas:anexo3.siglas_carrera,
         nombreEstudiante:anexo3.nombresestudiante+" "+anexo3.apellidosestudiante,
         cedula:anexo3.cedula,
@@ -294,8 +259,9 @@ export class Anexo3Component implements OnInit {
         fecha:anexo3.fecha_solicitud,
         paralelo:anexo3.paralelo,
         jornada:anexo3.jornada,
-        nombreproyecto:anexo3.nombreproyecto,
-        ciclo:anexo3.ciclo
+        empresa:anexo3.nombreproyecto,
+        ciclo:anexo3.ciclo,
+        num_convocatoria:anexo3.num_proceso
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -339,15 +305,17 @@ export class Anexo3Component implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo4 "+anexo3.nombreproyecto+" Covocatoria Nª"+anexo3.apellidosestudiante+".docx");
+      saveAs(out, "Anexo3 de "+anexo3.apellidosestudiante+".docx");
     });
   }
+
+
   convertFile(docum:any) {
     //console.log(docum)
     //Usage example:
-    var file = this.dataURLtoFile(docum, 'Anexo2.pdf');
+    var file = this.dataURLtoFile(docum, 'Anexo3.pdf');
     // console.log(file);
-    saveAs(file, 'Anexo2.pdf');
+    saveAs(file, 'Anexo3.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
     let arr = dataurl.split(','),

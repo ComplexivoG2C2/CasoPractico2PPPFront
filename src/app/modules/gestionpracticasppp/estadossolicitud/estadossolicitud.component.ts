@@ -1,28 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {FechaService} from "../../../services/fecha.service";
-import {CarrerasService} from "../../../services/carreras.service";
-import {ResponsablepppService} from "../../../services/responsableppp.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
-
-import {ProyectoService} from "../../../services/proyecto.service";
-
 import {Anexo3} from "../../../models/anexo3";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FechaService} from "../../../services/fecha.service";
+import {ProyectoService} from "../../../services/proyecto.service";
+import {ResponsablepppService} from "../../../services/responsableppp.service";
+import {FormBuilder} from "@angular/forms";
+import {EmpresaService} from "../../../services/empresa.service";
 import {DateAdapter} from "@angular/material/core";
 import {Anexo2Service} from "../../../services/anexo2.service";
 import {Anexo3Service} from "../../../services/anexo3.service";
-import {ExtrasService} from "../../../services/extras.service";
-import {MateriasService} from "../../../services/materias.service";
-// @ts-ignore
-import { saveAs } from "file-saver";
-import {EmpresaService} from "../../../services/empresa.service";
+import {saveAs} from "file-saver";
 
 @Component({
-  selector: 'app-estadosolicitud',
-  templateUrl: './estadosolicitud.component.html',
-  styleUrls: ['./estadosolicitud.component.css']
+  selector: 'app-estadossolicitud',
+  templateUrl: './estadossolicitud.component.html',
+  styleUrls: ['./estadossolicitud.component.css']
 })
-export class EstadosolicitudComponent implements OnInit {
+export class EstadossolicitudComponent implements OnInit {
+
 
   issloading=true;
   isexist?:boolean

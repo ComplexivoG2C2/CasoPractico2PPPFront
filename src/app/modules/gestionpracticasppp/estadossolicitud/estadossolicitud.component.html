@@ -6,9 +6,7 @@
         <div *ngFor="let anexo3 of anexo3enproceso">
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Proyecto: {{anexo3.nombreproyecto}}</mat-card-title>
-              <mat-card-subtitle>Cedula: {{anexo3.cedula}}</mat-card-subtitle>
-              <mat-card-subtitle>Nombre: {{anexo3.nombresestudiante}} {{anexo3.apellidosestudiante}}</mat-card-subtitle>
+              <strong>Empresa:</strong> {{anexo3.nombreproyecto}} <br>
               <span class="example-spacer"></span>
               <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
@@ -21,10 +19,12 @@
               </mat-menu>
             </mat-card-header>
             <mat-card-content>
-              <p>Carrera: {{anexo3.nombrecarrera}}</p>
-              <p>Fecha de envio: {{anexo3.fecha_solicitud | date:"longDate"}}</p>
 
-              <p>Resposable: {{anexo3.nombre_responsable}}</p>
+              <strong>Cedula:</strong> {{anexo3.cedula}}<br>
+              <strong>Nombre:</strong> {{anexo3.nombresestudiante}} {{anexo3.apellidosestudiante}}<br>
+              <strong>Carrera: </strong>{{anexo3.nombrecarrera}}<br>
+              <strong>Fecha de envio: </strong>{{anexo3.fecha_solicitud | date:"longDate"}}<br>
+              <strong>Resposable de Practicas Preprofesionales: </strong>{{anexo3.nombre_responsable}}<br>
 
             </mat-card-content>
           </mat-card>
@@ -35,9 +35,7 @@
         <div *ngFor="let anexo3 of anexo3aceptados">
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Proyecto: {{anexo3.nombreproyecto}}</mat-card-title>
-              <mat-card-subtitle>Cedula: {{anexo3.cedula}}</mat-card-subtitle>
-              <mat-card-subtitle>Nombre: {{anexo3.nombresestudiante}} {{anexo3.apellidosestudiante}}</mat-card-subtitle>
+              <strong>Empresa: </strong>{{anexo3.nombreproyecto}}<br>
               <span class="example-spacer"></span>
               <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
@@ -50,12 +48,15 @@
               </mat-menu>
             </mat-card-header>
             <mat-card-content>
-              <p>Carrera: {{anexo3.nombrecarrera}}</p>
-              <p>Fecha de envio: {{anexo3.fecha_solicitud | date:"longDate"}}</p>
-              <p>Ciclo: {{anexo3.ciclo}}</p>
-              <p>Resposable: {{anexo3.nombre_responsable}}</p>
-              <p>Razón: {{anexo3.razon}}</p>
-              <button mat-flat-button style="width: 100%" color="primary" [routerLink]="['/panelusuario/proyectovinculacion/firmarportulaciones',cedula]">FINALIZAR PROCESOS</button>
+
+              <strong>Cedula:</strong> {{anexo3.cedula}}<br>
+              <strong>Nombre: </strong>{{anexo3.nombresestudiante}} {{anexo3.apellidosestudiante}}<br>
+              <strong>Carrera: </strong>{{anexo3.nombrecarrera}}<br>
+                <strong>Fecha de envio: </strong>{{anexo3.fecha_solicitud | date:"longDate"}}<br>
+                  <strong>Ciclo:</strong> {{anexo3.ciclo}}<br>
+                    <strong>Resposable: </strong>{{anexo3.nombre_responsable}}<br>
+              <br>
+              <button mat-flat-button style="width: 100%" color="primary" [routerLink]="['/panelusuario/gestionpracticasppp/firmarportulaciones/',cedula]">Firmar Documento</button>
             </mat-card-content>
           </mat-card>
         </div>
@@ -65,9 +66,8 @@
         <div *ngFor="let anexo3 of anexo3denagados">
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Proyecto: {{anexo3.nombreproyecto}}</mat-card-title>
-              <mat-card-subtitle>Cedula: {{anexo3.cedula}}</mat-card-subtitle>
-              <mat-card-subtitle>Nombre: {{anexo3.nombresestudiante}} {{anexo3.apellidosestudiante}}</mat-card-subtitle>
+              <strong>Empresa: {{anexo3.nombreproyecto}}</strong>
+
               <span class="example-spacer"></span>
               <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
@@ -80,11 +80,13 @@
               </mat-menu>
             </mat-card-header>
             <mat-card-content>
-              <p>Carrera: {{anexo3.nombrecarrera}}</p>
-              <p>Fecha de envio: {{anexo3.fecha_solicitud | date:"longDate"}}</p>
-              <p>Ciclo: {{anexo3.ciclo}}</p>
-              <p>Resposable: {{anexo3.nombre_responsable}}</p>
-              <p>Razón: {{anexo3.razon}}</p>
+              <strong>Cedula:</strong> {{anexo3.cedula}}<br>
+              <strong>Nombre: </strong>{{anexo3.nombresestudiante}} {{anexo3.apellidosestudiante}}<br>
+              <strong>Carrera: </strong>{{anexo3.nombrecarrera}}<br>
+              <strong>Fecha de envio: </strong>{{anexo3.fecha_solicitud | date:"longDate"}}<br>
+              <strong>Ciclo:</strong> {{anexo3.ciclo}}<br>
+              <strong>Resposable: </strong>{{anexo3.nombre_responsable}}<br>
+              <br>
             </mat-card-content>
           </mat-card>
         </div>
@@ -93,7 +95,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>NO EXISTEN CONVOCATORIA</mat-card-title>
+      <mat-card-title>No Existen Convocatorias</mat-card-title>
     </mat-card>
   </div>
 </div>
