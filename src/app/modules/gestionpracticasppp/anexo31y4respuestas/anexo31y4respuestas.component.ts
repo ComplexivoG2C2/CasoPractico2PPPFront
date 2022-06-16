@@ -34,7 +34,7 @@ import {CordinadorvinculacionService} from "../../../services/cordinadorvinculac
 import {Anexo8Service} from "../../../services/anexo8.service";
 import {Anexo8} from "../../../models/anexo8";
 import {Anexo31} from "../../../models/anexo31";
-import {Anexo31Service} from "../../../services/anexo3-1.service";
+import {Anexo31Service} from "../../../services/anexo31.service";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -99,6 +99,7 @@ cedula?:String
           this.proyecto = value1.filter(value2 => value2.estado == true && value2.codigocarrera == value.filter(value1 => value1.cedula == cedula)[0].codigoCarrera);
           this.cordinadorvinculacionService.getCordinadorVinculacioAll().subscribe(da => {
             this.anexo4.nombreResponsable= da.nombres + " " + da.apellidos
+            this.anexo31.nombreResponsable= da.nombres + " " + da.apellidos
             this.filteredOptions = this.myControl.valueChanges.pipe(
               startWith(''),
               map(values => this.filter(values)),
@@ -127,13 +128,25 @@ cedula?:String
     this.anexo8Service.getAnexo8All().subscribe(value2 => {
       if (value2.filter(value3 => value3.idProyectoPPP == pryectoselect.option.value.id).length == 0) {
         Swal.fire({
-          text: 'No hay alumnos aceptados o denegados en esta convocatoria',
-          icon: 'success',
+          text: 'No hay alumnos aceptados o denegados en esta convocatoria.',
           color: "#000000",
           confirmButtonColor: "#0080f8",
           background: "#ffffff",
         })
-        window.location.reload();
+        this.pryectoselect = pryectoselect.option.value;
+        this.anexo3Service.getAnexo3byProyecto(this.pryectoselect.id).subscribe(value => {
+          this.anexo31.idProyectoPPP = this.pryectoselect.id;
+          this.anexo31.fechaSolicitudEmp = this.pryectoselect.fechaat;
+          this.anexo31.cargoEmpresa = this.pryectoselect.cargosolicitante;
+          this.anexo31.carrera = this.pryectoselect.carrera;
+          this.anexo31.nombreEmpresa = this.pryectoselect.nombre;
+          this.anexo31.nombreRepresentanteEmp = this.pryectoselect.nombresolicitante
+          this.anexo31.nombreResponsable = this.pryectoselect.nombreresponsable
+          this.anexo3 = value;
+        })
+////Para el anexo 3.1
+
+        // window.location.reload();
       } else {
         this.pryectoselect = pryectoselect.option.value;
         this.anexo3Service.getAnexo3byProyecto(this.pryectoselect.id).subscribe(value => {
@@ -146,11 +159,29 @@ cedula?:String
           this.anexo4.cargoEmpresa=this.pryectoselect.cargosolicitante
           this.anexo3 = value;
 
-          ///anexo31
+
+
         })
       }
     })
   }
+
+  //cambio de estados
+
+  pryectoselectestado: Solicitudproyecto = new Solicitudproyecto();
+  obtnerdatosestadoan4():  Solicitudproyecto {
+   this.pryectoselectestado.id=this.pryectoselect.id;
+   this.pryectoselectestado.estado=true;
+    return this.pryectoselectestado;
+  }
+  pryectoselectestado2: Solicitudproyecto = new Solicitudproyecto();
+  obtnerdatosestadoan3_1():  Solicitudproyecto {
+    this.pryectoselectestado2.id=this.pryectoselect.id;
+    this.pryectoselectestado2.estado=false;
+    return this.pryectoselectestado2;
+  }
+
+
 
   alumnosselc: ListaEstudiantesAnexo4Request[] = [];
   obtnerdatos(): Anexo4 {
@@ -176,7 +207,6 @@ cedula?:String
     this.fechaService.getSysdate().subscribe(value => {
       // @ts-ignore
       this.anexo31.fechaRespuesta = value.fecha + "";
-      this.anexo31.fechaSolicitudEmp = value.fecha;
 
     })
     return this.anexo31;
@@ -184,31 +214,31 @@ cedula?:String
 
 
 
-  guardarAceptacion() {
-    var anexo4: Anexo4 = this.obtnerdatos();
-    this.anexo4Service.saveAnexo4(anexo4).subscribe(value => {
-      Swal.fire({
-        title: 'Éxito',
-        text: 'Informe guardado exitosamente',
-        icon: 'success',
-        color: "#000102",
-        confirmButtonColor: "#0082fa",
-        background: "#ffffff",
-      })
-      this.router.navigate(['/panelusuario/gestionpracticasppp/veranexo31y4respuestas', anexo4.nombreResponsable])
-    }, error => {
-      Swal.fire({
-        title: 'Ha surgido un error',
-        text: "Hubo un error",
-        icon: 'error',
-        color: "#000000",
-        confirmButtonColor: "#0086ff",
-        background: "#fcfcfc",
-      })
-    })
-  }
-
-
+  // guardarAceptacion() {
+  //   var anexo4: Anexo4 = this.obtnerdatos();
+  //   this.anexo4Service.saveAnexo4(anexo4).subscribe(value => {
+  //     Swal.fire({
+  //       title: 'Éxito',
+  //       text: 'Informe guardado exitosamente',
+  //       icon: 'success',
+  //       color: "#000102",
+  //       confirmButtonColor: "#0082fa",
+  //       background: "#ffffff",
+  //     })
+  //     this.router.navigate(['/panelusuario/gestionpracticasppp/veranexo31y4respuestas', anexo4.nombreResponsable])
+  //   }, error => {
+  //     Swal.fire({
+  //       title: 'Ha surgido un error',
+  //       text: "Hubo un error",
+  //       icon: 'error',
+  //       color: "#000000",
+  //       confirmButtonColor: "#0086ff",
+  //       background: "#fcfcfc",
+  //     })
+  //   })
+  // }
+  //
+  //
 
 
 
@@ -216,6 +246,7 @@ cedula?:String
   async aceptarPostulacion(anexo4: Anexo4) {
     // @ts-ignore
     var anexo4=this.obtnerdatos(anexo4);
+
     Swal.fire({
       allowOutsideClick: false,
       allowEnterKey:false,
@@ -263,9 +294,10 @@ cedula?:String
                   getBase64(value).then(docx => {
                     anexo4.documento = docx + '';
                     this.anexo4Service.saveAnexo4(anexo4).subscribe(value1 => {
-
+                      var pro=this.obtnerdatosestadoan4()
+                      this.proyectoService.updateEstado(pro).subscribe(value => {
                         Swal.fire({
-                          title: 'Respuesta enviada a la empresa',
+                          title: 'El estudiante a sido aceptado',
                           showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                           },
@@ -274,7 +306,18 @@ cedula?:String
                           }
                         })
                         this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',this.cedula]);
-
+                      },error => {
+                        Swal.fire({
+                          title: 'error..',
+                          showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                          },
+                          hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                          }
+                        })
+                      })
+                      this.issloading=false;
                     },error => {
                       Swal.fire({
                         title: 'error..',
@@ -303,11 +346,13 @@ cedula?:String
   async negarPostulacion(anexo31: Anexo31) {
     // @ts-ignore
     var anexo31=this.obtnerdatosanexo31(anexo31);
+
+    console.log(anexo31+"hgfdsdfghjkl")
     Swal.fire({
       allowOutsideClick: false,
       allowEnterKey:false,
       allowEscapeKey:false,
-      text: 'Para enviar la respuesta a la empresa descague el Anexo (A4) y subalo',
+      text: 'Para enviar la respuesta a la empresa descague el Anexo (A3.1) y subalo',
       showDenyButton: true,
       showCancelButton: true,
       cancelButtonText: 'Salir',
@@ -350,18 +395,30 @@ cedula?:String
                 getBase64(value).then(docx => {
                   anexo31.documento = docx + '';
                   this.anexo31Service.saveAnexo31(anexo31).subscribe(value1 => {
-
-                    Swal.fire({
-                      title: 'Respuesta enviada a la empresa',
-                      showClass: {
-                        popup: 'animate__animated animate__fadeInDown'
-                      },
-                      hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp'
-                      }
+                    var pro2=this.obtnerdatosestadoan3_1()
+                    this.proyectoService.updateEstado(pro2).subscribe(value => {
+                      Swal.fire({
+                        title: 'El estudiante a sido aceptado',
+                        showClass: {
+                          popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                          popup: 'animate__animated animate__fadeOutUp'
+                        }
+                      })
+                      this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',this.cedula]);
+                    },error => {
+                      Swal.fire({
+                        title: 'error..',
+                        showClass: {
+                          popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                          popup: 'animate__animated animate__fadeOutUp'
+                        }
+                      })
                     })
-                    this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',this.cedula]);
-
+                    this.issloading=false;
                   },error => {
                     Swal.fire({
                       title: 'error..',
@@ -406,8 +463,8 @@ cedula?:String
 
       doc.setData({
         carrera: a.carrera,
-        fecha:a.fechaRespuesta,
-        fechaEmitida:a.fechaSolicitudEmp,
+        fecha:pipe.transform(a.fechaRespuesta, 'dd/MM/yyyy'),
+        fechaEmitida:pipe.transform(a.fechaSolicitudEmp, 'dd/MM/yyyy'),
         cargo:a.cargoEmpresa,
         empresa: a.nombreEmpresa,
         nombrerepresentante: a.nombreRepresentanteEmp,
@@ -505,8 +562,8 @@ cedula?:String
 
       doc.setData({
         carrera: a.carrera,
-        fecha:a.fechaRespuesta,
-        fechaSolicitudEmp:a.fechaSolicitudEmp,
+        fecha:pipe.transform(a.fechaRespuesta, 'dd/MM/yyyy'),
+        fechaSolicitudEmp:pipe.transform(a.fechaSolicitudEmp, 'dd/MM/yyyy'),
         cargoEmpresa:a.cargoEmpresa,
         empresa: a.nombreEmpresa,
         nombreRepresentanteEmp: a.nombreRepresentanteEmp,

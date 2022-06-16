@@ -14,6 +14,4 @@ export class Anexo31 {
   num_proceso?:Number;
 
 
-
-
 }

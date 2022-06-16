@@ -9,7 +9,7 @@ import {Anexo31} from "../models/anexo31";
 export class Anexo31Service {
 
 
-  private urlEndPoint: string = 'http://localhost:8080/api/anexo3_1';
+  private urlEndPoint: string = 'http://localhost:8080/api/anexo31';
 
   private httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
