@@ -55,7 +55,7 @@ export class ListarTutorComponent implements OnInit {
   eliminarEntidad(tutorD:tutorEmpresarial){
     // console.log(entidad)
     Swal.fire({
-      title: 'Eliminar Empresa',
+      title: 'Eliminar Tutor',
       text: "Seguro que quiere eliminar al tutor: "+tutorD.nombres +" "+ tutorD.apellidos,
       icon: 'warning',
       showCancelButton: true,
