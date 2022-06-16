@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
-import {tutorEmpresarial} from "../../../../models/tutorEmpresarial";
+import {TutorEmpresarial} from "../../../../models/tutorEmpresarial";
 import {FechaService} from "../../../../services/fecha.service";
 import {ActivatedRoute} from "@angular/router";
-import {TutorEmpresarialService} from "../../../../services/tutor-empresarial.service";
 import {Empresa} from "../../../../models/empresa";
 import Swal from "sweetalert2";
+import {TutempresarialService} from "../../../../services/tutempresarial.service";
 
 @Component({
   selector: 'app-listar-tutor',
@@ -18,12 +18,12 @@ export class ListarTutorComponent implements OnInit {
   issloading=true;
   isexist?:boolean
   panelOpenState = false;
-  tutor:tutorEmpresarial[]=[];
+  tutor:TutorEmpresarial[]=[];
   myControl = new FormControl();
-  filteredOptions?: Observable<tutorEmpresarial[]>;
+  filteredOptions?: Observable<TutorEmpresarial[]>;
 
   constructor(private fechaService:FechaService,private activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder,private tutorS:TutorEmpresarialService) { }
+              private _formBuilder: FormBuilder,private tutorS:TutempresarialService) { }
 
   ngOnInit(): void {
     this.tutorS.getTutoresAll().subscribe(value => {
@@ -52,7 +52,7 @@ export class ListarTutorComponent implements OnInit {
     );
   }
 
-  eliminarEntidad(tutorD:tutorEmpresarial){
+  eliminarEntidad(tutorD:TutorEmpresarial){
     // console.log(entidad)
     Swal.fire({
       title: 'Eliminar Tutor',

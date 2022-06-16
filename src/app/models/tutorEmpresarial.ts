@@ -1,4 +1,4 @@
-export class tutorEmpresarial {
+export class TutorEmpresarial {
   id?:number;
   cedula?:String;
   nombres?:String;
@@ -6,7 +6,7 @@ export class tutorEmpresarial {
   correo?:String;
   clave?:String;
   estado?:boolean;
-  fechaDesignacion?:Date;
+  fecha_designacion?:Date;
   coordinadorId?:number;
-  empresaId?:number;
+  empresa_id?:number;
 }

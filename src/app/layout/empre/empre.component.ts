@@ -14,7 +14,6 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 export class EmpreComponent implements OnInit,AfterViewInit {
 
 
-
   public emailEmpresa?:string;
   //Estado de barra lateral visible/no visible
   panelOpenState = false;

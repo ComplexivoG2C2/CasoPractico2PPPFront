@@ -24,10 +24,10 @@ import { VerestadoconvocatoriasComponent } from './verestadoconvocatorias/verest
 import { Anexo3Component } from './anexo3/anexo3.component';
 import { VersolicitudesestudianteComponent } from './versolicitudesestudiante/versolicitudesestudiante.component';
 import { Anexo8respuestaalestudianteComponent } from './anexo8respuestaalestudiante/anexo8respuestaalestudiante.component';
-import {CrearTutorComponent} from "./TutorEmpresarial/crear-tutor/crear-tutor.component";
 import {TutorEmpresarialComponent} from "./tutor-empresarial/tutor-empresarial.component";
 import {ListarTutorComponent} from "./TutorEmpresarial/listar-tutor/listar-tutor.component";
 import { Anexo31y4respuestasComponent } from './anexo31y4respuestas/anexo31y4respuestas.component';
+import { CreartutorempComponent } from './creartutoremp/creartutoremp.component';
 
 
 const routes: Routes = [
@@ -59,8 +59,8 @@ const routes: Routes = [
   },{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
   },{path:'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
-  },{path:'crearTutorEmpresarial/:id', component: CrearTutorComponent
-}
+}, {path:'creartutoremp/:id', component: CreartutorempComponent
+  }
 ]
 
 @NgModule({
@@ -84,9 +84,9 @@ const routes: Routes = [
     VersolicitudesestudianteComponent,
     Anexo8respuestaalestudianteComponent,
     TutorEmpresarialComponent,
-    CrearTutorComponent,
     ListarTutorComponent,
-    Anexo31y4respuestasComponent
+    Anexo31y4respuestasComponent,
+    CreartutorempComponent
   ],
   imports: [
     CommonModule,
