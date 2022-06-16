@@ -27,6 +27,7 @@ import { Anexo8respuestaalestudianteComponent } from './anexo8respuestaalestudia
 import {CrearTutorComponent} from "./TutorEmpresarial/crear-tutor/crear-tutor.component";
 import {TutorEmpresarialComponent} from "./tutor-empresarial/tutor-empresarial.component";
 import {ListarTutorComponent} from "./TutorEmpresarial/listar-tutor/listar-tutor.component";
+import { EstadosolicitudComponent } from './estadosolicitud/estadosolicitud.component';
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'crearTutorEmpresarial/:id', component: CrearTutorComponent
 },{path:'listarTutorEmpresarial', component:ListarTutorComponent
-}
+},{path:'estadosolicitud/:cedula', component:EstadosolicitudComponent
+  }
 ]
 
 @NgModule({
@@ -78,7 +80,8 @@ const routes: Routes = [
     Anexo8respuestaalestudianteComponent,
     TutorEmpresarialComponent,
     CrearTutorComponent,
-    ListarTutorComponent
+    ListarTutorComponent,
+    EstadosolicitudComponent
   ],
   imports: [
     CommonModule,
