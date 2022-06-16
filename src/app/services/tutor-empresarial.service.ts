@@ -19,8 +19,9 @@ export class TutorEmpresarialService {
 
 
   saveTutor(tutor:tutorEmpresarial):Observable<tutorEmpresarial>{
-    console.log(tutorEmpresarial);
-    return this.http.post<Empresa>(this.urlEndPoint,tutorEmpresarial,{headers: this.httpHeaders})
+    console.log(tutor);
+    console.log(this.httpHeaders)
+    return this.http.post<tutorEmpresarial>(this.urlEndPoint,tutor,{headers: this.httpHeaders})
   }
 
   getTutoresAll():Observable<tutorEmpresarial[]>{

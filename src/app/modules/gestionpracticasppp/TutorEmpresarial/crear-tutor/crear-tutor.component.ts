@@ -30,7 +30,7 @@ export class CrearTutorComponent implements OnInit {
   primerForm!: FormGroup;
   segundoForm!: FormGroup;
   tutor: tutorEmpresarial = new tutorEmpresarial();
-  idEmpresa?:Number;
+  idEmpresa?:string;
   fechaactual?:Date;
 
   constructor(private _formBuilder: FormBuilder,private router: Router,private activatedRoute: ActivatedRoute,
@@ -49,8 +49,9 @@ export class CrearTutorComponent implements OnInit {
     });
 
     this.activatedRoute.params.subscribe(params => {
-      let id = params['id']
+      let id = sessionStorage.getItem('id');
 
+      // @ts-ignore
       this.idEmpresa=id;
       console.log(this.idEmpresa+"ide empresa")
     })
@@ -62,8 +63,7 @@ export class CrearTutorComponent implements OnInit {
 
   obtenerDatos(){
     this.tutor.estado=true;
-    // @ts-ignore
-    this.tutor.empresaId = this.idEmpresa ;
+    this.tutor.empresaId = 1;
     this.tutor.coordinadorId=1;
     this.tutor.fechaDesignacion=this.fechaactual;
     return this.tutor;
@@ -72,10 +72,10 @@ export class CrearTutorComponent implements OnInit {
 
   crearTutor(){
     var tutor=this.obtenerDatos()
-
+    console.log(tutor)
     console.log(this.tutor.cedula + "Tutor Log")
     this.tutorS.saveTutor(tutor).subscribe(data=>{
-      console.log(data)
+      console.log(data+"Data")
       Swal.fire({
         title: 'Éxito',
         text: 'Tutor Registrado',
@@ -85,10 +85,10 @@ export class CrearTutorComponent implements OnInit {
         confirmButtonColor:"#0083fd",
         background: "#faf9f9",
       })
-      this.router.navigate(['/panelusuario/gestionpracticasppp/verTutorEmpresarial']);
+      this.router.navigate(['/panelempresa/gestionpracticasppp/listarTutorEmpresarial']);
     },err=>{
         Swal.fire({
-          title: 'Ha surgido un error',
+          title: 'Ha surgido un error al Crear Tutor',
           text: "Hubo un error.",
           icon: 'warning',
           color: "#000203",

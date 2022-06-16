@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Empresa} from "../../../models/empresa";
 import {IniciosesionService} from "../../../services/iniciosesion.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {tutorEmpresarial} from "../../../models/tutorEmpresarial";
 
 @Component({
   selector: 'app-loginempresa',
@@ -18,6 +19,7 @@ export class LoginempresaComponent implements OnInit {
   email?:String;
 //Obtiene los datos del inicio de sesión
   public empresaRequest: Empresa = new Empresa();
+  public tutorRequest: tutorEmpresarial = new tutorEmpresarial();
   //Habilita ek incio o el cierre de sesión
   habilitar: boolean = true;
   constructor(private iniciosesionService: IniciosesionService, private activatedRoute: ActivatedRoute,
@@ -41,6 +43,8 @@ export class LoginempresaComponent implements OnInit {
         sessionStorage.clear;
         console.log(sessionStorage.clear+"limpiar 1 empresa")
         sessionStorage.setItem('emp', JSON.stringify(data));
+        sessionStorage.setItem('id', JSON.stringify(data.id))
+        sessionStorage.setItem('nombre', JSON.stringify(data.nombre))
         console.log(data.emailEmpresa+'empresa login token'+sessionStorage.setItem('emp', JSON.stringify(data)))
         this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
 
