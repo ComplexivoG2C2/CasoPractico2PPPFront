@@ -153,7 +153,7 @@ export class Anexo81Component implements OnInit {
     console.log(this.obtenerDatosanexo8_1(proyecto))
     var pipe:DatePipe = new DatePipe('en-US')
     var anexo:Anexo8_1=this.obtenerDatosanexo8_1(proyecto);
-    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/oscar/src/assets/docs/Anexo8_1.docx", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/oscar/src/assets/docs/Anexo8.1.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore

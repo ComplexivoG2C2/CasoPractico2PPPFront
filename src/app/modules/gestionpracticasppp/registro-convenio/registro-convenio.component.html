@@ -1,0 +1,392 @@
+<div>
+  <div>
+    <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Registro de Convenios con entidades</p>
+          </div></ng-template>
+
+          <mat-card class="example-card">
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+              <div class="example-container">
+                <mat-label><b>No. de Informe: SIES-ITS-ISTA-</b></mat-label>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Codigo de informe</mat-label>
+                  <input matInput placeholder="00XXX" required>
+                </mat-form-field>
+
+                <mat-label>-</mat-label>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Año del informe</mat-label>
+                  <input matInput placeholder="2022" required>
+                </mat-form-field>
+
+                <mat-divider></mat-divider>
+              </div>
+
+              <div class="example-container">
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha del Convenio</mat-label>
+                  <input matInput [matDatepicker]="picker1" placeholder="Fecha de Seleccion" autofocus>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker1">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <mat-divider></mat-divider>
+              <mat-form-field appearance="fill" style="width: 80%">
+                <mat-label>Nombre de la Empresa</mat-label>
+                <input matInput placeholder="00XXX" required>
+              </mat-form-field>
+              <br>
+              <mat-form-field appearance="fill" style="width: 80%">
+                <mat-label>Naturaleza de gestión de la Entidad Receptora</mat-label>
+                <input matInput placeholder="00XXX" required>
+              </mat-form-field>
+              <br>
+              <mat-form-field appearance="fill" style="width: 80%">
+                <mat-label>Nombre de la persona autorizada legalmente para la suscripción del Convenio</mat-label>
+                <input matInput placeholder="00XXX" required>
+              </mat-form-field>
+              <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Número de RUC</mat-label>
+                <input matInput placeholder="00XXX" required>
+              </mat-form-field>
+
+              <mat-divider></mat-divider>
+              <br>
+              <div>
+                <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Actividad económica que consta en el RUC</p>
+          </div></ng-template>
+          <mat-card class="example-card" style="max-width: 100%">
+            <mat-divider></mat-divider>
+            <mat-card-content>
+
+              <mat-grid-list cols="3" rowHeight="8:2">
+                <mat-grid-tile colspan="3">
+                  <button mat-raised-button color="primary" style="width: 50%" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')">Agregar Filas<mat-icon>expand_more</mat-icon></button>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Codigo de Actividad
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Actividades
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Eliminar
+                </mat-grid-tile>
+
+                <br>
+
+                <div *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+                  <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Codigo de Actividad</mat-label>
+                      <input matInput type="text" [formControl]="row.get('codActividad')" placeholder="codigo de Actividad">
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Actividades</mat-label>
+                      <input matInput type="text" [formControl]="row.get('actividades')" placeholder="Actividades">
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1">
+                    <button mat-raised-button color="warn" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete</mat-icon></button>
+                  </mat-grid-tile>
+
+                </div>
+              </mat-grid-list>
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Plazo de vigencia y N° de estudiantes que recibiría la Entidad y datos de tutores</p>
+          </div></ng-template>
+
+          <mat-card class="example-card">
+            <mat-card-content>
+              <div class="example-container">
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Plazo de vigencia del convenio</strong> </mat-hint>
+                  <mat-label>Años del convenio</mat-label>
+                  <input matInput type="number" min="0" max="15" style="font-size: 18px;" class="form-control" class="impnumber" placeholder="5" [required]>
+                </mat-form-field>
+                <mat-label> Años</mat-label>
+
+                <mat-form-field appearance="outline" style="padding: 40px;">
+                  <mat-hint align="start"><strong>N° de estudiantes que recibiría inicialmente la Entidad Receptora</strong> </mat-hint>
+                  <mat-label>N° de estudiantes</mat-label>
+                  <input matInput type="number" min="1" max="15" style="font-size: 18px;" class="form-control" class="impnumber" placeholder="5" [required]>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="align:right;">
+                  <mat-hint align="start"><strong>Total de estudiantes proyectados que recibirá la Entidad Receptora durante la vigencia del convenio</strong> </mat-hint>
+                  <mat-label>Total de estudiantes</mat-label>
+                  <input matInput type="number" min="1" style="font-size: 18px;" class="form-control" class="impnumber" placeholder="20" [required]>
+                </mat-form-field>
+              </div>
+
+              <div class="example-container">
+                <mat-label>Datos: Tutor Académico  </mat-label>
+
+                <mat-form-field appearance="outline" style="width: 40%;">
+                  <mat-hint align="start"><strong>Nombres completos</strong> </mat-hint>
+                  <mat-label>Nombres completos</mat-label>
+                  <input matInput type="text" placeholder="Ing. Jessica Priscila Herrera Urgilés">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding: 40px;">
+                  <mat-hint align="start"><strong>Número de Contacto</strong> </mat-hint>
+                  <mat-label>Número de Contacto</mat-label>
+                  <input matInput type="text" placeholder="0999999999">
+                </mat-form-field>
+              </div>
+
+              <div class="example-container">
+                <mat-label>Datos: Tutor Empresarial  </mat-label>
+
+                <mat-form-field appearance="outline" style="width: 30%;">
+                  <mat-hint align="start"><strong>Nombres completos</strong> </mat-hint>
+                  <mat-label>Nombres completos</mat-label>
+                  <input matInput type="text" placeholder="Tcnl. Antony Vinicio Deleg Castro">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding: 10px;">
+                  <mat-hint align="start"><strong>Cargo</strong> </mat-hint>
+                  <mat-label>Cargo</mat-label>
+                  <input matInput type="text" placeholder="Programador">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Número de Contacto</strong> </mat-hint>
+                  <mat-label>Número de Contacto</mat-label>
+                  <input matInput type="text" placeholder="0999999999">
+                </mat-form-field>
+
+              </div>
+
+              <div class="example-container">
+                <mat-form-field appearance="outline" style="width: 27%;">
+                  <mat-hint align="start"><strong>Correo electrónico de la empresa</strong> </mat-hint>
+                  <mat-label>Correo electrónico de la empresa</mat-label>
+                  <input matInput type="text" placeholder="info@outlook.com">
+                </mat-form-field>
+
+                <mat-label>Número de contacto:  </mat-label>
+
+                <mat-form-field appearance="outline" style="width: 27%;">
+                  <mat-hint align="start"><strong>Nombres completos del representante de la empresa</strong> </mat-hint>
+                  <mat-label>Nombres completos</mat-label>
+                  <input matInput type="text" placeholder="Eduard Vinicio Deleg Sandoval">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding: 10px;">
+                  <mat-hint align="start"><strong>Número de Contacto de la empresa</strong> </mat-hint>
+                  <mat-label>Número de Contacto</mat-label>
+                  <input matInput type="text" placeholder="0999999999">
+                </mat-form-field>
+
+              </div>
+
+              <mat-divider></mat-divider>
+              <br>
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Dirección Matriz y Sucursal</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+            <mat-card-content>
+              <div class="example-container">
+                <mat-label>Direccion Matriz:  </mat-label>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Provincia de la matriz</strong> </mat-hint>
+                  <mat-label>Provincia de la matriz</mat-label>
+                  <input matInput type="text" placeholder="Azuay">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding: 40px;">
+                  <mat-hint align="start"><strong>Canton de la matriz</strong> </mat-hint>
+                  <mat-label>Canton</mat-label>
+                  <input matInput type="text" placeholder="Cuenca">
+                </mat-form-field>
+
+                <mat-label>Direccion:  </mat-label>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Calle Principal de la matriz</strong> </mat-hint>
+                  <mat-label>Provincia</mat-label>
+                  <input matInput type="text" placeholder="Av. de las Americas Intersección: del Chofer">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Numero, Edificio de la matriz</strong> </mat-hint>
+                  <mat-label>Numero, Edificio</mat-label>
+                  <input matInput type="text" placeholder="Santiago de leon Número: 1-66 Edificio: El dorado">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding: 30px;">
+                  <mat-hint align="start"><strong>Calle Secundaria de la matriz</strong> </mat-hint>
+                  <mat-label>Calle Secundaria</mat-label>
+                  <input matInput type="text" placeholder="Av. del Chofer">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Referencia  de la matriz</strong> </mat-hint>
+                  <mat-label>Referencia</mat-label>
+                  <input matInput type="text" placeholder="DETRÁS DE LA CLÍNICA PAUCARBAMBA">
+                </mat-form-field>
+
+              </div>
+
+              <div class="example-container">
+                <mat-label>Direccion Sucursal:  </mat-label>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Provincia de la Sucursal</strong> </mat-hint>
+                  <mat-label>Provincia</mat-label>
+                  <input matInput type="text" placeholder="Azuay">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding: 40px;">
+                  <mat-hint align="start"><strong>Canton de la Sucursal</strong> </mat-hint>
+                  <mat-label>Canton</mat-label>
+                  <input matInput type="text" placeholder="Cuenca">
+                </mat-form-field>
+
+                <mat-label>Direccion:  </mat-label>
+
+                <mat-form-field appearance="outline">
+                  <mat-hint align="start"><strong>Direccion de la Sucursal</strong> </mat-hint>
+                  <mat-label>Direccion</mat-label>
+                  <input matInput type="text" placeholder="Av. de las Americas Intersección: del Chofer">
+                </mat-form-field>
+
+              </div>
+
+
+
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Carrera y Administradores del Convenio</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+            <mat-card-content>
+              <mat-form-field appearance="fill" style="width: 80%">
+                <mat-hint align="start"><strong>Carrera</strong> </mat-hint>
+                <mat-label>La carrera que dirije</mat-label>
+                <input matInput placeholder="Tecnología Superior en Desarrollo de Software" required>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" style="width: 80%">
+                <mat-hint align="start"><strong>Cargo del Administrador del convenio del instituto</strong> </mat-hint>
+                <mat-label>Por el Instituto:</mat-label>
+                <input matInput placeholder="Coordinador(a) de la carrera de Tecnología Superior en Desarrollo de Software" required>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" style="width: 80%">
+                <mat-hint align="start"><strong>Cargo del Administrador del convenio por le Entidad Receptora</strong> </mat-hint>
+                <mat-label>Por la Entidad Receptora</mat-label>
+                <input matInput placeholder="Departamento de Desarrollo y Sistemas" required>
+              </mat-form-field>
+              <br>
+              <mat-divider ></mat-divider>
+              <br>
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+    </mat-stepper>
+
+    <!--
+            <mat-step [stepControl]="thirdFormGroup">
+              <form [formGroup]="thirdFormGroup">
+              <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Actividad económica que consta en el RUC</p>
+          </div></ng-template>
+                <mat-card class="example-card">
+                  <mat-card-content>
+
+
+                    /////////////////////
+
+                    <div align="center">
+                      <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                      <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </form>
+            </mat-step>
+  -->
+
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen datos actualmente.</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
