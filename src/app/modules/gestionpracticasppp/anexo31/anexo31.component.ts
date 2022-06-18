@@ -98,16 +98,16 @@ export class Anexo31Component implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
-       fechaS:['',Validators.required],
-      titulo:['',Validators.required],
-       nombreRepresentanteE:['', Validators.required],
-       cargo: ['',Validators.required],
-       empresa: ['',Validators.required]
+      // fechaS:['',Validators.required],
+      //titulo:['',Validators.required],
+      // nombreRepresentanteE:['', Validators.required],
+      // cargo: ['',Validators.required],
+      // empresa: ['',Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      fechaE:['',Validators.required],
-      responsablePPP:['',Validators.required],
-      carrera:['',Validators.required],
+      //fechaE:['',Validators.required],
+      //responsablePPP:['',Validators.required],
+      //carrera:['',Validators.required],
     });
     this.thirdFormGroup = this._formBuilder.group({
       docx:['',Validators.required]
@@ -165,7 +165,7 @@ export class Anexo31Component implements OnInit {
     console.log(this.obtenerDatosanexo3_1(proyecto))
     var pipe:DatePipe = new DatePipe('en-US')
     var anexo:Anexo3_1=this.obtenerDatosanexo3_1(proyecto);
-    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/oscar/src/assets/docs/Anexo3_1.docx", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo2.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
