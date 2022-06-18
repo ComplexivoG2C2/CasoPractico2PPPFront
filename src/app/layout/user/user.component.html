@@ -138,6 +138,18 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/estadosolicitud',persona.cedula]"
                       routerLinkActive="active"> Solicitudes Enviadas</button>
             </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Registro Diario de Actividades
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active"> Nuevo Registro</button>
+            </mat-expansion-panel>
+            <br>
           </div>
 
           <!--Empresa-->

@@ -28,6 +28,7 @@ import {CrearTutorComponent} from "./TutorEmpresarial/crear-tutor/crear-tutor.co
 import {TutorEmpresarialComponent} from "./tutor-empresarial/tutor-empresarial.component";
 import {ListarTutorComponent} from "./TutorEmpresarial/listar-tutor/listar-tutor.component";
 import { EstadosolicitudComponent } from './estadosolicitud/estadosolicitud.component';
+import { Anexo9Component } from './anexo9/anexo9.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   },{path:'crearTutorEmpresarial/:id', component: CrearTutorComponent
 },{path:'listarTutorEmpresarial', component:ListarTutorComponent
 },{path:'estadosolicitud/:cedula', component:EstadosolicitudComponent
+  },{path:'anexo9/:cedula/:nombrescompletos', component:Anexo9Component
   }
 ]
 
@@ -81,7 +83,8 @@ const routes: Routes = [
     TutorEmpresarialComponent,
     CrearTutorComponent,
     ListarTutorComponent,
-    EstadosolicitudComponent
+    EstadosolicitudComponent,
+    Anexo9Component
   ],
   imports: [
     CommonModule,
