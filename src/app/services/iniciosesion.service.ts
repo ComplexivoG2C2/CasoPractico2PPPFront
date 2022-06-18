@@ -34,6 +34,6 @@ export class IniciosesionService {
     console.log('email'+tutorRequest.correo)
     console.log(tutorRequest.clave)
     console.log("nombre"+tutorRequest.nombres)
-    return this.http.post<TutorEmpresarial>(this.urlEndPoint+"/login3",tutorRequest)
+    return this.http.post<TutorEmpresarial>(this.urlEndPoint+"/logintutor",tutorRequest)
   }
 }

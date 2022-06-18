@@ -15,6 +15,7 @@ export class LoginempresaComponent implements OnInit {
 
   isLinear = true;
   loginForm!: FormGroup;
+  tutorForm!: FormGroup;
   issloading=true;
   email?:String;
 //Obtiene los datos del inicio de sesión
@@ -37,13 +38,12 @@ export class LoginempresaComponent implements OnInit {
       emailEmpresa:['', Validators.required],
       clave:['', Validators.required],
     });
+    this.tutorForm= this._formBuilder.group({
+      emailTutor:['', Validators.required],
+      clave:['', Validators.required]
+    })
   }
 
-  rol(){
-    if(this.tipo == false){
-
-    }
-  }
 
   login2(emp:Empresa) {
     this.iniciosesionService.Login2(this.empresaRequest).subscribe(
@@ -53,6 +53,7 @@ export class LoginempresaComponent implements OnInit {
         sessionStorage.setItem('emp', JSON.stringify(data));
         console.log(data.emailEmpresa+'empresa login token'+sessionStorage.setItem('emp', JSON.stringify(data)))
         this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
+
       }, err => {
         // this.login3()
         Swal.fire({
@@ -73,12 +74,16 @@ export class LoginempresaComponent implements OnInit {
     console.log(this.tutorRequest)
     this.iniciosesionService.Login3(this.tutorRequest).subscribe(
       data => {
+        console.log("A")
         sessionStorage.clear;
+        console.log("ABC")
         console.log(sessionStorage.clear+"limpiar 1 empresa")
+        console.log("ADE")
         sessionStorage.setItem('tut', JSON.stringify(data));
+        console.log("AHU")
         console.log(data.correo+'empresa login token'+sessionStorage.setItem('emp', JSON.stringify(data)))
-        this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
-
+        // this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
+        console.log("ENTRA CORRECTO")
       }, err => {
         console.log(err)
         Swal.fire({
