@@ -17,6 +17,7 @@ export class EmpresaService {
     return this.http.post<Empresa>(this.urlEndPoint,empresa,{headers: this.httpHeaders})
   }
   getEmpresaAll():Observable<Empresa[]>{
+    console.log(this.httpHeaders)
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(
       data => data as Empresa[]
     ));
