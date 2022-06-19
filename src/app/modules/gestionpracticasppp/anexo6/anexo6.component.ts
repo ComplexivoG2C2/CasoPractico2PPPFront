@@ -312,7 +312,7 @@ export class Anexo6Component implements OnInit {
 
 
   generarDocumento(anexo6:Anexo6) {
-    //console.log(anexo5)
+    console.log("datos para el documento"+anexo6)
     var pipe:DatePipe = new DatePipe('en-US')
     loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo6.docx", function(
       // @ts-ignore

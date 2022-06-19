@@ -55,7 +55,7 @@ export class CreartutorempComponent implements OnInit {
     // @ts-ignore
     this.tutorEmpresarial.empresa_id = this.idEmpresa;
     // @ts-ignore
-    this.tutorEmpresarial.coordinadorId=1;
+    this.tutorEmpresarial.idProyectoPPP=null;
     this.tutorEmpresarial.fecha_designacion=this.fechaactual;
     return this.tutorEmpresarial;
     console.log(this.tutorEmpresarial+'datos obtenidos')

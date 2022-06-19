@@ -7,6 +7,6 @@ export class TutorEmpresarial {
   clave?:String;
   estado?:boolean;
   fecha_designacion?:Date;
-  coordinadorId?:number;
+  idProyectoPPP?:Number;
   empresa_id?:number;
 }

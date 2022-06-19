@@ -35,6 +35,8 @@ import { Anexo6Component } from './anexo6/anexo6.component';
 import { Anexo7Component } from './anexo7/anexo7.component';
 import { Anexo6listarComponent } from './anexo6listar/anexo6listar.component';
 import { EditardelegacionComponent } from './editardelegacion/editardelegacion.component';
+import { Anexo9Component } from './anexo9/anexo9.component';
+import { BienvenidatutorComponent } from './bienvenidatutor/bienvenidatutor.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,7 @@ const routes: Routes = [
   },{path:'crearempresa/:id', component:CrearempresaComponent
   },{path:'verempresa', component:VerempresaComponent
   },{path:'bienvenidaempresa', component:BienvenidaempresaComponent
+  },{path:'bienvenidatutor', component:BienvenidatutorComponent
   },{path:'nuevasolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:NuevasolicitudComponent
   },{path:'versolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
   },{path:'anexo2convocatoria/:cedula', component: Anexo2convocatoriasComponent
@@ -70,7 +73,10 @@ const routes: Routes = [
 
     //anexo8
   },{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
-  },{path:'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
+  }, {
+    path: 'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
+///anexo9
+  },{path:'anexo9/:cedula/:nombrescompletos', component:Anexo9Component
 
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'creartutoremp/:id', component: CreartutorempComponent
@@ -108,7 +114,9 @@ const routes: Routes = [
     Anexo6Component,
     Anexo7Component,
     Anexo6listarComponent,
-    EditardelegacionComponent
+    EditardelegacionComponent,
+    Anexo9Component,
+    BienvenidatutorComponent
   ],
   imports: [
     CommonModule,
