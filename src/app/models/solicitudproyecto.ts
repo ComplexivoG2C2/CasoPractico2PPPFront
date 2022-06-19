@@ -1,4 +1,8 @@
 export class Solicitudproyecto {
+
+
+  ////
+
   id?:number;
   participantes?:Number;
   codigo?:string;
@@ -23,19 +27,24 @@ export class Solicitudproyecto {
   fechaFin?:Date;
   actividadeslistProyectos?: actividadeslistProyectos[];
   docentesDelegados?:DocentesDelegados[];
-  actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[]=[];
+  actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[];
   ///
   requisitoslistProyectos?:  requisitoslistProyectos[];
-  docenteApoyoResponse?:DocenteApoyoResponse[];}
+  docenteApoyoResponse?:DocenteApoyoResponse[];
+
+}
 
 export class actividadeslistProyectos {
+  id?:number;
   descripcion?: string;
 }
 
 export class requisitoslistProyectos {
+  id?:number;
   descripcion?: string;
 }
 export class ActividadesEmpresalistProyecto{
+  id?:number;
   descripcion?: string;
 }
 export class DocenteApoyoResponse{

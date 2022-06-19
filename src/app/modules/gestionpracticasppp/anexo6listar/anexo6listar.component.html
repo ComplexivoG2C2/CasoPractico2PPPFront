@@ -1,0 +1,97 @@
+<div *ngIf="issloading==false">
+<div align="center">
+  <mat-card-title>Delegacion de Tutores Academicos </mat-card-title>
+  <mat-form-field appearance="legacy" style="width: 70%" >
+    <mat-label style="color: #020000">Buscar Delegaciones</mat-label>
+    <input matInput  placeholder="BUSCAR POR: NOMBRE EMPRESA/ TUTOR EMPRESARIAL" [formControl]="myControl">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+  <br>
+  <div *ngIf="isexist">
+    <div *ngFor="let anexo6 of filteredOptions | async">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Empresa: {{anexo6.nombreProyecto}}</mat-card-title>
+          <mat-card-subtitle><strong>Tutor Academico: </strong>{{anexo6.nombreDocenteReceptor}}</mat-card-subtitle>
+          <span class="example-spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/panelusuario/gestionpracticasppp/editardelegacion',anexo6.id,cedula]">
+              <mat-icon color="primary">edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item (click)="eliminarAnexo(anexo6)">
+              <mat-icon color="warn">delete_forever</mat-icon>
+              <span>Eliminar</span>
+            </button>
+            <button mat-menu-item (click)="convertFile(anexo6.documento)">
+              <mat-icon color="warn">download</mat-icon>
+              <span>Descargar documento</span>
+            </button>
+          </mat-menu>
+        </mat-card-header>
+        <mat-card-content>
+
+
+          <table class="table-borderless">
+            <th colspan="1"></th>
+            <th colspan="1"></th>
+            <th style="background: #455a64;color: white" colspan="1">INFORMACION</th>
+            <th colspan="1"></th>
+            <th style="background: #455a64;color: white" colspan="2">ALUMNOS A CARGO</th>
+            <tr aria-colspan="6">
+              <td colspan="1" style="background: #455a64;color: white">
+              </td>
+              <td colspan="1">
+                <p style="color: white">--------</p>
+              </td>
+              <td colspan="1">
+                <strong>Cedula del Tutor Academico: </strong>{{anexo6.cedulaDocenteApoyo}}<br>
+                <strong>Fecha: </strong>{{anexo6.fechaEmision | date:"longDate"}}<br>
+              </td>
+              <td colspan="1">
+                <p style="color: white">--------
+                </p>
+              </td>
+              <td colspan="2">
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                     Visualizar
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p *ngFor="let alumnos of anexo6.alumnos" > {{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</p>
+                </mat-expansion-panel>
+              </td>
+            </tr>
+          </table>
+
+
+
+
+
+
+
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen delegaciones actualmente.</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

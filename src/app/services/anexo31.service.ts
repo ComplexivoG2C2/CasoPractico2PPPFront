@@ -27,7 +27,6 @@ export class Anexo31Service {
 
   getAnexo31(): Observable<Anexo31[]> {
     return this.http.get(this.urlEndPoint + "/all", {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo31[]))
-
   }
 
   getAnexo31ByidProyecto(id?: Number): Observable<Anexo31> {

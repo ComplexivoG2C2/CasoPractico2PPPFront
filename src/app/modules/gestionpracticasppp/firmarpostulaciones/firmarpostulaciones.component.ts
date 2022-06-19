@@ -133,7 +133,7 @@ export class FirmarpostulacionesComponent implements OnInit {
                     anexo8.num_proceso=2;
                     this.anexo8Service.updateAnexo8(anexo8).subscribe(value1 => {
                       Swal.fire({
-                        title: 'Ya a finalizado el proceso de postulacion',
+                        title: 'Proceso de postulacion exitoso',
                         showClass: {
                           popup: 'animate__animated animate__fadeInDown'
                         },

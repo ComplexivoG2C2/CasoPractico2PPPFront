@@ -263,6 +263,7 @@ export class Anexo2convocatoriasComponent implements OnInit {
       this.requisitoslistProyectos.push({
         descripcion: value1.nombre + ""
       })
+      this.anexo2.requisitos=this.requisitoslistProyectos;
     })
     console.log(proyecto.id, this.requisitoslistProyectos)
     this.proyectoService.updateRequistosbyIdSolicitudes(Number(proyecto.id), this.requisitoslistProyectos).subscribe(value => {
@@ -288,7 +289,6 @@ export class Anexo2convocatoriasComponent implements OnInit {
     });
   }
 
-
   obtnerDatosanexo2(proyecto: Solicitudproyecto): Anexo2 {
 
     this.anexo2.numeroConvocatoria = this.numeroConvocatoria;
@@ -306,8 +306,10 @@ export class Anexo2convocatoriasComponent implements OnInit {
     this.empresaService.getEmpresaAll().subscribe(value => {
       this.anexo2.empresa = value.filter(value1 => value1.id = proyecto.empresa)[0].nombre
     })
+
+    console.log("datos del anexo2 ********** " + this.anexo2.requisitos)
     return this.anexo2
-    console.log("datos" + this.anexo2)
+    console.log("datos del anexo2 " + this.anexo2)
   }
 
   subirDocumento(proyecto: Solicitudproyecto, file: FileList) {
@@ -378,6 +380,7 @@ export class Anexo2convocatoriasComponent implements OnInit {
     console.log(this.obtnerDatosanexo2(proyecto))
     var pipe: DatePipe = new DatePipe('en-US')
     var anexo: Anexo2 = this.obtnerDatosanexo2(proyecto);
+    console.log(anexo+'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
     loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo2.docx", function (
       // @ts-ignore
       error,
@@ -392,8 +395,7 @@ export class Anexo2convocatoriasComponent implements OnInit {
 
 
       doc.setData({
-        // @ts-ignore
-        fecha: anexo.fecha,
+        fecha: pipe.transform(anexo.fecha, 'dd/MM/yyyy'),
         siglas: anexo.siglasCarrera,
         anio: anexo.anio,
         num_convocatoria: anexo.numeroConvocatoria,
@@ -402,7 +404,7 @@ export class Anexo2convocatoriasComponent implements OnInit {
         empresa: anexo.empresa,
         // actividades: proyecto.actividadeslistProyectos,
         actividades: proyecto.actividadesEmpresaProyecto,
-        asignatura: proyecto.requisitoslistProyectos,
+        asignatura:anexo.requisitos,
         nombre_resposable: anexo.nombreResponsable,
         fecha_maxima: pipe.transform(anexo.fechaMaxRecepcion, 'dd/MM/yyyy'),
       });

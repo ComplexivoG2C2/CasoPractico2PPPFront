@@ -1,0 +1,132 @@
+<div *ngIf="issloading==false">
+  <div>
+    <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title"> Editar asignacion de estudiantes a Tutores Academicos</p>
+          </div></ng-template>
+
+          <mat-card class="example-card">
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <p>
+                <strong>Empresa:</strong>  {{anexo6.nombreProyecto}}<br>
+                <strong>Tutor Academico:</strong> {{anexo6.nombreDocenteReceptor}}<br>
+              </p>
+              <mat-divider></mat-divider>
+              <br>
+              <div aling="center">
+                <button style="width: 45%" mat-raised-button color="accent" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6listar',cedula]">	Regresar</button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="thirtdFormGroup"  >
+        <form [formGroup]="thirtdFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title"> Seleccón de Alumnos</p>
+          </div></ng-template>
+          <mat-card class="example-card" style="max-width: 100%">
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <div id ="contenedor">
+                <div id ="izquierda">
+                  <mat-form-field appearance="outline" style="width: 90%">
+                    <mat-label>Buscar Alumnos</mat-label>
+                    <input matInput  placeholder="FILTRAR" [formControl]="myControlAnexe4">
+                    <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
+                  <br>
+                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                    <div *ngFor="let alumno of filteredOptionsAnexe4 | async">
+                      <mat-card style="margin-top: 3px; margin-right: 3px; border: 1px solid  #0c3255; border-inline: 5px solid  #0c3255; writing-mode: horizontal-tb;" class="example-card">
+                        {{alumno.cedulaEstudiante}} > {{alumno.nombreEstudiante}}
+                        <button mat-button color="primary" (click)="addAlumnos(alumno)">Agregar
+                          <mat-icon matBadgeColor="warn">keyboard_arrow_right</mat-icon>
+                        </button>
+                      </mat-card>
+                    </div>
+                  </cdk-virtual-scroll-viewport>
+                </div>
+                <div id ="derecha">
+            <strong>Lista de estudiantes seleccionados</strong>
+                  <br>
+                  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                    <div *ngFor="let alumno of alumnoselect">
+                      <mat-card style="margin-top: 3px; margin-right: 3px; border: 1px solid  #0c3255; border-inline: 5px solid  #0c3255; writing-mode: horizontal-tb;" class="example-card">
+                        {{alumno.cedulaEstudiante}} > {{alumno.nombreEstudiante}}
+                        <button mat-button color="warn" (click)="removeAlumnos(alumno)">
+                          <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
+                         Quitar
+                        </button>
+                      </mat-card>
+                    </div>
+                  </cdk-virtual-scroll-viewport>
+                </div>
+              </div>
+              <div aling="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourFormGroup" >
+
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title"> Subir Documento</p>
+        </div></ng-template>
+        <form [formGroup]="fourFormGroup">
+          <mat-card class="example-card">
+
+              <div>
+              <button mat-raised-button color="primary" (click)="generarAnexo()">Generar nuevo documento</button>
+              <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                <ngx-mat-file-input accept="application/pdf" (change)="subirDocumento($event.target.files)" formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                <mat-icon matSuffix>folder</mat-icon>
+              </mat-form-field>
+            </div>
+            <mat-card-content>
+              <div aling="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step  label="Confirmar">
+        <mat-card class="example-card">
+
+
+            <strong>Asignado:</strong>  {{anexo6.nombreDocenteReceptor}} <br>
+           <strong>Cedula: </strong>{{anexo6.cedulaDocenteApoyo}} <br>
+          <strong>Empresa:</strong> {{anexo6.nombreProyecto}} <br>
+          <strong>Alumnos:</strong>
+          <h4 *ngFor="let alumnos of alumnoselect">{{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</h4>
+          <mat-card-content>
+
+            <div aling="center">
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardarAnexo()">Actualizar</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-step>
+    </mat-stepper>
+  </div>
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader" style="margin: auto;">
+      <center>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </center>
+    </div>
+  </ng-container>
+</div>
