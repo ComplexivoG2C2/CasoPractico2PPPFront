@@ -150,6 +150,7 @@ export class NuevasolicitudComponent implements OnInit {
 
   obtenerDatos(): Solicitudproyecto {
     this.proyecto.estado = true;
+    this.proyecto.coordinadorCedula='0103156675';
     this.proyecto.actividadesEmpresaProyecto=this.rows.getRawValue();
     // @ts-ignore
     this.proyecto.empresa = this.ide;
@@ -163,7 +164,6 @@ export class NuevasolicitudComponent implements OnInit {
     // @ts-ignore
     this.proyecto.nombre=this.nombreempresa;
     console.log(this.proyecto.nombreempresa+"nombre de la emrpesa ")
-
     return this.proyecto;
   }
 
@@ -214,7 +214,7 @@ export class NuevasolicitudComponent implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      window.location.reload();
+      // window.location.reload();
     });
   }
 

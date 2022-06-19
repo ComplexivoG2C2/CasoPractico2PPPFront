@@ -297,7 +297,7 @@ cedula?:String
                       var pro=this.obtnerdatosestadoan4()
                       this.proyectoService.updateEstado(pro).subscribe(value => {
                         Swal.fire({
-                          title: 'El estudiante a sido aceptado',
+                          title: 'Respuesta Enviada',
                           showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                           },
@@ -305,7 +305,7 @@ cedula?:String
                             popup: 'animate__animated animate__fadeOutUp'
                           }
                         })
-                        this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',this.cedula]);
+                        this.router.navigate(['/panelusuario/gestionpracticasppp/anexo32y4listar',this.cedula]);
                       },error => {
                         Swal.fire({
                           title: 'error..',
@@ -398,7 +398,7 @@ cedula?:String
                     var pro2=this.obtnerdatosestadoan3_1()
                     this.proyectoService.updateEstado(pro2).subscribe(value => {
                       Swal.fire({
-                        title: 'El estudiante a sido aceptado',
+                        title: 'Respuesta Enviada',
                         showClass: {
                           popup: 'animate__animated animate__fadeInDown'
                         },
@@ -406,7 +406,7 @@ cedula?:String
                           popup: 'animate__animated animate__fadeOutUp'
                         }
                       })
-                      this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',this.cedula]);
+                      this.router.navigate(['/panelusuario/gestionpracticasppp/anexo32y4listar',this.cedula]);
                     },error => {
                       Swal.fire({
                         title: 'error..',

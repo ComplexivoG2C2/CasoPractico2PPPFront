@@ -17,7 +17,7 @@ export class TutempresarialService {
 
   saveTutores(tutorEmpresarrial: TutorEmpresarial): Observable<TutorEmpresarial> {
     console.log(tutorEmpresarrial);
-    return this.http.post<TutorEmpresarial>(this.urlEndPoint , tutorEmpresarrial, {headers: this.httpHeaders})
+    return this.http.post<TutorEmpresarial>(this.urlEndPoint + "/", tutorEmpresarrial, {headers: this.httpHeaders})
   }
   getTutoresAll():Observable<TutorEmpresarial[]>{
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(

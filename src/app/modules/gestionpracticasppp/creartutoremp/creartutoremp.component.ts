@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {TutorEmpresarial} from "../../../models/tutorEmpresarial";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaempService} from "../../../services/fechaemp.service";
@@ -17,7 +17,7 @@ export class CreartutorempComponent implements OnInit {
   primerForm!: FormGroup;
   segundoForm!: FormGroup;
   tutorEmpresarial: TutorEmpresarial = new TutorEmpresarial();
-  idEmpresa?:number;
+  idEmpresa?:Number;
   fechaactual?:Date;
 
   constructor(private _formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute,
@@ -36,11 +36,11 @@ export class CreartutorempComponent implements OnInit {
     })
 
     this.primerForm = this._formBuilder.group({
-      cedula:['', Validators.required],
-      nombres:['', Validators.required],
-      apellidos:['', Validators.required],
-      correo:['', Validators.required],
-      clave:['', Validators.required]
+      cedula:[''],
+      nombres:[''],
+      apellidos:[''],
+      correo:[''],
+      clave:['']
     });
     this.segundoForm = this._formBuilder.group({
     });
@@ -49,11 +49,13 @@ export class CreartutorempComponent implements OnInit {
 
 
 
-
+  // @ts-ignore
   obtenerDatos():TutorEmpresarial {
     this.tutorEmpresarial.estado=true;
+    // @ts-ignore
     this.tutorEmpresarial.empresa_id = this.idEmpresa;
-    this.tutorEmpresarial.coordinadorId=1;
+    // @ts-ignore
+    this.tutorEmpresarial.idProyectoPPP=null;
     this.tutorEmpresarial.fecha_designacion=this.fechaactual;
     return this.tutorEmpresarial;
     console.log(this.tutorEmpresarial+'datos obtenidos')
@@ -74,7 +76,7 @@ export class CreartutorempComponent implements OnInit {
       },err=>{
         Swal.fire({
           title: 'Ha surgido un error al Crear Tutor',
-          text: "Hubo un error."+ err.text,
+          text: "Hubo un error.",
           icon: 'warning',
           color: "#000203",
           confirmButtonColor:"#0089fd",

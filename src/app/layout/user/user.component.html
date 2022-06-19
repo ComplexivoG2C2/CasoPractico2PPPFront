@@ -99,17 +99,29 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verconvocatorias',persona.cedula]"
                       routerLinkActive="active">> Ver Convocatoria</button>
             </mat-expansion-panel>
-            <mat-expansion-panel (opened)="panelOpenState = true"
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
                   Solicitudes de Estudiantes
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',persona.cedula]"
-                      routerLinkActive="active">-Ver Solicitudes</button>
+                      routerLinkActive="active">-Solicitudes de Estudiantes</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/respuestaalestudiante',persona.cedula]"
-                      routerLinkActive="active">-Firmas de Aceptación</button>
+                      routerLinkActive="active">-Constancia de respuestas a estudiantes</button>
+            </mat-expansion-panel>
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Respuestas a Empresas
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo32y4respuestaaempresa',persona.cedula]"
+                      routerLinkActive="active">> Enviar Respuesta a empresas</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo32y4listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Respuesta a empresas</button>
             </mat-expansion-panel>
 <!-- ////-->
             <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
@@ -120,28 +132,21 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
-                      routerLinkActive="active">> Regsitrar tutores Academicos</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
-                      routerLinkActive="active">> Asignar tutores Academicos</button>
+                      routerLinkActive="active">> Registrar tutores Academicos</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6asignaciontutores',persona.cedula]"
+                      routerLinkActive="active">> Asignar Alumnos a Tutores Academicos</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Delegaciones</button>
             </mat-expansion-panel>
 <!--            ///-->
-            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header style="background: #455a64;color: white">
-                <mat-panel-title style="color: white">
-                 Respuestas a Empresas
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo32y4respuestaaempresa',persona.cedula]"
-                      routerLinkActive="active">> Enviar Respuesta a empresas</button>
-            </mat-expansion-panel>
+
           </div>
 <!--Estudiante-->
           <div class="list-group" *ngSwitchCase="'EST'">
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
                   Solicitud Estudiante
                 </mat-panel-title>
               </mat-expansion-panel-header>
@@ -150,16 +155,16 @@
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/estadossolicitud',persona.cedula]"
                       routerLinkActive="active"> Solicitudes Enviadas</button>
             </mat-expansion-panel>
-          </div>
-
-          <!--Empresa-->
-          <div class="list-group" *ngSwitchCase="'null'">
+            <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Registro Diario de Actividades
                 </mat-panel-title>
               </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active"> Nuevo Registro</button>
             </mat-expansion-panel>
           </div>
 

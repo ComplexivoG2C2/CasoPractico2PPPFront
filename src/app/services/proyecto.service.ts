@@ -28,8 +28,8 @@ export class ProyectoService {
     return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/update",proyectos,{headers: this.httpHeaders})
   }
   updateTutoresacademicos(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
-    console.log(proyectos);
-    return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/agregartutoresacademicos",proyectos,{headers: this.httpHeaders})
+    console.log("tutores agregados"+proyectos);
+    return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/tutoracademico",proyectos,{headers: this.httpHeaders})
   }
   updateEstado(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
     console.log(proyectos);

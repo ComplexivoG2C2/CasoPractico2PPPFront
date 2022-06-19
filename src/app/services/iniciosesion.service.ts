@@ -29,7 +29,6 @@ export class IniciosesionService {
     console.log("nombre"+empresaRequest.nombre)
     return this.http.post<Empresa>(this.urlEndPoint+"/login2",empresaRequest)
   }
-
   Login3(tutorRequest: TutorEmpresarial):Observable<TutorEmpresarial>{
     console.log('email'+tutorRequest.correo)
     console.log(tutorRequest.clave)

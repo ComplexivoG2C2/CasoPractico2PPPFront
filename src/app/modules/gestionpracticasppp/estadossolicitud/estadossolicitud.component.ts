@@ -57,9 +57,9 @@ export class EstadossolicitudComponent implements OnInit {
   convertFile(docum:any) {
     // console.log(docum)
     //Usage example:
-    var file = this.dataURLtoFile(docum, 'Anexo2.pdf');
+    var file = this.dataURLtoFile(docum, 'Anexo3.pdf');
     // console.log(file);
-    saveAs(file, 'Anexo2.pdf');
+    saveAs(file, 'Anexo3.pdf');
   }
   dataURLtoFile(dataurl:any, filename:any) {
     let arr = dataurl.split(','),

@@ -266,6 +266,8 @@ export class VersolicitudesestudianteComponent implements OnInit {
                         })
                         this.cargarpostulaiones(this.cedula+"")
                         this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',this.cedula]);
+                       /////recarga pantalla
+                        window.location.reload();
                       },error => {
                         Swal.fire({
                           title: 'error..',
@@ -338,7 +340,7 @@ export class VersolicitudesestudianteComponent implements OnInit {
       anexo.estado="DN";
       this.anexo3Service.updateAnexo3(anexo).subscribe(value => {
         Swal.fire({
-          title: 'desigancion denegada..',
+          title: 'Solicitud denegada..',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
@@ -348,6 +350,8 @@ export class VersolicitudesestudianteComponent implements OnInit {
         })
         this.cargarpostulaiones(this.cedula+"")
         this.router.navigate(['/panelusuario/gestionpracticasppp/versolicitudesestudiante',this.cedula]);
+        /////recarga pantalla
+        window.location.reload();
       },error => {
         Swal.fire({
           title: 'error..',

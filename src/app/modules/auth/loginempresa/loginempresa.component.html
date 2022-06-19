@@ -1,3 +1,51 @@
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport"-->
+<!--        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--  <link-->
+<!--    rel="stylesheet"-->
+<!--    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"-->
+<!--  />-->
+<!--  <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="contenedor">-->
+<!--  <script src="loginemp.js"></script>-->
+<!--  <form class="login"  [formGroup]="loginForm">-->
+<!--    <img src="assets/images/logooo.png"width="200" height="60">-->
+<!--    <br>-->
+
+<!--    <br>-->
+<!--    <button mat-button  color="primary"   ><mat-icon>first_page</mat-icon></button>-->
+<!--    <p class="title">Login</p>-->
+<!--    <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empresaRequest.emailEmpresa"  autofocus>-->
+<!--    <i class="fa fa-user"></i>-->
+<!--    <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empresaRequest.clave">-->
+
+<!--    <i class="fa fa-key"></i>-->
+<!--    <button (click)="login2(empresaRequest)">-->
+<!--      <i class="spinner"></i>-->
+<!--      <span class="state"  >Iniciar Sesion</span>-->
+<!--    </button>-->
+
+
+<!--  </form>-->
+<!--  <ng-container *ngIf="issloading">-->
+<!--    <div class="bss-loader">-->
+<!--      <div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </ng-container>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,42 +65,42 @@
   <script src="loginemp.js"></script>
 
   <div align="center">
-  <mat-tab-group mat-align-tabs="center" style="background-color: #f8f8f8; width: 90vh" >
-    <mat-tab label="Empresa" >
-  <form class="login"  [formGroup]="loginForm">
-    <img src="assets/images/logooo.png"width="200" height="60" style="margin: 1rem">
-    <button mat-button  color="primary"><mat-icon>first_page</mat-icon></button>
-    <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empresaRequest.emailEmpresa"  autofocus>
-    <i class="fa fa-user"></i>
-    <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empresaRequest.clave" style="margin-bottom: 1.2rem">
+    <mat-tab-group mat-align-tabs="center" style="background-color: #f8f8f8; width: 90vh" >
+      <mat-tab label="Empresa" >
+        <form class="login"  [formGroup]="loginForm">
+          <img src="assets/images/logooo.png"width="200" height="60" style="margin: 1rem">
+          <button mat-button  color="primary"><mat-icon>first_page</mat-icon></button>
+          <input matInput type="email" formControlName="emailEmpresa" placeholder="E-mail Empresarial" required [(ngModel)]="empresaRequest.emailEmpresa"  autofocus>
+          <i class="fa fa-user"></i>
+          <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="empresaRequest.clave" style="margin-bottom: 1.2rem">
 
-    <i class="fa fa-key"></i>
-    <button (click)="login2(empresaRequest)">
-      <i class="spinner"></i>
-      <span class="state"  >Iniciar Sesion</span>
-    </button>
-
-
-  </form>
-    </mat-tab>
-    <mat-tab label="Tutor Empresarial">
-      <form class="login"  [formGroup]="tutorForm">
-        <img src="assets/images/logooo.png"width="200" height="60" style="margin: 1rem">
-        <button mat-button  color="primary"><mat-icon>first_page</mat-icon></button>
-        <input matInput type="email" formControlName="emailTutor" placeholder="E-mail Tutor" required [(ngModel)]="tutorRequest.correo"  autofocus>
-        <i class="fa fa-user"></i>
-        <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="tutorRequest.clave" style="margin-bottom: 1.2rem">
-
-        <i class="fa fa-key"></i>
-        <button (click)="login3(tutorRequest)">
-          <i class="spinner"></i>
-          <span class="state"  >Iniciar Sesion</span>
-        </button>
+          <i class="fa fa-key"></i>
+          <button (click)="login2(empresaRequest)">
+            <i class="spinner"></i>
+            <span class="state"  >Iniciar Sesion</span>
+          </button>
 
 
-      </form>
-    </mat-tab>
-  </mat-tab-group>
+        </form>
+      </mat-tab>
+      <mat-tab label="Tutor Empresarial">
+        <form class="login"  [formGroup]="tutorForm">
+          <img src="assets/images/logooo.png"width="200" height="60" style="margin: 1rem">
+          <button mat-button  color="primary"><mat-icon>first_page</mat-icon></button>
+          <input matInput type="email" formControlName="emailTutor" placeholder="E-mail Tutor" required [(ngModel)]="tutorRequest.correo"  autofocus>
+          <i class="fa fa-user"></i>
+          <input matInput type="password" formControlName="clave" placeholder="* * * * *" required [(ngModel)]="tutorRequest.clave" style="margin-bottom: 1.2rem">
+
+          <i class="fa fa-key"></i>
+          <button (click)="login3(tutorRequest)">
+            <i class="spinner"></i>
+            <span class="state"  >Iniciar Sesion</span>
+          </button>
+
+
+        </form>
+      </mat-tab>
+    </mat-tab-group>
   </div>
   <ng-container *ngIf="issloading">
     <div class="bss-loader">

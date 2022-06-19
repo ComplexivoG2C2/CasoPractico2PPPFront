@@ -14,8 +14,13 @@ export class Anexo2 {
   carrera?:String;
   documento?:String;
   num_proceso?:Number;
+  requisitos?: requisitoslistProyectos[];
   materias?: MateriasProyecyo[]
   actividades?:Actividadesanexo[]=[]
+}
+export class requisitoslistProyectos {
+  id?:number;
+  descripcion?: string;
 }
 
 export class MateriasProyecyo{

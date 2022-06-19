@@ -5,12 +5,12 @@
         <form [formGroup]="firstFormGroup">
 
           <ng-template matStepLabel><div align="center" style="font-size: large">
-            <p class="title">Lista de Solicitudes Empresariales</p>
+            <p class="title">Convocatorias en Vigencia</p>
           </div></ng-template>
           <mat-card class="example-card">
             <div align="center">
               <mat-form-field appearance="legacy" style="width: 70%" >
-                <mat-label style="color: #020000">BUSCAR.</mat-label>
+                <mat-label style="color: #020000">Buscar</mat-label>
                 <input class="im" matInput  placeholder="BUSCAR POR: NOMBRE EMPRESA/ FECHA DE SOLICITUD" [formControl]="myControlconvocatoria">
                 <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
@@ -39,7 +39,9 @@
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup" >
-
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Tutores Academicos</p>
+          </div></ng-template>
           <mat-card class="example-card">
 
             <mat-divider></mat-divider>
@@ -47,10 +49,10 @@
             <mat-card-content>
               <div id ="contenedor">
                 <div id ="cabecera">
-                <h4>Seleccione los Tutores Academicos</h4>
+
                 <div id ="izquierda">
                   <mat-form-field appearance="outline" style="width: 90%">
-                    <mat-label>BUSCAR DOCENTE</mat-label>
+                    <mat-label>Buscar</mat-label>
                     <input matInput  placeholder="FILTRAR" [formControl]="myControl1">
                     <mat-icon matSuffix>search</mat-icon>
                   </mat-form-field>
@@ -59,10 +61,7 @@
                   <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
                     <div *ngFor="let docente of filteredOptionsapoyo | async">
                       <mat-card style="margin-top: 1px" class="itemmateria">
-
-
                             {{docente.cedula}} | {{docente.nombres_completo}}
-
                           <button mat-button color="primary" (click)="addApoyo(docente)">Agregar
                             <mat-icon matBadgeColor="warn">keyboard_arrow_right</mat-icon>
                           </button>
@@ -72,20 +71,16 @@
                   <br>
                 </div>
                 <div id ="derecha">
-                  <mat-form-field appearance="outline" style="width: 90%">
-                    <mat-label>BUSCAR DOCENTE</mat-label>
-                    <input matInput  placeholder="FILTRAR">
-                    <mat-icon matSuffix>search</mat-icon>
-                  </mat-form-field>
+                  <strong>Tutores Academicos Seleccionados:</strong>
                   <br>
                   <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
                     <div *ngFor="let docente of docentesselectApoyo">
 
                       <mat-card style="margin-top: 1px" class="itemmateria">
-                            {{docente.cedula}} | {{docente.nombres_completo}}
+                            {{docente.cedula}} > {{docente.nombres_completo}}
 
                           <span class="example-spacer"></span>
-                          <button mat-button color="primary" (click)="removeApoyo(docente)">
+                          <button mat-button color="accent" (click)="removeApoyo(docente)">
                             <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>
                             Quitar
                           </button>
@@ -97,33 +92,37 @@
               </div>
               </div>
             </mat-card-content>
-            <mat-divider></mat-divider>
-            <br>
-            <div style="text-align: end">
-              <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
-              <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
+            <div style="text-align: center">
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
             </div>
           </mat-card>
         </form>
       </mat-step>
       <mat-step [stepControl]="fourFormGroup" >
         <form [formGroup]="fourFormGroup">
-          <ng-template matStepLabel>Documentos</ng-template>
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Informacion y Tutores Academicos Seleccionados</p>
+          </div></ng-template>
           <mat-card class="example-card">
-            <div mat-card-avatar class="example-header-image"></div>
-            <p>{{carrera}}</p>
-            <mat-divider></mat-divider>
-            <br>
             <mat-card-content>
 
+
+              <strong>Nombre de la empresa:</strong> {{proyecto.nombre}}  <br>
+              <strong>Fecha de Inicio:</strong> {{proyecto.fechaInicio | date:"longDate"}}<br>
+              <strong>Fecha de Finalización: </strong>{{proyecto.fechaFin | date:"longDate"}}<br>
+              <mat-divider></mat-divider>
               <br>
+              <div align="center">
+                <strong style="font-size: 18px;text-align: center">TUTORES ACADEMICOS</strong>
+              </div>
+
               <div *ngFor="let anexo of anexo1">
                 <mat-card class="example-panel">
                   <div id ="contenedor1">
                     <div id ="izquierda1">
-                      <h3>Cédula: {{anexo.cedulaDelegado}}
-                        <br> Nombre: {{anexo.nombreDelegado}}
-                      </h3>
+                      <strong>Cédula:</strong> {{anexo.cedulaDelegado}}<br>
+                      <strong> Nombre:</strong> {{anexo.nombreDelegado}}<br>
                     </div>
                   </div>
                 </mat-card>
@@ -132,36 +131,14 @@
             <mat-divider></mat-divider>
             <br>
             <div style="text-align: end">
-              <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
-              <button mat-fab matStepperNext color="primary"><mat-icon>queue_play_next</mat-icon></button>
-            </div>
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button color="primary" (click)="agregartutoresacademicos(proyecto,anexo1)">	<mat-icon>expand_more</mat-icon></button>
+
+               </div>
           </mat-card>
         </form>
       </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Confirmar</ng-template>
-        <mat-card class="example-card">
-          <mat-card-header>
-          </mat-card-header>
-          <p class="mensaje"><p>
-          <mat-divider></mat-divider>
-          <br>
-          <mat-card-content>
 
-          <strong>INFORMACIÓN:</strong>
-          <strong>Nombre de la empresa: {{proyecto.nombre}}</strong>
-          <strong>Fecha de Inicio: {{proyecto.fechaInicio | date:"longDate"}}</strong>
-          <strong>Fecha de Finalización: {{proyecto.fechaFin | date:"longDate"}}</strong>
-          </mat-card-content>
-
-          <mat-divider></mat-divider>
-          <br>
-          <div style="text-align: end">
-            <button mat-fab matStepperPrevious color="warn" style="margin-right: 5px"><mat-icon>undo</mat-icon></button>
-            <button mat-fab color="primary" (click)="agregartutoresacademicos(proyecto,anexo1)"><mat-icon>save</mat-icon></button>
-          </div>
-        </mat-card>
-      </mat-step>
     </mat-stepper>
   </div>
   <div *ngIf="isexist==false">

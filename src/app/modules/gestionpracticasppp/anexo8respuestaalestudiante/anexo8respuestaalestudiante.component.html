@@ -1,1 +1,51 @@
-<p>anexo8respuestaalestudiante works!</p>
+<div *ngIf="issloading==false">
+  <div align="center">
+    <mat-card-title>CONSTANCIA DE RESPUESTA A LOS ESTUDIANTES </mat-card-title>
+    <mat-form-field appearance="outline" style="width: 70%">
+      <mat-label>BUSCAR POR NOMBRE DE LA EMPRESA/NOMBRE DEL ESTUDIANTE</mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <br>
+  <div *ngIf="isexist">
+    <div *ngFor="let anexo8 of anexo8">
+      <mat-card class="example-card">
+       <mat-card-title>Empresa: {{anexo8.nombreProyecto}}</mat-card-title>
+
+        <table>
+          <tr aria-colspan="4">
+            <td colspan="3" style="width: 80%">
+              <mat-card-content>
+                <strong>Cédula: </strong>{{anexo8.cedulaEstudiante}}<br>
+                <strong>Estudiante: </strong>{{anexo8.nombreEstudiante}}<br>
+                <strong>Carrera: </strong>{{anexo8.siglasCarrera}}<br>
+                <strong>Numero de Horas a cumplir:</strong>  {{anexo8.numeroHoras}}<br>
+                <strong>Fecha de Respuesta:  </strong>{{anexo8.fechaRespuesta | date:"longDate"}}
+              </mat-card-content>
+            </td>
+            <td style="padding-left: 10px" colspan="1">
+              <button mat-menu-item (click)="convertFile(anexo8.documento)">
+                <span>Descargar documento</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen.</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
+

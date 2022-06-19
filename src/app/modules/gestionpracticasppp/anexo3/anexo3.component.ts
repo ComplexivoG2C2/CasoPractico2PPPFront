@@ -24,6 +24,7 @@ import {Anexo2Service} from "../../../services/anexo2.service";
 import {Anexo3Service} from "../../../services/anexo3.service";
 import {ExtrasService} from "../../../services/extras.service";
 import {MateriasService} from "../../../services/materias.service";
+import {DatePipe} from "@angular/common";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -78,7 +79,6 @@ export class Anexo3Component implements OnInit {
             // @ts-ignore
             this.anexo2noanexo2receptables=value1.filter(value2 => value2.siglasCarrera==value.codigoCarrera&&value2.fechaMaxRecepcion<fecha.fecha)
           })
-
           this.issloading=false;
         })
       })
@@ -172,6 +172,8 @@ export class Anexo3Component implements OnInit {
                                 popup: 'animate__animated animate__fadeOutUp'
                               }
                             })
+                            this.issloading = false;
+                            this.router.navigate(['/panelusuario/gestionpracticasppp/estadossolicitud', this.cedula]);
                           },error => {
                             Swal.fire({
                               title: 'Error',
@@ -234,7 +236,8 @@ export class Anexo3Component implements OnInit {
   }
 
   generarDocumento(anex2:Anexo2) {
-    //console.log(this.obtnerDatos(anex2))
+    console.log(this.obtnerDatos(anex2))
+    var pipe: DatePipe = new DatePipe('en-US')
     var anexo3:Anexo3=this.obtnerDatos(anex2);
     loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo3.docx", function(
       // @ts-ignore
@@ -256,7 +259,7 @@ export class Anexo3Component implements OnInit {
         nombreEstudiante:anexo3.nombresestudiante+" "+anexo3.apellidosestudiante,
         cedula:anexo3.cedula,
         nombrecarrera:anexo3.nombrecarrera,
-        fecha:anexo3.fecha_solicitud,
+        fecha:pipe.transform(anexo3.fecha_solicitud, 'dd/MM/yyyy'),
         paralelo:anexo3.paralelo,
         jornada:anexo3.jornada,
         empresa:anexo3.nombreproyecto,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {UserComponent} from "./layout/user/user.component";
 import {EmpreComponent} from "./layout/empre/empre.component";
+import {TutorempreComponent} from "./layout/tutorempre/tutorempre.component";
 
 const routes: Routes = [
   {path:'',redirectTo:'/auth/inicio_sesion',pathMatch:'full'},
@@ -18,6 +19,16 @@ const routes: Routes = [
   },
   {
     path: "panelempresa", component: EmpreComponent,
+    children: [
+      {
+        path: 'gestionpracticasppp',
+        loadChildren: () =>
+          import('./modules/gestionpracticasppp/gestionpracticasppp.module').then((m) => m.GestionpracticaspppModule)
+      }
+    ]
+  },
+  {
+    path: "paneltutor", component: TutorempreComponent,
     children: [
       {
         path: 'gestionpracticasppp',

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class VersolicutudesComponent implements OnInit {
 
   constructor() { }
-
+///listar las solicitudes emitidas por la propia emrpresa
   ngOnInit(): void {
   }
 

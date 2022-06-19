@@ -8,13 +8,15 @@ import {UserComponent} from "./layout/user/user.component";
 import {FooterComponent} from "./layout/footer/footer.component";
 import {MaterialModule} from "../material/material.module";
 import {EmpreComponent } from './layout/empre/empre.component';
+import { TutorempreComponent } from './layout/tutorempre/tutorempre.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     FooterComponent,
-    EmpreComponent
+    EmpreComponent,
+    TutorempreComponent
   ],
   imports: [
     BrowserModule,
