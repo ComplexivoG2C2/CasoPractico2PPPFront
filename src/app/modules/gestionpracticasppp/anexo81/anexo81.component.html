@@ -1,1 +1,106 @@
-<p>anexo81 works!</p>
+<div *ngIf="issloading==false">
+  <div *ngIf="isexist">
+    <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Seleccion de la Asignacion para Notificar el Cronograma de Actividades</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Buscar por: Nombre/Apellidos del Tutor Academico o Nombre de la Empresa</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControlanexo7">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionan7($event)" formControlName="firstCtrl" required>
+                  <mat-list-option *ngFor="let shoe of filteredOptionsanexo7 | async" [value]="shoe"  class="example-item">
+                    <div><strong>Tutor Academico:</strong> {{shoe.nombreTutoracademico}} <strong>Estudiante:</strong> {{shoe.nombreEstudiante}}</div>
+                  </mat-list-option>
+                </mat-selection-list>
+              </cdk-virtual-scroll-viewport>
+              <br>
+              <p>
+                <strong>Seleccion> Tutor Academico:</strong>{{anexo7select.nombreTutoracademico}} <strong> del estudiante :</strong>{{anexo7select.nombreEstudiante}}
+              </p>
+              <mat-divider></mat-divider>
+              <br>
+              <div>
+                <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+
+
+
+      <mat-step [stepControl]="thirtdFormGroup">
+        <form [formGroup]="thirtdFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Generar Notificaion a Tutores Academicos</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+
+            <mat-card-content>
+              <mat-divider></mat-divider>
+              <div align="center">
+                <table>
+                  <th style="padding: 5px">
+                    <strong>Informacion</strong>
+                  </th>
+
+                  <th style="padding: 5px;margin-left: 20px">
+                    <strong>Generar y subidr el Documento</strong>
+                  </th>
+                  <tr>
+                    <td style="padding: 5px">
+                      <strong>Docente Emisor/ Responsable de Practicas Preprofesionales: </strong>{{anexo81.nombreResponsable}}<br>
+                      <strong>Nombres del Alumno: </strong>{{anexo81.nombreEstudiante}}<br>
+                      <strong>Empresa:  </strong>{{anexo81.nombreEmpresa}}<br>
+                    </td>
+
+                    <td style="padding: 5px;margin-left: 20px">
+                      <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Acta</button>
+                      <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                        <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)" placeholder="Subir Acta"></ngx-mat-file-input>
+                        <mat-icon matSuffix>folder</mat-icon>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                </table>
+
+              </div>
+
+
+
+            </mat-card-content>
+
+            <div align="center">
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button color="primary" (click)="guardaranexo81()">Notificar al Tutor Academico</button>
+            </div>
+          </mat-card>
+        </form>
+      </mat-step>
+
+    </mat-stepper>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen datos actualmente.</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

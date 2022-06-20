@@ -147,7 +147,19 @@
                       routerLinkActive="active">> Ver Actas de Reunion</button>
             </mat-expansion-panel>
 
-
+            <!--            ///-->
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Notificacion de Cronograma a Tutor Academico
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo81',persona.cedula]"
+                      routerLinkActive="active">> Nueva Notificacion</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo81listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Notificaciones</button>
+            </mat-expansion-panel>
 
 
           </div>
