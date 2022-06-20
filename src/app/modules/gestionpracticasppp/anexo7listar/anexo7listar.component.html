@@ -1,0 +1,86 @@
+<div *ngIf="issloading==false">
+  <div align="center">
+    <mat-card-title>Lista de Actas de Reuniones </mat-card-title>
+    <mat-form-field appearance="legacy" style="width: 70%" >
+      <mat-label style="color: #020000">Buscar</mat-label>
+      <input matInput  placeholder="Buscar: Fechas/ Nombre de la empresa" [formControl]="myControl">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <br>
+  <div *ngIf="isexist">
+    <div *ngFor="let anexo7 of filteredOptions | async">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Empresa: {{anexo7.nombreEmpresa}}</mat-card-title>
+          <span class="example-spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminarAnexo(anexo7)">
+              <mat-icon color="warn">delete_forever</mat-icon>
+              <span>Eliminar</span>
+            </button>
+            <button mat-menu-item (click)="convertFile(anexo7.documento)">
+              <mat-icon color="warn">download</mat-icon>
+              <span>Descargar documento</span>
+            </button>
+          </mat-menu>
+        </mat-card-header>
+        <mat-card-content>
+
+
+
+          <table class="table-borderless">
+            <th colspan="1"></th>
+            <th style="background: #455a64;color: white" colspan="1">Informacion</th>
+            <th colspan="1"></th>
+            <th style="background: #455a64;color: white" colspan="3">Cronograma de Actividades</th>
+            <tr aria-colspan="6">
+
+              <td colspan="1">
+                <p style="color: white">--------</p>
+              </td>
+              <td colspan="1">
+                <strong>Carrera: </strong>{{anexo7.carrera}}<br>
+                <strong>Horas a Relizar: </strong>{{anexo7.horasTotales}}<br>
+                <strong>Cédula estudiante: </strong>{{anexo7.cedulaEstudiante}}<br>
+                <strong>Nombre el estudiante: </strong>{{anexo7.nombreEstudiante}}<br>
+              </td>
+              <td colspan="1">
+                <p style="color: white">--------
+                </p>
+              </td>
+              <td colspan="3">
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Ver mas
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let cronograma of anexo7.cronogramaActividadesAnexo7s"> <strong>Actividad:</strong> {{cronograma.actividadRealizar}} <strong># Semana</strong>  {{cronograma.semanas}} <strong>#Horas</strong> {{cronograma.nrohoras}}</div>
+                </mat-expansion-panel>
+              </td>
+            </tr>
+          </table>
+
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen actas de reunion aun</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
