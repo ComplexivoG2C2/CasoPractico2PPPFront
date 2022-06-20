@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Anexo81} from "../models/anexo81";
 import {map, Observable} from "rxjs";
+import {Anexo6} from "../models/anexo6";
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,9 @@ export class Anexo81Service {
 
   deleteAnexo81(id?: Number){
     return this.http.delete<Anexo81>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
+  }
+  getAnexo81byCedula(cedula:String):Observable<Anexo81[]>{
+    return this.http.get('http://localhost:8080/api/anexo81/tutoracademico/'+cedula,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo81[]))
+
   }
 }

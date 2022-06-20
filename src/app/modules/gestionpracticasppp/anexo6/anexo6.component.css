@@ -8,6 +8,7 @@
 .example-card {
   max-width: 80%;
   margin: 5px auto;
+  border: 1px solid black;
 }
 .example-carditem {
   max-width: 95%;
