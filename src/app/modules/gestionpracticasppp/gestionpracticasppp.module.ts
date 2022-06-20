@@ -37,6 +37,7 @@ import { Anexo6listarComponent } from './anexo6listar/anexo6listar.component';
 import { EditardelegacionComponent } from './editardelegacion/editardelegacion.component';
 import { Anexo9Component } from './anexo9/anexo9.component';
 import { BienvenidatutorComponent } from './bienvenidatutor/bienvenidatutor.component';
+import { VerEstadoSolicitudesEmpresaComponent } from './ver-estado-solicitudes-empresa/ver-estado-solicitudes-empresa.component';
 
 
 const routes: Routes = [
@@ -81,6 +82,7 @@ const routes: Routes = [
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'creartutoremp/:id', component: CreartutorempComponent
   },{path:'listarTutorEmpresarial', component:ListarTutorComponent
+  },{path:'verestadoempresa/:id/:emp', component:VerEstadoSolicitudesEmpresaComponent
   }
 ]
 
@@ -116,7 +118,8 @@ const routes: Routes = [
     Anexo6listarComponent,
     EditardelegacionComponent,
     Anexo9Component,
-    BienvenidatutorComponent
+    BienvenidatutorComponent,
+    VerEstadoSolicitudesEmpresaComponent
   ],
   imports: [
     CommonModule,

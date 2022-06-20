@@ -8,7 +8,7 @@ import {map, Observable} from "rxjs";
 })
 export class EmpresaService {
   private urlEndPoint:string='http://localhost:8080/api/empresa';
-  private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['user']).token})
+  private httpHeaders = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+JSON.parse(sessionStorage['emp']).token})
 
   constructor(private http:HttpClient) { }
 
@@ -17,7 +17,6 @@ export class EmpresaService {
     return this.http.post<Empresa>(this.urlEndPoint,empresa,{headers: this.httpHeaders})
   }
   getEmpresaAll():Observable<Empresa[]>{
-    console.log(this.httpHeaders)
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(
       data => data as Empresa[]
     ));

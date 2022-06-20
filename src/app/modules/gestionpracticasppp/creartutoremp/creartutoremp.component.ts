@@ -29,7 +29,7 @@ export class CreartutorempComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       this.idEmpresa=id;
-      console.log(this.idEmpresa+"ide empresa")
+      console.log(id+"ide empresa")
       this.fechaempService.getSysdate().subscribe(value => {
         this.fechaactual = value.fecha;
       })
