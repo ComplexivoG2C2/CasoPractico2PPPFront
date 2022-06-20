@@ -37,6 +37,12 @@ import { Anexo6listarComponent } from './anexo6listar/anexo6listar.component';
 import { EditardelegacionComponent } from './editardelegacion/editardelegacion.component';
 import { Anexo9Component } from './anexo9/anexo9.component';
 import { BienvenidatutorComponent } from './bienvenidatutor/bienvenidatutor.component';
+import {MatSliderModule} from "@angular/material/slider";
+import { Anexo7listarComponent } from './anexo7listar/anexo7listar.component';
+import { Anexo6consultartutoracademicoComponent } from './anexo6consultartutoracademico/anexo6consultartutoracademico.component';
+import { Anexo81Component } from './anexo81/anexo81.component';
+import { Anexo81listarComponent } from './anexo81listar/anexo81listar.component';
+import { Anexo81listartutoracademicoComponent } from './anexo81listartutoracademico/anexo81listartutoracademico.component';
 
 
 const routes: Routes = [
@@ -64,17 +70,28 @@ const routes: Routes = [
   },{path:'anexo32y4listar/:cedula', component:Anexo31y4listarComponent
   //anexo5
 
+
+  //anexo6
   },{path: 'anexo6/:id/:cedula', component: AgregartutoracademicoComponent
   },{path:'anexo6asignaciontutores/:cedula', component:Anexo6Component
   },{path:'anexo6listar/:cedula', component:Anexo6listarComponent
   },{path:'editardelegacion/:id/:cedula', component:EditardelegacionComponent
+  },{path:'anexo6consultatutoracademico/:cedula', component:Anexo6consultartutoracademicoComponent
+
   //anexo7
+  },{path:'anexo7actareunion/:cedula', component:Anexo7Component
+  },{path:'anexo7listar/:cedula', component:Anexo7listarComponent
 
-
-    //anexo8
+  //anexo8
   },{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
-  }, {
-    path: 'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
+  }, {path: 'respuestaalestudiante/:cedula', component: Anexo8respuestaalestudianteComponent
+
+  ///anexo8.1
+
+  },{path:'anexo81/:cedula', component: Anexo81Component
+  }, {path: 'anexo81listar/:cedula', component: Anexo81listarComponent
+  }, {path: 'anexo81listartutoracademico/:cedula', component: Anexo81listartutoracademicoComponent
+
 ///anexo9
   },{path:'anexo9/:cedula/:nombrescompletos', component:Anexo9Component
 
@@ -116,7 +133,12 @@ const routes: Routes = [
     Anexo6listarComponent,
     EditardelegacionComponent,
     Anexo9Component,
-    BienvenidatutorComponent
+    BienvenidatutorComponent,
+    Anexo7listarComponent,
+    Anexo6consultartutoracademicoComponent,
+    Anexo81Component,
+    Anexo81listarComponent,
+    Anexo81listartutoracademicoComponent
   ],
   imports: [
     CommonModule,
@@ -126,6 +148,7 @@ const routes: Routes = [
     FormsModule,
     MatDialogModule,
     MaterialFileInputModule,
+    MatSliderModule
   ],
   exports: [RouterModule]
 })

@@ -3,51 +3,48 @@ id?:Number
 fechaReunion?:Date;
 nombreResponsable?:String;
 carrera?:String;
+siglascarrera?:String;
 tituloTutorEmp?:String;
 nombreTutorEmp?:String;
 nombreEmpresa?:String;
 lugarReunion?:String;
 cortesia?:String;
-  nombreEstudiante?:String;
+nombreEstudiante?:String;
+cedulaEstudiante?:String;
+cedulaTutoracademico?:String;
+nombreTutoracademico?:String;
 ciclo?:String;
-
-horasCumplidas?:Number
-
- Fechainicio?:Date
-
- Fechafin?:Date
-
-  horasInicio?:Number
-
- horasFin?:Number
-
-  horasTotales?:Number
-
-   idProyectoPPP?:Number
-
-  codigoAnexo?:String
-
-  documento?:String
-
- num_proceso?:Number
-
-// <ActividadesAnexo7Request actividadesAnexo7s;
-//   private List<ActividadesCumplirAnexo7Request> actividadesCumplirAnexo7s;
-//
-//
-//
-//   private List<CronogramaActividadesAnexo7Request> cronogramaActividadesAnexo7s;
-//
-//
+horasCumplidas?:Number;
+Fechainicio?:String;
+Fechafin?:Date;
+horasInicio?:String;
+horasFin?:String;
+horasTotales?:Number;
+idProyectoPPP?:Number;
+codigoAnexo?:String;
+documento?:String;
+num_proceso?:Number;
+actividadesAnexo7s?:ActividadesAnexo7Request[]=[];
+actividadesCumplirAnexo7s?:ActividadesCumplirAnexo7Request[]=[];
+cronogramaActividadesAnexo7s?:CronogramaActividadesAnexo7Request[]=[];
 
 }
 
-export class ActividadesAnexo9Request{
+export class ActividadesAnexo7Request{
   id?:Number;
-  fecha?:Date;
-  descripcionActividad?:String;
-  lugar?:String;
-  horallegada?:String;
-  horasalida?:String;
-  numHoras?:Number;
+ descripcion?:String;
+}
+export class ActividadesCumplirAnexo7Request{
+  id?:Number;
+  area?:String;
+  actividadRealizar?:String;
+  asignaturaRelacionada?:String;
+}
+
+export class CronogramaActividadesAnexo7Request{
+  id?:Number;
+  actividadRealizar?:String;
+  semanas?:Number;
+  nrohoras?:Number;
+  horasTotales?:Number;
 }

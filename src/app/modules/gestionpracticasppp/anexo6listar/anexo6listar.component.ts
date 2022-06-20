@@ -57,7 +57,7 @@ export class Anexo6listarComponent implements OnInit {
         this.anexo6Service.getAnexo6All().subscribe(value1 => {
           this.isexist=value1.filter(value2 => value2.siglasCarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera).length!=0;
           this.anexo6=value1.filter(value2 => value2.siglasCarrera==value.filter(value3 => value3.cedula==cedula)[0].codigoCarrera)
-          //  console.log(this.anexo5)
+           console.log(this.anexo6)
           this.issloading=false;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),

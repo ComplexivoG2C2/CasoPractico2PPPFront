@@ -1,1 +1,307 @@
-<p>anexo7 works!</p>
+<div *ngIf="issloading==false">
+  <div *ngIf="isexist">
+    <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Seleccion de la Empresa</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Buscar</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControlproyecto">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+                <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                  <mat-list-option *ngFor="let shoe of filteredOptionsProyecto | async" [value]="shoe"  class="example-item">
+                    <div><strong>Empresa:</strong> {{shoe.nombre}} <strong>Periodo:</strong> {{shoe.fechaInicio}}-{{shoe.fechaFin}}</div>
+                  </mat-list-option>
+                </mat-selection-list>
+              </cdk-virtual-scroll-viewport>
+              <br>
+              <p>
+                <strong>Empresa seleccionada: </strong>{{proyectoselect.nombre}}
+              </p>
+              <mat-divider></mat-divider>
+              <br>
+              <div>
+                <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Alumnos</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <div>
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Tutores Academicos</mat-label>
+                  <mat-select formControlName="docente" (selectionChange)="selectionDocente($event.value)">
+                    <mat-option  *ngFor="let docente of anexo1" [value]="docente.cedulaDelegado">{{docente.cedulaDelegado}} > {{docente.nombreDelegado}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Estudiantes A Cargo</mat-label>
+                  <mat-select formControlName="estudiante" (selectionChange)="selectionAlumno($event.value)">
+                    <mat-option  *ngFor="let alumnos of anexo06.alumnos" [value]="alumnos.cedulaEstudiante">{{alumnos.cedulaEstudiante}} {{alumnos.nombreEstudiante}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+
+
+              </div>
+
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary" [disabled]="activate">	<mat-icon>expand_more</mat-icon></button>
+
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="tabla2FormGroup">
+        <form [formGroup]="tabla2FormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Actividades a Cumplir y Asignaturas Relacionadas</p>
+          </div></ng-template>
+
+          <mat-card class="example-card"  style="max-width: 100%">
+            <table>
+              <th colspan="1" style="width: 150px;align-content: start" >
+                <strong>Hora de Entrada</strong>
+              </th>
+              <th colspan="1" style="width: 150px;align-content: start">
+                <strong>Hora de Salida</strong>
+              </th>
+              <th colspan="1" style="width: 400px;align-content: start">
+                <strong>Lugar de la Reunion</strong>
+              </th>
+              <tr aria-colspan="3">
+                <td colspan="1">
+                  <mat-form-field style="width: 150px;align-content: start" appearance="outline">
+                    <mat-label>Hora de Entrada</mat-label>
+                    <input matInput type="text" formControlName="entrada"  placeholder="00:00 AM/PM"  [(ngModel)]="anexo7.horasInicio">
+                  </mat-form-field>
+                </td>
+                <td colspan="1">
+                  <mat-form-field style="width: 150px;align-content: start" appearance="outline">
+                    <mat-label>Hora de Salida</mat-label>
+                    <input matInput type="text" formControlName="salida" placeholder="00:00 AM/PM"  [(ngModel)]="anexo7.horasFin">
+                  </mat-form-field>
+                </td>
+                <td colspan="1">
+                  <mat-form-field style="width: 400px;align-content: start" appearance="outline">
+                    <mat-label>Lugar donde se efectuara la Reunion</mat-label>
+                    <input matInput type="text" formControlName="lugar"   [(ngModel)]="anexo7.lugarReunion">
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <mat-grid-list cols="6" rowHeight="2:1">
+                <mat-grid-tile colspan="6">
+                  <button mat-raised-button color="primary" style="width: 80%" (click)="onAddRow2('')" *ngIf="tabla2FormGroup.get('rows2')">Agregar Filas<mat-icon>expand_more</mat-icon></button>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Area
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                  Actividades
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                  Asignatura Relacionada
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Opcion
+                </mat-grid-tile>
+                <br>
+                <div *ngFor="let row2 of tabla2FormGroup.get('rows2')?.controls;let index = index;">
+                  <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Area</mat-label>
+                      <input matInput [formControl]="row2.get('area')" placeholder="area">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Actividad   {{index}}</mat-label>
+                      <mat-select [formControl]="row2.get('actividadRealizar')">
+                        <mat-option *ngFor="let activida of proyectoselect.actividadeslistProyectos" [value]="activida.descripcion">{{activida.descripcion}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="2">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Seleccionar</mat-label>
+                    <mat-select [formControl]="row2.get('asignaturaRelacionada')">
+                    <mat-option *ngFor="let materias of materias" [value]="materias.nombre">{{materias.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1">
+                    <button mat-raised-button color="warn" (click)="onRemoveRow2(index)"><mat-icon>keyboard_return</mat-icon></button>
+                  </mat-grid-tile>
+                </div>
+
+              </mat-grid-list>
+
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+
+
+
+      <mat-step [stepControl]="thirtdFormGroup">
+        <form [formGroup]="thirtdFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Cronograma de Actividades</p>
+          </div></ng-template>
+          <mat-card class="example-card"  style="max-width: 100%">
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <mat-grid-list cols="6" rowHeight="2:1">
+                <mat-grid-tile colspan="6">
+                  <button mat-raised-button color="primary" style="width: 80%" (click)="onAddRow('')" *ngIf="thirtdFormGroup.get('rows')">Agregar Filas<mat-icon>expand_more</mat-icon></button>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Actividades
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3">
+                  Semana
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Horas
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  Opcion
+                </mat-grid-tile>
+                <br>
+                <div *ngFor="let row of thirtdFormGroup.get('rows')?.controls;let index = index;">
+
+                  <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Actividad   {{index}}</mat-label>
+                      <mat-select [formControl]="row.get('actividadRealizar')">
+                        <mat-option *ngFor="let activida of proyectoselect.actividadeslistProyectos" [value]="activida.descripcion">{{activida.descripcion}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="3" >
+                      <mat-slider min="0" max="8" step="1" thumbLabel tickInterval="1" [formControl]="row.get('semanas')"></mat-slider>
+                      <!--                      ////////////-->
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Horas</mat-label>
+                      <input matInput type="number" [formControl]="row.get('nrohoras')" (ngModelChange)="sumar()" [max]="500" (keyup)="sumar()" >
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1">
+                    <button mat-raised-button color="warn" (click)="onRemoveRow(index)"><mat-icon>keyboard_return</mat-icon></button>
+                  </mat-grid-tile>
+                </div>
+                <mat-grid-tile colspan="6">
+                  <strong style="font-size: 20px;background: #ffc200">Total: {{sum}} horas de {{numerominimo}} horas mínimas requeridas</strong>
+                </mat-grid-tile>
+              </mat-grid-list>
+
+
+              <div>
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button matStepperNext color="primary" [disabled]="activar">Siguente</button>
+
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fourFormGroup">
+        <form [formGroup]="fourFormGroup">
+          <ng-template matStepLabel><div align="center" style="font-size: large">
+            <p class="title">Genracion del Docmuneto (Acta de Reunion)</p>
+          </div></ng-template>
+          <mat-card class="example-card">
+
+            <mat-card-content>
+              <mat-divider></mat-divider>
+              <div align="center">
+                <table>
+                  <th style="padding: 5px">
+                    <strong>Informacion</strong>
+                  </th>
+
+                  <th style="padding: 5px;margin-left: 20px">
+                    <strong>Generar y subidr el Documento</strong>
+                  </th>
+                  <tr>
+                    <td style="padding: 5px">
+                      <strong>Docente Emisor/ Responsable de Practicas Preprofesionales: </strong>{{anexo7.nombreResponsable}}<br>
+                      <strong>Nombres del Alumno: </strong>{{anexo7.nombreEstudiante}}<br>
+                      <strong>Empresa:  </strong>{{anexo7.nombreEmpresa}}<br>
+                    </td>
+
+                    <td style="padding: 5px;margin-left: 20px">
+                      <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Acta</button>
+                      <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                        <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)"  formControlName="docx" placeholder="Subir Acta"></ngx-mat-file-input>
+                        <mat-icon matSuffix>folder</mat-icon>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                </table>
+
+              </div>
+
+
+
+            </mat-card-content>
+
+              <div align="center">
+                <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                <button style="width: 45%" mat-raised-button color="primary" (click)="guardaranexo7()">Generar Acta de Reunion</button>
+              </div>
+          </mat-card>
+        </form>
+      </mat-step>
+
+    </mat-stepper>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No existen datos actualmente.</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
