@@ -1,0 +1,179 @@
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Cronograma del Estudiante</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Buscar</mat-label>
+            <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <mat-card-content>
+
+            <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport1">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionAnexo7($event)" formControlName="anexo10">
+                <mat-list-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  <div><strong> Empresa:</strong> {{option.nombreEmpresa}} <strong>Estudiante </strong>{{option.cedulaEstudiante}} : {{option.nombreEstudiante}}</div>
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+            <p style="font-size: medium">
+              Estudiante Seleccionado: {{anexo7select.cedulaEstudiante}} : {{anexo7select.nombreEstudiante}}
+            </p>
+            <mat-divider></mat-divider>
+            <br>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+
+
+
+
+    <mat-step [stepControl]="secondFormGroup" >
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Seguimiento al Cronograma</p>
+        </div></ng-template>
+
+        <mat-card class="example-card"  style="max-width: 100%">
+
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <mat-grid-list cols="9" rowHeight="2:1.1">
+              <mat-grid-tile colspan="4">
+                <button mat-raised-button color="primary" style="width: 100%" (click)="onAddRow('')" *ngIf="secondFormGroup.get('rows')">Agregar Filas<mat-icon>expand_more</mat-icon></button>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="5">
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                <strong>No.</strong>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                <strong>Fecha de Seguimiento</strong>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="2" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                <strong>Actividades segun cronograma</strong>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                <strong>Fecha Finalizacion Prevista</strong>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="2" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                <strong> Porcentaje de avance</strong>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="2" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                <strong>Observaciones</strong>
+              </mat-grid-tile>
+              <br>
+              <div *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+                <mat-grid-tile colspan="1" style="border:1px solid #7e7e7e;background:#E4EFF3 ">
+                    <div> {{index+1}}</div>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1"  style="border:1px solid #c7c7c7">
+                  <mat-form-field class="example-full-width" appearance="outline">
+
+                    <input matInput type="date"  min="0" max="100" [formControl]="row.get('fechaSeguimiento')"  placeholder="dd/MM/yyyy" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2"  style="border:1px solid #c7c7c7">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Actividad</mat-label>
+                    <input  matInput type="text" [formControl]="row.get('actividades')"  placeholder="Actividad" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile colspan="1"  style="border:1px solid #c7c7c7">
+                  <mat-form-field class="example-full-width" appearance="outline">
+
+                    <input matInput type="date"  min="0" max="100" [formControl]="row.get('fechaFinPrevista')"  placeholder="dd/MM/yyyy" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2"  style="border:1px solid #c7c7c7">
+                  <mat-slider style="margin-top: 35px" min="0" max="100" step="1" thumbLabel tickInterval="1" [formControl]="row.get('porcentajeAvance')"></mat-slider>
+                </mat-grid-tile>
+
+
+
+                <mat-grid-tile colspan="2"  style="border:1px solid #c7c7c7">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <textarea matInput type="text" [formControl]="row.get('observaciones')"  placeholder="" [required]></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+              </div>
+
+
+            </mat-grid-list>
+
+            <div align="center" style="margin-top: 30px">
+
+
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent"(click)="refresh()" >	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourFormGroup">
+      <form [formGroup]="fourFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Genracion del Documento (A10)</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+
+
+          <mat-card-content>
+            <div align="center">
+              <table>
+                <tr>
+                  <td>
+                    <button style="width: 100%" mat-raised-button color="primary" (click)="generarDocumento10()">Generar Documento</button>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="outline" style="width: 100%; margin-left: 10px" >
+                      <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento10($event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+                      <mat-icon matSuffix>folder</mat-icon>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+            <div align="center">
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardaranexo10()">	Guardar Seguimiento<mat-icon>expand_more</mat-icon></button>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>aun no existen registros</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+
+  </div>
+</ng-container>
