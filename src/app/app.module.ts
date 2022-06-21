@@ -16,7 +16,7 @@ import { TutorempreComponent } from './layout/tutorempre/tutorempre.component';
     UserComponent,
     FooterComponent,
     EmpreComponent,
-    TutorempreComponent
+    TutorempreComponent,
   ],
   imports: [
     BrowserModule,

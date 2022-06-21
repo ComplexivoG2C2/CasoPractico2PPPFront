@@ -22,9 +22,9 @@ td, th {
   width: 10%;
 }
 .example-card {
-  width: 70%;
+  width: 80%;
   float: left;
-  margin-left: 15%;
+  margin-left: 10%;
   margin-bottom: 10px;
   border: 1px solid #000201;
   border-inline: 5px solid  #0c3255;

@@ -1,9 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Anexo3} from "../../../models/anexo3";
 import {Solicitudproyecto} from "../../../models/solicitudproyecto";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -27,6 +23,7 @@ import {Anexo31} from "../../../models/anexo31";
 import {Anexo4} from "../../../models/anexo4";
 import {Anexo31y4respuestasService} from "../../../services/anexo31y4respuestas.service";
 import {Anexo31Service} from "../../../services/anexo31.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -48,7 +45,7 @@ function getBase64(file: any) {
   styleUrls: ['./anexo31y4listar.component.css']
 })
 export class Anexo31y4listarComponent implements OnInit {
-
+  panelOpenState = true;
   issloading=true;
   isexist1?:boolean
   isexist2?:boolean
@@ -76,7 +73,7 @@ export class Anexo31y4listarComponent implements OnInit {
 
               private _adapter: DateAdapter<any>,
               private anexo31Service:Anexo31Service,
-              private anexo4Service:Anexo31y4respuestasService,) {
+              private anexo4Service:Anexo31y4respuestasService,private sanitizer: DomSanitizer) {
     this._adapter.setLocale('es-ec');
   }
 
@@ -172,6 +169,19 @@ export class Anexo31y4listarComponent implements OnInit {
       return new File([u8arr], filename, { type: mime });
     }
 
+  }
+
+  safeUrl: any;
+
+  //url 2 where the need to use an add
+  getSafeUrl(docum:any){
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(docum);
+  }
+  safeUrl2: any;
+
+  //url 2 where the need to use an add
+  getSafeUrl2(docum2:any){
+    this.safeUrl2 = this.sanitizer.bypassSecurityTrustResourceUrl(docum2);
   }
 
 

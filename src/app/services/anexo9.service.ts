@@ -10,7 +10,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class Anexo9Service {
 
-
   private urlEndPoint: string = 'http://localhost:8080/api/anexo9';
 
   private httpHeaders = new HttpHeaders({
@@ -22,7 +21,7 @@ export class Anexo9Service {
   }
 
   updateActivadades(anexo9: Anexo9): Observable<Anexo9> {
-    //console.log(anexo8);
+    console.log(anexo9);
     return this.http.put<Anexo9>(this.urlEndPoint, anexo9, {headers: this.httpHeaders})
   }
 
@@ -47,9 +46,6 @@ export class Anexo9Service {
     return this.http.post<Anexo9>(this.urlEndPoint, anexo9, {headers: this.httpHeaders})
   }
 
-  getDocentedirector(codigoProyecto?: Number): Observable<TutorempresarialNombres> {
-    return this.http.get("http://localhost:8080/api/docentes/director/" + codigoProyecto, {headers: this.httpHeaders}).pipe(map(Response => Response as TutorempresarialNombres))
-  }
 
   getanexo9byproyecto(idProyectoPPP?: number): Observable<Anexo9[]> {
     return this.http.get(this.urlEndPoint + "/allByProyecto/" + idProyectoPPP, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo9[]))

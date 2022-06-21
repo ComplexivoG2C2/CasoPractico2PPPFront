@@ -59,13 +59,11 @@ export class VerempresaComponent implements OnInit {
     Swal.fire({
       title: 'Eliminar Empresa',
       text: "Seguro que quiere eliminar la empresa: "+empresa.nombre,
-      icon: 'warning',
       showCancelButton: true,
-      color: "#0c3255",
-      confirmButtonColor:"#0c3255",
-      iconColor:"#b72020",
-      background: "#fbc02d",
-      cancelButtonColor: '#d33',
+      color: "#000000",
+      confirmButtonColor:"#0086ff",
+      background: "#fffefb",
+      cancelButtonColor: 'rgba(252,246,0,0.7)',
       confirmButtonText: 'Eliminar'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -73,23 +71,19 @@ export class VerempresaComponent implements OnInit {
         this.empresaService.deleteEmpresa(Number(empresa.id)).subscribe(value => {
           Swal.fire({
             title: 'Eliminado',
-
-            icon: 'success',
-            iconColor :'#17550c',
-            color: "#0c3255",
+            iconColor :'#0081f6',
+            color: "#000405",
             confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            background: "#fdfdfd",
           })
           this.issloading=false;
         },error => {
           Swal.fire({
             title: 'Ha surgido un error',
             text: "Hubo un error",
-            icon: 'warning',
-            iconColor :'#b72020',
-            color: "#0c3255",
-            confirmButtonColor:"#0c3255",
-            background: "#fbc02d",
+            color: "#000307",
+            confirmButtonColor:"#007bf5",
+            background: "#fafafa",
           })
         })
       }

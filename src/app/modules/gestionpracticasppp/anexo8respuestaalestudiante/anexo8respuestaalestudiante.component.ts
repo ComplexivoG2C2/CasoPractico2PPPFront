@@ -13,6 +13,7 @@ import {DateAdapter} from "@angular/material/core";
 import {Anexo2Service} from "../../../services/anexo2.service";
 import {Anexo3Service} from "../../../services/anexo3.service";
 import {Anexo8Service} from "../../../services/anexo8.service";
+import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   selector: 'app-anexo8respuestaalestudiante',
   templateUrl: './anexo8respuestaalestudiante.component.html',
@@ -20,7 +21,7 @@ import {Anexo8Service} from "../../../services/anexo8.service";
 })
 export class Anexo8respuestaalestudianteComponent implements OnInit {
 
-
+  panelOpenState = false;
   issloading=true;
   isexist?:boolean
   anexo8:Anexo8[]=[];
@@ -38,7 +39,7 @@ export class Anexo8respuestaalestudianteComponent implements OnInit {
               private _adapter: DateAdapter<any>,
               private anexo2Service:Anexo2Service,
               private anexo3Service:Anexo3Service,
-              private anexo8Service:Anexo8Service) {
+              private anexo8Service:Anexo8Service,private sanitizer: DomSanitizer) {
     this._adapter.setLocale('es-ec');
   }
 
@@ -69,7 +70,12 @@ export class Anexo8respuestaalestudianteComponent implements OnInit {
       ||option.nombreRepresentante?.toLocaleLowerCase().includes(filterValue)
     );
   }
+  safeUrl: any;
 
+  //url 2 where the need to use an add
+  getSafeUrl(docum:any){
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(docum);
+  }
   convertFile(docum:any) {
     //console.log(docum)
     //Usage example:

@@ -8,11 +8,11 @@ import {ProyectoService} from "../../../services/proyecto.service";
 import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {EmpresaService} from "../../../services/empresa.service";
 import {DateAdapter} from "@angular/material/core";
-import {Anexo1} from "../../../models/anexo1";
-import Swal from "sweetalert2";
+
 import {saveAs} from "file-saver";
 import {Anexo81Service} from "../../../services/anexo81.service";
 import {Anexo81} from "../../../models/anexo81";
+import {DomSanitizer} from "@angular/platform-browser";
 function getBase64(file:any) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -27,6 +27,9 @@ function getBase64(file:any) {
   styleUrls: ['./anexo81listartutoracademico.component.css']
 })
 export class Anexo81listartutoracademicoComponent implements OnInit {
+
+
+
 
 
   issloading=true;
@@ -45,7 +48,7 @@ export class Anexo81listartutoracademicoComponent implements OnInit {
               private _formBuilder: FormBuilder,
               private empresaService:EmpresaService,
               private _adapter: DateAdapter<any>,
-              private anexo81Service:Anexo81Service) {
+              private anexo81Service:Anexo81Service,private sanitizer: DomSanitizer) {
     this._adapter.setLocale('es-ec');
   }
 
@@ -73,6 +76,15 @@ export class Anexo81listartutoracademicoComponent implements OnInit {
       ||option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
     );
   }
+
+  safeUrl: any;
+
+  //url 2 where the need to use an add
+  getSafeUrl(docum:any){
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(docum);
+  }
+
+
 
   //convert a pdf
   convertFile(docum:any) {

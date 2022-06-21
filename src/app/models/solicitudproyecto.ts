@@ -30,7 +30,7 @@ export class Solicitudproyecto {
   actividadesEmpresaProyecto?:ActividadesEmpresalistProyecto[];
   ///
   requisitoslistProyectos?:  requisitoslistProyectos[];
-  docenteApoyoResponse?:DocenteApoyoResponse[];
+  tutorAcademicoResponse?:TutorAcademicoResponse[];
 
 }
 
@@ -47,7 +47,7 @@ export class ActividadesEmpresalistProyecto{
   id?:number;
   descripcion?: string;
 }
-export class DocenteApoyoResponse{
+export class TutorAcademicoResponse{
   cedula?:String;
   nombres?:String;
   correo?:String;

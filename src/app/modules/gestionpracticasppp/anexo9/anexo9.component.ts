@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-// @ts-ignore
-import PizZip from "pizzip";
-// @ts-ignore
-import PizZipUtils from "pizzip/utils/index.js";
-// @ts-ignore
-import { saveAs } from "file-saver";
+
 import {FechaService} from "../../../services/fecha.service";
 import {DatePipe} from "@angular/common";
-import {MatSelectionListChange} from "@angular/material/list";
 import {MatSelectChange} from "@angular/material/select";
 import {Anexo3} from "../../../models/anexo3";
 import {Solicitudproyecto} from "../../../models/solicitudproyecto";
@@ -22,6 +16,13 @@ import {Anexo9Service} from "../../../services/anexo9.service";
 import Swal from "sweetalert2";
 import Docxtemplater from "docxtemplater";
 
+// @ts-ignore
+import PizZip from "pizzip";
+// @ts-ignore
+import PizZipUtils from "pizzip/utils/index.js";
+// @ts-ignore
+import { saveAs } from "file-saver";
+
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
 }
@@ -33,6 +34,7 @@ function getBase64(file: any) {
     reader.onerror = error => reject(error);
   });
 }
+
 @Component({
   selector: 'app-anexo9',
   templateUrl: './anexo9.component.html',
@@ -55,11 +57,9 @@ export class Anexo9Component implements OnInit {
   anexo9requeste:Anexo9=new Anexo9();
   solicitudproyecto:Solicitudproyecto=new Solicitudproyecto();
   empresa:Empresa=new Empresa();
-  ceduladir?: String;
   //secuenciasdepantallas
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
-  thirdFormGroup?:FormGroup;
   fourFormGroup?: FormGroup;
   ////ARRAY
   rows: FormArray;
@@ -105,8 +105,6 @@ export class Anexo9Component implements OnInit {
     this.fourFormGroup = this._formBuilder.group({
       docx: ['', Validators.required],
     });
-    this.thirdFormGroup = this._formBuilder.group({
-    });
     //ArrayActividades
     this.secondFormGroup.get("items_value")?.setValue("yes");
     this.secondFormGroup.addControl('rows', this.rows);
@@ -138,7 +136,6 @@ export class Anexo9Component implements OnInit {
       id:actividades?.id,
       fecha:actividades?.fecha,
       descripcionActividad:actividades?.descripcionActividad,
-      lugar:actividades?.lugar,
       horallegada:actividades?.horallegada,
       horasalida:actividades?.horasalida,
       numHoras:actividades?.numHoras,
@@ -213,17 +210,15 @@ export class Anexo9Component implements OnInit {
     this.anexo9.cedulaEstudiante=this.cedula;
     this.anexo9.idProyectoPPP=this.solicitudproyecto.id;
     this.anexo9.nombreTutoremp=this.solicitudproyecto.nombretutoremp;
-    this.anexo9.nombreTutoracademico=(this.solicitudproyecto.docenteApoyoResponse!=undefined)?this.solicitudproyecto.docenteApoyoResponse[0].nombres:"";
+    this.anexo9.nombreTutorAcademico=(this.solicitudproyecto.tutorAcademicoResponse!=undefined)?this.solicitudproyecto.tutorAcademicoResponse[0].nombres:"";
+   console.log(this.anexo9.nombreTutorAcademico)
     this.anexo9.nombreEmpresa=this.solicitudproyecto.nombre;
     this.anexo9.nombreEstudiante=this.nombre;
     this.anexo9.nombreProyecto=this.solicitudproyecto.nombre;
     this.anexo9.totalHoras=this.sum;
     this.anexo9.actividades=this.rows.getRawValue();
     this.anexo9.nombreRepresentanteemp=this.empresa.nombreCoordinador;
-    this.anexo9Service.getDocentedirector(this.solicitudproyecto.id).subscribe(value => {
-      this.ceduladir = value.cedula;
-    })
-    this.anexo9.cedulaTutoremp=this.ceduladir;
+
     return this.anexo9;
   }
   guardar(){
@@ -231,7 +226,7 @@ export class Anexo9Component implements OnInit {
     this.anexo9Service.saveAnexo9(this.ontnerDatos()).subscribe(datos=>{
       // console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
       Swal.fire({
-        title: 'Actividades Registradas',
+        title: 'Actividad Registrada',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -239,7 +234,7 @@ export class Anexo9Component implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      window.location.reload();
+      // window.location.reload();
     },err=>{
       Swal.fire({
         title: 'Error',
@@ -324,7 +319,7 @@ export class Anexo9Component implements OnInit {
         nombre_estudiante:anexo9.nombreEstudiante,
         identificiacion_est:anexo9.cedulaEstudiante,
         nombre_admin_entidad:anexo9.nombreRepresentanteemp,
-        tutoracademico:anexo9.nombreTutoracademico,
+        tutoracademico:anexo9.nombreTutorAcademico,
         tutoremp:anexo9.nombreTutoremp,
         tb:anexo9.actividades,
         totalHoras:anexo9.totalHoras

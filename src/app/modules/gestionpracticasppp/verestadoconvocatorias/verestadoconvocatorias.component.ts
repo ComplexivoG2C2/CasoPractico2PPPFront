@@ -98,9 +98,9 @@ export class VerestadoconvocatoriasComponent implements OnInit {
           title: 'En proceso',
           text: 'Usted ya se postuló en esta convocatoria, espere su respuesta en el apartado de "Postulaciones".',
           icon: 'info',
-          color: "#0c3255",
-          confirmButtonColor:"#0c3255",
-          background: "#fbc02d",
+          color: "#000000",
+          confirmButtonColor:"#0082ff",
+          background: "#ffffff",
         })
       }else{
         this.materiasService.getMateriasbyAlumno(this.cedula+"").subscribe(async value1 => {
@@ -121,22 +121,17 @@ export class VerestadoconvocatoriasComponent implements OnInit {
               allowEnterKey:false,
               allowEscapeKey:false,
               title: '¡ATENCIÓN!',
-              text: '🔊 Antes de "CONTINUAR LA ACEPTACIÓN" usted deberá: ' +
-                '1. Obtener el anexo\n' +
-                '2. Firmar el anexo y trasnformarlo a PDF '+
-                '3. Regrese a esta pestaña pulsando en "POSTULAR AQUI" \n' +
-                '4. Dar clic en "Continuar Postulación"',
+              text: 'postulacion',
 
-              icon: 'info',
               showDenyButton: true,
               showCancelButton: true,
-              cancelButtonText: 'Salir, y continuar después',
-              confirmButtonText: '📑OBTENER ANEXO',
+              cancelButtonText: 'Salir',
+              confirmButtonText: 'OBTENER ANEXO',
               denyButtonText: `CONTINUAR POSTULACIÓN 👉`,
               denyButtonColor: "#3cb227",
-              color: "#0c3255",
-              confirmButtonColor: "#0c3255",
-              background: "#fbc02d",
+              color: "#000102",
+              confirmButtonColor: "#008aff",
+              background: "#fafafa",
             }).then(async (result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
@@ -148,11 +143,11 @@ export class VerestadoconvocatoriasComponent implements OnInit {
                   allowEscapeKey:false,
                   showCancelButton: true,
                   confirmButtonText:"Enviar postulación",
-                  color: "#0c3255",
+                  color: "#070000",
                   confirmButtonColor: "#3cb227",
-                  background: "#fbc02d",
+                  background: "#fffffd",
                   title: 'Confirmación',
-                  text: 'Debe subir el anexo en el formato requerido "PDF" para finalizar. Nota: Sea reponsable con el documento a subir.',
+                  text: 'Debe subir el Documento',
                   input: 'file',
                   inputAttributes: {
                     'accept': 'application/pdf',
@@ -168,21 +163,19 @@ export class VerestadoconvocatoriasComponent implements OnInit {
                           this.anexo3Service.saveAnexo3(anexo3).subscribe(value2 => {
                             Swal.fire({
                               title: 'Éxito',
-                              text: 'La solicitud fue enviada de forma existosa, espere su repuesta',
-                              icon: 'success',
-                              iconColor :'#17550c',
-                              color: "#0c3255",
-                              confirmButtonColor:"#0c3255",
-                              background: "#fbc02d",
+                              text: 'Solicitud enviada',
+                              color: "#000205",
+                              confirmButtonColor:"#017bff",
+                              background: "#fafaf9",
                             })
                           },error => {
                             Swal.fire({
                               title: 'Ha surgido un error',
-                              text: "Hubo un error, contáctese con TICs.",
+                              text: "Hubo un error.",
                               icon: 'error',
-                              color: "#0c3255",
-                              confirmButtonColor:"#0c3255",
-                              background: "#fbc02d",
+                              color: "#020000",
+                              confirmButtonColor:"#0085ff",
+                              background: "#f8f8f5",
                             })
                           })
                           // console.log(anexo3)
@@ -197,11 +190,10 @@ export class VerestadoconvocatoriasComponent implements OnInit {
           } else {
             Swal.fire({
               title: 'Mensaje',
-              text: 'No cumple con los requisitos para postular, revise el documento por favor".',
-              icon: 'info',
-              color: "#0c3255",
-              confirmButtonColor:"#0c3255",
-              background: "#fbc02d",
+              text: 'No cumple con los requisitos para postular.',
+              color: "#020000",
+              confirmButtonColor:"#0081fc",
+              background: "#fffefd",
             })
           }
         })

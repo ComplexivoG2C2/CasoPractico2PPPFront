@@ -8,10 +8,11 @@
 }
 .example-card {
   margin: 0 auto;
-  width: 85%;
-  max-height: 600px;
+  width: 90%;
   background: rgba(255, 255, 255, 0.81);
   border: 1px solid #455a64;
+  margin-top: 15px;
+  border-radius: 5px;
 }
 mat-form-field{
   width: 98%;

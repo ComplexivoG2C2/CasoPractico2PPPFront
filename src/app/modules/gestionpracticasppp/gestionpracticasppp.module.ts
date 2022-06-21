@@ -43,6 +43,9 @@ import { Anexo6consultartutoracademicoComponent } from './anexo6consultartutorac
 import { Anexo81Component } from './anexo81/anexo81.component';
 import { Anexo81listarComponent } from './anexo81listar/anexo81listar.component';
 import { Anexo81listartutoracademicoComponent } from './anexo81listartutoracademico/anexo81listartutoracademico.component';
+import { Anexo9tutoracademicoComponent } from './anexo9tutoracademico/anexo9tutoracademico.component';
+import { Anexo10Component } from './anexo10/anexo10.component';
+import { Anexo10listartutoracademicoComponent } from './anexo10listartutoracademico/anexo10listartutoracademico.component';
 
 
 const routes: Routes = [
@@ -93,7 +96,13 @@ const routes: Routes = [
   }, {path: 'anexo81listartutoracademico/:cedula', component: Anexo81listartutoracademicoComponent
 
 ///anexo9
-  },{path:'anexo9/:cedula/:nombrescompletos', component:Anexo9Component
+  },{path:'anexo9/:cedula/:nombres', component:Anexo9Component
+  },{path:'anexo9tutoracademico', component:Anexo9tutoracademicoComponent
+
+///anexo10
+  },{path:'anexo10/:id/:cedula/:nombres', component:Anexo10Component
+  },{path:'anexo10listartutoracademico/:cedula/:nombres', component:Anexo10listartutoracademicoComponent
+
 
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'creartutoremp/:id', component: CreartutorempComponent
@@ -138,7 +147,10 @@ const routes: Routes = [
     Anexo6consultartutoracademicoComponent,
     Anexo81Component,
     Anexo81listarComponent,
-    Anexo81listartutoracademicoComponent
+    Anexo81listartutoracademicoComponent,
+    Anexo9tutoracademicoComponent,
+    Anexo10Component,
+    Anexo10listartutoracademicoComponent
   ],
   imports: [
     CommonModule,

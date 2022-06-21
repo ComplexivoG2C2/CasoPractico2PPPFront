@@ -15,17 +15,33 @@
         <div *ngFor="let anexo of filteredOptionsa | async" align="center">
           <mat-card class="example-card">
             <table>
-              <tr aria-colspan="4">
-                <td colspan="3" style="width: 80%">
+              <th colspan="2">
+
+              </th>
+              <th colspan="2" >
+
+              </th>
+              <tr aria-colspan="4" style="background: #e5ffea">
+                <td colspan="2" style="width: 80%">
                   <mat-card-content>
                     <strong>Empresa:</strong> {{anexo.nombreEmpresa}} <br>
                     <strong>Fecha que envio la Solicitud: </strong>{{anexo.fechaSolicitudEmp  | date:"longDate"}}<br>
                   </mat-card-content>
                 </td>
-                <td style="padding-left: 10px" colspan="1">
-                  <button mat-menu-item (click)="convertFile4(anexo.documento)" style="background: #c4e5fc">
-                    <span>Descargar documento</span>
-                  </button>
+                <td colspan="2" style="margin-left: 15px">
+                  <mat-expansion-panel (opened)="panelOpenState = false"
+                                       (closed)="panelOpenState = true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Documento
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div align="center">
+                      <button style="width: 50%;margin-top: 2px" mat-raised-button color="primary" (click)="getSafeUrl(anexo.documento)"><mat-icon>preview</mat-icon>Visualizar Documento</button>
+                      <button style="width: 50%;margin-top: 2px;background: #ffc200" mat-raised-button (click)="convertFile4(anexo.documento)"><mat-icon>file_download</mat-icon>Descargar</button>
+                      <iframe [src]="safeUrl" style="width: 100%; height: 240px; border: none"></iframe>
+                    </div>
+                  </mat-expansion-panel>
                 </td>
               </tr>
             </table>
@@ -48,17 +64,33 @@
         <div *ngFor="let anexo2 of filteredOptionsr | async" align="center">
           <mat-card class="example-card">
             <table>
-              <tr aria-colspan="4">
-                <td colspan="3" style="width: 80%">
+              <th colspan="2" style="color: #ffe6e5">
+
+              </th>
+              <th colspan="2" style="color: #ffe6e5">
+
+              </th>
+              <tr aria-colspan="4" style="background: #ffe6e5">
+                <td colspan="2">
                   <mat-card-content>
                     <strong>Empresa:</strong> {{anexo2.nombreEmpresa}} <br>
                     <strong>Fecha que envio la Solicitud: </strong>{{anexo2.fechaSolicitudEmp  | date:"longDate"}}<br>
                   </mat-card-content>
                 </td>
-                <td style="padding-left: 10px" colspan="1">
-                  <button mat-menu-item (click)="convertFile31(anexo2.documento)" style="background: #c4e5fc">
-                    <span>Descargar documento</span>
-                  </button>
+                <td colspan="2" style="margin-left: 15px">
+                  <mat-expansion-panel (opened)="panelOpenState = false"
+                                       (closed)="panelOpenState = true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Documento
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div align="center">
+                      <button style="width: 50%;margin-top: 2px" mat-raised-button color="primary" (click)="getSafeUrl2(anexo2.documento)"><mat-icon>preview</mat-icon>Visualizar Documento</button>
+                      <button style="width: 50%;margin-top: 2px;background: #ffc200" mat-raised-button (click)="convertFile31(anexo2.documento)"><mat-icon>file_download</mat-icon>Descargar</button>
+                      <iframe [src]="safeUrl2" style="width: 100%; height: 240px; border: none"></iframe>
+                    </div>
+                  </mat-expansion-panel>
                 </td>
               </tr>
             </table>

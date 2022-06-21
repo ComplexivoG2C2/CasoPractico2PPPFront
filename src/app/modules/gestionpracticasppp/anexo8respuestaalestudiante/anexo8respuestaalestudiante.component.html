@@ -11,26 +11,53 @@
   <div *ngIf="isexist">
     <div *ngFor="let anexo8 of anexo8">
       <mat-card class="example-card">
-       <mat-card-title>Empresa: {{anexo8.nombreProyecto}}</mat-card-title>
 
-        <table>
-          <tr aria-colspan="4">
-            <td colspan="3" style="width: 80%">
-              <mat-card-content>
-                <strong>Cédula: </strong>{{anexo8.cedulaEstudiante}}<br>
-                <strong>Estudiante: </strong>{{anexo8.nombreEstudiante}}<br>
-                <strong>Carrera: </strong>{{anexo8.siglasCarrera}}<br>
-                <strong>Numero de Horas a cumplir:</strong>  {{anexo8.numeroHoras}}<br>
-                <strong>Fecha de Respuesta:  </strong>{{anexo8.fechaRespuesta | date:"longDate"}}
-              </mat-card-content>
-            </td>
-            <td style="padding-left: 10px" colspan="1">
-              <button mat-menu-item (click)="convertFile(anexo8.documento)">
-                <span>Descargar documento</span>
-              </button>
-            </td>
-          </tr>
-        </table>
+
+        <mat-card-header>
+          <mat-card-title>Empresa: {{anexo8.nombreProyecto}}</mat-card-title>
+
+        </mat-card-header>
+
+<mat-card-content>
+
+  <table class="table-borderless">
+    <th style="background: #455a64;color: white" colspan="2">Informacion</th>
+    <th style="background: #ffffff;color: white" colspan="1">---</th>
+    <th style="background: #455a64;color: white" colspan="2">Documento</th>
+    <tr aria-colspan="5">
+
+
+      <td colspan="2">
+        <strong>Cédula: </strong>{{anexo8.cedulaEstudiante}}<br>
+        <strong>Estudiante: </strong>{{anexo8.nombreEstudiante}}<br>
+        <strong>Carrera: </strong>{{anexo8.siglasCarrera}}<br>
+        <strong>Numero de Horas a cumplir:</strong>  {{anexo8.numeroHoras}}<br>
+        <strong>Fecha de Respuesta:  </strong>{{anexo8.fechaRespuesta | date:"longDate"}}
+
+      </td>
+
+      <td colspan="1" style="color: white">---
+      </td>
+
+      <td colspan="2" style="margin-left: 15px">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Documento
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div align="center">
+            <button style="width: 50%;margin-top: 2px" mat-raised-button color="primary" (click)="getSafeUrl(anexo8.documento)"><mat-icon>preview</mat-icon>Visualizar Documento</button>
+            <button style="width: 50%;margin-top: 2px;background: #ffc200" mat-raised-button (click)="convertFile(anexo8.documento)"><mat-icon>file_download</mat-icon>Descargar</button>
+            <iframe [src]="safeUrl" style="width: 100%; height: 240px; border: none"></iframe>
+          </div>
+        </mat-expansion-panel>
+      </td>
+    </tr>
+  </table>
+</mat-card-content>
+
 
       </mat-card>
     </div>

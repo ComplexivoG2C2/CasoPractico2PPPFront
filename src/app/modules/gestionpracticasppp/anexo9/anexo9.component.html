@@ -7,28 +7,22 @@
 
           <mat-card-content>
             <br>
-            <mat-form-field appearance="fill">
-              <mat-label>Seleccione la empresa en donde esta desarrollando sus practicas Preprofesionales:</mat-label>
-              <mat-select  (selectionChange)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="proyecto">
-                <mat-option *ngFor="let item of solicitudproyectos" [value]="item.id">{{item.nombre}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div align="center">
+              <mat-form-field appearance="outline" style="width: 80%">
+                <mat-label>Seleccione la empresa en donde esta desarrollando sus practicas Preprofesionales:</mat-label>
+                <mat-select  (selectionChange)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="proyecto">
+                  <mat-option *ngFor="let item of solicitudproyectos" [value]="item.id">{{item.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
             <br>
             <br>
-            <mat-card-title>
               <strong>Datos Informativos:</strong>
               <br>
-              <br>
-            </mat-card-title>
-            <mat-card-subtitle style="font-size: x-large">
-              <strong>Empresa: </strong> {{empresa.nombre}}
-            </mat-card-subtitle>
-            <mat-card-subtitle style="font-size: x-large">
-              <strong>Nombre del Estudiante:  </strong> {{nombre}}
-            </mat-card-subtitle>
-            <mat-card-subtitle style="font-size: x-large">
-              <strong>Nro. de Cédula:  </strong> {{cedula}}
-            </mat-card-subtitle>
+              <strong>Empresa: </strong> {{empresa.nombre}}<br>
+              <strong>Nombre del Estudiante Participante:  </strong> {{nombre}}<br>
+              <strong>Numero de Cédula:  </strong> {{cedula}}
 
           </mat-card-content>
           <div style="text-align: center">
@@ -42,88 +36,102 @@
 
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <mat-card class="example-card">
-          <mat-card-header>
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Registro de Asistencia</p>
+        </div></ng-template>
+        <mat-card class="example-card"  style="max-width: 100%">
 
-            <mat-card-title>INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY</mat-card-title></mat-card-header>
-
+          <mat-divider></mat-divider>
           <mat-card-content>
-            <mat-grid-list cols="4" rowHeight="100" [formGroup]="secondFormGroup">
-
-              <mat-grid-tile colspan="1">
-                <mat-label  class="example-full-widthf" appearance="outline"><b>Fecha</b></mat-label>
+            <mat-grid-list cols="8" rowHeight="4:3">
+              <mat-grid-tile colspan="8">
+                <button mat-raised-button color="primary" style="width: 50%" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')">Agregar Filas<mat-icon>expand_more</mat-icon></button>
+                <button style="width: 50%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="1">
-                <mat-label  class="example-full-widthhora" appearance="outline"><b>Hora LLegada</b></mat-label>
+              <mat-grid-tile colspan="1">Fecha
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="1">
-                <mat-label  class="example-full-widthhora" appearance="outline"><b>Hora Salida</b></mat-label>
+              <mat-grid-tile colspan="1">Hora LLegada
               </mat-grid-tile>
-              <mat-grid-tile colspan="1">
-                <mat-label  class="example-full-width" appearance="outline"><b> Actividades</b></mat-label>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="1" >
-                <mat-label  class="example-full-widthl" appearance="outline"><b>Lugar</b></mat-label>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="1">
-                <mat-label  class="example-full-width2" appearance="outline"> <b>Horas</b></mat-label>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="4" *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
-                <mat-form-field appearance="outline"  style="margin-left: 2px; width: 120px">
-                  <mat-label>Fecha:</mat-label>
-                  <input matInput [matDatepicker]="picker" [formControl]="row.get('fecha')" [min]="solicitudproyecto.fechaInicio" [max]="solicitudproyecto.fechaFin" placeholder="Fecha:" [required]>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
 
-                <mat-form-field class="example-full-widthhora" appearance="fill" style="margin-left: 10px">
-                  <mat-label>Lugar</mat-label>
-                  <input matInput type="text"   [formControl]="row.get('horallegada')"  placeholder="Hora llegada" [required]>
-                </mat-form-field>
-                <mat-form-field class="example-full-widthhora" appearance="fill" style="margin-left: 10px">
-                  <mat-label>Lugar</mat-label>
-                  <input matInput type="text"   [formControl]="row.get('horasalida')"  placeholder="Hora salida" [required]>
-                </mat-form-field>
+              <mat-grid-tile colspan="1">Hora Salida
+              </mat-grid-tile>
 
-                <mat-form-field class="example-full-width" appearance="fill" style="margin-left: 10px">
-                  <mat-label>Descripción de Actividades:</mat-label>
+              <mat-grid-tile colspan="3">Actividades a Realizar
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="1">Horas
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="1">Opcion
+              </mat-grid-tile>
+              <br>
+              <div *ngFor="let row of secondFormGroup.get('rows')?.controls;let index = index;">
+
+                <mat-grid-tile colspan="1">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha:</mat-label>
+                    <input matInput [matDatepicker]="picker" [formControl]="row.get('fecha')" [min]="solicitudproyecto.fechaInicio" [max]="solicitudproyecto.fechaFin" placeholder="Fecha:" [required]>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" class="example-full-width2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Lugar</mat-label>
+                    <input matInput type="text"   [formControl]="row.get('horallegada')"  placeholder="Hora llegada" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" class="example-full-width2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Lugar</mat-label>
+                    <input matInput type="text"   [formControl]="row.get('horasalida')"  placeholder="Hora salida" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile colspan="3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Descripción de Actividades Realizadas:</mat-label>
                   <textarea matInput [formControl]="row.get('descripcionActividad')"  placeholder="Descripción de Actividades:" [required]>
                </textarea>
                 </mat-form-field>
-                <mat-form-field class="example-full-width" appearance="fill" style="margin-left: 10px">
-                  <mat-label>Lugar</mat-label>
-                  <input matInput type="text"   [formControl]="row.get('lugar')"  placeholder="Lugar" [required]>
-                </mat-form-field>
+                </mat-grid-tile>
 
-                <mat-form-field class="example-full-width2"  appearance="fill" style="margin-left: 10px">
-                  <mat-label>Numero de Horas</mat-label>
-                  <input matInput type="number" min="0" max="15" style="font-size: 18px;" class="form-control" (ngModelChange)="sumar()" (keyup)="sumar()"  class="impnumber"  [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
-                </mat-form-field>
-
-                <span class="example-spacer"></span>
-                <button mat-flat-button color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" (click)="eliminarActividad(row.value)" [disabled]="">Borrar</button>
+                <mat-grid-tile colspan="1">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Numero de Horas</mat-label>
+                    <input matInput type="number" min="0" max="15" style="font-size: 18px;" class="form-control" (ngModelChange)="sumar()" (keyup)="sumar()"  class="impnumber"  [formControl]="row.get('numHoras')"  placeholder="Horas" [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
 
 
+                <mat-grid-tile colspan="1">
+                  <button mat-raised-button color="warn" (click)="onRemoveRow(index)" (click)="eliminarActividad(row.value)" [disabled]=""><mat-icon>keyboard_return</mat-icon></button>
+                </mat-grid-tile>
+
+              </div>
+              <mat-grid-tile colspan="6">
+                <strong style="font-size:large">TOTAL DE HORAS:</strong> <strong style="font-size:large"> {{sum}}</strong><br>
               </mat-grid-tile>
-
             </mat-grid-list>
 
-            <strong style="font-size:large">TOTAL DE HORAS:</strong> <strong style="font-size:large"> {{sum}}</strong><br>
-            <br>
-            <div>
-              <button  style="align-self: center;" mat-raised-button color="accent"  (click)="guardar()">Guardar Registro</button>
-              <br>
-              <button mat-flat-button color="primary" (click)="onAddRow()" *ngIf="secondFormGroup.get('rows')">Agregar Actividad</button>
-            </div>
+
+
           </mat-card-content>
-          <br>
+
+
           <div style="text-align: center">
             <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
-            <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            <button  style="align-self: center;" mat-raised-button color="accent"  (click)="guardar()">Guardar Registro</button>
+
           </div>
+
         </mat-card>
+
       </form>
     </mat-step>
 
@@ -131,8 +139,8 @@
 
 
 
-    <mat-step [stepControl]="thirdFormGroup" >
-      <form [formGroup]="thirdFormGroup">
+    <mat-step [stepControl]="fourFormGroup" >
+      <form [formGroup]="fourFormGroup">
         <mat-card class="example-card">
 
           <br><br>

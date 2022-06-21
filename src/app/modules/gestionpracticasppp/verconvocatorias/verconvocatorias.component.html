@@ -38,29 +38,18 @@
         <mat-card-content>
 
           <table class="table-borderless">
-            <th colspan="1"></th>
-            <th colspan="1"></th>
-            <th style="background: #455a64;color: white" colspan="1">INFORMACION</th>
-            <th colspan="1"></th>
-            <th style="background: #455a64;color: white" colspan="2">ACTIVIDADES A DESARROLLAR</th>
-            <tr aria-colspan="6">
-              <td colspan="1" style="background: #455a64;color: white">
-              </td>
-              <td colspan="1">
-                <p style="color: white">--------</p>
-              </td>
-              <td colspan="1">
+            <th style="background: #455a64;color: white" colspan="2">Informacion</th>
+            <th style="background: #455a64;color: white" colspan="2">Documento</th>
+            <tr aria-colspan="4">
+
+
+              <td colspan="2">
                 <strong>Empresa: </strong>{{anexo2.nombreProyecto}}<br>
                 <strong>Carrera: </strong>{{anexo2.carrera}}<br>
                 <strong>Ciclo: </strong>{{anexo2.ciclo}}<br>
                 <strong>Fecha de máxima recepción: </strong>{{anexo2.fechaMaxRecepcion | date:"longDate"}}<br>
                 <strong>Número de Convocatoria: </strong>{{anexo2.numeroConvocatoria}}<br>
-              </td>
-              <td colspan="1">
-                <p style="color: white">--------
-                </p>
-              </td>
-              <td colspan="2">
+                <div align="center" style="font-size: 16px;color: white;background:  #455a64"><strong>Actividades a Desarrollar</strong></div>
                 <mat-expansion-panel (opened)="panelOpenState = true"
                                      (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>
@@ -71,8 +60,24 @@
                   <p *ngFor="let actividades of anexo2.actividades" >
                     <strong>{{actividades.descripcion}} </strong><br>
                 </mat-expansion-panel>
+              </td>
 
-                  </td>
+
+              <td colspan="2" style="margin-left: 15px">
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Documento
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div align="center">
+                    <button style="width: 50%;margin-top: 2px" mat-raised-button color="primary" (click)="getSafeUrl(anexo2.documento)"><mat-icon>preview</mat-icon>Visualizar Documento</button>
+                    <button style="width: 50%;margin-top: 2px;background: #ffc200" mat-raised-button (click)="convertFile(anexo2.documento)"><mat-icon>file_download</mat-icon>Descargar</button>
+                    <iframe [src]="safeUrl" style="width: 100%; height: 240px; border: none"></iframe>
+                  </div>
+                </mat-expansion-panel>
+              </td>
             </tr>
           </table>
 

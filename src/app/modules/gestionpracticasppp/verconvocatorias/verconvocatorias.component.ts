@@ -12,6 +12,7 @@ import {ResponsablepppService} from "../../../services/responsableppp.service";
 import {EmpresaService} from "../../../services/empresa.service";
 import {DateAdapter} from "@angular/material/core";
 import {Anexo2Service} from "../../../services/anexo2.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-verconvocatorias',
@@ -37,7 +38,7 @@ export class VerconvocatoriasComponent implements OnInit {
               private _formBuilder: FormBuilder,
               private empresaService: EmpresaService,
               private _adapter: DateAdapter<any>,
-              private anexo2Service: Anexo2Service) {
+              private anexo2Service: Anexo2Service,private sanitizer: DomSanitizer) {
     this._adapter.setLocale('es-ec');
   }
 
@@ -122,7 +123,12 @@ export class VerconvocatoriasComponent implements OnInit {
     })
   }
 
+  safeUrl: any;
 
+  //url 2 where the need to use an add
+  getSafeUrl(docum:any){
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(docum);
+  }
   convertFile(docum: any) {
     //console.log(docum)
     //Usage example:

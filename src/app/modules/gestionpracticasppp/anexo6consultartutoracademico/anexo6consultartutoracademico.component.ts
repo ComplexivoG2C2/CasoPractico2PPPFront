@@ -16,6 +16,7 @@ import {Anexo3Service} from "../../../services/anexo3.service";
 import {Anexo31y4respuestasService} from "../../../services/anexo31y4respuestas.service";
 import {Anexo1Service} from "../../../services/anexo1.service";
 import {Anexo6Service} from "../../../services/anexo6.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 function getBase64(file:any) {
   return new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ export class Anexo6consultartutoracademicoComponent implements OnInit {
               private anexo3Service:Anexo3Service,
               private anexo4Service:Anexo31y4respuestasService,
               private anexo1Service:Anexo1Service,
-              private anexo6Service:Anexo6Service) {
+              private anexo6Service:Anexo6Service,private sanitizer: DomSanitizer) {
     this._adapter.setLocale('es-ec');
   }
 
@@ -130,6 +131,12 @@ export class Anexo6consultartutoracademicoComponent implements OnInit {
       }
     })
 
+  }
+  safeUrl: any;
+
+  //url 2 where the need to use an add
+  getSafeUrl(docum:any){
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(docum);
   }
 
   //convert a pdf

@@ -5,7 +5,7 @@ export class Anexo9{
   nombreEstudiante?:String;
   cedulaEstudiante?:String;
   nombreRepresentanteemp?:String;
-  nombreTutoracademico?:String;
+  nombreTutorAcademico?:String;
   nombreTutoremp?:String;
   idProyectoPPP?:Number;
   documento?:String;
@@ -19,7 +19,6 @@ export class ActividadesAnexo9Request{
   id?:Number;
   fecha?:Date;
   descripcionActividad?:String;
-  lugar?:String;
   horallegada?:String;
   horasalida?:String;
   numHoras?:Number;
