@@ -25,6 +25,7 @@ import {Anexo2Service} from "../../../services/anexo2.service";
 })
 export class AgregartutoracademicoComponent implements OnInit {
 
+
   isexist?: boolean;
   isLinear = true;
   myControlconvocatoria = new FormControl();
@@ -33,8 +34,7 @@ export class AgregartutoracademicoComponent implements OnInit {
   secondFormGroup?: FormGroup;
   thirdFormGroup?: FormGroup;
   solicitudes: Solicitudproyecto[] = [];
-  solicitudproyectoselect: Solicitudproyecto = new Solicitudproyecto();
-  actividadesanexo: Actividadesanexo[] = []
+     actividadesanexo: Actividadesanexo[] = []
   anexo2: Anexo2 = new Anexo2();
   numeroConvocatoria?: String;
   data: Date = new Date();
@@ -48,10 +48,8 @@ export class AgregartutoracademicoComponent implements OnInit {
   addForm: FormGroup;
   rows: FormArray;
   itemForm?: FormGroup;
-  materias: Materias[] = [];
   proyecto: Solicitudproyecto = new Solicitudproyecto();
-  seleccionmaterias: Materias[] = [];
-  filteredOptions?: Observable<Materias[]>;
+
   cedula?: String;
 
 
@@ -61,8 +59,9 @@ export class AgregartutoracademicoComponent implements OnInit {
   fourFormGroup: FormGroup;
 
   docentes:Docentes[]=[];
-  docentesselectDirector:Docentes = new Docentes();
   docentesselectApoyo:Docentes[]=[]
+  solicitudproyectoselect: Solicitudproyecto = new Solicitudproyecto();
+//empresa>>>>>>>>>>>>>>>>>>>>>>
   anexo1:Anexo1[]=[];
   delegados: DocentesDelegados[]=[];
   myControldocente = new FormControl();
@@ -159,7 +158,9 @@ export class AgregartutoracademicoComponent implements OnInit {
       || option.nombreresponsable?.toLocaleLowerCase().includes(filterValue)
     );
   }
-  idppp?:Number;
+idppp?:Number;
+  siglasc?:String;
+  nomcarrera?:String;
   //event para la selecion de la solicitud
   selectionProyecto(proyectoselect: MatSelectionListChange) {
     this.solicitudproyectoselect = proyectoselect.option.value
@@ -167,8 +168,9 @@ export class AgregartutoracademicoComponent implements OnInit {
     this.proyectoService.getSolicitudesbyid(Number(this.solicitudproyectoselect.id)).subscribe(value => {
       console.log(Number(this.solicitudproyectoselect.id) + "CODIGOOOOOO SOLICITUD")
       this.proyecto = value;
-
-      this.idppp=this.proyecto.id
+this.siglasc=value.codigocarrera;
+this.idppp=this.proyecto.id;
+      this.nomcarrera=this.proyecto.carrera;
       this.responsablepppService.getDocentesbyAll().subscribe(value => {
         this.docentes=value;
         this.filteredOptionsapoyo = this.myControl1.valueChanges.pipe(
@@ -227,7 +229,7 @@ export class AgregartutoracademicoComponent implements OnInit {
       this.docentesAnexo1.documento=""
       this.docentesAnexo1.cedulaDelegado=value.cedula;
       this.docentesAnexo1.nombreDelegado=value.nombres_completo;
-      this.docentesAnexo1.nombreRol="tutoracademico"
+      this.docentesAnexo1.nombreRol="apoyo"
       this.docentesAnexo1.cedulaCoordinador=this.CedulaC;
       this.docentesAnexo1.nombreCoordinador=this.NombreC;
       this.docentesAnexo1.siglasCarrera=this.Siglas;
@@ -240,97 +242,117 @@ export class AgregartutoracademicoComponent implements OnInit {
       this.docentesDelagados.cargo="apoyo";
       this.delegados.push(this.docentesDelagados)
     })
-    this.docentesAnexo1 = new Anexo1();
-    this.docentesDelagados = new DocentesDelegados();
-    this.docentesAnexo1.docenteTitulo=this.docentesselectDirector.titulo;
-    this.docentesAnexo1.documento=""
-    this.docentesAnexo1.cedulaDelegado=this.docentesselectDirector.cedula;
-    this.docentesAnexo1.nombreDelegado=this.docentesselectDirector.nombres_completo;
-    this.docentesAnexo1.nombreRol="director"
-    this.docentesAnexo1.cedulaCoordinador=this.CedulaC;
-    this.docentesAnexo1.nombreCoordinador=this.NombreC;
-    this.docentesAnexo1.siglasCarrera=this.Siglas;
-    this.docentesAnexo1.nombreCarrera=this.carrera;
-    this.docentesAnexo1.fechaDelegacion=this.Fechaat;
-    this.docentesAnexo1.nombreProyecto=this.proyecto.nombre;
-    this.anexo1.push(this.docentesAnexo1)
-    this.docentesDelagados.cedula=this.docentesselectDirector.cedula;;
-    this.docentesDelagados.estado=true;
-    this.docentesDelagados.cargo="dp";
-    this.delegados.push(this.docentesDelagados)
   }
 
 
 
 
   agregartutoresacademicos(proyectos: Solicitudproyecto,anexo1:Anexo1[]){
-    var a1=0;
-    var a2=0;
-    proyectos.docentesDelegados=this.delegados;
-    proyectos.coordinadorCedula=this.CedulaC
-    console.log("dentro del metodo de actualizar"+proyectos.docentesDelegados)
-    // @ts-ignore
+  var a1=0;
+  var a2=0;
+  proyectos.docentesDelegados=this.delegados;
+  proyectos.coordinadorCedula='0103156675'
+  console.log("dentro del metodo de actualizar"+proyectos.docentesDelegados)
+    console.log("cedula de coordinador"+proyectos.coordinadorCedula)
+  // @ts-ignore
     proyectos.id=this.idppp;
 
-    var a1=anexo1.length;
-    anexo1.forEach(value => {
-      if (value.documento?.length==0){
-        a2=a2+1;
+  var a1=anexo1.length;
+  anexo1.forEach(value => {
+  if (value.documento?.length==0){
+  a2=a2+1;
+}
+})
+if(a1==a2){
+  console.log("si cumple..................")
+  this.proyectoService.updateTutoresacademicos(proyectos).subscribe(value => {
+    this.proyectoService.getSolicitudes().subscribe(value1 => {
+      var id = value1.filter(value2 => value2.codigo==proyectos.codigo&&value2.codigocarrera==proyectos.codigocarrera)[0].id;
+
+        console.log("este es el id"+id)
+      anexo1.forEach(value1 => {
+        value1.idProyectoPPP=id;
+        value1.cedulaCoordinador='0103156675';
+        value1.siglasCarrera=this.siglasc;
+        value1.nombreCarrera=this.nomcarrera;
+        this.tacademicoService.saveAnexo1(value1).subscribe(value2 => {
+          Swal.fire({
+            title: 'Docentes Asignados',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+
+          this.issloading=false;
+        },error => {
+          Swal.fire({
+            title: '..eeee',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+          this.issloading=false;
+        })
+      })
+    })
+    // this.proyectoService.getSolicitudes().subscribe(value1 => {
+    //
+    //   anexo1.forEach(value1 => {
+    //     value1.idProyectoPPP=this.idppp;
+    //     this.tacademicoService.saveAnexo1(value1).subscribe(value2 => {
+    //       Swal.fire({
+    //         title: 'Éxito',
+    //         text: 'Tutores Agregados.',
+    //         iconColor :'#17550c',
+    //         color: "#0c3255",
+    //         confirmButtonColor:"#0c3255",
+    //         background: "#ffffff",
+    //       })
+    //       this.issloading=false;
+    //     },error => {
+    //       Swal.fire({
+    //         title: 'Ha surgido un error',
+    //         text: "Hubo un error",
+    //         color: "#0c3255",
+    //         confirmButtonColor:"#0c3255",
+    //         background: "#ffffff",
+    //       })
+    //       this.issloading=false;
+    //     })
+    //   })
+    // })
+  },error => {
+    Swal.fire({
+      title: 'e..ror al agregar t academicos',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
       }
     })
-    if(a1==a2){
-      this.issloading=true;
-      this.proyectoService.updateSolicitudes(proyectos).subscribe(value => {
-        this.proyectoService.getSolicitudes().subscribe(value1 => {
-
-          anexo1.forEach(value1 => {
-            value1.idProyectoPPP=this.idppp;
-            this.tacademicoService.saveAnexo1(value1).subscribe(value2 => {
-              Swal.fire({
-                title: 'Éxito',
-                text: 'Tutorres Agregados.',
-                icon: 'success',
-                iconColor :'#17550c',
-                color: "#0c3255",
-                confirmButtonColor:"#0c3255",
-                background: "#fbc02d",
-              })
-              this.router.navigate(['/panelusuario/proyectovinculacion/verproyecto',this.CedulaC,this.NombreC]);
-              this.issloading=false;
-            },error => {
-              Swal.fire({
-                title: 'Ha surgido un error',
-                text: "Hubo un error, contáctese con TICs.",
-                icon: 'error',
-                color: "#0c3255",
-                confirmButtonColor:"#0c3255",
-                background: "#fbc02d",
-              })
-              this.issloading=false;
-            })
-          })
-        })
-      },error => {
-        Swal.fire({
-          title: 'Ha surgido un error',
-          text: "...........",
-          icon: 'error',
-          color: "#0c3255",
-          confirmButtonColor:"#0c3255",
-          background: "#fbc02d",
-        })
-        this.issloading=false;
-      })
-    }else{
-      Swal.fire({
-        title: 'Error',
-        text: 'Faltan documentos',
-        icon: 'warning',
-        color: "#0c3255",
-        confirmButtonColor:"#0c3255",
-        background: "#fbc02d",
-      })
+    this.issloading=false;
+  })
+}else{
+  Swal.fire({
+    title: 'error',
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
     }
+  })
+}
   }
+
+
+
 
 }

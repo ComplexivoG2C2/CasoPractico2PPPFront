@@ -63,10 +63,10 @@ export class UserComponent implements OnInit,AfterViewInit {
     if(rol=="CV"){
       return "COORDINADOR/A DE VINCULACIÓN";
     }
-    if(rol=="TE"){
-      return "TUTOR EMPRESARIAL";
-    }
-    if(rol=="TA"){
+    // if(rol=="TE"){
+    //   return "TUTOR EMPRESARIAL";
+    // }
+    if(rol=="DA"){
       return "TUTOR ACADEMICO";
     }
     if(rol=="RPPP"){
@@ -78,9 +78,9 @@ export class UserComponent implements OnInit,AfterViewInit {
     if(rol=="DOC"){
       return "DOCENTE";
     }
-    if(rol==null){
-      return "EMPRESA";
-    }
+    // if(rol==null){
+    //   return "EMPRESA";
+    // }
     return "Si rol";
   }
   logout():void{

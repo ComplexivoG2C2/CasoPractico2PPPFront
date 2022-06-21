@@ -1,4 +1,5 @@
 
+
 <section class="bst-section">
 
   <mat-toolbar class="mat-bar">
@@ -15,7 +16,7 @@
     </button>
   </mat-toolbar>
 
-  <mat-drawer-container autosize>
+  <mat-drawer-container autosize style="background:  #E4EFF3">
     <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
       <div class="contenedor-perfil">
         <div class="imagem-mat" style="background-image:url({{persona.urlFoto}})" referrerpolicy="no-referrer"></div>
@@ -54,20 +55,18 @@
           </div>
 
 <!--Tutor academico-->
-          <div class="list-group" *ngSwitchCase="'TA'">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                .....jhhhh
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <button mat-button class="id-menus" [routerLink]="['',persona.cedula]"
-                      routerLinkActive="active">-///////////////////</button>
+          <div class="list-group" *ngSwitchCase="'DA'">
 
 
-            </mat-expansion-panel>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6consultatutoracademico',persona.cedula]"
+                      routerLinkActive="active">- Consultar Notificación designación (A6)</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo81listartutoracademico',persona.cedula]"
+                    routerLinkActive="active">- Notificacion de Cronograma de Actividades (8.1)</button>
+
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9consultatutoracademico',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active">- Consulta Registro de asistencia de estudiantes(A9)</button>
+
+
           </div>
  <!--Tutor empresarial-->
           <div class="list-group" *ngSwitchCase="'TE'">
@@ -102,38 +101,95 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header style="background: #455a64;color: white">
                 <mat-panel-title style="color: white">
-                  Tutores Academicos
+                  Solicitudes de Estudiantes
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/versolicitudesestudiantes',persona.cedula]"
+                      routerLinkActive="active">-Solicitudes de Estudiantes</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/respuestaalestudiante',persona.cedula]"
+                      routerLinkActive="active">-Constancia de respuestas a estudiantes</button>
+            </mat-expansion-panel>
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Respuestas a Empresas
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo32y4respuestaaempresa',persona.cedula]"
+                      routerLinkActive="active">> Enviar Respuesta a empresas</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo32y4listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Respuesta a empresas</button>
+            </mat-expansion-panel>
+<!-- ////-->
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                 Tutores Academicos
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
-                      routerLinkActive="active">> Regsitrar tutores Academicos</button>
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6',persona.id,persona.cedula]"
-                      routerLinkActive="active">> Asignar tutores Academicos</button>
+                      routerLinkActive="active">> Registrar tutores Academicos</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6asignaciontutores',persona.cedula]"
+                      routerLinkActive="active">> Asignar Alumnos a Tutores Academicos</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Delegaciones</button>
             </mat-expansion-panel>
-          </div>
+<!--            ///-->
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                Actas de Reunion
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo7actareunion',persona.cedula]"
+                      routerLinkActive="active">> Generar Acta</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo7listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Actas de Reunion</button>
+            </mat-expansion-panel>
 
+            <!--            ///-->
+            <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Notificacion de Cronograma a Tutor Academico
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo81',persona.cedula]"
+                      routerLinkActive="active">> Nueva Notificacion</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo81listar',persona.cedula]"
+                      routerLinkActive="active">> Ver Notificaciones</button>
+            </mat-expansion-panel>
+
+
+          </div>
 <!--Estudiante-->
           <div class="list-group" *ngSwitchCase="'EST'">
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Solicitud
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Solicitud Estudiante
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo3',persona.cedula]"
-                      routerLinkActive="active">> Registrar empresas</button>
+                      routerLinkActive="active"> Lista de Solicitudes</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/estadossolicitud',persona.cedula]"
+                      routerLinkActive="active"> Solicitudes Enviadas</button>
             </mat-expansion-panel>
-          </div>
-
-          <!--Empresa-->
-          <div class="list-group" *ngSwitchCase="'null'">
+            <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
+              <mat-expansion-panel-header style="background: #455a64;color: white">
+                <mat-panel-title style="color: white">
+                  Registro Diario de Actividades
                 </mat-panel-title>
               </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9',persona.cedula,persona.nombrescompletos]"
+                      routerLinkActive="active"> Nuevo Registro</button>
             </mat-expansion-panel>
           </div>
 

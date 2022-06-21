@@ -43,4 +43,3 @@ export class Anexo2Service {
     return this.http.delete<Solicitudproyecto>(this.urlEndPoint + '/' + id, {headers: this.httpHeaders})
   }
 }
-

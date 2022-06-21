@@ -1,0 +1,62 @@
+.mat-stepper-vertical {
+  margin-top: 8px;
+  background: #E4EFF3;
+}
+.mat-form-field {
+  margin-top: 16px;
+}
+.example-card {
+  max-width: 80%;
+  margin: 5px auto;
+  border: 1px solid black;
+}
+.example-carditem {
+  max-width: 95%;
+  font-size: 14px;
+}
+
+.itemmateria {
+  max-width: 95%;
+  position: center;
+  margin: 0 auto;
+  background: #e5e5e5;
+  height: 60px;
+  font-size: 12px;
+}
+
+.example-viewport {
+  height: 200px;
+  width: 90%;
+}
+
+.example-item {
+  margin-top: 2px;
+  height: 50px;
+  font-size: 14px;
+}
+
+.example-item:hover {
+  color: #ffffff;
+  cursor: pointer;
+  background: #043e6e;
+}
+mat-list-option[aria-selected="true"] {
+  background: #043e6e;
+  color: rgb(255, 255, 255);
+}
+
+#contenedor{
+  overflow: hidden;
+}
+#izquierda{
+  text-align: start;
+  height:50%;
+  float:left;
+  width:50%;
+}
+#derecha{
+  height:50%;
+  float:right;
+  width:50%;
+  text-align: start;
+}

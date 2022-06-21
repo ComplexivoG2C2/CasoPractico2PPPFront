@@ -1,0 +1,66 @@
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Empresas</p>
+        </div></ng-template>
+
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-form-field appearance="outline" style="width: 70%" >
+              <mat-label>Buscar Empresa</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                <mat-list-option *ngFor="let shoe of filteredOptions | async" [value]="shoe" class="example-item">
+                 <div><strong>Empresa: </strong>{{shoe.nombre}}</div>
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+            <p>
+              <strong>Empresa seleccionada: </strong> {{pryectoselect.nombre}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirthFormGroup" label="Enviar Respuesta">
+      <form [formGroup]="thirthFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header style="text-align: center">
+            <div style="text-align: center">Debe obtener el anexo y posteriormente deberá firmar y subir de en formato PDF</div>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <br>
+          <mat-card-content>
+            <div align="center">
+              <button style="width: 45%" mat-raised-button color="primary" (click)=" aceptarPostulacion()">Enviar respuesta positiva (A4)</button>
+              <button style="width: 45%" mat-raised-button color="accent" (click)=" negarPostulacion()">Enviar respuesta desierta (A3.1)</button>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+
+  </mat-stepper>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
