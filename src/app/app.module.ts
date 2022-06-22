@@ -11,6 +11,7 @@ import {MaterialModule} from "../material/material.module";
 import { PrincipalComponent } from './modules/principal/principal.component';
 import { CardsComponent } from './modules/principal/cards/cards.component';
 import { InstitucionComponent } from './modules/principal/institucion/institucion.component';
+import { ContactosComponent } from './modules/principal/contactos/contactos.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InstitucionComponent } from './modules/principal/institucion/institucio
     FooterComponent,
     PrincipalComponent,
     CardsComponent,
-    InstitucionComponent
+    InstitucionComponent,
+    ContactosComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {InstitucionComponent} from "./modules/principal/institucion/institucion.
 const routes: Routes = [
   {path: "inicio", component:PrincipalComponent},
   {path: "institucion", component:InstitucionComponent},
+
   {path:'',redirectTo:'/auth/inicio_sesion',pathMatch:'full'},
   {path:'auth',
     loadChildren:()=>

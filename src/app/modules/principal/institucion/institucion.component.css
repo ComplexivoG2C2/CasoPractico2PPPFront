@@ -1,0 +1,19 @@
+.mat-toolbar{
+  background-color: #FAC02E;
+  color: white;
+  border-bottom: 0;
+
+
+}
+.mat-button{
+  color: white;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+.center {
+
+  text-align: center;
+
+
+}
