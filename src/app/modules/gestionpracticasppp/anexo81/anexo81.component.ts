@@ -157,21 +157,6 @@ export class Anexo81Component implements OnInit {
 console.log("e seleecionado la convocatoria"+this.anexo81.carrera)
     })
   }
-  // selectionAnexo7(anexo7select: MatSelectionListChange){
-  //
-  //   this.activate = true;
-  //   this.anexo7select = anexo7select.option.value
-  //
-  //   this.anexo7Service.getAnexo7().subscribe(value1 => {
-  //     console.log("solicitudes" + value1)
-  //
-  //     this.issloading = false;
-  //     this.filteredOptionsanexo7 = this.myControlanexo7.valueChanges.pipe(
-  //       startWith(''),
-  //       map(values => this.filteran7(values)),
-  //     );
-  //   })
-  // }
 
   obtnerdatos(): Anexo81 {
     this.anexo81.idProyectoPPP = this.anexo7select.idProyectoPPP;
@@ -202,7 +187,7 @@ console.log("e seleecionado la convocatoria"+this.anexo81.carrera)
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      this.router.navigate(['/panelusuario/gestionpracticasppp/anexo8listar', this.cedula])
+      this.router.navigate(['/panelusuario/gestionpracticasppp/anexo81listar', this.cedula])
     }, error => {
       if (error.error.message == "La fecha de inicio no puede ser mayor a la fecha fin") {
         Swal.fire({

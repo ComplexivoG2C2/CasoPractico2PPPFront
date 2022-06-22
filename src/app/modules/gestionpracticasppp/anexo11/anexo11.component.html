@@ -1,0 +1,173 @@
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Seleccione el Estudiante a su cargo</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Buscar:</mat-label>
+            <input matInput  placeholder="FILTRAR" [formControl]="myControlanexo7">
+            <mat-icon matSuffix>search</mat-icon>
+
+          </mat-form-field>
+
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionan7($event)" formControlName="firstCtrl" required>
+                <mat-list-option *ngFor="let shoe of filteredOptionsanexo7 | async" [value]="shoe"  class="example-item">
+                  <div><strong>Estudiante:</strong> {{shoe.nombreEstudiante}}</div>
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+            <p>
+              <strong>Seleccion> Estudiante :</strong>{{anexo7select.nombreEstudiante}}
+            </p>
+            <mat-divider></mat-divider>
+            <br>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirtdFormGroup">
+      <form [formGroup]="thirtdFormGroup">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>VISITAS A LA INSTITUCIÓN</mat-card-title>
+          <mat-card-subtitle>REGISTRO DE VISITAS</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content [formGroup]="addForm">
+          <h3><strong>Empresa: </strong>{{empresa.nombre}}</h3>
+          <h3><strong>Representante legal: </strong>{{empresa.representante}}</h3>
+          <strong>Informe</strong>
+          <mat-grid-list cols="6" rowHeight="2:1">
+            <mat-grid-tile colspan="6">
+              <button mat-fab color="primary" (click)="onAddRow(Informe)" *ngIf="addForm.get('rows')"><mat-icon>add_circle</mat-icon></button>
+            </mat-grid-tile>
+            <div  *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px;">
+                  <mat-label>Fecha de visita</mat-label>
+                  <input matInput  [min]="minDate" [matDatepicker]="picker" [formControl]="row.get('fecha')">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 50%; margin-left: 2px;">
+                  <mat-label>Inicio</mat-label>
+                  <input matInput type="time" [formControl]="row.get('horaInicio')">
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width: 50%; margin-left: 2px;">
+                  <mat-label>Fin</mat-label>
+                  <input matInput type="time" [formControl]="row.get('horaFin')">
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+                  <mat-label>Actidades</mat-label>
+                  <textarea matInput [formControl]="row.get('actividades')"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+                  <mat-label>Observaciones</mat-label>
+                  <textarea matInput [formControl]="row.get('observaciones')"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <button mat-mini-fab color="warn" style="margin-left: 50px" (click)="onRemoveRow(index)" [disabled]=""><mat-icon>delete_sweep</mat-icon></button>
+              </mat-grid-tile>
+            </div>
+          </mat-grid-list>
+          <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput [(ngModel)]="anexo11.observaciones" name="observacion" [ngModelOptions]="{standalone: true}"></textarea>
+          </mat-form-field>
+          <div style="text-align: center">
+            <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+            <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="fourFormGroup">
+      <form [formGroup]="fourFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Documento de Registro de Visitas</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+
+          <mat-card-content>
+            <mat-divider></mat-divider>
+            <div align="center">
+              <table>
+                <th style="padding: 5px">
+                  <strong>Informacion</strong>
+                </th>
+
+                <th style="padding: 5px;margin-left: 20px">
+                  <strong>Generar y subir el Documento</strong>
+                </th>
+                <tr>
+                  <td style="padding: 5px">
+                    <strong>Tutor Academico: </strong>{{anexo11.nombreDirectorDocenteApoyo}}<br>
+                    <strong>Nombres del Alumno: </strong>{{anexo11.nombreest}}<br>
+                    <strong>Carerra:  </strong>{{anexo11.carrera}}<br>
+                    <strong>Ciclo del Estudiante:  </strong>{{anexo11.ciclo}}<br>
+                    <strong>Empresa:  </strong>{{anexo11.empresa}}<br>
+                    <strong>Representante Legal de la Empresa:  </strong>{{anexo11.representanteLegal}}<br>
+
+                  </td>
+
+                  <td style="padding: 5px;margin-left: 20px">
+                    <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Documento</button>
+                    <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                      <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)" placeholder="Subir Documento"></ngx-mat-file-input>
+                      <mat-icon matSuffix>folder</mat-icon>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+
+
+
+          </mat-card-content>
+
+          <div align="center">
+            <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+            <button style="width: 45%" mat-raised-button color="primary" (click)="guardarAnexo11()">Registrar Visita</button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+
+
+  </mat-stepper>
+</div>
+
+
+
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
