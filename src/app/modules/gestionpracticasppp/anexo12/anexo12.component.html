@@ -1,0 +1,158 @@
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Estudiantes a Cargo</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+          <mat-card-content>
+
+            <mat-form-field appearance="outline" style="width: 90%">
+              <mat-label>BUSCAR...</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionAnexo14($event)" formControlName="anexo12">
+                <mat-list-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  Empresa: {{option.empresa}} :  Estudiante participante: {{option.cedulaEstudiante}} : {{option.nombresEstudiante}}
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+            <p style="font-size: medium">
+              Estudiante Seleccionado: {{anexo14select.cedulaEstudiante}} : {{anexo14select.nombresEstudiante}}
+            </p>
+            <mat-divider></mat-divider>
+            <br>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="DATOS INFORMATIVOS DEL ESTUDIANTE">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Datos del Estudiante</p>
+        </div></ng-template>
+        <mat-card class="example-card2">
+
+          <mat-card-content>
+            <strong>Datos del Estudiante</strong>
+            <mat-card class="example-card">
+              <mat-list>
+                <mat-list-item>Nombres del Estudiante: {{anexo14select.nombresEstudiante}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Cédula: {{anexo14select.cedulaEstudiante}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Carrera: {{proyectoselect.carrera}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Periodo de la Realizacion de Practicas: Del {{proyectoselect.fechaFin| date:'mediumDate'}} al {{proyectoselect.fechaFin| date:'mediumDate'}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Fecha en la que se realiza la Evaluacion: {{fechae | date:'mediumDate'}}
+                </mat-list-item>
+                <br>
+                <mat-divider></mat-divider>
+              </mat-list>
+            </mat-card>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+          <div align="center">
+            <button style="width: 45%" mat-raised-button matStepperPrevious color="accent" (click)="refresh()">	<mat-icon>expand_less</mat-icon></button>
+            <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" >
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Evaluacion al Estudiante</p>
+        </div></ng-template>
+        <mat-card class="example-card2">
+
+          <mat-card-content>
+            <mat-card-subtitle style="font-size: large"><strong>Elaborado por: </strong>{{nombre}}</mat-card-subtitle>
+            <mat-grid-list cols="6" rowHeight="2:1">
+
+              <mat-grid-tile colspan="1" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                #
+              </mat-grid-tile>
+              <mat-grid-tile colspan="3" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                Parametros
+              </mat-grid-tile>
+              <mat-grid-tile colspan="2" style="background: #E4EFF3;padding: 0;border:1px solid #7e7e7e">
+                Calificacion
+              </mat-grid-tile>
+              <br>
+              <div *ngFor="let row of thirdFormGroup.get('rows')?.controls;let index = index;">
+
+                <mat-grid-tile colspan="1" style="border:1px solid #c7c7c7;background: #f1f2f5">
+                  <mat-form-field class="example-full-width1" appearance="outline">
+                    <input readonly="readonly" matInput type="text" [formControl]="row.get('tutorempItem0')"  [required]>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="3"  style="border:1px solid #c7c7c7; background: #f1f2f5">
+                  <textarea style="padding-top: 1px" rows="3" readonly="readonly" matInput type="text"  [formControl]="row.get('tutorempItem1')"  [required]></textarea>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2" style="border:1px solid #c7c7c7" >
+                  <mat-slider style="margin-top: 30px;margin-left: 10px" min="0" max="20" step="5" thumbLabel tickInterval="5" [formControl]="row.get('tutorempItem2')"(ngModelChange)="sumar()" (keyup)="sumar()"></mat-slider>
+                </mat-grid-tile>
+
+              </div>
+
+            </mat-grid-list>
+            <br><mat-divider></mat-divider>
+            <div align="center">
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent" (click)="refresh()">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary" [disabled]="activar">Siguente</button>
+
+            </div>
+          </mat-card-content>
+
+
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step>
+      <mat-card class="example-card">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Generar Documento</p>
+        </div></ng-template>
+        <mat-card-content>
+          <div>
+            <button mat-raised-button color="primary" (click)="generarDocumento12()">Generar Documento</button>
+            <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+              <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento12($event.target.files)" placeholder="Subir Documento"></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </div>
+          <div align="center">
+            <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+            <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardar()">	Guardar Evaluacion<mat-icon>expand_more</mat-icon></button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>Aun no hay estudaintes</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

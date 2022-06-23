@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 
-
-
 // @ts-ignore
 import PizZip from "pizzip";
 // @ts-ignore
@@ -30,6 +28,11 @@ import {MatSelectionListChange} from "@angular/material/list";
 import {Anexo14} from "../../../models/anexo14";
 import {DatePipe} from "@angular/common";
 import Docxtemplater from "docxtemplater";
+import {Anexo14empService} from "../../../services/anexo14emp.service";
+import {FechatutorempService} from "../../../services/fechatutoremp.service";
+import {ProyectotutorempService} from "../../../services/proyectotutoremp.service";
+import {Anexo12} from "../../../models/anexo12";
+import {Anexo12empService} from "../../../services/anexo12emp.service";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -52,11 +55,12 @@ const resultado = [
 ]
 
 @Component({
-  selector: 'app-anexo14',
-  templateUrl: './anexo14.component.html',
-  styleUrls: ['./anexo14.component.css']
+  selector: 'app-anexo12',
+  templateUrl: './anexo12.component.html',
+  styleUrls: ['./anexo12.component.css']
 })
-export class Anexo14Component implements OnInit {
+export class Anexo12Component implements OnInit {
+
 
   activar?:boolean=false;
   sum = 0;
@@ -68,18 +72,17 @@ export class Anexo14Component implements OnInit {
   isexist?: boolean;
   myControl = new FormControl();
   cedula?:String;
-  nombres?:String;
+  idpro?:Number;
   fechai?:Date;
   fechaf?:Date;
   fechae?:Date;
   resultadoAnexo14?:String;
   user: User=new User();
-  anexo9: Anexo9=new Anexo9();
-  anexo9select: Anexo9[] = []
-  anexo7: Anexo7[] = []
-  anexo7select: Anexo7 = new Anexo7();
+
+  anexo14: Anexo14[] = []
+  anexo14select: Anexo14 = new Anexo14();
   proyectoselect: Solicitudproyecto = new Solicitudproyecto();
-  filteredOptions?: Observable<Anexo7[]>;
+  filteredOptions?: Observable<Anexo14[]>;
   firstFormGroup?: FormGroup;
   secondFormGroup?:FormGroup;
   thirdFormGroup?:FormGroup;
@@ -87,18 +90,15 @@ export class Anexo14Component implements OnInit {
   numero?:Number;
   rows: FormArray;
   itemForm?: FormGroup;
-  tutoracaItem1?:String
-
+  tutoracaItem1?:String;
+nombre?:String;
   constructor(private activatedRoute: ActivatedRoute,
               private _formBuilder: FormBuilder,
-              private anexo7Service: Anexo7Service,
-              private usarioService: IniciosesionService,
-              private proyectoService: ProyectoService,
-              private fechaService: FechaService,
+              private anexo14empService: Anexo14empService,
+              private fechatutorempService: FechatutorempService,
               private _adapter: DateAdapter<any>,
-              private anexo14Service: Anexo14Service,
-              private anexo9Service:Anexo9Service,
-
+              private anexo12tutorempService:Anexo12empService,
+              private solicitudemptutorService:ProyectotutorempService
   ) {
     this._adapter.setLocale('es-ec');
     this.thirdFormGroup = this._formBuilder.group({
@@ -117,26 +117,36 @@ export class Anexo14Component implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params=>{
+      let idpro = params['idpro']
+      let nombre = params['nombre']
       let cedula = params['cedula']
-      let nombres = params['nombres']
-      this.nombres = nombres;
-      console.log("esta es la cedula"+this.nombres)
-      this.anexo7Service.getAnexo7().subscribe(data => {
-        this.anexo7 = data.filter(value => value.cedulaTutoracademico==cedula);
+      this.idpro= idpro;
+      this.nombre=nombre;
+      this.cedula=cedula;
+
+      console.log("este es el id de proyecto"+this.idpro)
+
+      console.log("este es el id de nn"+this.nombre)
+
+      console.log("este es el id de cc"+this.cedula)
+
+      this.anexo14empService.getAll().subscribe(data => {
+        this.anexo14 = data.filter(value => value.idProyecto==this.idpro);
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
         );
         this.issloading = false;
+        console.log(this.filteredOptions+"ccccccccccccc")
 
       })
-      this.fechaService.getSysdate().subscribe(value => {
+      this.fechatutorempService.getSysdate().subscribe(value => {
         this.fechae = value.fecha;
       })
     })
 
     this.firstFormGroup = this._formBuilder.group({
-      anexo6: ['', Validators.required]
+      anexo12: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
     });
@@ -147,24 +157,20 @@ export class Anexo14Component implements OnInit {
     this.thirdFormGroup.addControl('rows', this.rows);
 
   }
-  filter(value: any): Anexo7[] {
+  filter(value: any): Anexo14[] {
     const filterValue = value.toString().toLowerCase();
-    return this.anexo7.filter(option => option.nombreEmpresa?.toLowerCase().includes(filterValue)
-      ||option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
+    return this.anexo14.filter(option => option.empresa?.toLowerCase().includes(filterValue)
+      ||option.nombresEstudiante?.toLocaleLowerCase().includes(filterValue)
       ||option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
     );
   }
 
-  selectionAnexo7(anexo7: MatSelectionListChange){
-    this.anexo7select=anexo7.option.value
+  selectionAnexo14(anexo14: MatSelectionListChange){
+    this.anexo14select=anexo14.option.value
 
-    this.proyectoService.getSolicitudesbyid(Number(this.anexo7select.idProyectoPPP)).subscribe(dataP=>{
+    this.solicitudemptutorService.getSolicitudesbyid(Number(this.anexo14select.idProyecto)).subscribe(dataP=>{
       this.proyectoselect=dataP
     })
-    this.anexo9Service.getAnexo9byCedula(this.anexo7select.cedulaEstudiante+'').subscribe(data=>{
-      this.anexo9=data[0]
-    })
-
 
     resultado?.forEach(value2 => {
       // @ts-ignore
@@ -174,11 +180,11 @@ export class Anexo14Component implements OnInit {
 
   }
 //Array
-  onAddRow(tutoraca1:String,tutoraca:String) {
+  onAddRow(tutoremp1:String,tutoremp:String) {
     this.sum = 0;
-    this.rows.push(this.createItemFormGroup(tutoraca1,tutoraca));
+    this.rows.push(this.createItemFormGroup(tutoremp1,tutoremp));
     this.rows.getRawValue().forEach(element => {
-      this.sum+=element.tutoracademicoPuntaje;
+      this.sum+=element.tutorempPuntaje;
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -190,7 +196,7 @@ export class Anexo14Component implements OnInit {
     this.sum = 0;
     this.rows.removeAt(rowIndex);
     this.rows.getRawValue().forEach(element => {
-      this.sum+=element.tutoracaItem2;
+      this.sum+=element.tutorempItem2;
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -201,7 +207,7 @@ export class Anexo14Component implements OnInit {
   sumar(){
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
-      this.sum+=element.tutoracaItem2;
+      this.sum+=element.tutorempItem2;
     })
     if(this.numerominimo-1>=this.sum){
       this.activar=true;
@@ -210,40 +216,40 @@ export class Anexo14Component implements OnInit {
     }
     console.log("metodo sumar"+this.sum)
   }
-  createItemFormGroup(tutoraca1:String,tutoraca:String): FormGroup {
+  createItemFormGroup(tutoremp1:String,tutoremp:String): FormGroup {
     return this._formBuilder.group({
-      tutoracaItem0:[tutoraca1, Validators.required],
-      tutoracaItem1:[tutoraca, Validators.required],
-      tutoracaItem2:['', Validators.required],
+      tutorempItem0:[tutoremp1, Validators.required],
+      tutorempItem1:[tutoremp, Validators.required],
+      tutorempItem2:['', Validators.required],
     });
   }
 
 
-  anexo14ob: Anexo14 = new Anexo14();
+  anexo12ob: Anexo12= new Anexo12();
   obtenerdatos(){
-    this.anexo14ob.cedulaEstudiante=this.anexo7select.cedulaEstudiante;
-    this.anexo14ob.carrera=this.proyectoselect.carrera;
-    this.anexo14ob.idProyecto=this.proyectoselect.id;
-    this.anexo14ob.nombretutoracademico=this.nombres;
-    this.anexo14ob.nombresEstudiante=this.anexo7select.nombreEstudiante;
-    this.anexo14ob.tutoracademicoPuntaje=this.sum;
-    this.anexo14ob.promedio=this.anexo14ob.promedio;
-    this.anexo14ob.fechaInicio=this.proyectoselect.fechaInicio;
-    this.anexo14ob.fechaFinaliza=this.proyectoselect.fechaFin;
-    this.anexo14ob.empresa=this.anexo7select.nombreEmpresa;
-    this.anexo14ob.cedulatutoracademico=this.anexo7select.cedulaTutoracademico;
-    this.anexo14ob.carrera=this.anexo7select.carrera;
-    this.anexo14ob.fechaEvaluacion=this.fechae;
-    this.anexo14ob.totalHoras=parseInt(this.anexo9.totalHoras+'');
-    console.log(this.anexo14ob.totalHoras)
-    this.anexo14ob.tutoraca=this.rows.getRawValue();
-    return this.anexo14ob;
+    this.anexo12ob.cedulaEstudiante=this.anexo14select.cedulaEstudiante;
+    this.anexo12ob.carrera=this.proyectoselect.carrera;
+    this.anexo12ob.idProyecto=this.proyectoselect.id;
+    this.anexo12ob.nombretutoremp=this.nombre;
+    this.anexo12ob.nombresEstudiante=this.anexo14select.nombresEstudiante;
+    this.anexo12ob.tutorempPuntaje=this.sum;
+    this.anexo12ob.promedio=this.anexo12ob.promedio;
+    this.anexo12ob.fechaInicio=this.proyectoselect.fechaInicio;
+    this.anexo12ob.fechaFinaliza=this.proyectoselect.fechaFin;
+    this.anexo12ob.empresa=this.anexo14select.empresa;
+    this.anexo12ob.cedulatutoremp=this.cedula;
+    this.anexo12ob.carrera=this.anexo14select.carrera;
+    this.anexo12ob.fechaEvaluacion=this.fechae;
+    this.anexo12ob.totalHoras=this.anexo14select.totalHoras;
+    console.log(this.anexo12ob.totalHoras)
+    this.anexo12ob.tutoremp=this.rows.getRawValue();
+    return this.anexo12ob;
   }
 
 
   guardar(){
-    this.anexo14ob=this.obtenerdatos();
-    this.anexo14Service.saveAnexo14(this.obtenerdatos()).subscribe(datos=>{
+    this.anexo12ob=this.obtenerdatos();
+    this.anexo12tutorempService.saveAnexo12(this.obtenerdatos()).subscribe(datos=>{
       Swal.fire({
         title: 'Evaluacion Completada',
         showClass: {
@@ -271,30 +277,30 @@ export class Anexo14Component implements OnInit {
   }
 
 
-  subirDocumento14(file:FileList){
+  subirDocumento12(file:FileList){
     if(file.length==0){
     }else{
       getBase64(file[0]).then(docx=>{
         // @ts-ignore
         if(docx.length>=10485760){
-          this.anexo14ob.documento="";
+          this.anexo12ob.documento="";
           Swal.fire(
             'Fallo',
             'El documento excede el peso permitido',
             'warning'
           )
         }else{
-          this.anexo14ob.documento=docx+"";
+          this.anexo12ob.documento=docx+"";
         }
       })
     }
   }
 
-  generarDocumento14() {
-    var anexo14:Anexo14=this.obtenerdatos();
-    console.log(anexo14)
+  generarDocumento12() {
+    var anexo12:Anexo12=this.obtenerdatos();
+    console.log(anexo12)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo14.docx", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo12.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -309,17 +315,16 @@ export class Anexo14Component implements OnInit {
 
 
       doc.setData({
-        fechainicio:pipe.transform(anexo14.fechaInicio,'dd/MM/yyyy'),
-        fechafin:pipe.transform(anexo14.fechaFinaliza,'dd/MM/yyyy'),
-        tb:anexo14.tutoraca,
-        nombreTutoracademico:anexo14.nombretutoracademico,
-        puntajeta:anexo14.tutoracademicoPuntaje,
-        nombreEstudiante:anexo14.nombresEstudiante,
-        cedulaEstudiante:anexo14.cedulaEstudiante,
-        empresa:anexo14.empresa,
-        carrera:anexo14.carrera,
-        nhoras:anexo14.totalHoras,
-
+        fechainicio:pipe.transform(anexo12.fechaInicio,'dd/MM/yyyy'),
+        fechafin:pipe.transform(anexo12.fechaFinaliza,'dd/MM/yyyy'),
+        tb:anexo12.tutoremp,
+        nombreTutoremp:anexo12.nombretutoremp,
+        puntajete:anexo12.tutorempPuntaje,
+        nombreEstudiante:anexo12.nombresEstudiante,
+        cedulaEstudiante:anexo12.cedulaEstudiante,
+        empresa:anexo12.empresa,
+        carrera:anexo12.carrera,
+        nhoras:anexo12.totalHoras,
 
       });
       try {
@@ -364,7 +369,7 @@ export class Anexo14Component implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-      saveAs(out, "Anexo14.docx");
+      saveAs(out, "Anexo12.docx");
     });
   }
   refresh() {

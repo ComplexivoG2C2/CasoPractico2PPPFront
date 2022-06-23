@@ -23,6 +23,7 @@ export class Anexo12{
 }
 export class Anexo12TutorempRequest{
   id?:Number;
+  tutorempItem0?:String;
   tutorempItem1?:String;
   tutorempItem2?:Number;
 }
