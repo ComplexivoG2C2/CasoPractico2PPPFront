@@ -1,5 +1,73 @@
 
 
+<!--<section class="bst-section">-->
+
+<!--  <mat-toolbar class="mat-bar">-->
+<!--    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()" >-->
+<!--      <mat-icon>menu</mat-icon>-->
+<!--    </button>-->
+
+<!--    <span class="example-spacer"></span>-->
+
+<!--    <img src="/assets/images/logooo.png" alt="10px" height="50px">-->
+<!--    <span class="example-spacer"></span>-->
+<!--    <button mat-icon-button class="material-icons teal-color" aria-label="Example icon-button with heart icon" (click)="logout()">-->
+<!--      <mat-icon>settings_power</mat-icon>-->
+<!--    </button>-->
+<!--  </mat-toolbar>-->
+
+<!--  <mat-drawer-container autosize>-->
+<!--    <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">-->
+<!--      <div class="contenedor-perfil">-->
+<!--          <div>-->
+
+<!--          <h4>{{empresa.nombre}}</h4>-->
+<!--          <br>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <ng-container>-->
+<!--        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/nuevasolicitud',empresa.id,empresa.nombre,empresa.representante,empresa.titulorepresentante]">-->
+<!--          <mat-icon>description</mat-icon>-->
+<!--          <span>Generar Solicitud</span>-->
+<!--        </button>-->
+<!--        &lt;!&ndash;      //////////////&ndash;&gt;-->
+<!--        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/crearTutorEmpresarial',empresa.id]">-->
+<!--          <mat-icon>description</mat-icon>-->
+<!--          <span>Resultado de Solicitudes</span>-->
+<!--        </button>-->
+<!--        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/creartutoremp',empresa.id]">-->
+<!--          <mat-icon>description</mat-icon>-->
+<!--          <span>Resultado de Solicitudes</span>-->
+<!--        </button>-->
+<!--        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/TutorEmpresarial']">-->
+<!--          <mat-icon>description</mat-icon>-->
+<!--          <span>Tutor Empresarial</span>-->
+<!--        </button>-->
+
+
+
+
+<!--      </ng-container>-->
+<!--    </mat-drawer>-->
+
+<!--    <div class="example-sidenav-content">-->
+<!--      <main>-->
+<!--        <router-outlet></router-outlet>-->
+<!--      </main>-->
+<!--    </div>-->
+
+<!--  </mat-drawer-container>-->
+<!--  <app-footer></app-footer>-->
+
+<!--  <ng-container *ngIf="issloading">-->
+<!--    <div class="bss-loader">-->
+<!--      <mat-spinner></mat-spinner>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+<!--</section>-->
+
+
 <section class="bst-section">
 
   <mat-toolbar class="mat-bar">
@@ -19,7 +87,7 @@
   <mat-drawer-container autosize>
     <mat-drawer #drawer class="example-sidenav"  opened="true" mode="side">
       <div class="contenedor-perfil">
-          <div>
+        <div>
 
           <h4>{{empresa.nombre}}</h4>
           <br>
@@ -32,17 +100,18 @@
           <span>Generar Solicitud</span>
         </button>
         <!--      //////////////-->
-        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/crearTutorEmpresarial',empresa.id]">
-          <mat-icon>description</mat-icon>
-          <span>Resultado de Solicitudes</span>
-        </button>
+
         <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/creartutoremp',empresa.id]">
           <mat-icon>description</mat-icon>
-          <span>Resultado de Solicitudes</span>
+          <span>Crear Tutores</span>
         </button>
         <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/TutorEmpresarial']">
           <mat-icon>description</mat-icon>
           <span>Tutor Empresarial</span>
+        </button>
+        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/verestadoempresa', empresa.id, empresa.nombre]">
+          <mat-icon>description</mat-icon>
+          <span>Ver Estado de Solicitudes</span>
         </button>
 
 

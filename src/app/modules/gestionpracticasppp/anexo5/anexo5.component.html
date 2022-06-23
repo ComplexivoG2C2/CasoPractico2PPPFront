@@ -1,0 +1,145 @@
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="primerForm">
+    <form [formGroup]="primerForm">
+      <div align="center" style="font-size: large">
+        <p class="title">Asignar Tutor Empresarial</p>
+      </div>
+      <mat-card class="example-card">
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <br>
+
+          <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+            <mat-selection-list #tutores [multiple]="false" (selectionChange)="selectionTutor($event)" formControlName="firstCtrl" required>
+              <mat-list-option *ngFor="let tutor of tutorEmpresarial" [value]="tutor" class="example-item">
+                <div><strong>Tutor: </strong>{{tutor.nombres}} {{tutor.apellidos}}</div>
+                <div><strong>Cedula: </strong>{{tutor.cedula}}</div>
+              </mat-list-option>
+            </mat-selection-list>
+          </cdk-virtual-scroll-viewport>
+
+
+        </mat-card-content>
+        <div>
+          <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+        </div>
+      </mat-card>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel><div align="center" style="font-size: large">
+        <p class="title">Seleccione el Estudiante a su cargo</p>
+      </div></ng-template>
+      <mat-card class="example-card">
+
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Buscar:</mat-label>
+          <input matInput  placeholder="FILTRAR" [formControl]="myControlAnexe3">
+          <mat-icon matSuffix>search</mat-icon>
+
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+            <mat-selection-list #shoes [multiple]="false" (selectionChange)="seleccionestudiante($event)"  required>
+              <mat-list-option *ngFor="let shoe of filteredOptionsanexo3 | async" [value]="shoe"  class="example-item">
+                <div><strong>Estudiante:</strong> {{shoe.nombresestudiante}}</div>
+              </mat-list-option>
+            </mat-selection-list>
+          </cdk-virtual-scroll-viewport>
+          <br>
+          <p>
+            <strong>Seleccion> Estudiante :</strong>{{anexo3Select.nombresestudiante}}
+          </p>
+          <mat-divider></mat-divider>
+          <br>
+          <div>
+            <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="segundoForm">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <table>
+      <th style="padding: 5px">
+        <strong>INFORMACIÓN DEL TUTOR</strong>
+      </th>
+      <th style="padding: 5px">-</th>
+      <tr>
+        <td style="padding: 5px">
+          <!--            <strong>Cédula: </strong> {{tutores.selectedOptions}}<br>-->
+          <strong>Nombres: </strong> {{tutorSelect.nombres}}<br>
+          <strong>Apellidos: </strong>{{tutorSelect.apellidos}}<br>
+          <strong>Correo:</strong>{{tutorSelect.correo}}<br>
+        </td>
+      </tr>
+    </table>
+    <mat-card-header style="text-align: center">
+      <div style="text-align: center">Debe descargar el anexo, firmarlo y subirlo de en formato PDF para completar con el proceso</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div align="center">
+        <button style="width: 45%" mat-raised-button color="primary" (click)="asignarTutor()">Asignar Tutor (A5)</button>
+        <button style="width: 45%" mat-raised-button color="accent">Cancelar</button>
+      </div>
+    </mat-card-content>
+  </mat-step>
+
+<!--  <mat-step [stepControl]="thirtdFormGroup">-->
+<!--    <form [formGroup]="thirtdFormGroup">-->
+<!--      <ng-template matStepLabel><div align="center" style="font-size: large">-->
+<!--        <p class="title">Estudiantes </p>-->
+<!--      </div></ng-template>-->
+<!--      <mat-card class="example-card" style="max-width: 100%">-->
+<!--        <mat-card-header>-->
+<!--          <strong>Seleccione el Alumnos</strong>-->
+<!--        </mat-card-header>-->
+<!--        <mat-divider></mat-divider>-->
+<!--        <mat-card-content>-->
+<!--          <mat-form-field appearance="outline" style="width: 90%">-->
+<!--            <input matInput  placeholder="FILTRAR" [formControl]="myControlAnexe8">-->
+<!--            <mat-icon matSuffix>search</mat-icon>-->
+<!--          </mat-form-field>-->
+<!--          <br>-->
+<!-- -->
+
+
+<!--          <div id ="derecha">-->
+<!--            <strong>Estudiantes Seleccinados:</strong>-->
+<!--            <br>-->
+<!--&lt;!&ndash;            <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngFor="let alumno of alumnoselect">&ndash;&gt;-->
+<!--&lt;!&ndash;                <mat-card style="margin-top: 1px" class="itemmateria">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div> <strong>Cedula:</strong> {{alumno.cedulaEstudiante}} ><strong>Nombres:</strong>  {{alumno.nombreEstudiante}}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>      <button mat-raised-button style="width: 100%;background: #94c6f8" (click)="removeAlumnos(alumno)">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <mat-icon matBadgeColor="warn">keyboard_arrow_left</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                  Quitar&ndash;&gt;-->
+<!--&lt;!&ndash;                </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                </mat-card>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </cdk-virtual-scroll-viewport>&ndash;&gt;-->
+
+<!--          </div> -->
+<!--          <div style="text-align: center">-->
+<!--            <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>-->
+<!--            <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>-->
+<!--          </div>-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
+<!--    </form>-->
+<!--  </mat-step>-->
+
+
+  <mat-card class="example-card">
+
+  </mat-card>
+</mat-stepper>

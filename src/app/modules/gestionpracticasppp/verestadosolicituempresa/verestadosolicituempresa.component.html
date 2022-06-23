@@ -1,0 +1,107 @@
+<div *ngIf="issloading==false">
+
+  <mat-tab-group mat-align-tabs="center">
+
+    <mat-tab label="Proyecto Satisfactorio">
+
+      <div *ngIf="isexist1">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
+            <mat-label>BUSCAR CONVOCATORIA: </mat-label>
+            <input matInput   placeholder="FILTRAR" [formControl]="myControla">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <br>
+        <div *ngFor="let anexo of filteredOptionsa | async" align="center">
+          <mat-card class="example-card">
+            <table>
+              <tr aria-colspan="4">
+                <td colspan="3" style="width: 80%">
+                  <mat-card-content>
+                    <strong>Empresa:</strong> {{anexo.nombreEmpresa}} <br>
+                    <strong>Carrera:</strong> {{anexo.carrera}} <br>
+                    <strong>Responsable de Practicas:</strong>{{anexo.nombreResponsable}}<br>
+                    <strong>Fecha que envio la Solicitud: </strong>{{anexo.fechaSolicitudEmp  | date:"longDate"}}<br>
+                  </mat-card-content>
+                </td>
+                <td style="padding-left: 10px" colspan="1">
+                  <button mat-menu-item (click)="convertFile4(anexo.documento)" style="background: #c4e5fc">
+                    <span>Descargar documento</span>
+                  </button>
+                  <button mat-menu-item [routerLink]="['/panelempresa/gestionpracticasppp/asignarTutor',idEmpresa,anexo.idProyectoPPP, anexo.carrera, anexo.nombreResponsable ]">
+                    <span>Asignar Tutor</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+
+          </mat-card>
+        </div>
+
+      </div>
+
+
+    </mat-tab>
+
+    <mat-tab label="Proyecto  Desierto">
+      <div *ngIf="isexist2">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
+            <mat-label>BUSCAR CONVOCATORIA: </mat-label>
+            <input matInput   placeholder="FILTRAR" [formControl]="myControlr">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <br>
+        <div *ngFor="let anexo2 of filteredOptionsr | async" align="center">
+          <mat-card class="example-card">
+            <table>
+              <tr aria-colspan="4">
+                <td colspan="3" style="width: 80%">
+                  <mat-card-content>
+                    <strong>Empresa:</strong> {{anexo2.nombreEmpresa}} <br>
+                    <strong>Carrera:</strong> {{anexo2.carrera}} <br>
+                    <strong>Responsable de Practicas:</strong>{{anexo2.nombreResponsable}}<br>
+                    <strong>Fecha que envio la Solicitud: </strong>{{anexo2.fechaSolicitudEmp  | date:"longDate"}}<br>
+                  </mat-card-content>
+                </td>
+                <td style="padding-left: 10px" colspan="1">
+                  <button mat-menu-item (click)="convertFile31(anexo2.documento)" style="background: #c4e5fc">
+                    <span>Descargar documento</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+
+          </mat-card>
+        </div>
+      </div>
+      <div *ngIf="isexist2==false">
+        <mat-card>
+          <mat-card-title>Aun no existen respuestas.</mat-card-title>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div *ngIf="isexist1==false">
+  <mat-card>
+    <mat-card-title>Aun no existen respuestas.</mat-card-title>
+  </mat-card>
+</div>
+
+<!--<div *ngIf="isexist2==false">-->
+<!--  <mat-card>-->
+<!--    <mat-card-title>Aun no existen respuestas.</mat-card-title>-->
+<!--  </mat-card>-->
+<!--</div>-->
+
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
