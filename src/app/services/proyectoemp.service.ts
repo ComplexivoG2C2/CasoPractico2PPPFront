@@ -40,6 +40,10 @@ export class ProyectoempService {
   deleteSolicitudes(id?: Number){
     return this.http.delete<Solicitudproyecto>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
+  updateDatosTutor(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
+    console.log(proyectos);
+    return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/tutorempdatos",proyectos,{headers: this.httpHeaders})
+  }
 
   getSolicitudesbyid(id:number):Observable<Solicitudproyecto>{
     return this.http.get(this.urlEndPoint+"/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Solicitudproyecto))

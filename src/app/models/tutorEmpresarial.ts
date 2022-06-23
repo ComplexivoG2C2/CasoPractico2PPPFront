@@ -9,4 +9,5 @@ export class TutorEmpresarial {
   fecha_designacion?:Date;
   idProyectoPPP?:Number;
   empresa_id?:number;
+  titulo?:String;
 }

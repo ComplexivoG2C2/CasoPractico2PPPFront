@@ -35,6 +35,11 @@ export class ProyectoService {
     console.log(proyectos);
     return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/estado",proyectos,{headers: this.httpHeaders})
   }
+
+  updateDatosTutor(proyectos: Solicitudproyecto):Observable<Solicitudproyecto>{
+    console.log(proyectos);
+    return this.http.put<Solicitudproyecto>(this.urlEndPoint+"/tutorempdatos",proyectos,{headers: this.httpHeaders})
+  }
   deleteSolicitudes(id?: Number){
     return this.http.delete<Solicitudproyecto>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }

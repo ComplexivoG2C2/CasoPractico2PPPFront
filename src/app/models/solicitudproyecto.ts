@@ -19,7 +19,9 @@ export class Solicitudproyecto {
   nombretutoremp?:String;
   responsablePPP?:Number;
   documento?:String;
-
+  nombreTutoremp?:String;
+  cedulaTutoremp?:String;
+  tituloTutoremp?:String;
 
   coordinadorCedula?:String;
   plazoEjecucion?:String;

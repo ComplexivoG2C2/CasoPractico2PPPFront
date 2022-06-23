@@ -144,6 +144,21 @@ export class Anexo5Component implements OnInit {
     console.log("Seleccion Tutor")
     this.tutorSelect = tutorselect.option.value;
   }
+  tutoemp: TutorEmpresarial= new TutorEmpresarial();
+  obtnerdatostutoremp():  TutorEmpresarial {
+    this.tutoemp.id=this.tutorSelect.id;
+    this.tutoemp.idProyectoPPP=this.proyecto;
+    return this.tutoemp;
+  }
+
+  ppp: Solicitudproyecto= new Solicitudproyecto();
+  obtnerdatosppp():  Solicitudproyecto {
+    this.ppp.id=this.proyecto;
+    this.ppp.nombreTutoremp=this.tutorSelect.nombres;
+    this.ppp.cedulaTutoremp=this.tutorSelect.nombres;
+    this.ppp.tituloTutoremp=this.tutorSelect.titulo;
+    return this.ppp;
+  }
 
   obtenerDatos(): Anexo5{
     this.fechaService.getSysdate().subscribe(value => {
@@ -160,7 +175,7 @@ export class Anexo5Component implements OnInit {
     })
     return this.anexo5;
   }
-  anexo5C:Anexo5= new Anexo5();
+anexo5C:Anexo5=new Anexo5();
   async asignarTutor(){
     // @ts-ignore
     var anexo5=this.obtenerDatos(this.anexo5C);
@@ -208,20 +223,40 @@ export class Anexo5Component implements OnInit {
                 this.issloading=true;
                 getBase64(value).then(docx => {
                   anexo5.documento = docx + '';
+
                   this.anexo5Service.saveAnexo5(anexo5).subscribe(value1 => {
-                    // var pro2=this.obtnerdatosestadoan5();
-                    Swal.fire({
-                      title: 'Respuesta Enviada',
-                      showClass: {
-                        popup: 'animate__animated animate__fadeInDown'
-                      },
-                      hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp'
-                      }
-                    })
-                    this.router.navigate(['/panelempresa/gestionpracticasppp/TutorEmpresarial'])
-                    this.issloading=false;
-                  },error => {
+                      var tutoremp=this.obtnerdatostutoremp()
+                      this.tutempresarialService.updateDatoste(tutoremp).subscribe(value => {
+
+                        var ppp=this.obtnerdatosppp()
+                        this.proyectoService.updateDatosTutor(ppp).subscribe(value3=>{
+
+                          Swal.fire({
+                            title: 'Respuesta Enviada',
+                            showClass: {
+                              popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                              popup: 'animate__animated animate__fadeOutUp'
+                            }
+                          })
+                          // this.router.navigate(['/panelusuario/gestionpracticasppp/anexo32y4listar',this.cedula]);
+                        },error => {
+                          Swal.fire({
+                            title: 'error..',
+                            showClass: {
+                              popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                              popup: 'animate__animated animate__fadeOutUp'
+                            }
+                          })
+                        })
+                        this.issloading=false;
+
+                        })
+
+                    },error => {
                     Swal.fire({
                       title: 'error..',
                       showClass: {

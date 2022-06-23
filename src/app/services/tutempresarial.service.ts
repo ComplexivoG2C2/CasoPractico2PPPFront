@@ -24,4 +24,10 @@ export class TutempresarialService {
       data => data as TutorEmpresarial[]
     ));
   }
+
+  updateDatoste(tutorEmpresarial:TutorEmpresarial):Observable<TutorEmpresarial>{
+    console.log(tutorEmpresarial);
+    return this.http.put<TutorEmpresarial>(this.urlEndPoint+"/actualizaridproyecto",tutorEmpresarial,{headers: this.httpHeaders})
+  }
+
 }
