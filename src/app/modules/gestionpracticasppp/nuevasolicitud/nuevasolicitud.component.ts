@@ -195,6 +195,7 @@ export class NuevasolicitudComponent implements OnInit {
     var proyecto=this.obtenerDatos()
     this.proyectoS.saveSolicitudes(proyecto).subscribe(value => {
       console.log("entrarrrrrrrrrr" + this.proyectoS.saveSolicitudes(proyecto));
+
       Swal.fire({
         title: 'Solicitud enviada',
         showClass: {
@@ -204,6 +205,7 @@ export class NuevasolicitudComponent implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
+      this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
     }, error => {
       Swal.fire({
         title: 'No se pudo enviar',

@@ -98,6 +98,7 @@ export class LoginempresaComponent implements OnInit {
         sessionStorage.clear;
         console.log(sessionStorage.clear+"limpiar 1 empresa")
         sessionStorage.setItem('emp', JSON.stringify(data));
+        sessionStorage.setItem('user', JSON.stringify(data));
         console.log(data.emailEmpresa+'empresa login token'+sessionStorage.setItem('emp', JSON.stringify(data)))
         this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
 

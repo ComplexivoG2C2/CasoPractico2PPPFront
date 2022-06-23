@@ -27,7 +27,6 @@ export class Anexo6Service {
   }
   getAnexo6All():Observable<Anexo6[]>{
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo6[]))
-
   }
   getAnexo6byId(id?:Number):Observable<Anexo6>{
     return this.http.get(this.urlEndPoint+'/'+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo6))

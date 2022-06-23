@@ -37,7 +37,12 @@ import { Anexo6listarComponent } from './anexo6listar/anexo6listar.component';
 import { EditardelegacionComponent } from './editardelegacion/editardelegacion.component';
 import { Anexo9Component } from './anexo9/anexo9.component';
 import { BienvenidatutorComponent } from './bienvenidatutor/bienvenidatutor.component';
-import { VerEstadoSolicitudesEmpresaComponent } from './ver-estado-solicitudes-empresa/ver-estado-solicitudes-empresa.component';
+import {
+  VerEstadoSolicitudesEmpresaComponent
+} from './ver-estado-solicitudes-empresa/ver-estado-solicitudes-empresa.component';
+import { AsignarTutorComponent } from './TutorEmpresarial/asignar-tutor/asignar-tutor.component';
+import { Anexo12Component } from './anexo12/anexo12.component';
+import { Anexo121Component } from './anexo121/anexo121.component';
 
 
 const routes: Routes = [
@@ -83,7 +88,9 @@ const routes: Routes = [
   },{path:'creartutoremp/:id', component: CreartutorempComponent
   },{path:'listarTutorEmpresarial', component:ListarTutorComponent
   },{path:'verestadoempresa/:id/:emp', component:VerEstadoSolicitudesEmpresaComponent
-  }
+  },{path:'asignarTutor/:id/:pro/:carrera/:responsable', component:AsignarTutorComponent
+  },{path:'anexo12', component:Anexo12Component
+  }, {path:'anexo12.1', component:Anexo121Component}
 ]
 
 @NgModule({
@@ -119,7 +126,10 @@ const routes: Routes = [
     EditardelegacionComponent,
     Anexo9Component,
     BienvenidatutorComponent,
-    VerEstadoSolicitudesEmpresaComponent
+    VerEstadoSolicitudesEmpresaComponent,
+    AsignarTutorComponent,
+    Anexo12Component,
+    Anexo121Component
   ],
   imports: [
     CommonModule,

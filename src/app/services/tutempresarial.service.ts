@@ -24,4 +24,10 @@ export class TutempresarialService {
       data => data as TutorEmpresarial[]
     ));
   }
+
+  getTutoresEmp(idEmpresa: any):Observable<TutorEmpresarial[]>{
+    return this.http.get(this.urlEndPoint+"/byEmp/"+idEmpresa,{headers: this.httpHeaders}).pipe(map(
+      data => data as TutorEmpresarial[]
+    ));
+  }
 }

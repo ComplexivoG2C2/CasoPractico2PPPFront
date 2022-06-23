@@ -3,6 +3,7 @@
   <mat-tab-group mat-align-tabs="center">
 
     <mat-tab label="Proyecto Satisfactorio">
+
       <div *ngIf="isexist1">
         <div align="center">
           <mat-form-field appearance="outline" style="width: 70%">
@@ -19,6 +20,8 @@
                 <td colspan="3" style="width: 80%">
                   <mat-card-content>
                     <strong>Empresa:</strong> {{anexo.nombreEmpresa}} <br>
+                    <strong>Carrera:</strong> {{anexo.carrera}} <br>
+                    <strong>Responsable de Practicas:</strong>{{anexo.nombreResponsable}}<br>
                     <strong>Fecha que envio la Solicitud: </strong>{{anexo.fechaSolicitudEmp  | date:"longDate"}}<br>
                   </mat-card-content>
                 </td>
@@ -26,14 +29,25 @@
                   <button mat-menu-item (click)="convertFile4(anexo.documento)" style="background: #c4e5fc">
                     <span>Descargar documento</span>
                   </button>
+                  <button mat-menu-item [routerLink]="['/panelempresa/gestionpracticasppp/asignarTutor',idEmpresa,anexo.idProyectoPPP, anexo.carrera, anexo.nombreResponsable ]">
+                    <span>Asignar Tutor</span>
+                  </button>
                 </td>
               </tr>
             </table>
 
           </mat-card>
         </div>
+
       </div>
+      <div *ngIf="isexist1==false">
+        <mat-card>
+          <mat-card-title>Aun no existen respuestas.</mat-card-title>
+        </mat-card>
+      </div>
+
     </mat-tab>
+
     <mat-tab label="Proyecto  Desierto">
       <div *ngIf="isexist2">
         <div align="center">
@@ -52,6 +66,8 @@
                 <td colspan="3" style="width: 80%">
                   <mat-card-content>
                     <strong>Empresa:</strong> {{anexo2.nombreEmpresa}} <br>
+                    <strong>Carrera:</strong> {{anexo2.carrera}} <br>
+                    <strong>Responsable de Practicas:</strong>{{anexo2.nombreResponsable}}<br>
                     <strong>Fecha que envio la Solicitud: </strong>{{anexo2.fechaSolicitudEmp  | date:"longDate"}}<br>
                   </mat-card-content>
                 </td>
@@ -66,14 +82,25 @@
           </mat-card>
         </div>
       </div>
+      <div *ngIf="isexist2==false">
+        <mat-card>
+          <mat-card-title>Aun no existen respuestas.</mat-card-title>
+        </mat-card>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>
-<div *ngIf="isexist1==false">
-  <mat-card>
-    <mat-card-title>Aun no existe.</mat-card-title>
-  </mat-card>
-</div>
+<!--<div *ngIf="isexist1==false">-->
+<!--  <mat-card>-->
+<!--    <mat-card-title>Aun no existen respuestas.</mat-card-title>-->
+<!--  </mat-card>-->
+<!--</div>-->
+
+<!--<div *ngIf="isexist2==false">-->
+<!--  <mat-card>-->
+<!--    <mat-card-title>Aun no existen respuestas.</mat-card-title>-->
+<!--  </mat-card>-->
+<!--</div>-->
 
 <ng-container *ngIf="issloading">
   <div class="bss-loader" style="margin: auto;">
@@ -82,3 +109,4 @@
     </center>
   </div>
 </ng-container>
+
