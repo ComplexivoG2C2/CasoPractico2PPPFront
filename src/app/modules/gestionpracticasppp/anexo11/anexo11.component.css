@@ -7,8 +7,16 @@
   width: 100%;
 }
 .example-card {
-  max-width: 600px;
+  max-width: 70%;
   margin: 5px auto;
+  border: 1px solid #0e0000;
+  border-radius: 8px;
+}
+.example-card2 {
+  max-width: 95%;
+  margin: 5px auto;
+  border: 1px solid #0e0000;
+  border-radius: 8px;
 }
 
 .example-viewport {

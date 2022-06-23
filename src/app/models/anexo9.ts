@@ -11,7 +11,8 @@ export class Anexo9{
   documento?:String;
   totalHoras?:Number;
   cedulaTutoremp?:String;
-  actividades?:ActividadesAnexo9Request[]
+  actividades?:ActividadesAnexo9Request[];
+  carrera?:String;
 
 }
 

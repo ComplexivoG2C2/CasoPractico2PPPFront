@@ -118,7 +118,7 @@ export class Anexo9Component implements OnInit {
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.numHoras;
 
-      // console.log(this.sum)
+      console.log(this.sum)
     })
     //console.log(this.rows.getRawValue())
   }
@@ -145,8 +145,7 @@ export class Anexo9Component implements OnInit {
     this.sum = 0;
     this.rows.getRawValue().forEach(element => {
       this.sum+=element.numHoras;
-      // console.log(this.sum)
-      //console.log(this.proyecto)
+      console.log(this.sum)
     })
   }
 
@@ -183,7 +182,7 @@ export class Anexo9Component implements OnInit {
     this.proyectoService.getSolicitudesbyid(event.value).subscribe(data=>{
       this.solicitudproyecto=data
       console.log( this.solicitudproyecto)
-      this.anexo9Service.getEntidadById(data.empresa).subscribe(da=>{
+      this.anexo9Service.getEmpresaById(data.empresa).subscribe(da=>{
         this.empresa=da;
       })
     })
@@ -215,6 +214,7 @@ export class Anexo9Component implements OnInit {
     this.anexo9.nombreEmpresa=this.solicitudproyecto.nombre;
     this.anexo9.nombreEstudiante=this.nombre;
     this.anexo9.nombreProyecto=this.solicitudproyecto.nombre;
+    this.anexo9.carrera=this.solicitudproyecto.carrera;
     this.anexo9.totalHoras=this.sum;
     this.anexo9.actividades=this.rows.getRawValue();
     this.anexo9.nombreRepresentanteemp=this.empresa.nombreCoordinador;
@@ -226,7 +226,7 @@ export class Anexo9Component implements OnInit {
     this.anexo9Service.saveAnexo9(this.ontnerDatos()).subscribe(datos=>{
       // console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
       Swal.fire({
-        title: 'Actividad Registrada',
+        title: 'Actividad Registrada....',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -234,10 +234,10 @@ export class Anexo9Component implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      // window.location.reload();
+      window.location.reload();
     },err=>{
       Swal.fire({
-        title: 'Error',
+        title: 'La fecha no puede repetirse',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -271,29 +271,25 @@ export class Anexo9Component implements OnInit {
   }
 
   actulizar(){
-    // console.log(this.ontnerDatos())
+    console.log(this.ontnerDatos())
     this.anexo9.id=this.anexo9requeste.id
     this.anexo9Service.updateActivadades(this.ontnerDatos()).subscribe(datos=>{
-      // console.log(this.anexo8Service.updateActivadades(this.ontnerDatos()))
+      console.log(this.anexo9Service.updateActivadades(this.ontnerDatos()))
       Swal.fire({
-        title: 'Actividad Registrada',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
+        icon: 'success',
+        title: 'ACTIVIDAD REGISTRADA',
+        text: 'Datos guadados correctamente',
+        confirmButtonColor: "#0088ff",
+        background: "#ffffff",
       })
       window.location.reload();
     },err=>{
       Swal.fire({
-        title: 'Error',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
+        icon: 'warning',
+        title: 'Al paracer hubo un problema',
+        text: err.error.message,
+        confirmButtonColor: "#0089ff",
+        background: "#ffffff",
       })
     })
   }
@@ -314,13 +310,11 @@ export class Anexo9Component implements OnInit {
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
 
       doc.setData({
-        nombre_proyecto:anexo9.nombreProyecto,
         empresa:anexo9.nombreEmpresa,
-        nombre_estudiante:anexo9.nombreEstudiante,
-        identificiacion_est:anexo9.cedulaEstudiante,
-        nombre_admin_entidad:anexo9.nombreRepresentanteemp,
+        nombreEstudiante:anexo9.nombreEstudiante,
+        carrera:anexo9.carrera,
         tutoracademico:anexo9.nombreTutorAcademico,
-        tutoremp:anexo9.nombreTutoremp,
+        nombreTutoremp:anexo9.nombreTutoremp,
         tb:anexo9.actividades,
         totalHoras:anexo9.totalHoras
       });
