@@ -121,7 +121,7 @@ export class RegistroConvenioComponent implements OnInit {
       // docx:['',Validators.required]
     });
 
-    // this.fechaempService.getSysdate().subscribe(value => {
+    //this.fechaempService.getSysdate().subscribe(value => {
     //   this.fechaactual=value.fecha;
     // })
 
