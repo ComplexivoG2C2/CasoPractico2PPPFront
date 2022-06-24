@@ -16,15 +16,15 @@ export class RegistroConvenioService {
   constructor(private http: HttpClient) { }
 
   saveRegistroConvenio(registroConvenio:RegistroConvenio):Observable<RegistroConvenio>{
-    //console.log(anexo3_1)
-    return this.http.post<RegistroConvenio>(this.urlEndPoint,RegistroConvenio,{headers:this.httpHeaders})
+    console.log(registroConvenio)
+    return this.http.post<RegistroConvenio>(this.urlEndPoint,registroConvenio,{headers:this.httpHeaders})
   }
 
   deleteRegistroConvenio(id?: Number){
     return this.http.delete<RegistroConvenio>(this.urlEndPoint+'/'+id,{headers: this.httpHeaders})
   }
 
-  getAnexo3_1():Observable<RegistroConvenio[]>{
+  getRegistroConvenio():Observable<RegistroConvenio[]>{
     return this.http.get(this.urlEndPoint+"/all",{headers: this.httpHeaders}).pipe(map(Response => Response as RegistroConvenio[]))
   }
 

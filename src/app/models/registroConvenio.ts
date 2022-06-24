@@ -50,7 +50,7 @@ export class RegistroConvenio {
 
 export class ActividadEconomicaRuc {
   id?:Number;
-  codActividad?:Number;
+  codActividad?:String;
   actividades?:String;
 }
 

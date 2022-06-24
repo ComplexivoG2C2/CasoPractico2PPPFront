@@ -23,6 +23,11 @@
 .example-full-widthtabla {
   width: 90%;
 }
+
+.example-full-width {
+  width: 100%;
+}
+
 .example-card2 {
   max-width: 60%;
   position: center;
