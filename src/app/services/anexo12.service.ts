@@ -32,6 +32,9 @@ export class Anexo12Service {
   getAnexo12byid(id?:Number):Observable<Anexo12>{
     return this.http.get(this.urlEndPoint+"/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12))
   }
+  getAnexo12bycedulaest(cedulaEstudiante:String):Observable<Anexo12>{
+    return this.http.get(this.urlEndPoint+"/porcedulaest/"+cedulaEstudiante,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12))
+  }
 
   saveAnexo12(anexo12: Anexo12): Observable<Anexo12> {
     //console.log(anexo11);
@@ -42,5 +45,8 @@ export class Anexo12Service {
   }
   getAnexo11byidproyecto(idProyecoPPP?:number):Observable<Anexo12[]>{
     return this.http.get(this.urlEndPoint+"/allByProyecto/"+idProyecoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12[]))
+  }
+  getAnexo12biidppp(idProyecoPPP?:number):Observable<Anexo12>{
+    return this.http.get(this.urlEndPoint+"/byppp/"+idProyecoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12))
   }
 }

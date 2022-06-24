@@ -44,4 +44,7 @@ export class Anexo12empService {
   getAnexo11byidproyecto(idProyecoPPP?:number):Observable<Anexo12[]>{
     return this.http.get(this.urlEndPoint+"/allByProyecto/"+idProyecoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12[]))
   }
+  getAnexo12biidppp(idProyecoPPP?:number):Observable<Anexo12>{
+    return this.http.get(this.urlEndPoint+"/byppp/"+idProyecoPPP,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo12))
+  }
 }

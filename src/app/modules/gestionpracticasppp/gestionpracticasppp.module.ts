@@ -57,6 +57,7 @@ import { VerestadosolicituempresaComponent } from './verestadosolicituempresa/ve
 import { Anexo5Component } from './anexo5/anexo5.component';
 import { Anexo12Component } from './anexo12/anexo12.component';
 import { Anexo12listarComponent } from './anexo12listar/anexo12listar.component';
+import { Anexo121Component } from './anexo121/anexo121.component';
 
 
 const routes: Routes = [
@@ -122,10 +123,16 @@ const routes: Routes = [
     //anexo12
   },{path:'anexo12/:idpro/:nombre/:cedula', component:Anexo12Component
 
+
+
+    ////anexo12.1
+  },{path:'anexo121/:idpro/:nombre', component:Anexo121Component
+
     //anexo14
   },{path:'anexo14/:cedula/:nombres', component:Anexo14Component
 
-
+//anexo15
+  },{path:'anexo15/:cedula/:nombres', component:Anexo15Component
 
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'creartutoremp/:id', component: CreartutorempComponent
@@ -187,7 +194,8 @@ const routes: Routes = [
     VerestadosolicituempresaComponent,
     Anexo5Component,
     Anexo12Component,
-    Anexo12listarComponent
+    Anexo12listarComponent,
+    Anexo121Component
   ],
   imports: [
     CommonModule,

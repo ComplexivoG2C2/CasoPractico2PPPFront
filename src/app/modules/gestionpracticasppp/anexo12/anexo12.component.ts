@@ -14,7 +14,7 @@ import {Anexo8} from "../../../models/anexo8";
 import {Anexo7} from "../../../models/anexo7";
 import {Solicitudproyecto} from "../../../models/solicitudproyecto";
 import {map, Observable, startWith} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Anexo6Service} from "../../../services/anexo6.service";
 import {IniciosesionService} from "../../../services/iniciosesion.service";
 import {ProyectoService} from "../../../services/proyecto.service";
@@ -98,7 +98,7 @@ nombre?:String;
               private fechatutorempService: FechatutorempService,
               private _adapter: DateAdapter<any>,
               private anexo12tutorempService:Anexo12empService,
-              private solicitudemptutorService:ProyectotutorempService
+              private solicitudemptutorService:ProyectotutorempService,private router: Router,
   ) {
     this._adapter.setLocale('es-ec');
     this.thirdFormGroup = this._formBuilder.group({
@@ -238,7 +238,7 @@ nombre?:String;
     this.anexo12ob.fechaFinaliza=this.proyectoselect.fechaFin;
     this.anexo12ob.empresa=this.anexo14select.empresa;
     this.anexo12ob.cedulatutoremp=this.cedula;
-    this.anexo12ob.carrera=this.anexo14select.carrera;
+    this.anexo12ob.siglascarrera=this.anexo14select.siglascarrera;
     this.anexo12ob.fechaEvaluacion=this.fechae;
     this.anexo12ob.totalHoras=this.anexo14select.totalHoras;
     console.log(this.anexo12ob.totalHoras)
@@ -259,7 +259,9 @@ nombre?:String;
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
-      window.location.reload();
+      this.issloading=false;
+      this.router.navigate(['/paneltutor/gestionpracticasppp/anexo121',this.anexo14select.idProyecto,this.nombre]);
+
     },err=>{
       Swal.fire({
         title: 'no registrado',
@@ -273,6 +275,10 @@ nombre?:String;
       window.location.reload();
       this.issloading=false;
     })
+
+
+
+
 
   }
 

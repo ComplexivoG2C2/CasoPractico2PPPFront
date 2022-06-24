@@ -1,1 +1,97 @@
-<p>anexo15 works!</p>
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Estudiantes a Cargo</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+          <mat-card-content>
+
+            <mat-form-field appearance="outline" style="width: 90%">
+              <mat-label>BUSCAR...</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionAnexo14($event)" formControlName="anexo15">
+                <mat-list-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  Empresa: {{option.empresa}} :  Estudiante participante: {{option.cedulaEstudiante}} : {{option.nombresEstudiante}}
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+            <p style="font-size: medium">
+              Estudiante Seleccionado: {{anexo14select.cedulaEstudiante}} : {{anexo14select.nombresEstudiante}}
+            </p>
+            <mat-divider></mat-divider>
+            <br>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="DATOS INFORMATIVOS DEL ESTUDIANTE">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Datos del Estudiante</p>
+        </div></ng-template>
+        <mat-card class="example-card2">
+
+          <mat-card-content>
+            <strong>Datos del Estudiante</strong>
+            <mat-card class="example-card">
+              <mat-list>
+                <mat-list-item>Nombres del Estudiante: {{anexo14select.nombresEstudiante}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Cédula: {{anexo14select.cedulaEstudiante}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Carrera: {{anexo14select.carrera}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Periodo de la Realizacion de Practicas: Del {{anexo14select.fechaFinaliza| date:'mediumDate'}} al {{anexo14select.fechaFinaliza| date:'mediumDate'}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>Fecha en la que se realiza la Evaluacion: {{fechae | date:'mediumDate'}}
+                </mat-list-item>
+                <br>
+                <mat-divider></mat-divider>
+              </mat-list>
+
+                <div>
+                  <button mat-raised-button color="primary" (click)="generarDocumento15()">Generar Documento</button>
+                  <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
+                    <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento15($event.target.files)" placeholder="Subir Documento"></ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div align="center">
+                  <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+                  <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardar()">	Guardar Evaluacion<mat-icon>expand_more</mat-icon></button>
+
+                </div>
+
+
+            </mat-card>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+
+        </mat-card>
+      </form>
+    </mat-step>
+
+  </mat-stepper>
+</div>
+<div *ngIf="isexist==false">
+  <mat-card>
+    <mat-card-title>Aun no hay estudaintes</mat-card-title>
+  </mat-card>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
