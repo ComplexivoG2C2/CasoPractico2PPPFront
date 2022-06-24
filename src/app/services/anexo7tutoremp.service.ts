@@ -28,6 +28,11 @@ export class Anexo7tutorempService {
     return this.http.get(this.urlEndPoint + "/all", {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7[]))
 
   }
+  updateanexo7(anexo7: Anexo7): Observable<Anexo7> {
+    console.log(anexo7);
+    return this.http.put<Anexo7>(this.urlEndPoint, anexo7, {headers: this.httpHeaders})
+  }
+
 
   getAnexo7ByidProyecto(id?: Number): Observable<Anexo7> {
     return this.http.get(this.urlEndPoint + "/allByProyecto/" + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7))

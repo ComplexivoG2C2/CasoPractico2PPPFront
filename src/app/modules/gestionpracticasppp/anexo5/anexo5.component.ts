@@ -91,10 +91,10 @@ export class Anexo5Component implements OnInit {
       this.tutempresarialService.getTutoresAll().subscribe(value => {
         this.tutorEmpresarial=value.filter(value1 => value1.empresa_id=this.idEmpresa);
         console.log(this.tutorEmpresarial)
-      });
+
       this.anexo3Service.getAnexo3byProyecto(proy).subscribe(value => {
         this.anex3lista = value.filter(value1 => value1.estado=='AN');
-        console.log("entro al metodo "+this.anex3lista)
+        console.log("entro al metodo 3333"+this.anex3lista)
         this.filteredOptionsanexo3= this.myControlAnexe3.valueChanges.pipe(
           startWith(''),
           map(values => this.filter(values)),
@@ -103,7 +103,7 @@ export class Anexo5Component implements OnInit {
         this.issloading = false;
 
       })
-
+      });
 
 
     })
@@ -240,7 +240,7 @@ anexo5C:Anexo5=new Anexo5();
                               popup: 'animate__animated animate__fadeOutUp'
                             }
                           })
-                          // this.router.navigate(['/panelusuario/gestionpracticasppp/anexo32y4listar',this.cedula]);
+                          this.router.navigate(['/panelempresa/gestionpracticasppp/anexo5empresa',this.idEmpresa]);
                         },error => {
                           Swal.fire({
                             title: 'error..',

@@ -355,6 +355,8 @@ fechaperiodo?:String;
     this.anexo7.horasCumplidas=this.numerominimo;
     this.anexo7.cronogramaActividadesAnexo7s=this.rows.getRawValue();
     this.anexo7.actividadesCumplirAnexo7s=this.rows2.getRawValue();
+    this.anexo7.nombreTutorEmp=this.proyectoselect.nombretutoremp;
+    this.anexo7.tituloTutorEmp=this.proyectoselect.tituloTutoremp;
 
     this.anexo7.actividadesAnexo7s=this.proyectoselect.actividadeslistProyectos;
 

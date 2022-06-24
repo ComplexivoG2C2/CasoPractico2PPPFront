@@ -25,6 +25,11 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import {ResponsablepppService} from "../../../services/responsableppp.service";
+import {Resposable} from "../../../models/resposableppp";
+import {Solicitudproyecto} from "../../../models/solicitudproyecto";
+import {Anexo7} from "../../../models/anexo7";
+import {Anexo7Service} from "../../../services/anexo7.service";
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
 }
@@ -66,22 +71,24 @@ export class Anexo15Component implements OnInit {
   filteredOptions?: Observable<Anexo14[]>;
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
-
+  proyectoselect: Solicitudproyecto = new Solicitudproyecto();
   numero?: Number;
   anexo12: Anexo12 = new Anexo12();
   tutoracaItem1?: String;
   anexo6: Anexo6[] = [];
-
+  responsableppp:Resposable[]=[];
+responsable:Resposable=new Resposable();
+  anexo7: Anexo7 = new Anexo7();
   nombre?: String;
-
+  anexo7lista: Anexo7[] = [];
   constructor(private activatedRoute: ActivatedRoute,
               private _formBuilder: FormBuilder,
               private anexo14Service: Anexo14Service,
               private fechaService: FechaService,
               private _adapter: DateAdapter<any>,
-              private anexo6Service: Anexo6Service,
+              private anexo6Service: Anexo6Service,private anexo7Service:Anexo7Service,
               private anexo12Service: Anexo12Service, private anexo15Service: Anexo15Service,
-              private solicitudService: ProyectoService, private router: Router,
+              private solicitudService: ProyectoService, private router: Router,private responsablepppService:ResponsablepppService
   ) {
     this._adapter.setLocale('es-ec');
 
@@ -144,6 +151,12 @@ export class Anexo15Component implements OnInit {
       this.anexo12 = value;
       console.log("obtuve datos del anexo12")
     })
+    this.anexo7Service.getAnexo7().subscribe(value1 => {
+      this.anexo7lista = value1.filter(value2=>value2.nombreEstudiante==this.anexo14select.nombresEstudiante)
+      // @ts-ignore
+      this.anexo7=value1[0];
+      console.log("resaponsable"+this.anexo7.nombreResponsable)
+    })
 
   }
 
@@ -155,6 +168,7 @@ export class Anexo15Component implements OnInit {
   obtenerdatos() {
     this.anexo15.carrera = this.anexo14select.carrera;
     this.anexo15.idProyecto = this.anexo14select.idProyecto;
+    this.anexo15.periodoacademico=this.anexo7.nombreResponsable;
     ///estudiante
     this.anexo15.cedulaEstudiante = this.anexo14select.cedulaEstudiante;
     this.anexo15.nombresEstudiante = this.anexo14select.nombresEstudiante;
@@ -182,7 +196,7 @@ export class Anexo15Component implements OnInit {
     this.anexo15.empresa = this.anexo14select.empresa;
     this.anexo15.siglascarrera = this.anexo14select.siglascarrera;
     this.anexo15.fechaEvaluacion = this.fechae;
-
+this.anexo15.ciclo=this.anexo7.ciclo;
     this.anexo15.promediofinal = this.promedio;
     this.anexo15.totalHoras = this.anexo14select.totalHoras;
     console.log(this.anexo15.totalHoras)
@@ -261,14 +275,19 @@ export class Anexo15Component implements OnInit {
 
 
       doc.setData({
-        fechainicio:pipe.transform(anexo15.fechaEvaluacion,'dd/MM/yyyy'),
-        nombreTutoremp:anexo15.nombretutoremp,
-        puntajete:anexo15.notaTutorE,
+        fecha:pipe.transform(anexo15.fechaEvaluacion,'dd/MM/yyyy'),
+        nombreTutoracademico:anexo15.nombretutoracademico,
+        notaa:anexo15.notaTutorA,
+        notae:anexo15.notaTutorE,
+        notafa:anexo15.porcentajeTutorA,
+        notafe:anexo15.porcentajeTutorE,
+        promedio:anexo15.promediofinal,
         nombreEstudiante:anexo15.nombresEstudiante,
         cedulaEstudiante:anexo15.cedulaEstudiante,
         empresa:anexo15.empresa,
         carrera:anexo15.carrera,
-        nhoras:anexo15.totalHoras,
+        totalhoras:anexo15.totalHoras,
+        responsablePPP:anexo15.periodoacademico,
 
       });
       try {

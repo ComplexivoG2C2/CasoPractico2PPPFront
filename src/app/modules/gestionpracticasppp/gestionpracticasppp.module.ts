@@ -58,6 +58,12 @@ import { Anexo5Component } from './anexo5/anexo5.component';
 import { Anexo12Component } from './anexo12/anexo12.component';
 import { Anexo12listarComponent } from './anexo12listar/anexo12listar.component';
 import { Anexo121Component } from './anexo121/anexo121.component';
+import { Anexo5listarComponent } from './anexo5listar/anexo5listar.component';
+import { Anexo5listarcoordinacionComponent } from './anexo5listarcoordinacion/anexo5listarcoordinacion.component';
+import { Anexo5listarempresaComponent } from './anexo5listarempresa/anexo5listarempresa.component';
+import { Anexo7firmarComponent } from './anexo7firmar/anexo7firmar.component';
+import { Firmaranexo9Component } from './firmaranexo9/firmaranexo9.component';
+import { Anexo9firmarComponent } from './anexo9firmar/anexo9firmar.component';
 
 
 const routes: Routes = [
@@ -84,6 +90,10 @@ const routes: Routes = [
   },{path:'anexo32y4respuestaaempresa/:cedula', component:Anexo31y4respuestasComponent
   },{path:'anexo32y4listar/:cedula', component:Anexo31y4listarComponent
   //anexo5
+  },{path:'asignarTutor/:id/:pro/:carrera/:responsable', component:Anexo5Component
+  },{path:'anexo5listar/:nombres', component:Anexo5listarComponent
+  },{path:'anexo5responsableppp/:cedula', component:Anexo5listarcoordinacionComponent
+  },{path:'anexo5empresa/:id', component:Anexo5listarempresaComponent
 
 
   //anexo6
@@ -96,6 +106,8 @@ const routes: Routes = [
   //anexo7
   },{path:'anexo7actareunion/:cedula', component:Anexo7Component
   },{path:'anexo7listar/:cedula', component:Anexo7listarComponent
+  },{path:'anexo7firmar/:nombres', component:Anexo7firmarComponent
+
 
   //anexo8
   },{path:'versolicitudesestudiantes/:cedula', component: VersolicitudesestudianteComponent
@@ -138,8 +150,7 @@ const routes: Routes = [
   },{path:'creartutoremp/:id', component: CreartutorempComponent
   },{path:'listarTutorEmpresarial', component:ListarTutorComponent
   },{path:'verestadoempresa/:id/:emp', component:VerestadosolicituempresaComponent
-    //anexo5
-  },{path:'asignarTutor/:id/:pro/:carrera/:responsable', component:Anexo5Component
+
   }
 ]
 
@@ -195,7 +206,13 @@ const routes: Routes = [
     Anexo5Component,
     Anexo12Component,
     Anexo12listarComponent,
-    Anexo121Component
+    Anexo121Component,
+    Anexo5listarComponent,
+    Anexo5listarcoordinacionComponent,
+    Anexo5listarempresaComponent,
+    Anexo7firmarComponent,
+    Firmaranexo9Component,
+    Anexo9firmarComponent
   ],
   imports: [
     CommonModule,

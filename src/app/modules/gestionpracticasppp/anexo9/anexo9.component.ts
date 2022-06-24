@@ -218,6 +218,8 @@ export class Anexo9Component implements OnInit {
     this.anexo9.totalHoras=this.sum;
     this.anexo9.actividades=this.rows.getRawValue();
     this.anexo9.nombreRepresentanteemp=this.empresa.nombreCoordinador;
+    this.anexo9.nombreTutoremp=this.solicitudproyecto.nombreTutoremp;
+    this.anexo9.cedulaTutoremp=this.solicitudproyecto.cedulaTutoremp;
 
     return this.anexo9;
   }

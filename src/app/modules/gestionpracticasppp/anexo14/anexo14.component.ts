@@ -232,7 +232,7 @@ export class Anexo14Component implements OnInit {
     this.anexo14ob.fechaFinaliza=this.proyectoselect.fechaFin;
     this.anexo14ob.empresa=this.anexo7select.nombreEmpresa;
     this.anexo14ob.cedulatutoracademico=this.anexo7select.cedulaTutoracademico;
-    this.anexo14ob.carrera=this.anexo7select.carrera;
+    this.anexo14ob.siglascarrera=this.anexo7select.siglascarrera;
     this.anexo14ob.fechaEvaluacion=this.fechae;
     this.anexo14ob.totalHoras=parseInt(this.anexo9.totalHoras+'');
     console.log(this.anexo14ob.totalHoras)
