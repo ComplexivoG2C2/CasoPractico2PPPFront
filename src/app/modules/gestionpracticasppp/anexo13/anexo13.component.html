@@ -8,17 +8,20 @@
 
         <mat-card class="example-card">
           <mat-card-content>
-            <mat-divider></mat-divider>
-            <mat-form-field appearance="outline" style="width: 80%">
-              <mat-label>Seleccione la empresa en donde esta desarrollando sus practicas Preprofesionales:</mat-label>
-              <mat-select  (selectionChange)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="firstCtrl">
-                <mat-option *ngFor="let item of solicitudproyectos" [value]="item.id">{{item.nombre}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <br>
+            <div align="center">
+              <mat-divider></mat-divider>
+              <mat-form-field appearance="outline" style="width: 80%">
+                <mat-label>Seleccione la empresa en donde esta desarrollando sus practicas Preprofesionales:</mat-label>
+                <mat-select  (selectionChange)="selectOpcion($event)" style="width: 100%" name="select" required formControlName="firstCtrl">
+                  <mat-option *ngFor="let item of solicitudproyectos" [value]="item.id">{{item.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+            </div>
+
           </mat-card-content>
           <mat-card-actions>
-            <div>
+            <div align="center">
               <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
             </div>
           </mat-card-actions>
@@ -26,7 +29,7 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Datos">
+    <mat-step [stepControl]="secondFormGroup" label="Datos Adicionales">
       <form [formGroup]="secondFormGroup">
         <mat-card class="example-card">
           <mat-card-header style="text-align: center">
@@ -34,82 +37,91 @@
           </mat-card-header>
           <mat-divider></mat-divider>
           <br>
-          <div><strong>Nombre:</strong>{{anexo13.cedulaEstudiante}}</div>
-          <br>
-          <table>
-            <tr aria-colspan="4">
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Telefono del Estudiante</mat-label>
-                  <input matInput formControlName="tl" placeholder="+593)000000000)"  required [(ngModel)]="anexo13.telefonoEstudiante"  autofocus>
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Area o Departamento Laborado</mat-label>
-                  <input matInput formControlName="area" placeholder="Area en la que trabajo"  required [(ngModel)]="anexo13.area"  autofocus>
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Ciclo:</mat-label>
-                  <mat-select formControlName="ciclo" required [(ngModel)]="anexo13.ciclo">
-                    <mat-option value="PRIMER">Primer Ciclo</mat-option>
-                    <mat-option value="SEGUNDO">Segundo Ciclo</mat-option>
-                    <mat-option value="TERCERO">Tercer Ciclo</mat-option>
-                    <mat-option value="CUARTO">Cuarto Ciclo</mat-option>
-                    <mat-option value="QUINTO">Quinto Ciclo</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-label>Tiempo Asignado:</mat-label>
-                  <mat-select formControlName="tiempo"  required [(ngModel)]="anexo13.tiempo">
-                    <mat-option value="Medio">Medio Tiempo</mat-option>
-                    <mat-option value="Completo">Tiempo Completoo</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr aria-colspan="3">
-              <td>
-                <mat-form-field>
-                  <mat-label>Constitucion de la Empresa</mat-label>
-                  <textarea matInput formControlName="constitucion" placeholder="Constitución..." required [(ngModel)]="anexo13.constitucion"></textarea>
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field>
-                  <mat-label>Actividad Principal</mat-label>
-                  <textarea matInput formControlName="actividad"  placeholder="Actividad Principal..." required [(ngModel)]="anexo13.actividadPrincipal"></textarea>
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field>
-                  <mat-label>Principios Empresa</mat-label>
-                  <textarea matInput formControlName="principios"  placeholder="Principios..." required [(ngModel)]="anexo13.principiosEmpresa"></textarea>
-                </mat-form-field>
-              </td>
-            </tr>
+            <br>
+          <mat-grid-list cols="4" rowHeight="8:2">
 
-            <tr aria-colspan="1">
-              <td style="width: 100%">
-                <mat-form-field>
-                  <mat-label>Misión de la Empresa</mat-label>
-                  <textarea matInput formControlName="mision" placeholder="Misión..." required [(ngModel)]="anexo13.misionEmpresa"></textarea>
-                </mat-form-field>
-              </td><br>
-              <td style="width: 100%">
-                <mat-form-field>
-                  <mat-label>Visión de la Empresa</mat-label>
-                  <textarea matInput formControlName="vision"  placeholder="Visión..." required [(ngModel)]="anexo13.visionEmpresa"></textarea>
-                </mat-form-field>
-              </td>
-            </tr>
-          </table>
+              <div style="width: 100%;">
+                <strong>Informacion adicional del Estudiante</strong>
+
+                <mat-grid-tile colspan="1">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Telefono del Estudiante</mat-label>
+                    <input matInput formControlName="tl" placeholder="(+593)000000000)"  required [(ngModel)]="anexo13.telefonoEstudiante"  autofocus>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Area o Departamento Laborado</mat-label>
+                    <input matInput formControlName="area" placeholder="Area en la que trabajo"  required [(ngModel)]="anexo13.area"  autofocus>
+                  </mat-form-field>
+                </mat-grid-tile>
+                  <mat-grid-tile colspan="1">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ciclo Actual:</mat-label>
+                    <mat-select formControlName="ciclo" required [(ngModel)]="anexo13.ciclo">
+                      <mat-option value="PRIMER">Primer Ciclo</mat-option>
+                      <mat-option value="SEGUNDO">Segundo Ciclo</mat-option>
+                      <mat-option value="TERCERO">Tercer Ciclo</mat-option>
+                      <mat-option value="CUARTO">Cuarto Ciclo</mat-option>
+                      <mat-option value="QUINTO">Quinto Ciclo</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tiempo Asignado:</mat-label>
+                    <mat-select formControlName="tiempo"  required [(ngModel)]="anexo13.tiempo">
+                      <mat-option value="Medio">Medio Tiempo</mat-option>
+                      <mat-option value="Completo">Tiempo Completoo</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </div>
+          </mat-grid-list>
+            <mat-grid-list cols="4" rowHeight="8:2">
+              <div style="width: 100%;margin-top: 20px">
+              <strong>Nombre de la Empresa:</strong>{{proyecto13.nombre}}
+                <mat-grid-tile colspan="2">
+                  <mat-form-field>
+                    <mat-label>Constitucion de la Empresa</mat-label>
+                    <textarea style="width: 100%"  matInput formControlName="constitucion" placeholder="Constitución..." required [(ngModel)]="anexo13.constitucion"></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  <mat-form-field>
+                    <mat-label>Actividad Principal</mat-label>
+                    <textarea style="width: 100%"  matInput formControlName="actividad"  placeholder="Actividad Principal..." required [(ngModel)]="anexo13.actividadPrincipal"></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                  <mat-form-field>
+                    <mat-label>Principios Empresa</mat-label>
+                    <textarea style="width: 100%"  matInput formControlName="principios"  placeholder="Principios..." required [(ngModel)]="anexo13.principiosEmpresa"></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </div>
+            </mat-grid-list>
+
+          <mat-grid-list cols="4" rowHeight="8:2">
+              <div style="width: 100%">
+                <mat-grid-tile colspan="2">
+  <mat-form-field>
+    <mat-label>Misión de la Empresa</mat-label>
+    <textarea style="width: 100%" matInput formControlName="mision" placeholder="Misión..." required [(ngModel)]="anexo13.misionEmpresa"></textarea>
+  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2">
+                  <mat-form-field>
+                    <mat-label>Visión de la Empresa</mat-label>
+                    <textarea style="width: 100%"  matInput formControlName="vision"  placeholder="Visión..." required [(ngModel)]="anexo13.visionEmpresa"></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </div>
+          </mat-grid-list>
           <mat-card-actions>
-            <div>
+            <div align="center">
               <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
             </div>
           </mat-card-actions>
@@ -119,12 +131,12 @@
 
 
 
-    <mat-step [stepControl]="thirthFormGroup" >
+    <mat-step [stepControl]="thirthFormGroup" label="Dercargar y Subida del documento">
       <form [formGroup]="thirthFormGroup">
         <mat-card class="example-card">
 
           <br><br>
-          <h4> SI YA CULMINO EL REGISTRO DE TODAS SUS ACTIVIDADES, DESCARGUE EL ARCHIVO Y SUBALO.</h4>
+          <h4> A continuacion tendra que decargar su documento y subirlo en formato PDF</h4>
           <div>
             <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Anexo</button>
             <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
@@ -133,9 +145,10 @@
             </mat-form-field>
           </div>
           <mat-card-content>
-            <div>
-              <button mat-flat-button matStepperPrevious color="primary"  >Return</button>
-              <button mat-flat-button matStepperNext color="warn" (click)="guardarAnexo13()">Next</button>
+
+            <div align="center">
+              <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
+              <button style="width: 45%" mat-raised-button matStepperNext color="primary" (click)="guardarAnexo13()">	<mat-icon>expand_more</mat-icon></button>
             </div>
           </mat-card-content>
         </mat-card>

@@ -66,6 +66,8 @@ import { Anexo9firmarComponent } from './anexo9firmar/anexo9firmar.component';
 import { Anexo9responsablepppComponent } from './anexo9responsableppp/anexo9responsableppp.component';
 import { Anexo11firmasComponent } from './anexo11firmas/anexo11firmas.component';
 import { Anexo13Component } from './anexo13/anexo13.component';
+import { RegistroconvenioComponent } from './registroconvenio/registroconvenio.component';
+import { DescargardocumentoComponent } from './descargardocumento/descargardocumento.component';
 
 
 const routes: Routes = [
@@ -84,6 +86,11 @@ const routes: Routes = [
   },{path:'versolicitud/:id/:nombreempresa/:nombresolicitante/:cargosolicitante', component:VersolicutudesComponent
   },{path:'anexo2convocatoria/:cedula', component: Anexo2convocatoriasComponent
   },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
+
+    ////convenios
+  },{path:'registroconvenio/:cedula', component:RegistroconvenioComponent
+
+
     ////Anexo3
   },{path: 'anexo3/:cedula', component: Anexo3Component
   },{path:'estadossolicitud/:cedula', component:EstadossolicitudComponent
@@ -139,8 +146,6 @@ const routes: Routes = [
     //anexo12
   },{path:'anexo12/:idpro/:nombre/:cedula', component:Anexo12Component
 
-
-
     ////anexo12.1
   },{path:'anexo121/:idpro/:nombre', component:Anexo121Component
 
@@ -157,7 +162,8 @@ const routes: Routes = [
 
     ////anexo13
   },{path:'anexo13/:cedula/:nombres/:email', component:Anexo13Component
-  }
+  },{path:'verdescargar/:cedula/:nombres', component:DescargardocumentoComponent
+}
 ]
 
 @NgModule({
@@ -220,7 +226,9 @@ const routes: Routes = [
     Anexo9firmarComponent,
     Anexo9responsablepppComponent,
     Anexo11firmasComponent,
-    Anexo13Component
+    Anexo13Component,
+    RegistroconvenioComponent,
+    DescargardocumentoComponent
   ],
   imports: [
     CommonModule,

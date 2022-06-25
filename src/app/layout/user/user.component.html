@@ -31,31 +31,37 @@
 
         <div [ngSwitch]="persona.rol">
  <!--Admin-->
-          <div class="list-group" *ngSwitchCase="'AUT'">
+          <div class="list-group" *ngSwitchCase="'AUT'" style="background: #455a64;color: white">
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/cordinadorvinculacion']"
                       routerLinkActive="active">> Asignar Coordinador Vinculación</button>
-            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo1',persona.cedula,persona.nombrescompletos]"
-                    routerLinkActive="active">> Anexo 1 plantilla</button>
           </div>
 <!--Cordinado de VC-->
-          <div class="list-group" *ngSwitchCase="'CV'">
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"
-                      routerLinkActive="active">> Registrar empresas</button>
+          <div class="list-group" *ngSwitchCase="'CV'" style="background: #455a64;color: white">
+<!--              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"-->
+<!--                      routerLinkActive="active">> Registrar empresas</button>-->
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/registroconvenio',persona.cedula]"
+                    routerLinkActive="active">> Convenios con empresas</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"
                     routerLinkActive="active">> Informe de empresas</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verdescargar',persona.cedula,persona.nombrescompletos]"
+                    routerLinkActive="active">Historial de Procesos</button>
           </div>
 
 
 <!--Cordinado de Carrera-->
-          <div class="list-group" *ngSwitchCase="'CC'">
-
+          <div class="list-group" *ngSwitchCase="'CC'" style="background: #455a64;color: white">
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"
+                    routerLinkActive="active">> Registrar empresas</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/nuevoresponsableppp',persona.cedula]"
                       routerLinkActive="active">> Asignar Reposable de Practicas</button>
-
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verresponsableppp',persona.cedula]"
+                    routerLinkActive="active">> Ver Reposable de Practicas</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verdescargar',persona.cedula,persona.nombrescompletos]"
+                    routerLinkActive="active">Ver Documentos</button>
           </div>
 
 <!--Tutor academico-->
-          <div class="list-group" *ngSwitchCase="'DA'">
+          <div class="list-group" *ngSwitchCase="'DA'" style="background: #455a64;color: white">
 
 
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo6consultatutoracademico',persona.cedula]"
@@ -192,7 +198,7 @@
 
           </div>
 <!--Estudiante-->
-          <div class="list-group" *ngSwitchCase="'EST'">
+          <div class="list-group" *ngSwitchCase="'EST'" style="background: #455a64;color: white">
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header style="background: #455a64;color: white">
@@ -201,9 +207,9 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo3',persona.cedula]"
-                      routerLinkActive="active"> Lista de Solicitudes</button>
+                      routerLinkActive="active"> Lista de Convocatorias (A2)</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/estadossolicitud',persona.cedula]"
-                      routerLinkActive="active"> Solicitudes Enviadas</button>
+                      routerLinkActive="active"> Solicitudes Enviadas (A3)</button>
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -214,9 +220,9 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9',persona.cedula,persona.nombrescompletos]"
-                      routerLinkActive="active"> Nuevo Registro</button>
+                      routerLinkActive="active"> Nuevo Registro de Asistencia (A9)</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo13',persona.cedula,persona.nombrescompletos,persona.email]"
-                      routerLinkActive="active"> Nuevo Registro</button>
+                      routerLinkActive="active"> Informe de Finalizacion (A13)</button>
             </mat-expansion-panel>
           </div>
 
