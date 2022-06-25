@@ -21,6 +21,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {Anexo4SeleccionEComponent} from "./anexo4-seleccion-e/anexo4-seleccion-e.component";
 import { Anexo31Component } from './anexo31/anexo31.component';
 import { Anexo81Component } from './anexo81/anexo81.component';
+import { RegistroConvenioComponent } from './registro-convenio/registro-convenio.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,8 @@ const routes: Routes = [
     component:Anexo31Component
   },{path:'anexo8_1',
     component:Anexo81Component
+  },{path:'registroconvenio/:cedula',
+    component:RegistroConvenioComponent
   }
 
 ]
@@ -73,6 +76,7 @@ const routes: Routes = [
     VersolicutudesComponent,
     Anexo31Component,
     Anexo81Component,
+    RegistroConvenioComponent,
   ],
   imports: [
     CommonModule,

@@ -444,7 +444,7 @@
             <br><br>
             <h4> SI YA CULMINO EL REGISTRO DE CONVENIOS Y TODAS SUS ACTIVIDADES, DESCARGUE EL ARCHIVO Y SUBALO.</h4>
             <div>
-              <button mat-raised-button color="primary">Obtener Registro del Convenio</button>
+              <button mat-raised-button color="primary" (click)="ggenerarDocumento9()">Obtener Registro del Convenio</button>
               <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
                 <ngx-mat-file-input accept="application/pdf" placeholder="Subir Documento"></ngx-mat-file-input>
                 <mat-icon matSuffix>folder</mat-icon>
@@ -459,7 +459,6 @@
           </mat-card>
         </form>
       </mat-step>
-
 
     </mat-stepper>
   </div>

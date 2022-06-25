@@ -242,6 +242,7 @@ this.issloading=false;
    this.registroConvenio2.nombreRepreEmpresa=this.registroConvenio1.nombreRepreEmpresa;
     this.registroConvenio2.rucEmpresa=this.registroConvenio1.rucEmpresa;
   */
+     this.registroConvenio2.empresa_id=1;
     this.registroConvenio2.actividadEconomicaRuc=this.rows.getRawValue();
 
   /*  this.registroConvenio2.anioConvenio=this.registroConvenio1.anioConvenio;
@@ -293,6 +294,111 @@ this.naturaleza=this.registroConvenio2.naturalezaEntidad;
      })
 
    }
+
+  ggenerarDocumento9() {
+    var registroConvenio:RegistroConvenio=this.obtenerDatos();
+    // console.log(registroConvenio)
+    var pipe:DatePipe = new DatePipe('en-US')
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/oscar/src/assets/docs/RegistroConvenios.doc", function(
+      // @ts-ignore
+      error,
+      // @ts-ignore
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+
+      doc.setData({
+        codigoInforme:registroConvenio.codigoInforme,
+        anioInforme:registroConvenio.anioInforme,
+        fechaConvenio:registroConvenio.fechaConvenio,
+        nombreEmpresa:registroConvenio.nombreEmpresa,
+        naturalezaEntidad:registroConvenio.naturalezaEntidad,
+        nombreRepreEmpresa:registroConvenio.nombreRepreEmpresa,
+        rucEmpresa:registroConvenio.rucEmpresa,
+
+        actividadEconomicaRuc:registroConvenio.actividadEconomicaRuc,
+
+        anioConvenio:registroConvenio.anioConvenio,
+        nroEstudiantes:registroConvenio.nroEstudiantes,
+        totalEstudiantes:registroConvenio.totalEstudiantes,
+        nombreTutorAcademico:registroConvenio.nombreTutorAcademico,
+        tlfTutorA:registroConvenio.tlfTutorA,
+        cargoTutorEmpresa:registroConvenio.cargoTutorEmpresa,
+        tlfTutorEmpresa:registroConvenio.tlfTutorEmpresa,
+        emailEmpresa:registroConvenio.emailEmpresa,
+        tlfContactoEmpresa:registroConvenio.tlfContactoEmpresa,
+        provinciaMatrizEmpresa:registroConvenio.provinciaMatrizEmpresa,
+        cantonMatrizEmpresa:registroConvenio.cantonMatrizEmpresa,
+        callePrincipalEmpresa:registroConvenio.callePrincipalEmpresa,
+        numIdentificacionEdificio:registroConvenio.numIdetificacionEdificio,
+        calleSecundariaMatrizEmpresa:registroConvenio.calleSecundariaMatrizEmpresa,
+        referenciaEmpresa:registroConvenio.referenciaEmpresa,
+        provinciaSucursalEmpresa:registroConvenio.provinciaSucursalEmpresa,
+        cantonSucursalEmpresa:registroConvenio.cantonSucursalEmpresa,
+        direccionSucursalEmpresa:registroConvenio.direccionSucursalEmpresa,
+        carrera:registroConvenio.carrera,
+        cargoAdminConvenioIsta:registroConvenio.cargoAdminConvenioIsta,
+        cargoRepreEmpresa:registroConvenio.cargoRepreEmpresa,
+        justificacionEmpresa:registroConvenio.justificacionEmpresa,
+        nombreRectorIsta:registroConvenio.nombreRectorIsta,
+        fechaNombramiento:registroConvenio.fechaNombramiento,
+
+        actividadesRealizar:registroConvenio.actividadesRealizars,
+
+        nroTutoresEmpresa:registroConvenio.nroTutoresEmpresa,
+        conclusionesConvenio:registroConvenio.conclusionesConvenio,
+        recomendacionesConvenio:registroConvenio.recomendacionesConvenio,
+        nombreAdminConvenio:registroConvenio.nombreAdminConvenio,
+      });
+      try {
+        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        // @ts-ignore
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+                error,
+                key
+              ) {
+                // @ts-ignore
+                error[key] = value[key];
+                return error;
+              },
+              {});
+          }
+          return value;
+        }
+        //console.log(JSON.stringify({ error: error }, replaceErrors));
+        // @ts-ignore
+        if (error.properties && error.properties.errors instanceof Array) {
+          // @ts-ignore
+          const errorMessages = error.properties.errors
+            // @ts-ignore
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          // console.log("errorMessages", errorMessages);
+          // errorMessages is a humanly readable message looking like this :
+          // 'The tag beginning with "foobar" is unopened'
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+     // saveAs(out, "RegistroConvenios.doc");
+    });
+  }
 
   // eliminarActividad(actividades:ActividadEconomicaRuc){
   //   console.log(this.registroConvenio.id,actividades.id)
