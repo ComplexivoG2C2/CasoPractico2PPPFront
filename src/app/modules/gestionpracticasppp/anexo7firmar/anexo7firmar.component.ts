@@ -7,7 +7,6 @@ import {Anexo7} from "../../../models/anexo7";
 import {map, Observable, startWith} from "rxjs";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {DateAdapter} from "@angular/material/core";
-import {Anexo7Service} from "../../../services/anexo7.service";
 // @ts-ignore
 import { saveAs } from "file-saver";
 import {Anexo7tutorempService} from "../../../services/anexo7tutoremp.service";
@@ -47,12 +46,12 @@ export class Anexo7firmarComponent implements OnInit {
     this.activatedRoute.params.subscribe( params => {
       let nombres=params['nombres']
       this.nombres=nombres;
+      console.log('nombres'+this.nombres)
       this.anexo7Service.getAnexo7().subscribe(value => {
+        this.isexist=value.length!=0;
         this.anexo7 = value.filter(value => value.nombreTutorEmp==nombres);
 
-        //console.log(value);
-        this.isexist=value.length!=0;
-        this.anexo7=value;
+        console.log(value+"si hay datos");
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),
@@ -76,7 +75,7 @@ export class Anexo7firmarComponent implements OnInit {
     const {value: file} = await Swal.fire({
       allowOutsideClick: false,
       title: 'SELECCIONE EL PDF',
-      text: 'Debe subir la covocataria en tipo PDF',
+      text: 'Debe subir el documento en tipo PDF',
       input: 'file',
       color: "#090000",
       confirmButtonColor:"#0085ff",
@@ -94,8 +93,7 @@ export class Anexo7firmarComponent implements OnInit {
               anexo7.documento = docx + '';
               this.anexo7Service.updateanexo7(anexo7).subscribe(value1 => {
                 Swal.fire({
-                  title: 'Exito',
-                  text: 'Respuesta enviada',
+                  title: 'Documento subido',
                   color: "#070000",
                   confirmButtonColor:"#0089ff",
                   background: "#ffffff",

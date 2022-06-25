@@ -1,1 +1,71 @@
-<p>anexo9firmar works!</p>
+<div *ngIf="issloading==false">
+
+  <div align="center">
+    <mat-card-title>Registro de Asistencia (A9)</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 80%">
+      <mat-label>BUSCAR </mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+
+  <br>
+  <div  *ngIf="isexist">
+    <div *ngFor="let anexo9 of filteredOptions | async">
+      <mat-card class="example-card">
+
+        <mat-card-content>
+          <table>
+            <tr aria-colspan="3">
+              <td colspan="2">
+                <strong>Carrera:</strong>  {{anexo9.carrera}}<br>
+                <strong>Tutor Academico:</strong>  {{anexo9.nombreTutorAcademico}}<br>
+                <strong>Tutor Empresarial:</strong>  {{anexo9.nombreTutoremp}}<br>
+                <strong>Estudiante:</strong>   {{anexo9.nombreEstudiante}}<br>
+                <strong>Horas Totales:</strong>  {{anexo9.totalHoras}}<br>
+
+              </td>
+              <td colspan="1">
+
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Ver registro de Asistencia
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let cronograma of anexo9.actividades"> <strong>Hora Ingreso/Salida: </strong>{{cronograma.horallegada}}<strong> a </strong>{{cronograma.horasalida}}<strong> Actividad: </strong> {{cronograma.descripcionActividad}} <strong> # Horas: </strong>  {{cronograma.numHoras}}</div>
+                  </mat-expansion-panel>
+
+
+              </td>
+            </tr>
+          </table>
+
+
+          <mat-divider></mat-divider>
+          <br>
+          <div align="center">
+            <button style="width: 30%" mat-raised-button color="primary" (click)="convertFile(anexo9.documento)">DESCARGAR DOCUMENTO</button>
+            <button style="width: 30%" mat-raised-button color="accent" style="margin-left: 5px" (click)="update(anexo9)">SUBIR DOCUMENTO</button>
+          </div>
+        </mat-card-content>
+
+
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>Aun no se receptan Anexos(9)</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

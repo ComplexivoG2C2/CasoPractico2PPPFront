@@ -62,8 +62,10 @@ import { Anexo5listarComponent } from './anexo5listar/anexo5listar.component';
 import { Anexo5listarcoordinacionComponent } from './anexo5listarcoordinacion/anexo5listarcoordinacion.component';
 import { Anexo5listarempresaComponent } from './anexo5listarempresa/anexo5listarempresa.component';
 import { Anexo7firmarComponent } from './anexo7firmar/anexo7firmar.component';
-import { Firmaranexo9Component } from './firmaranexo9/firmaranexo9.component';
 import { Anexo9firmarComponent } from './anexo9firmar/anexo9firmar.component';
+import { Anexo9responsablepppComponent } from './anexo9responsableppp/anexo9responsableppp.component';
+import { Anexo11firmasComponent } from './anexo11firmas/anexo11firmas.component';
+import { Anexo13Component } from './anexo13/anexo13.component';
 
 
 const routes: Routes = [
@@ -122,6 +124,8 @@ const routes: Routes = [
 ///anexo9
   },{path:'anexo9/:cedula/:nombres', component:Anexo9Component
   },{path:'anexo9tutoracademico', component:Anexo9tutoracademicoComponent
+  },{path:'anexo9responsableppp/:cedula', component:Anexo9responsablepppComponent
+  },{path:'anexo9firmar/:nombres', component:Anexo9firmarComponent
 
 ///anexo10
   },{path:'anexo10/:id/:cedula/:nombres', component:Anexo10Component
@@ -130,7 +134,7 @@ const routes: Routes = [
 //anexo11
   },{path:'anexo11/:cedula/:nombres', component:Anexo11Component
   },{path:'anexo11listar/:cedula', component:Anexo11listarComponent
-
+  },{path:'anexo11firmar/:nombres', component:Anexo11firmasComponent
 
     //anexo12
   },{path:'anexo12/:idpro/:nombre/:cedula', component:Anexo12Component
@@ -151,6 +155,8 @@ const routes: Routes = [
   },{path:'listarTutorEmpresarial', component:ListarTutorComponent
   },{path:'verestadoempresa/:id/:emp', component:VerestadosolicituempresaComponent
 
+    ////anexo13
+  },{path:'anexo13/:cedula/:nombres/:email', component:Anexo13Component
   }
 ]
 
@@ -211,8 +217,10 @@ const routes: Routes = [
     Anexo5listarcoordinacionComponent,
     Anexo5listarempresaComponent,
     Anexo7firmarComponent,
-    Firmaranexo9Component,
-    Anexo9firmarComponent
+    Anexo9firmarComponent,
+    Anexo9responsablepppComponent,
+    Anexo11firmasComponent,
+    Anexo13Component
   ],
   imports: [
     CommonModule,

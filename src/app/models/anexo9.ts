@@ -13,6 +13,7 @@ export class Anexo9{
   cedulaTutoremp?:String;
   actividades?:ActividadesAnexo9Request[];
   carrera?:String;
+  siglascarrera?:String;
 
 }
 

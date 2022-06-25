@@ -21,6 +21,13 @@ export class EmpresaService {
       data => data as Empresa[]
     ));
   }
+  getEmpresaAllsinid():Observable<Empresa[]>{
+    return this.http.get(this.urlEndPoint+"/allsincoordinador",{headers: this.httpHeaders}).pipe(map(
+        data => data as Empresa[]
+    ));
+  }
+
+
   getsaveEmpresabyNombre(nombre?:String){
     return this.http.get<Empresa>(this.urlEndPoint+"/all/"+nombre,{headers: this.httpHeaders}).pipe(map(data=>data as Empresa[]))
   }

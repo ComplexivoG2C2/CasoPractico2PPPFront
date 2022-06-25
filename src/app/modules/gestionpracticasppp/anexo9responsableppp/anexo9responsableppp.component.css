@@ -9,9 +9,8 @@
 .example-card {
   max-width: 80%;
   margin: 5px auto;
+  border-radius: 10px;
   border:1px solid #0e0000;
-  border-radius: 8px;
-  margin-top: 5px;
 }
 
 .example-viewport {
@@ -106,4 +105,17 @@ mat-grid-tile {
 
 .example-result-card .example-value-label {
   font-weight: 600;
+}
+
+.example-full-width {
+  width: 90%;
+}
+.example-full-widthl {
+  width: 150px;
+}
+.example-full-widthf {
+  width: 150px;
+}
+.example-full-width2 {
+  width: 80px;
 }

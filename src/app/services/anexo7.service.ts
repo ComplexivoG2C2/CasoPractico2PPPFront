@@ -34,7 +34,9 @@ export class Anexo7Service {
     return this.http.put<Anexo7>(this.urlEndPoint, anexo7, {headers: this.httpHeaders})
   }
 
-
+  getAnexo7ByidProyecto7(id?: Number): Observable<Anexo7[]> {
+    return this.http.get(this.urlEndPoint + "/allByProyecto/" + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7[]))
+  }
   getAnexo7ByidProyecto(id?: Number): Observable<Anexo7> {
     return this.http.get(this.urlEndPoint + "/allByProyecto/" + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo7))
   }

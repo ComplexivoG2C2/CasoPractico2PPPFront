@@ -220,6 +220,7 @@ export class Anexo9Component implements OnInit {
     this.anexo9.nombreRepresentanteemp=this.empresa.nombreCoordinador;
     this.anexo9.nombreTutoremp=this.solicitudproyecto.nombreTutoremp;
     this.anexo9.cedulaTutoremp=this.solicitudproyecto.cedulaTutoremp;
+    this.anexo9.siglascarrera=this.solicitudproyecto.codigocarrera;
 
     return this.anexo9;
   }

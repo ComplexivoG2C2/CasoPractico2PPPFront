@@ -31,6 +31,9 @@ export class Anexo10Service {
   getAnexo10ByidProyecto(id?: Number): Observable<Anexo10> {
     return this.http.get(this.urlEndPoint + "/allByProyecto/" + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo10))
   }
+  getAnexo10ByidProyecto10(id?: Number): Observable<Anexo10[]> {
+    return this.http.get(this.urlEndPoint + "/allByProyecto/" + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo10[]))
+  }
   getAnexo10_porid(id:Number):Observable<Anexo10>{
     return this.http.get(this.urlEndPoint+"/allById/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo10))
   }
