@@ -1,0 +1,149 @@
+<div *ngIf="issloading==false">
+  <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Proyecto</p>
+        </div></ng-template>
+
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-divider></mat-divider>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="auto" class="example-viewport">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionProyecto($event)" formControlName="firstCtrl" required>
+                <mat-list-option *ngFor="let shoe of filteredOptions | async" [value]="shoe" class="example-item">
+                  <div><strong>Id Proyecto: </strong>{{shoe.idProyectoPPP}}<br>
+                  <strong>Estudiante:</strong>{{shoe.nombreEstudiante}}<br>
+                  <strong> Nombre Proyecto:</strong>{{shoe.nombreProyecto}}<br>
+                    <strong>Responsable de Practicas:</strong>{{shoe.nombreResponsable}}<br>
+
+                  </div>
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+          </mat-card-content>
+          <mat-card-actions>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Datos">
+      <form [formGroup]="secondFormGroup">
+        <mat-card class="example-card">
+          <mat-card-header style="text-align: center">
+
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <div><strong>Nombre:</strong>{{anexo13.cedulaEstudiante}}</div>
+          <br>
+          <table>
+            <tr aria-colspan="3">
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Area o Departamento Laborado</mat-label>
+                  <input matInput formControlName="area" placeholder="Area en la que trabajo"  required [(ngModel)]="anexo13.area"  autofocus>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Ciclo:</mat-label>
+                  <mat-select formControlName="ciclo" required [(ngModel)]="anexo13.ciclo">
+                    <mat-option value="PRIMER">Primer Ciclo</mat-option>
+                    <mat-option value="SEGUNDO">Segundo Ciclo</mat-option>
+                    <mat-option value="TERCERO">Tercer Ciclo</mat-option>
+                    <mat-option value="CUARTO">Cuarto Ciclo</mat-option>
+                    <mat-option value="QUINTO">Quinto Ciclo</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Tiempo Asignado:</mat-label>
+                  <mat-select formControlName="tiempo"  required [(ngModel)]="anexo13.tiempo">
+                    <mat-option value="Medio">Medio Tiempo</mat-option>
+                    <mat-option value="Completo">Tiempo Completoo</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr aria-colspan="3">
+              <td>
+                <mat-form-field>
+                  <mat-label>Constitucion de la Empresa</mat-label>
+                  <textarea matInput formControlName="constitucion" placeholder="Constitución..." required [(ngModel)]="anexo13.constitucion"></textarea>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Actividad Principal</mat-label>
+                  <textarea matInput formControlName="actividad"  placeholder="Actividad Principal..." required [(ngModel)]="anexo13.actividadPrincipal"></textarea>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Principios Empresa</mat-label>
+                  <textarea matInput formControlName="principios"  placeholder="Principios..." required [(ngModel)]="anexo13.principiosEmpresa"></textarea>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr aria-colspan="1">
+              <td>
+              <mat-form-field>
+                <mat-label>Misión de la Empresa</mat-label>
+                <textarea matInput formControlName="mision" placeholder="Misión..." required [(ngModel)]="anexo13.misionEmpresa"></textarea>
+              </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Visión de la Empresa</mat-label>
+                  <textarea matInput formControlName="vision"  placeholder="Visión..." required [(ngModel)]="anexo13.visionEmpresa"></textarea>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+          <mat-card-actions>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirthFormGroup" label="Anexo 13">
+      <form [formGroup]="thirthFormGroup">
+        <mat-card class="example-card">
+          <td style="padding: 5px;text-align: start" colspan="1">
+            <button mat-raised-button color="primary" (click)="generarDocumento(proyecto13)">Generar Solicitud</button>
+            <span class="example-spacer"></span>
+            <mat-form-field appearance="outline" style="width: 50%; margin-left: 5px" >
+              <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento(proyecto13, $event.target.files)"  formControlName="docx" placeholder="Subir Documento"></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </td>
+        </mat-card>
+        <mat-card-actions>
+          <div>
+            <button style="width: 100%" mat-raised-button matStepperNext color="primary"></button>
+            <button style="width: 100%" mat-raised-button matStepperNext color="primary"></button>
+          </div>
+        </mat-card-actions>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>
