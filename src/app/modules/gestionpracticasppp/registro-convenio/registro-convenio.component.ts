@@ -159,7 +159,7 @@ console.log("si funciona"+ this.cedula);
       z:['',Validators.required]
     });
     this.fifthFormGroup = this._formBuilder.group({
-      // docx:['',Validators.required]
+       docx:['',Validators.required]
     });
     this.sixthFormGroup = this._formBuilder.group({
       a1:['',Validators.required],
@@ -371,7 +371,7 @@ this.naturaleza=this.registroConvenio2.naturalezaEntidad;
 
         tb2:registroConvenio.actividadesRealizars,
 
-        nroTutoresEmpresa:registroConvenio.nroTutoresEmpresa,
+        nroTutoresEmpresa:1,
         conclusionesConvenio:registroConvenio.conclusionesConvenio,
         recomendacionesConvenio:registroConvenio.recomendacionesConvenio,
         nombreAdminConvenio:registroConvenio.nombreAdminConvenio,
