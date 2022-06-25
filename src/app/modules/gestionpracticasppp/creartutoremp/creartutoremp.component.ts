@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TutorEmpresarial} from "../../../models/tutorEmpresarial";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaempService} from "../../../services/fechaemp.service";
@@ -20,6 +20,20 @@ export class CreartutorempComponent implements OnInit {
   idEmpresa?:Number;
   fechaactual?:Date;
 
+  //Validaciones de correo y telefonos
+  omit_special_char(event: { charCode: any; }) {
+    var k;
+    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
+    return ((k >= 48 && k <= 57));
+  }
+
+  omit_max_char(event: { target: any; }) {
+    var k;
+    k = event.target.value.length;  //         k = event.keyCode;  (Both can be used)
+    console.log(k)
+    return (k <= 9);
+  }
+
   constructor(private _formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute,
               private tutempresarialService: TutempresarialService, private fechaempService:FechaempService) {
 
@@ -36,11 +50,12 @@ export class CreartutorempComponent implements OnInit {
     })
 
     this.primerForm = this._formBuilder.group({
-      cedula:[''],
-      nombres:[''],
-      apellidos:[''],
-      correo:[''],
-      clave:['']
+      cedula:['', [Validators.required, Validators.pattern('[0-9]{7,10}')]],
+      nombres:new FormControl(),
+      apellidos:new FormControl(),
+      correo:new FormControl(),
+      clave:new FormControl(),
+      titulo:new FormControl()
     });
     this.segundoForm = this._formBuilder.group({
     });

@@ -33,6 +33,12 @@
             <tr style="margin-top: 0px">
               <td>
                 <mat-form-field appearance="outline">
+                  <mat-label>Titulo</mat-label>
+                  <input matInput type="text" formControlName="titulo" placeholder="Titulo Academico del Tutor"   [(ngModel)]="tutorEmpresarial.tituloTutor">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
                   <mat-label>Correo</mat-label>
                   <input matInput type="email" formControlName="correo" placeholder="Correo del Tutor"   [(ngModel)]="tutorEmpresarial.correo">
                 </mat-form-field>
@@ -69,6 +75,7 @@
             <strong>Cédula: </strong> {{tutorEmpresarial.cedula}}<br>
             <strong>Nombres: </strong> {{tutorEmpresarial.nombres}}<br>
             <strong>Apellidos: </strong>{{tutorEmpresarial.apellidos}}<br>
+            <strong>Titulo: </strong>{{tutorEmpresarial.tituloTutor}}<br>
             <strong>Correo:</strong>{{tutorEmpresarial.correo}}<br>
             <strong>Clave: </strong>{{tutorEmpresarial.clave}}<br>
           </td>
