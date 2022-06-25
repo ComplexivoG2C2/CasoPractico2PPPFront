@@ -295,11 +295,32 @@ this.naturaleza=this.registroConvenio2.naturalezaEntidad;
 
    }
 
+  subirDocumento9(file:FileList){
+    if(file.length==0){
+    }else{
+      getBase64(file[0]).then(docx=>{
+        // @ts-ignore
+        //console.log(docx.length)
+        // @ts-ignore
+        if(docx.length>=10485760){
+          this.registroConvenio2.documento="";
+          Swal.fire(
+            'Fallo',
+            'El documento excede el peso permitido',
+            'warning'
+          )
+        }else{
+          this.registroConvenio2.documento=docx+"";
+        }
+      })
+    }
+  }
+
   ggenerarDocumento9() {
     var registroConvenio:RegistroConvenio=this.obtenerDatos();
     // console.log(registroConvenio)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/oscar/src/assets/docs/RegistroConvenios.doc", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/oscar/src/assets/docs/registroConvenios.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -320,13 +341,14 @@ this.naturaleza=this.registroConvenio2.naturalezaEntidad;
         nombreRepreEmpresa:registroConvenio.nombreRepreEmpresa,
         rucEmpresa:registroConvenio.rucEmpresa,
 
-        actividadEconomicaRuc:registroConvenio.actividadEconomicaRuc,
+        tb1:registroConvenio.actividadEconomicaRuc,
 
         anioConvenio:registroConvenio.anioConvenio,
         nroEstudiantes:registroConvenio.nroEstudiantes,
         totalEstudiantes:registroConvenio.totalEstudiantes,
         nombreTutorAcademico:registroConvenio.nombreTutorAcademico,
         tlfTutorA:registroConvenio.tlfTutorA,
+        nombreTutorEmpresa:registroConvenio.nombreTutorEmpresa,
         cargoTutorEmpresa:registroConvenio.cargoTutorEmpresa,
         tlfTutorEmpresa:registroConvenio.tlfTutorEmpresa,
         emailEmpresa:registroConvenio.emailEmpresa,
@@ -347,7 +369,7 @@ this.naturaleza=this.registroConvenio2.naturalezaEntidad;
         nombreRectorIsta:registroConvenio.nombreRectorIsta,
         fechaNombramiento:registroConvenio.fechaNombramiento,
 
-        actividadesRealizar:registroConvenio.actividadesRealizars,
+        tb2:registroConvenio.actividadesRealizars,
 
         nroTutoresEmpresa:registroConvenio.nroTutoresEmpresa,
         conclusionesConvenio:registroConvenio.conclusionesConvenio,
@@ -396,7 +418,7 @@ this.naturaleza=this.registroConvenio2.naturalezaEntidad;
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
-     // saveAs(out, "RegistroConvenios.doc");
+      saveAs(out, "RegistroConvenios.docx");
     });
   }
 
