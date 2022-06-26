@@ -1,9 +1,7 @@
 # Caso Practico 2  Tercer Examen Complexivo ISTA
 <img src="https://www.tecazuay.edu.ec/assets/img/logo%20desenfocado4.png">
 
-## Servidor de Desarrollo
 
-Ejecutar `ng serve` para un servidor de desarrollo. La ruta de ejecucion es: `http://localhost:4200/`. Si el programa detecta cambios la pagina se recargara automaticamente.
 ## Tabla de Contenidos
 1. [Información General](#general-info)
 2. [Tecnologias Implementadas](#technologies)
@@ -46,7 +44,7 @@ cd CasoPractico2PPPFront
 npm install --force
 ```
 
-Ejecutado ese comando tendremos todas las dependencias instaladas en el programa y podremos desplegarlo de manera local con el comando y se nos desplegara en la ruta `http://localhost:4200/`:
+Ejecutado ese comando tendremos todas las dependencias instaladas en el programa y podremos desplegarlo de manera local con el comando y se nos desplegara en la ruta `http://localhost:4200/`, en caso de detectar cualquier cambio en el codigo la página web se recargara automaticamente:
 ```
 ng serve --o
 ```
