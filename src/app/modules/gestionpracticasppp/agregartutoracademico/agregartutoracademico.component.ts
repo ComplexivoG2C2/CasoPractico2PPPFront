@@ -271,7 +271,7 @@ if(a1==a2){
 
         console.log("este es el id"+id)
       anexo1.forEach(value1 => {
-        value1.idProyectoPPP=id;
+        value1.idProyectoPPP=this.idppp;
         value1.cedulaCoordinador='0103156675';
         value1.siglasCarrera=this.siglasc;
         value1.nombreCarrera=this.nomcarrera;
@@ -285,7 +285,6 @@ if(a1==a2){
               popup: 'animate__animated animate__fadeOutUp'
             }
           })
-
           this.issloading=false;
         },error => {
           Swal.fire({

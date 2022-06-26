@@ -204,6 +204,7 @@ export class NuevasolicitudComponent implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
+      this.router.navigate(['/panelempresa/gestionpracticasppp/bienvenidaempresa']);
     }, error => {
       Swal.fire({
         title: 'No se pudo enviar',

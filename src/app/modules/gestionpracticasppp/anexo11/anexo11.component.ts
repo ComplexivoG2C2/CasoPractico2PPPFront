@@ -30,6 +30,9 @@ import {MatSelectionListChange} from "@angular/material/list";
 import {Anexo7} from "../../../models/anexo7";
 import {Anexo7Service} from "../../../services/anexo7.service";
 import {map, Observable, startWith} from "rxjs";
+import {Anexo2} from "../../../models/anexo2";
+import {TutorempuserService} from "../../../services/tutorempuser.service";
+import {TutorEmpresarial} from "../../../models/tutorEmpresarial";
 // @ts-ignore
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -59,22 +62,24 @@ export class Anexo11Component implements OnInit {
   myControlanexo7 = new FormControl();
   anexo7lista: Anexo7[] = [];
 
-  anexo1:Anexo1 = new Anexo1();
   anexo6:Anexo6= new Anexo6();
-  proyecto:Solicitudproyecto= new Solicitudproyecto();
   empresa:Empresa = new Empresa();
   isexist?:boolean=true;
   issloading=true;
 
-  anexo8:Anexo8[]=[];
+  tutorlist:TutorEmpresarial[]=[];
+  tutor:TutorEmpresarial=new TutorEmpresarial();
 
   Informe:ListVisitaRequest=new ListVisitaRequest();
-
+anexo7:Anexo7=new Anexo7();
   // @ts-ignore
   addForm: FormGroup;
   rows: FormArray;
 nombre?:String;
   anexo7select: Anexo7 = new Anexo7();
+cedula?:String;
+  anexo2:Anexo2=new Anexo2();
+  anexo2lista:Anexo2[]=[];
 
   constructor(private _formBuilder: FormBuilder,
               private fechaService:FechaService,private carrerasService:CarrerasService,
@@ -82,8 +87,7 @@ nombre?:String;
               private empresaService:EmpresaService,
               private anexo6Service:Anexo6Service,
               private anexo1Service:Anexo1Service,
-              private router:Router,
-              private proyectoService:ProyectoService,
+              private router:Router, private tutorempresarialService:TutorempuserService,
               private anexo2Service:Anexo2Service,
               private responsablepppService:ResponsablepppService,
               private anexo11Service:Anexo11Service,private anexo7Service:Anexo7Service,
@@ -102,8 +106,7 @@ nombre?:String;
       let cedula = params['cedula']
       let nombre = params['nombres']
       this.nombre = nombre;
-      this.anexo1Service.getAnexo1byCedula(cedula).subscribe(value => {
-        this.anexo1=value[value.length-1]
+this.cedula=cedula;
         ///////
         this.anexo7Service.getAnexo7().subscribe(value1 => {
           this.anexo7lista = value1.filter(value2 => value2.nombreTutoracademico == nombre);
@@ -116,68 +119,40 @@ nombre?:String;
           console.log("entro al metodo"+this.filteredOptionsanexo7)
           this.issloading = false;
           this.isexist = true;
+
         })
 
-        this.anexo8Service.getAnexo8All().subscribe(value2 => {
-          this.anexo8=value2.filter(value3 => value3.idProyectoPPP==this.anexo1.idProyectoPPP&&value3.num_proceso==2)
-          this.proyectoService.getSolicitudesbyid(Number(this.anexo1.idProyectoPPP)).subscribe(value2 => {
-            this.proyecto=(value2.estado==true)?value2:new Solicitudproyecto();
-            if(value2.estado==false){
-              Swal.fire({
-                title: 'no nay registros',
-                showClass: {
-                  popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                  popup: 'animate__animated animate__fadeOutUp'
-                }
-              })
-            }
-            this.empresaService.getsaveEmpresabyId(Number(this.proyecto.empresa)).subscribe(value3 => {
-              this.empresa=value3
-              this.anexo2Service.getAnexoByidProyecto(Number(this.anexo1.idProyectoPPP)).subscribe(value4 => {
-                this.anexo11.ciclo=value4.ciclo;
-                this.responsablepppService.getResposablepppbyCarrera(value4.siglasCarrera+'').subscribe(value5 => {
-                  this.anexo11.periodoAcademicon=value5.fecha_inicio_periodo+" "+value5.fecha_fin_periodo;
-                  this.anexo11Service.getAnexo11by(Number(this.anexo1.idProyectoPPP)).subscribe(value6 => {
-                    if(value6.length==0){
-                      this.onAddRow(this.Informe)
-                      this.issloading=false;
-                    }else {
-                      this.anexo11=value6[0];
-                      // @ts-ignore
-                      value6[0].informes.forEach(value7 => {
-                        this.issloading=false;
-                        this.onAddRow(value7)
-                      })
-                    }
-
-                  })
-                })
-              })
-            })
-
-          })
-        })
-      })
     })
     this.addForm.get("items_value")?.setValue("yes");
     this.addForm.addControl('rows', this.rows);
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
-    this.thirtdFormGroup = this._formBuilder.group({});
-    this.fourFormGroup = this._formBuilder.group({});
+    this.thirtdFormGroup = this._formBuilder.group({
+
+    });
+    this.fourFormGroup = this._formBuilder.group({
+      descripcion: ['', Validators.required],
+    });
   }
 
   selectionan7(anexo7select: MatSelectionListChange) {
-
     this.anexo7select = anexo7select.option.value
+    console.log("anexo7")
+    this.anexo11.carrera=this.anexo7select.carrera;
+    console.log("carrera"+this.anexo11.carrera)
+    console.log("ff")
+    this.anexo2Service.getAnexoByidProyecto(this.anexo7select.idProyectoPPP).subscribe(value1 => {
+      this.anexo2=value1
+      // this.anexo2= this.anexo2lista[0]
+      console.log("ciiclo"+this.anexo2.ciclo)
+      this.tutorempresarialService.getTutoresAll().subscribe(value7=>{
+        // this.tutorlist=value7.filter(ff=>ff.idProyectoPPP==this.anexo7select.idProyectoPPP)
+        this.tutor=value7[0];
 
-    this.anexo7Service.getanexo7byid7(Number(this.anexo7select.id)).subscribe(value7 => {
-      this.anexo11.carrera = value7.carrera
-      console.log("e seleecionado la convocatoria"+this.anexo11.carrera)
+      })
     })
+
   }
 
   //ArrayActividades
@@ -199,25 +174,25 @@ nombre?:String;
   }
 
   anexo11:Anexo11=new Anexo11();
-  estudiantesVisitaRequest:EstudiantesVisitaRequest[]=[];
   obtnerDatos():Anexo11{
-    this.estudiantesVisitaRequest.length=0;
-    this.anexo8.forEach(value => {
-      this.estudiantesVisitaRequest.push({
-        cedula:value.cedulaEstudiante,
-        nombre:value.nombreEstudiante,
-      })
-    })
-    this.anexo11.cedulaDirectorDocenteApoyo=this.anexo1.cedulaDelegado;
-    this.anexo11.nombreDirectorDocenteApoyo=this.anexo1.nombreDelegado;
+
+    // this.anexo11.carrera=this.anexo7select.siglascarrera;
+    // console.log("carrera"+this.anexo11.carrera)
+    this.anexo11.cedulaDirectorDocenteApoyo=this.cedula;
+    this.anexo11.nombreDirectorDocenteApoyo=this.nombre;
     this.anexo11.nombreest=this.anexo7select.nombreEstudiante;
+    this.anexo11.ciclo=this.anexo2.ciclo;
     ///falta tutor
 this.anexo11.cedulaest=this.anexo7select.cedulaEstudiante;
-    this.anexo11.empresa=this.empresa.nombre;
-    this.anexo11.proyectoId=this.proyecto.id;
+this.anexo11.nombretutoremp=this.anexo7select.nombreTutorEmp;
+
+this.anexo11.cedulaetutoremp=this.tutor.cedula;
+
+
+    this.anexo11.empresa=this.anexo7select.nombreEmpresa;
+    this.anexo11.proyectoId=this.anexo7select.idProyectoPPP;
     this.anexo11.siglascarrera=this.anexo7select.siglascarrera;
     this.anexo11.representanteLegal=this.empresa.representante;
-    this.anexo11.estudiantesVisitas=this.estudiantesVisitaRequest;
     this.anexo11.informes=this.rows.getRawValue()
     return this.anexo11;
   }
@@ -278,7 +253,7 @@ this.anexo11.cedulaest=this.anexo7select.cedulaEstudiante;
         registro:anexo11.informes,
         carrera: anexo11.carrera,
         nombreTutoremp: anexo11.nombretutoremp,
-      observacionGeneral:anexo11.observaciones,
+        observacionGeneral:anexo11.observaciones,
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -329,10 +304,11 @@ this.anexo11.cedulaest=this.anexo7select.cedulaEstudiante;
 
 
 
-
+anexo11ww:Anexo11=new Anexo11();
   guardarAnexo11(){
     //console.log(this.obtnerDatos())
-    this.anexo11Service.saveAnexo11(this.obtnerDatos()).subscribe(value => {
+    this.anexo11ww=this.obtnerDatos();
+    this.anexo11Service.saveAnexo11(this.anexo11ww).subscribe(value => {
       Swal.fire({
         title: 'Resgitrado',
         showClass: {
@@ -342,6 +318,7 @@ this.anexo11.cedulaest=this.anexo7select.cedulaEstudiante;
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
+      window.location.reload();
     },error => {
       Swal.fire({
         title: 'error',
@@ -352,6 +329,7 @@ this.anexo11.cedulaest=this.anexo7select.cedulaEstudiante;
           popup: 'animate__animated animate__fadeOutUp'
         }
       })
+      window.location.reload();
     })
 
   }

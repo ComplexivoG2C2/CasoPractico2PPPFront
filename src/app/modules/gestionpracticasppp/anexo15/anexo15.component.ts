@@ -189,9 +189,9 @@ responsable:Resposable=new Resposable();
     // @ts-ignore
     this.anexo15.porcentajeTutorA = (this.anexo14select.tutoracademicoPuntaje * 40) / 100;
     // @ts-ignore
-    this.anexo15.porcentajeTutorE = (this.anexo12.tutorempPuntaje * 60) / 100;
+    this.anexo15.porcentajeTutorE = (this.anexo15.notaTutorE* 60) / 100;
     // @ts-ignore
-    this.promedio = (this.anexo15.porcentajeTutorA + this.anexo15.porcentajeTutorE) / 2;
+    this.promedio = (this.anexo15.porcentajeTutorA + this.anexo15.porcentajeTutorE);
     console.log("promedio" + this.promedio)
     this.anexo15.empresa = this.anexo14select.empresa;
     this.anexo15.siglascarrera = this.anexo14select.siglascarrera;
@@ -217,7 +217,7 @@ this.anexo15.ciclo=this.anexo7.ciclo;
         }
       })
       this.issloading = false;
-      this.router.navigate(['/paneltutor/gestionpracticasppp/anexo15listar']);
+      this.router.navigate(['/panelusuario/gestionpracticasppp/anexo15listar',this.cedula,this.nombre]);
 
     }, err => {
       Swal.fire({
@@ -285,6 +285,7 @@ this.anexo15.ciclo=this.anexo7.ciclo;
         nombreEstudiante:anexo15.nombresEstudiante,
         cedulaEstudiante:anexo15.cedulaEstudiante,
         empresa:anexo15.empresa,
+        ciclo:anexo15.ciclo,
         carrera:anexo15.carrera,
         totalhoras:anexo15.totalHoras,
         responsablePPP:anexo15.periodoacademico,

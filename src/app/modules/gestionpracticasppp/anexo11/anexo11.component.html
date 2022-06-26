@@ -45,11 +45,7 @@
         </div></ng-template>
       <mat-card class="example-card2">
 
-
-
         <mat-card-content [formGroup]="addForm">
-  <strong>Empresa: </strong>{{empresa.nombre}}<br>
-  <strong>Representante legal: </strong>{{empresa.representante}}<br>
 
         <mat-grid-list cols="10" rowHeight="2:1">
           <mat-grid-tile colspan="5">
@@ -116,11 +112,12 @@
             </mat-grid-tile>
 
           </div>
+
+
         </mat-grid-list>
-  <mat-form-field appearance="fill" style="width: 100%; margin-left: 2px">
-    <mat-label>Observaciones</mat-label>
-    <textarea matInput [(ngModel)]="anexo11.observaciones" name="observacion" [ngModelOptions]="{standalone: true}"></textarea>
-  </mat-form-field>
+
+
+
   <div style="text-align: center">
     <button style="width: 45%" mat-raised-button matStepperPrevious color="accent">	<mat-icon>expand_less</mat-icon></button>
     <button style="width: 45%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
@@ -148,34 +145,28 @@
           <mat-card-content>
             <mat-divider></mat-divider>
             <div align="center">
-              <table>
-                <th style="padding: 5px">
-                  <strong>Informacion</strong>
-                </th>
 
-                <th style="padding: 5px;margin-left: 20px">
-                  <strong>Generar y subir el Documento</strong>
-                </th>
-                <tr>
-                  <td style="padding: 5px">
-                    <strong>Tutor Academico: </strong>{{anexo11.nombreDirectorDocenteApoyo}}<br>
-                    <strong>Nombres del Alumno: </strong>{{anexo11.nombreest}}<br>
-                    <strong>Carerra:  </strong>{{anexo11.carrera}}<br>
-                    <strong>Ciclo del Estudiante:  </strong>{{anexo11.ciclo}}<br>
-                    <strong>Empresa:  </strong>{{anexo11.empresa}}<br>
-                    <strong>Representante Legal de la Empresa:  </strong>{{anexo11.representanteLegal}}<br>
 
-                  </td>
+                  <strong>Observaciones Generales</strong>
 
-                  <td style="padding: 5px;margin-left: 20px">
+
+                    <mat-form-field  appearance="outline">
+                      <mat-label>Observaciones Generales</mat-label>
+                      <textarea style="height: 20px" matInput formControlName="descripcion" placeholder="Observaciones Genrales" [(ngModel)]="anexo11.observaciones" name="observacionws" autofocus></textarea>
+                    </mat-form-field>
+
+                <br>
+              <mat-divider></mat-divider>
+                  <div>
                     <button mat-raised-button color="primary" (click)="generarDocumento()">Obtener Documento</button>
                     <mat-form-field appearance="outline" style="width: 75%; margin-left: 10px" >
                       <ngx-mat-file-input accept="application/pdf"  (change)="subirDocumento($event.target.files)" placeholder="Subir Documento"></ngx-mat-file-input>
                       <mat-icon matSuffix>folder</mat-icon>
                     </mat-form-field>
-                  </td>
-                </tr>
-              </table>
+                  </div>
+
+
+
 
             </div>
 

@@ -186,11 +186,12 @@ cedula?:String
   alumnosselc: ListaEstudiantesAnexo4Request[] = [];
   obtnerdatos(): Anexo4 {
     this.alumnosselc.length = 0;
-    this.anexo3.forEach(value => {
+    this.anexo3.forEach(value =>
+    { if(value.estado=='AN'){
       this.alumnosselc.push({
         cedula: value.cedula,
         nombre: value.nombresestudiante+''+value.apellidosestudiante,
-      })
+      })}
     })
     this.fechaService.getSysdate().subscribe(value => {
       // @ts-ignore

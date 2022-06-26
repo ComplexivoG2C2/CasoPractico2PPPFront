@@ -66,7 +66,6 @@ export class Anexo8respuestaalestudianteComponent implements OnInit {
       ||option.nombreProyecto?.toLocaleLowerCase().includes(filterValue)
       ||option.nombreEstudiante?.toLocaleLowerCase().includes(filterValue)
       ||option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
-      ||option.cedulaDirector?.toLocaleLowerCase().includes(filterValue)
       ||option.nombreRepresentante?.toLocaleLowerCase().includes(filterValue)
     );
   }

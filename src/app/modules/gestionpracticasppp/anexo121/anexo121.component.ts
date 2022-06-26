@@ -41,7 +41,6 @@ function getBase64(file: any) {
   });
 }
 
-
 @Component({
   selector: 'app-anexo121',
   templateUrl: './anexo121.component.html',
@@ -50,6 +49,7 @@ function getBase64(file: any) {
 export class Anexo121Component implements OnInit {
 
 
+  anexo12select: Anexo12 = new Anexo12();
   activar?:boolean=false;
   sum = 0;
   numerominimo=0;
@@ -66,7 +66,6 @@ export class Anexo121Component implements OnInit {
   fechae?:Date;
   user: User=new User();
 
-  anexo12: Anexo12=new Anexo12();
 
   proyectoselect: Solicitudproyecto = new Solicitudproyecto();
 
@@ -74,11 +73,11 @@ export class Anexo121Component implements OnInit {
   secondFormGroup?:FormGroup;
   thirdFormGroup?:FormGroup;
   fourFormGroup?:FormGroup;
-  addForm: FormGroup;
   anexo7:Anexo7[]=[];
 anexos7:Anexo7=new Anexo7();
+  anexo12: Anexo12[] = []
   numero?:Number;
-  rows: FormArray;
+  filteredOptions?: Observable<Anexo12[]>;
   itemForm?: FormGroup;
   tutoracaItem1?:String;
   nombre?:String;
@@ -88,14 +87,10 @@ anexos7:Anexo7=new Anexo7();
               private _adapter: DateAdapter<any>,
               private anexo12tutorempService:Anexo12empService,
               private solicitudemptutorService:ProyectotutorempService,
-              private anexo7Service:Anexo7tutorempService,
-              private anexo121Service:Anexo121tutorempService
+              private anexo121Service:Anexo121tutorempService,private anexo7Service:Anexo7tutorempService
   ) {
     this._adapter.setLocale('es-ec');
     //ArrayActividades
-
-    this.addForm = this._formBuilder.group({});
-    this.rows = this._formBuilder.array([]);
   }
 
   ngAfterViewInit(): void {
@@ -109,29 +104,27 @@ anexos7:Anexo7=new Anexo7();
     this.activatedRoute.params.subscribe(params=>{
       let idpro = params['idpro']
       let nombre = params['nombre']
+      let cedula = params['cedula']
       this.idpro= idpro;
       this.nombre=nombre;
+      this.cedula=cedula;
+      console.log("este es el id de proyecto"+this.idpro)
+
 
       console.log("este es el id de proyecto"+this.idpro)
 
       console.log("este es el id de nn"+this.nombre)
 
-      this.anexo12tutorempService.getAnexo12biidppp(idpro).subscribe(data => {
-        this.anexo12= data
-        console.log(this.anexo12+"ccccccccccccc")
+      console.log("este es el id de cc"+this.cedula)
 
-        this.anexo7Service.getAnexo7().subscribe(value => {
-          console.log(Number(data.id) + "CODIGOOOOOO PROYECTO")
-          this.anexo7=value.filter(value8=>value8.nombreEstudiante==data.nombresEstudiante)
-
-            this.anexos7=this.anexo7[0];
-
-            console.log("fffffffffffffff"+value)
-
-
-
-        })
+      this.anexo12tutorempService.getAll().subscribe(data => {
+        this.anexo12 = data.filter(value => value.idProyecto==this.idpro);
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(values => this.filter(values)),
+        );
         this.issloading = false;
+        console.log(this.filteredOptions+"ccccccccccccc")
 
 
       })
@@ -143,47 +136,58 @@ anexos7:Anexo7=new Anexo7();
     this.firstFormGroup = this._formBuilder.group({
 
     });
-
-    this.thirdFormGroup = this._formBuilder.group({
+    this.secondFormGroup = this._formBuilder.group({
+      anexo12:['',Validators.required]
     });
 
-    this.thirdFormGroup.get("items_value")?.setValue("yes");
-    this.thirdFormGroup.addControl('rows', this.rows);
-    this.addForm.get("items_value")?.setValue("");
-    this.addForm.addControl('rows', this.rows);
+  }
+  filter(value: any): Anexo12[] {
+    const filterValue = value.toString().toLowerCase();
+    return this.anexo12.filter(option => option.empresa?.toLowerCase().includes(filterValue)
+      ||option.nombresEstudiante?.toLocaleLowerCase().includes(filterValue)
+      ||option.cedulaEstudiante?.toLocaleLowerCase().includes(filterValue)
+    );
   }
 
-  //ArrayActividades
-  onAddRow(descripcion: String) {
-    this.rows.push(this.createItemFormGroup(descripcion));
+  selectionAnexo12(anexo12: MatSelectionListChange){
+    this.anexo12select=anexo12.option.value
+
+    this.solicitudemptutorService.getSolicitudesbyid(Number(this.anexo12select.idProyecto)).subscribe(dataP=>{
+      this.proyectoselect=dataP
+
+    })
+
+    this.anexo7Service.getAnexo7().subscribe(value => {
+
+      this.anexo7=value.filter(value8=>value8.nombreEstudiante==this.anexo12select.nombresEstudiante)
+
+      this.anexos7=this.anexo7[0];
+
+      console.log("fffffffffffffff"+value)
+
+    })
+
   }
 
-  onRemoveRow(rowIndex: number) {
-    this.rows.removeAt(rowIndex);
-  }
 
-  createItemFormGroup(descripcion: String): FormGroup {
-    return this._formBuilder.group({
-      descripcion: [descripcion, Validators.required],
-    });
-  }
 
   anexo121: Anexo121= new Anexo121();
   obtenerdatos(){
-    this.anexo121.cedulaEstudiante=this.anexo12.cedulaEstudiante;
-    this.anexo121.idProyecto=this.anexo12.idProyecto;
-    this.anexo121.nombretutoremp=this.anexo12.nombretutoremp;
-    this.anexo121.nombresEstudiante=this.anexo12.nombresEstudiante;
-    this.anexo121.tutorempPuntaje=this.anexo12.tutorempPuntaje;
-    this.anexo121.promedio=this.anexo12.promedio;
-    this.anexo121.fechaInicio=this.anexo12.fechaInicio;
-    this.anexo121.fechaFinaliza=this.anexo12.fechaFinaliza;
-    this.anexo121.empresa=this.anexo12.empresa;
-    this.anexo121.cedulatutoremp=this.anexo12.cedulatutoremp;
-    this.anexo121.carrera=this.anexo12.carrera;
-    this.anexo121.siglascarrera=this.anexo12.siglascarrera;
-    this.anexo121.fechaEvaluacion=this.anexo12.fechaEvaluacion;
-    this.anexo121.totalHoras=this.anexo12.totalHoras;
+    this.anexo121.cedulaEstudiante=this.anexo12select.cedulaEstudiante;
+    this.anexo121.idProyecto=this.anexo12select.idProyecto;
+    this.anexo121.nombretutoremp=this.anexo12select.nombretutoremp;
+    this.anexo121.nombresEstudiante=this.anexo12select.nombresEstudiante;
+    this.anexo121.tutorempPuntaje=this.anexo12select.tutorempPuntaje;
+    this.anexo121.promedio=this.anexo12select.promedio;
+    this.anexo121.fechaInicio=this.anexo12select.fechaInicio;
+    this.anexo121.fechaFinaliza=this.anexo12select.fechaFinaliza;
+    this.anexo121.empresa=this.anexo12select.empresa;
+    this.anexo121.cedulatutoremp=this.cedula;
+    this.anexo121.carrera=this.anexo12select.carrera;
+    this.anexo121.siglascarrera=this.anexo12select.siglascarrera;
+    this.anexo121.fechaEvaluacion=this.anexo12select.fechaEvaluacion;
+    this.anexo121.totalHoras=this.anexo12select.totalHoras;
+    this.anexo121.responsableppp=this.anexos7.nombreResponsable;
 
     this.anexo121.actividades=this.anexos7.actividadesAnexo7s;
     console.log(this.anexo121.totalHoras)
@@ -266,10 +270,12 @@ anexos7:Anexo7=new Anexo7();
         nombreTutoremp:anexo121.nombretutoremp,
         nombreEstudiante:anexo121.nombresEstudiante,
         cedulaEstudiante:anexo121.cedulaEstudiante,
+        cedulaTutoremp:anexo121.cedulatutoremp,
         empresa:anexo121.empresa,
         carrera:anexo121.carrera,
         nhoras:anexo121.totalHoras,
         nota:anexo121.tutorempPuntaje,
+        ResponsablePPP:anexo121.responsableppp,
 
       });
       try {

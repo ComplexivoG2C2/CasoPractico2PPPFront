@@ -13,6 +13,8 @@ export class Anexo5{
   nombreEst?:String;
   cedulaEst?:String;
   siglascarrera?:String;
+  cargo?:String;
+  gerentenombre?:String;
 }
 
 export class ListaEstudiantesAnexo5Request{

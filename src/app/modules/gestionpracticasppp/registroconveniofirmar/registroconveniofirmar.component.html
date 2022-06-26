@@ -1,0 +1,72 @@
+<div *ngIf="issloading==false">
+
+  <div align="center">
+    <mat-card-title>Firmar Convenios con empresas</mat-card-title>
+    <mat-form-field appearance="outline" style="width: 80%">
+      <mat-label>BUSCAR </mat-label>
+      <input matInput   placeholder="FILTRAR" [formControl]="myControl">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+
+  <br>
+  <div  *ngIf="isexist">
+    <div *ngFor="let registroconvenio of filteredOptions | async">
+      <mat-card class="example-card">
+
+        <mat-card-content>
+          <table>
+            <tr aria-colspan="3">
+              <td colspan="2">
+                <strong>Nombre Rector / Rectora: </strong>  {{nombre}}<br>
+                <strong>Empresa:</strong>  {{registroconvenio.nombreEmpresa}}<br>
+                <strong>Direccion de la empresa:</strong>   {{registroconvenio.callePrincipalEmpresa}}<br>
+                <strong>Fecha del convenio:</strong>  {{registroconvenio.fechaConvenio | date:"longDate"}}<br>
+                <strong>Justificacion:</strong>  {{registroconvenio.justificacionEmpresa}}<br>
+
+              </td>
+              <td colspan="1">
+                <div align="center">
+<!--                  <mat-expansion-panel (opened)="panelOpenState = true"-->
+<!--                                       (closed)="panelOpenState = false">-->
+<!--                    <mat-expansion-panel-header>-->
+<!--                      <mat-panel-title>-->
+<!--                        Ver cronograma-->
+<!--                      </mat-panel-title>-->
+<!--                    </mat-expansion-panel-header>-->
+<!--                    <div *ngFor="let cronograma of registroconvenio.actividadEconomicaRuc"> <strong>Codigo de Actividad:</strong> {{cronograma.codActividad}} <strong> Activiades: </strong>  {{cronograma.actividades}}</div>-->
+<!--                  </mat-expansion-panel>-->
+                  <div align="center">
+                    <button style="width: 100%;margin-left: 20px" mat-raised-button color="primary" (click)="convertFile(registroconvenio.documento)">FIRMAR DOCUMENTO</button><br>
+                    <button style="width: 100%;margin-left: 20px" mat-raised-button color="accent" style="margin-left: 5px" (click)="update(registroconvenio)">SUBIR DOCUMENTO</button>
+                  </div>
+                </div>
+
+              </td>
+            </tr>
+          </table>
+
+
+          <mat-divider></mat-divider>
+          <br>
+
+        </mat-card-content>
+
+
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isexist==false">
+    <mat-card>
+      <mat-card-title>No tiene anexos</mat-card-title>
+    </mat-card>
+  </div>
+</div>
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

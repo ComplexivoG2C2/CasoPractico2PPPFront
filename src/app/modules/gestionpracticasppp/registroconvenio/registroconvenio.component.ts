@@ -16,7 +16,7 @@ import {CordinadorvinculacionService} from "../../../services/cordinadorvinculac
 import {MatSelectionListChange} from "@angular/material/list";
 import {FechaempService} from "../../../services/fechaemp.service";
 import {MatSelectChange} from "@angular/material/select";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaService} from "../../../services/fecha.service";
 import {EmpresaService} from "../../../services/empresa.service";
@@ -24,6 +24,8 @@ import {DateAdapter} from "@angular/material/core";
 import {Solicitudproyecto} from "../../../models/solicitudproyecto";
 import {RegistroConvenio} from "../../../models/registroConvenio";
 import {RegistroConvenioService} from "../../../services/registro-convenio.service";
+import {Empresa} from "../../../models/empresa";
+import {Anexo6} from "../../../models/anexo6";
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
 }
@@ -75,13 +77,16 @@ export class RegistroconvenioComponent implements OnInit {
   data:Date = new Date();
   fechaactual?:Date;
 
-  filteredOptionsProyecto?: Observable<Solicitudproyecto[]>;
-  proyectos: Solicitudproyecto[] = [];
-
+  filteredOptionsEmpresa?: Observable<Empresa[]>;
+  myControl= new FormControl();
+  empresaselect:Empresa=new Empresa();
   naturaleza?:String;
   carrera?:String;
   cedula?:String;
-
+  empresas:Empresa[]=[];
+  nombres?:String;
+  id?:Number;
+ff?:Date;
   constructor(
     private router: Router,
     private fechaService: FechaService,
@@ -89,7 +94,7 @@ export class RegistroconvenioComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private empresaS: EmpresaService,
     private _adapter: DateAdapter<any>,
-    private registroConvenioService:RegistroConvenioService,
+    private registroConvenioService:RegistroConvenioService,private empresaService:EmpresaService,
     //private fechaempService:FechaempService,
     private cordinadorvinculacionService:CordinadorvinculacionService,
   ) {
@@ -118,15 +123,28 @@ export class RegistroconvenioComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
+
       let cedula=params['cedula']
+      let nombres=params['nombres']
+      this.nombres=nombres;
       this.cedula=cedula;
+
       console.log("si funciona"+ this.cedula);
+      this.empresaService.getEmpresaAll().subscribe(value=>{
+        this.empresas=value
+        this.filteredOptionsEmpresa = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(values=>this.filter(values)),
+        );
+        this.issloading=false;
+      })
+      this.fechaService.getSysdate().subscribe(value => {
+        this.ff = value.fecha;
+      })
     })
 
     this.firstFormGroup = this._formBuilder.group({
       a:['',Validators.required],
-      b:['',Validators.required],
-      c:['',Validators.required],
       naturaleza:['',Validators.required],
       d:['',Validators.required]
     });
@@ -142,23 +160,18 @@ export class RegistroconvenioComponent implements OnInit {
       j:['',Validators.required],
       k:['',Validators.required],
       l:['',Validators.required],
-      m:['',Validators.required],
-      n:['',Validators.required],
-      o:['',Validators.required]
+       empresa:['',Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
       p:['',Validators.required],
-      q:['',Validators.required],
-      r:['',Validators.required],
+
       s:['',Validators.required],
       t:['',Validators.required],
       u:['',Validators.required],
       v:['',Validators.required],
-      w:['',Validators.required],
-      x:['',Validators.required],
+
       re:['',Validators.required],
       y:['',Validators.required],
-      z:['',Validators.required]
     });
     this.fifthFormGroup = this._formBuilder.group({
       docx:['',Validators.required]
@@ -175,36 +188,28 @@ export class RegistroconvenioComponent implements OnInit {
       d4:['',Validators.required],
       f5:['',Validators.required],
 
-      g6:['',Validators.required],
     });
 
-    //this.fechaempService.getSysdate().subscribe(value => {
-    //   this.fechaactual=value.fecha;
-    // })
 
-//ArrayActividades
     this.secondFormGroup.get("items_value")?.setValue("yes");
     this.secondFormGroup.addControl('rows', this.rows);
 
     this.seventhFormGroup.get("items_value")?.setValue("yes");
     this.seventhFormGroup.addControl('rows2', this.rows2);
-    //Arraycronograma
-    // this.thirtdFormGroup.get("items_value")?.setValue("yes");
-    // this.thirtdFormGroup.addControl('rows', this.rows);
-    //ArrayActividades
     console.log("analizar")
     this.issloading=false;
   }
-
-  //ArrayActividades
+  filter(value: any): Empresa[] {
+    const filterValue = value.toLowerCase();
+    return this.empresas.filter(option => option.nombre?.toLowerCase().includes(filterValue)
+    );
+  }
   onAddRow(codActividad:String) {
     this.rows.push(this.createItemFormGroup(codActividad));
-    //console.log(this.rows.getRawValue())
   }
 
   onAddRow2(actividadesRealizar:String) {
     this.rows2.push(this.createItemFormGroup2(actividadesRealizar));
-    //console.log(this.rows2.getRawValue())
   }
 
   createItemFormGroup(codActividad:String): FormGroup {
@@ -236,33 +241,30 @@ export class RegistroconvenioComponent implements OnInit {
 
   obtenerDatos():RegistroConvenio{
 
-    /*  this.registroConvenio2.codigoInforme=this.registroConvenio1.codigoInforme;
-     this.registroConvenio2.fechaConvenio=this.registroConvenio1.fechaConvenio;
-     this.registroConvenio2.nombreEmpresa=this.registroConvenio1.nombreEmpresa;
-    this.registroConvenio2.naturalezaEntidad=this.registroConvenio1.naturalezaEntidad;
-    this.registroConvenio2.nombreRepreEmpresa=this.registroConvenio1.nombreRepreEmpresa;
-     this.registroConvenio2.rucEmpresa=this.registroConvenio1.rucEmpresa;
-   */
     this.registroConvenio2.anioInforme="2022";
     this.registroConvenio2.empresa_id=1;
     this.registroConvenio2.nroTutoresEmpresa=1;
+    this.registroConvenio2.fechaConvenio=this.ff;
+    this.registroConvenio2.nombreAdminConvenio=this.nombres;
     this.registroConvenio2.actividadEconomicaRuc=this.rows.getRawValue();
-
-    /*  this.registroConvenio2.anioConvenio=this.registroConvenio1.anioConvenio;
-       this.registroConvenio2.nroEstudiantes=this.registroConvenio1.nroEstudiantes;
-       this.registroConvenio2.totalEstudiantes=this.registroConvenio1.totalEstudiantes;
-       this.registroConvenio2.nombreTutorAcademico=this.registroConvenio1.nombreTutorAcademico;
-      this.registroConvenio2.nombreEmpresa=this.registroConvenio1.nombreEmpresa;
-      this.registroConvenio2.tlfTutorA=this.registroConvenio1.tlfTutorA;
-      this.registroConvenio2.nombreTutorEmpresa=this.registroConvenio1.nombreTutorEmpresa;
-       this.registroConvenio2.cargoTutorEmpresa=this.registroConvenio1.cargoTutorEmpresa;
-      this.registroConvenio2.tlfTutorEmpresa=this.registroConvenio1.tlfTutorEmpresa;*/
+    this.registroConvenio2.nombreEmpresa=this.empresaselect.nombre;
+    this.registroConvenio2.emailEmpresa=this.empresaselect.emailEmpresa;
+    this.registroConvenio2.nombreRepreEmpresa=this.empresaselect.representante;
+    this.registroConvenio2.tlfContactoEmpresa=this.empresaselect.telefonoEmpresa;
+    this.registroConvenio2.cantonMatrizEmpresa=this.empresaselect.ciudad;
+    this.registroConvenio2.cantonSucursalEmpresa=this.empresaselect.ciudad;
+    this.registroConvenio2.callePrincipalEmpresa=this.empresaselect.direccion;
+    this.registroConvenio2.cargoRepreEmpresa=this.empresaselect.titulorepresentante;
+    this.registroConvenio2.direccionSucursalEmpresa=this.empresaselect.direccion;
     this.registroConvenio2.actividadesRealizars=this.rows2.getRawValue();
     return this.registroConvenio2;
   }
 
   obtenerGestion(event:MatSelectChange){
     this.naturaleza=this.registroConvenio2.naturalezaEntidad;
+  }
+  selectionEmpresa(empresaselect: MatSelectionListChange) {
+    this.empresaselect = empresaselect.option.value
   }
 
   obtenerCarrera(event:MatSelectChange){
@@ -274,7 +276,19 @@ export class RegistroconvenioComponent implements OnInit {
     this.registroConvenioService.saveRegistroConvenio(this.obtenerDatos()).subscribe(datos=>{
       // console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
       Swal.fire({
-        title: 'Actividad Registrada....',
+        title: 'Convenio Generado',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+      this.issloading=false
+      this.router.navigate(['/panelusuario/gestionpracticasppp/bienvenida']);
+    },err=>{
+      Swal.fire({
+        title: 'Debe tener empresas registradas',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -283,16 +297,6 @@ export class RegistroconvenioComponent implements OnInit {
         }
       })
       window.location.reload();
-    },err=>{
-      Swal.fire({
-        title: 'La fecha no puede repetirse',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
     })
 
   }

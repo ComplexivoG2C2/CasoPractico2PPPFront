@@ -32,4 +32,9 @@ export class RegistroConvenioService {
     return this.http.get(this.urlEndPoint+"/registroId/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as RegistroConvenio))
   }
 
+  updateregistro(regitroconvenio:RegistroConvenio): Observable<RegistroConvenio> {
+    console.log(regitroconvenio);
+    return this.http.put<RegistroConvenio>(this.urlEndPoint,regitroconvenio, {headers: this.httpHeaders})
+  }
+
 }

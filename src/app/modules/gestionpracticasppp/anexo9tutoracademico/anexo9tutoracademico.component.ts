@@ -34,6 +34,7 @@ export class Anexo9tutoracademicoComponent implements OnInit {
   myControl = new FormControl();
   filteredOptions?: Observable<Anexo9[]>;
   anexo9:Anexo9[]=[];
+  nombres?:String;
 
   constructor(private router: Router,
               private fechaService:FechaService,
@@ -50,9 +51,12 @@ export class Anexo9tutoracademicoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       let cedula = params['cedula']
+      let nombres= params['nombres']
+      this.nombres=nombres;
+      console.log('nombre'+nombres)
       this.anexo9Service.getAll().subscribe(value => {
+        this.anexo9=value.filter(g=>g.nombreTutorAcademico==nombres);
         this.isexist=value.length!=0;
-        this.anexo9=value;
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(values=>this.filter(values)),

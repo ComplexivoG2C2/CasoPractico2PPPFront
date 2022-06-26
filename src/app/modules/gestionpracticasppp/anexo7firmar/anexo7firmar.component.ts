@@ -98,6 +98,7 @@ export class Anexo7firmarComponent implements OnInit {
                   confirmButtonColor:"#0089ff",
                   background: "#ffffff",
                 })
+                this.router.navigate(['/paneltutor/gestionpracticasppp/bienvenidatutor'])
               },error => {
                 Swal.fire({
                   title: 'Error',

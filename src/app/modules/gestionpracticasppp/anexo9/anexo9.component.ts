@@ -22,6 +22,8 @@ import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 // @ts-ignore
 import { saveAs } from "file-saver";
+import {Anexo7Service} from "../../../services/anexo7.service";
+import {Anexo7} from "../../../models/anexo7";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -61,12 +63,14 @@ export class Anexo9Component implements OnInit {
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
   fourFormGroup?: FormGroup;
+  anexo7lista:Anexo7[]=[];
+  anexo7:Anexo7=new Anexo7;
   ////ARRAY
   rows: FormArray;
   itemForm?: FormGroup;
 //ANEXO8
   constructor(private fechaService: FechaService,private anexo9Service:Anexo9Service,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,
-              private anexo3Service:Anexo3Service, private proyectoService:ProyectoService) {
+              private anexo3Service:Anexo3Service, private proyectoService:ProyectoService,private anexo7Service:Anexo7Service) {
     //ArrayActividades
     this.secondFormGroup = this._formBuilder.group({
       items: [null, Validators.required],
@@ -90,6 +94,10 @@ export class Anexo9Component implements OnInit {
           this.solicitudproyectos=value.filter(value1 => value1.id==datos.filter(d=>d.estado=="AN")[datos.length-1].idProyectoPPP&&value1.estado==true)
         })
         this.issloading=false;
+      })
+      this.anexo7Service.getAnexo7().subscribe(value => {
+        this.anexo7lista=value.filter(value2=>value2.cedulaEstudiante==cedula)
+        this.anexo7=this.anexo7lista[0];
       })
       this.fechaService.getSysdate().subscribe(value => {
         this.Fechaenvio = value.fecha;
@@ -208,17 +216,17 @@ export class Anexo9Component implements OnInit {
   ontnerDatos():Anexo9{
     this.anexo9.cedulaEstudiante=this.cedula;
     this.anexo9.idProyectoPPP=this.solicitudproyecto.id;
-    this.anexo9.nombreTutoremp=this.solicitudproyecto.nombretutoremp;
-    this.anexo9.nombreTutorAcademico=(this.solicitudproyecto.tutorAcademicoResponse!=undefined)?this.solicitudproyecto.tutorAcademicoResponse[0].nombres:"";
+    this.anexo9.nombreTutoremp=this.solicitudproyecto.nombreTutoremp;
+    this.anexo9.nombreTutorAcademico=this.anexo7.nombreTutoracademico;
    console.log(this.anexo9.nombreTutorAcademico)
     this.anexo9.nombreEmpresa=this.solicitudproyecto.nombre;
     this.anexo9.nombreEstudiante=this.nombre;
     this.anexo9.nombreProyecto=this.solicitudproyecto.nombre;
     this.anexo9.carrera=this.solicitudproyecto.carrera;
     this.anexo9.totalHoras=this.sum;
+
     this.anexo9.actividades=this.rows.getRawValue();
     this.anexo9.nombreRepresentanteemp=this.empresa.nombreCoordinador;
-    this.anexo9.nombreTutoremp=this.solicitudproyecto.nombreTutoremp;
     this.anexo9.cedulaTutoremp=this.solicitudproyecto.cedulaTutoremp;
     this.anexo9.siglascarrera=this.solicitudproyecto.codigocarrera;
 

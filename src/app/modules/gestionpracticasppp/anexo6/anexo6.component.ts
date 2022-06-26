@@ -242,10 +242,10 @@ export class Anexo6Component implements OnInit {
       Swal.fire({
         title: 'Debe seleccionar a los estudiantes a cargo',
         showClass: {
-          popup: 'animate__animated animate__fadeInDown'
+          popup: 'animate_animated animate_fadeInDown'
         },
         hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
+          popup: 'animate_animated animate_fadeOutUp'
         }
       })
     }else {
@@ -257,10 +257,10 @@ export class Anexo6Component implements OnInit {
       Swal.fire({
         title: 'Debe seleccionar a los estudiantes a cargo',
         showClass: {
-          popup: 'animate__animated animate__fadeInDown'
+          popup: 'animate_animated animate_fadeInDown'
         },
         hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
+          popup: 'animate_animated animate_fadeOutUp'
         }
       })
     }else {
@@ -268,10 +268,10 @@ export class Anexo6Component implements OnInit {
         Swal.fire({
           title: 'Designacion Guardada',
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: 'animate_animated animate_fadeInDown'
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
+            popup: 'animate_animated animate_fadeOutUp'
           }
         })
         this.router.navigate(['/panelusuario/gestionpracticasppp/anexo6listar',this.cedula]);
@@ -279,10 +279,10 @@ export class Anexo6Component implements OnInit {
         Swal.fire({
           title: 'Error',
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: 'animate_animated animate_fadeInDown'
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
+            popup: 'animate_animated animate_fadeOutUp'
           }
         })
       })

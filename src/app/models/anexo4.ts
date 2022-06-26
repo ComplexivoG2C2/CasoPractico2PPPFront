@@ -17,4 +17,5 @@ export class ListaEstudiantesAnexo4Request {
   id?:Number;
   cedula?:String;
   nombre?:String;
+  estado?:String;
 }

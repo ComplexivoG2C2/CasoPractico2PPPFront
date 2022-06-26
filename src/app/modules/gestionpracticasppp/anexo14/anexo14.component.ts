@@ -87,8 +87,8 @@ export class Anexo14Component implements OnInit {
   numero?:Number;
   rows: FormArray;
   itemForm?: FormGroup;
+  anexo9ss:Anexo9[]=[];
   tutoracaItem1?:String
-
   constructor(private activatedRoute: ActivatedRoute,
               private _formBuilder: FormBuilder,
               private anexo7Service: Anexo7Service,
@@ -160,17 +160,40 @@ export class Anexo14Component implements OnInit {
 
     this.proyectoService.getSolicitudesbyid(Number(this.anexo7select.idProyectoPPP)).subscribe(dataP=>{
       this.proyectoselect=dataP
+      console.log("id"+this.proyectoselect.id)
+      // this.anexo9Service.getanexo9byproyecto(Number(this.anexo7select.idProyectoPPP)).subscribe(data=>{
+      //   this.anexo9ss=data
+      //   console.log("nombretutor"+this.nombres)
+      //   this.anexo9=this.anexo9ss[0];
+      //   console.log(this.anexo9.totalHoras+"horassssssssssssssssssss515")
+      // })
     })
     this.anexo9Service.getAnexo9byCedula(this.anexo7select.cedulaEstudiante+'').subscribe(data=>{
-      this.anexo9=data[0]
+
+      this.isexist=data.length!=0;
+      if(this.isexist==true){
+        this.anexo9=data[0]
+      }else{
+        Swal.fire({
+          title: 'El estudiante no tiene aun registradas sus actividades(A9)',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+      }
+
     })
+
+
 
 
     resultado?.forEach(value2 => {
       // @ts-ignore
       this.onAddRow(value2.item+"", value2.de+"")
     })
-
 
   }
 //Array
@@ -235,7 +258,7 @@ export class Anexo14Component implements OnInit {
     this.anexo14ob.siglascarrera=this.anexo7select.siglascarrera;
     this.anexo14ob.fechaEvaluacion=this.fechae;
     this.anexo14ob.totalHoras=parseInt(this.anexo9.totalHoras+'');
-    console.log(this.anexo14ob.totalHoras)
+    console.log(this.anexo14ob.totalHoras+"horassssssssssssssssssss")
     this.anexo14ob.tutoraca=this.rows.getRawValue();
     return this.anexo14ob;
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TutorEmpresarial} from "../../../models/tutorEmpresarial";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FechaempService} from "../../../services/fechaemp.service";
@@ -28,6 +28,7 @@ export class CreartutorempComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
+      // @ts-ignore
       this.idEmpresa=id;
       console.log(this.idEmpresa+"ide empresa")
       this.fechaempService.getSysdate().subscribe(value => {
@@ -36,11 +37,12 @@ export class CreartutorempComponent implements OnInit {
     })
 
     this.primerForm = this._formBuilder.group({
-      cedula:[''],
-      nombres:[''],
-      apellidos:[''],
-      correo:[''],
-      clave:['']
+      cedula:['',Validators.required],
+      nombres:['',Validators.required],
+      apellidos:['',Validators.required],
+      correo:['',Validators.required],
+      clave:['',Validators.required],
+      titulo:['',Validators.required]
     });
     this.segundoForm = this._formBuilder.group({
     });

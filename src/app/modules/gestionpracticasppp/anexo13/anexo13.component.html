@@ -131,6 +131,40 @@
 
 
 
+    <mat-step [stepControl]="tirFormGroup" label="Descripcion Detallada de las Actividades">
+      <form [formGroup]="tirFormGroup">
+        <mat-card class="example-card">
+          <mat-card-content style="text-align: center">
+
+            <mat-grid-list cols="4" rowHeight="8:6">
+
+              <div style="width: 100%;">
+                <strong>Informacion adicional del Estudiante</strong>
+
+
+                <mat-grid-tile colspan="4">
+                  <mat-form-field>
+                    <mat-label>Principios Empresa</mat-label>
+                    <textarea style="width: 100%"  matInput formControlName="dd"  placeholder="Principios..." required [(ngModel)]="anexo13.descripciondetallada"></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </div>
+            </mat-grid-list>
+
+
+
+          <mat-card-actions>
+            <div align="center">
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-step>
+
+
+
     <mat-step [stepControl]="thirthFormGroup" label="Dercargar y Subida del documento">
       <form [formGroup]="thirthFormGroup">
         <mat-card class="example-card">

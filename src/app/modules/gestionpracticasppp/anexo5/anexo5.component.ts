@@ -25,6 +25,7 @@ import {Anexo5empService} from "../../../services/anexo5emp.service";
 import {ProyectoempService} from "../../../services/proyectoemp.service";
 import {Anexo3empService} from "../../../services/anexo3emp.service";
 import {Anexo7} from "../../../models/anexo7";
+import {Empresa} from "../../../models/empresa";
 
 function loadFile(url:any, callback:any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -63,6 +64,9 @@ export class Anexo5Component implements OnInit {
   issloading = true;
   nombrEmpresa?:string;
   carrera?:string;
+
+  empresa:Empresa[]=[];
+  empresaseleccion:Empresa=new Empresa();
   responPPP?:string;
   thirdFormGroup?: FormGroup;
   myControlAnexe3 = new FormControl();
@@ -101,7 +105,10 @@ export class Anexo5Component implements OnInit {
         );
         console.log("entro al metodo"+this.filteredOptionsanexo3)
         this.issloading = false;
-
+this.empresaService.getEmpresaAll().subscribe(value1 => {
+  this.empresa=value1.filter(value=>value.id==this.idEmpresa)
+  this.empresaseleccion=this.empresa[0];
+})
       })
       });
 
@@ -164,10 +171,13 @@ export class Anexo5Component implements OnInit {
     this.fechaService.getSysdate().subscribe(value => {
       this.anexo5.fechaRespuesta= value.fecha;
       this.anexo5.idEmpresa= this.idEmpresa;
+      this.anexo5.cargo=this.empresaseleccion.titulorepresentante;
+      this.anexo5.gerentenombre=this.empresaseleccion.representante;
       this.anexo5.idProyectoPPP= this.proyecto;
       this.anexo5.carrera= this.carrera;
       this.anexo5.cedulaTutor=this.tutorSelect.cedula;
       this.anexo5.nombreTutor=this.tutorSelect.nombres;
+      this.anexo5.tituloTutor=this.tutorSelect.titulo;
       this.anexo5.responsablePPP= this.responPPP;
       this.anexo5.nombreEst=this.anexo3Select.nombresestudiante;
       this.anexo5.cedulaEst=this.anexo3Select.cedula;
@@ -305,8 +315,8 @@ anexo5C:Anexo5=new Anexo5();
         tutor:a.nombreTutor,
         cedulaTutor:a.cedulaTutor,
         estudiante:a.nombreEst,
-        gerenteNombre:a.idEmpresa,
-        cargo:a.idEmpresa
+        gerenteNombre:a.gerentenombre,
+        cargo:a.cargo,
       });
       try{
         doc.render();

@@ -34,17 +34,23 @@
           <div class="list-group" *ngSwitchCase="'AUT'" style="background: #455a64;color: white">
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/cordinadorvinculacion']"
                       routerLinkActive="active">> Asignar Coordinador Vinculación</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/registroconveniofirmar',persona.cedula,persona.nombrescompletos]"
+                    routerLinkActive="active">> Firmar Convenios</button>
           </div>
 <!--Cordinado de VC-->
           <div class="list-group" *ngSwitchCase="'CV'" style="background: #455a64;color: white">
 <!--              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/crearempresa',persona.id]"-->
 <!--                      routerLinkActive="active">> Registrar empresas</button>-->
-            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/registroconvenio',persona.cedula]"
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/registroconvenio',persona.cedula,persona.nombrescompletos]"
                     routerLinkActive="active">> Convenios con empresas</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verempresa']"
                     routerLinkActive="active">> Informe de empresas</button>
-            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verdescargar',persona.cedula,persona.nombrescompletos]"
-                    routerLinkActive="active">Historial de Procesos</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/lineaprocesos',persona.cedula]"
+                    routerLinkActive="active">- Ver estados de procesos</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo15mostrar']"
+                    routerLinkActive="active">- Lista de Informes finales (A15)</button>
+<!--            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verdescargar',persona.cedula,persona.nombrescompletos]"-->
+<!--                    routerLinkActive="active">Historial de Procesos</button>-->
           </div>
 
 
@@ -56,8 +62,10 @@
                       routerLinkActive="active">> Asignar Reposable de Practicas</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verresponsableppp',persona.cedula]"
                     routerLinkActive="active">> Ver Reposable de Practicas</button>
-            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verdescargar',persona.cedula,persona.nombrescompletos]"
-                    routerLinkActive="active">Ver Documentos</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo15mostrar']"
+                    routerLinkActive="active">- Lista de Informes finales (A15)</button>
+<!--            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/verdescargar',persona.cedula,persona.nombrescompletos]"-->
+<!--                    routerLinkActive="active">Ver Documentos</button>-->
           </div>
 
 <!--Tutor academico-->
@@ -69,7 +77,7 @@
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo81listartutoracademico',persona.cedula]"
                     routerLinkActive="active">- Notificacion de Cronograma de Actividades (8.1)</button>
 
-              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9tutoracademico']"
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9tutoracademico',persona.cedula,persona.nombrescompletos]"
                       routerLinkActive="active">- Consulta Registro de asistencia de estudiantes(A9)</button>
 
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo10',persona.id,persona.cedula,persona.nombrescompletos]"
@@ -78,14 +86,18 @@
                     routerLinkActive="active">- Ver Seguimientos Cronograma(A10)</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo11',persona.cedula,persona.nombrescompletos]"
                     routerLinkActive="active">- Registro de Visitas(A11)</button>
-            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo11listar',persona.cedula]"
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo11listar',persona.cedula,persona.nombrescompletos]"
                     routerLinkActive="active">- Ver Visitas(A11)</button>
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo12listado',persona.nombrescompletos]"
+                    routerLinkActive="active">- Ver Evaluaciones del Tutor Empresarial (A12)</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo14',persona.cedula,persona.nombrescompletos]"
                     routerLinkActive="active">- Evaluacion al Estudiante (A14)</button>
-
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo14listar',persona.cedula,persona.nombrescompletos]"
+                    routerLinkActive="active">- Lista de Evaluaciones a Estudiantes (A14)</button>
             <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo15',persona.cedula,persona.nombrescompletos]"
                     routerLinkActive="active">- Informe final (A15)</button>
-
+            <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo15listar',persona.cedula,persona.nombrescompletos]"
+                    routerLinkActive="active">- Lista de Informes finales (A15)</button>
           </div>
  <!--Tutor empresarial-->
           <div class="list-group" *ngSwitchCase="'TE'">
@@ -141,6 +153,7 @@
                       routerLinkActive="active">> Ver Respuesta a empresas</button>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo5responsableppp',persona.cedula]"
                       routerLinkActive="active">> Ver Tutores Academicos</button>
+
             </mat-expansion-panel>
 <!-- ////-->
             <mat-expansion-panel style="background: #455a64;color: white" (opened)="panelOpenState = true"
@@ -194,7 +207,15 @@
               </mat-expansion-panel-header>
               <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo9responsableppp',persona.cedula]"
                       routerLinkActive="active">> Ver Documentos</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo12listado',persona.nombrescompletos]"
+                      routerLinkActive="active">- Ver Evaluaciones del Tutor Empresarial (A12)</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo121verresponsable',persona.cedula]"
+                      routerLinkActive="active">- Certificados Emitidos (A12.1)</button>
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/gestionpracticasppp/anexo15mostrar']"
+                      routerLinkActive="active">- Lista de Informes finales (A15)</button>
             </mat-expansion-panel>
+
+
 
           </div>
 <!--Estudiante-->

@@ -153,6 +153,8 @@ id?:Number;
   onRemoveRow(rowIndex: number) {
     this.rows.removeAt(rowIndex);
   }
+  numero?:Number;
+
   createItemFormGroup(actividades:String): FormGroup {
     return this._formBuilder.group({
       fechaSeguimiento: ['', Validators.required],
@@ -252,7 +254,7 @@ id?:Number;
         nombreEstudiante:anexo10.nombreEstudiante,
         nombreEmpresa:anexo10.nombreEmpresa,
         tutorAcademico:anexo10.tutorAcademico,
-        tb2:anexo10.cronogramaAnexo10s,
+        tb1:anexo10.cronogramaAnexo10s,
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)

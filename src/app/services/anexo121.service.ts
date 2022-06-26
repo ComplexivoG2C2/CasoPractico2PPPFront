@@ -8,7 +8,7 @@ import {Anexo121} from "../models/anexo121";
 })
 export class Anexo121Service {
 
-  private urlEndPoint: string = 'http://localhost:8080/api/anexo12';
+  private urlEndPoint: string = 'http://localhost:8080/api/anexo121';
   private httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + JSON.parse(sessionStorage["user"]).token

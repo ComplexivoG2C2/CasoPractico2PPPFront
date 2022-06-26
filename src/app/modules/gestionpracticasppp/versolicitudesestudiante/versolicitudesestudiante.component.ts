@@ -312,6 +312,10 @@ export class VersolicitudesestudianteComponent implements OnInit {
       this.anexoresponse.fechaRespuesta=data.fecha;});
     this.anexoresponse.cedulaEstudiante=anexo3.cedula;
     this.anexoresponse.num_proceso=1;
+
+    ///tutoremp
+    this.anexoresponse.nombreTutoremp=this.proyecto[0].nombreTutoremp;
+    this.anexoresponse.titulo=this.proyecto[0].tituloTutoremp;
     return this.anexoresponse;
   }
 
@@ -387,6 +391,8 @@ export class VersolicitudesestudianteComponent implements OnInit {
         empresa:anexo8.nombreProyecto,
         siglas_carrera:anexo8.siglasCarrera,
         horas:anexo8.numeroHoras,
+        tutorempresa:anexo8.nombreTutoremp,
+        titulo:anexo8.titulo,
         nom_responsable:anexo8.nombreResponsable
       });
       try {

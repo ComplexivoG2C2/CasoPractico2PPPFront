@@ -32,5 +32,6 @@ export class Anexo13{
   principiosEmpresa?:String;
   misionEmpresa?:String;
   visionEmpresa?:String;
+  descripciondetallada?:String;
 
 }

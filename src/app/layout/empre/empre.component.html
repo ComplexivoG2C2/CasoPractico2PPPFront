@@ -95,6 +95,10 @@
       </div>
 
       <ng-container>
+        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/registroconveniofirmar2',empresa.id,empresa.nombre]">
+          <mat-icon>description</mat-icon>
+          <span>Documento de Convenio</span>
+        </button>
         <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/nuevasolicitud',empresa.id,empresa.nombre,empresa.representante,empresa.titulorepresentante]">
           <mat-icon>description</mat-icon>
           <span>Generar Solicitud</span>
@@ -105,10 +109,14 @@
           <mat-icon>description</mat-icon>
           <span>Crear Tutores</span>
         </button>
-        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/TutorEmpresarial']">
+        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/listarTutorEmpresarial']">
           <mat-icon>description</mat-icon>
-          <span>Tutor Empresarial</span>
+          <span>Listar Tutores</span>
         </button>
+<!--        <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/TutorEmpresarial']">-->
+<!--          <mat-icon>description</mat-icon>-->
+<!--          <span>Tutor Empresarial</span>-->
+<!--        </button>-->
         <button mat-button class="menu-button" [routerLink]="['/panelempresa/gestionpracticasppp/verestadoempresa', empresa.id, empresa.nombre]">
           <mat-icon>description</mat-icon>
           <span>Ver Estado de Solicitudes</span>

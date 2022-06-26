@@ -15,10 +15,9 @@ export class Anexo10 {
 
 export class CronogramaAnexo10Request {
 id?:Number;
-nro?:Number;
 fechaSeguimiento?:Date;
 actividades?:String;
-fechaFinPrevista?:String;
+fechaFinPrevista?:Date;
 porcentajeAvance?:Number;
 observaciones?:String;
 }

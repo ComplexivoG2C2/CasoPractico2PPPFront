@@ -55,12 +55,13 @@ function getBase64(file: any) {
 })
 export class Anexo13Component implements OnInit {
 
-
+  isexist?: boolean;
   issloading = true;
   isLinear = true;
   firstFormGroup?: FormGroup;
   secondFormGroup?: FormGroup;
   thirthFormGroup?: FormGroup;
+  tirFormGroup?: FormGroup;
   myControl = new FormControl();
   solicitudproyectos: Solicitudproyecto[]=[];
   pryectoselect: Solicitudproyecto = new Solicitudproyecto();
@@ -128,7 +129,9 @@ anexo9:Anexo9=new Anexo9();
     this.thirthFormGroup = this._formBuilder.group({
       docx: ['', Validators.required],
     });
-
+    this.tirFormGroup = this._formBuilder.group({
+     dd: ['', Validators.required],
+    });
 
   }
 
@@ -156,21 +159,49 @@ idpro?:Number;
           this.emp=da.filter(va=>va.id==this.tutoremp.empresa_id)
           this.empresa=this.emp[0];
           console.log("empresa"+this.empresa.ciudad)
-        // this.tutorempService.gettutorbyid(this.tutoremp.id).subscribe(da=>{
-        //   // @ts-ignore
-        //   this.emp=da
-        //   console.log("empresa1111"+da)
-        //   this.empresa=this.emp[0];
-        //   console.log("empresa2222"+this.empresa.id)
 
 
         // @ts-ignore
-        this.anexo9Service.getanexo9byproyecto(Number(this.proyecto13.id)).subscribe(value9=>{
-          this.anexo9s=value9.filter(v=>v.cedulaEstudiante==this.cedula);
-          this.anexo9=this.anexo9s[0];
+        // this.anexo9Service.getanexo9byproyecto(Number(this.proyecto13.id)).subscribe(value9=>{
+        //   this.anexo9s=value9;
+        //   this.anexo9=this.anexo9s[0];
+
+          this.anexo9Service.getanexo9byproyecto(Number(this.proyecto13.id)).subscribe(value9=>{
+            this.anexo9s=value9.filter(v=>v.cedulaEstudiante==this.cedula);
+
+            this.isexist=value9.length!=0;
+            if(this.isexist==true){
+              this.anexo9=this.anexo9s[0];
+              console.log(this.anexo9.nombreTutorAcademico+'ddddddddd')
+            }else{
+              Swal.fire({
+                title: 'Para realizar el informe final debe completar el Anexo(9)',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
+              })
+            }
+
+
+
 
 
           // @ts-ignore
+    //       this.anexo6Service.getAnexo6byId(this.proyecto13.id).subscribe(value7=>{
+    //
+    //         this.anexo6=value7
+    //         this.anexo13.cedulaTutorAcademico=this.anexo6.cedulaDocenteApoyo
+    //
+    //         console.log(this.anexo6+"cedulatutoracademico")
+    //       })
+    //       })
+    //     })
+    //     })
+    // })
+
           this.anexo6Service.getAnexo6All().subscribe(value7=>{
 
             this.anexo6s=value7.filter(v2=>v2.nombreDocenteReceptor==this.anexo9.nombreTutorAcademico)
@@ -178,10 +209,14 @@ idpro?:Number;
             this.anexo13.cedulaTutorAcademico=this.anexo6.cedulaDocenteApoyo
             console.log(this.anexo6+"cedulatutoracademico")
           })
-          })
         })
         })
+      })
     })
+
+
+
+
       // })
 
     // })
@@ -216,7 +251,7 @@ correoo?:String;
     this.anexo13.cedulaTutorEmpresarial=this.proyecto13.cedulaTutoremp;
 
     // @ts-ignore
-    this.anexo13.nombreEmpresa= this.proyecto13.nombreempresa;
+    this.anexo13.nombreEmpresa= this.proyecto13.nombre;
     // @ts-ignore
     this.anexo13.nombreTutorEmpresarial= this.proyecto13.nombreTutoremp;
     // @ts-ignore
@@ -229,8 +264,8 @@ correoo?:String;
     this.anexo13.cargoTutorEmpresarial=this.proyecto13.tituloTutoremp;
     this.anexo13.ubicacionEmpresa=this.empresa.ciudad;
     this.anexo13.teléfonoTutorEmpresarial=this.empresa.telefonoEmpresa;
-    // @ts-ignore
-    this.anexo13.horas=this.anexo9.totalHoras;
+
+    this.anexo13.horas=this.anexo9.totalHoras+"";
     this.anexo13.nombreTutorAcademico=this.anexo9.nombreTutorAcademico;
     // this.anexo13.cedulaTutorAcademico=this.anexo6.cedulaDocenteApoyo;
 
@@ -248,7 +283,7 @@ correoo?:String;
     var anexo:Anexo13=this.obtenerDatos();
     // console.log(anexo)
     var pipe:DatePipe = new DatePipe('en-US')
-    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/darwin-g/src/assets/docs/Anexo13..docx", function(
+    loadFile("https://raw.githubusercontent.com/ComplexivoG2C2/CasoPractico2PPPFront/leo/src/assets/docs/Anexo13.docx", function(
       // @ts-ignore
       error,
       // @ts-ignore
@@ -286,7 +321,8 @@ correoo?:String;
         actividadPrincipal:anexo.actividadPrincipal,
         principiosEmpresa:anexo.principiosEmpresa,
         misionEmpresa:anexo.misionEmpresa,
-        visionEmpresa:anexo.visionEmpresa
+        visionEmpresa:anexo.visionEmpresa,
+        descripciondetallada:anexo.descripciondetallada,
 
         /////todos los datos que se quieran enviar
       });
@@ -364,7 +400,7 @@ correoo?:String;
     this.anexo13Service.saveAnexo13(this.obtenerDatos()).subscribe(datos=>{
       // console.log(">."+this.anexo8Service.saveAnexo8(this.ontnerDatos()))
       Swal.fire({
-        title: 'Actividad Registrada....',
+        title: 'Informe Final subido',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },

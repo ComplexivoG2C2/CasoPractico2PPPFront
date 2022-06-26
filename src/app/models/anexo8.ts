@@ -5,9 +5,10 @@ export class Anexo8 {
   nombreEstudiante?:String;
   siglasCarrera?:String;
   nombreProyecto?:String;
-  nombreDirector?:String;
+  nombreTutoremp?:String;
   nombreRepresentante?:String;
   numeroHoras?:String;
+  titulo?:String;
   nombreResponsable?:String;
   fechaRecepcionEst?:Date;
   idProyectoPPP?:Number;

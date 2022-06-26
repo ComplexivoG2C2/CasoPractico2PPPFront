@@ -39,6 +39,7 @@ export class Anexo2Service {
     return this.http.get(this.urlEndPoint + "/allByProyecto/" + id, {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo2))
   }
 
+
   deleteAnexo2(id?: Number) {
     return this.http.delete<Solicitudproyecto>(this.urlEndPoint + '/' + id, {headers: this.httpHeaders})
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Anexo11} from "../models/anexo11";
+import {Anexo7} from "../models/anexo7";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class Anexo11Service {
   }
   getAnexo11by(idproyecto:Number):Observable<Anexo11[]>{
     return this.http.get(this.urlEndPoint+"/proyecto/"+idproyecto,{headers: this.httpHeaders}).pipe(map(Response => Response as Anexo11[]))
+  }
+  getAnexo11(): Observable<Anexo11[]> {
+    return this.http.get(this.urlEndPoint + "/all", {headers: this.httpHeaders}).pipe(map(Response => Response as Anexo11[]))
+
   }
 }

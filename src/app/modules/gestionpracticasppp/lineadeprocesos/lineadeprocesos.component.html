@@ -1,0 +1,123 @@
+<div *ngIf="issloading==false">
+
+  <mat-tab-group mat-align-tabs="center">
+
+    <mat-tab label="Procesos en Ejecucion">
+      <div *ngIf="isexist1">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
+            <mat-label>BUSCAR Proceso ppp Aprovados: </mat-label>
+            <input matInput   placeholder="FILTRAR" [formControl]="myControla">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <br>
+        <div *ngFor="let anexo of filteredOptionsa | async" align="center">
+          <mat-card class="example-card">
+            <table>
+              <th colspan="4">
+
+              </th>
+
+              <tr aria-colspan="4" style="background: #b1fcbf">
+                <td colspan="4" style="width: 100%">
+                  <mat-card-content>
+                    <strong>Dirigida a la Carrera: </strong>{{anexo.carrera}}<br>
+                    <strong>Perteneciente a la Empresa:</strong> {{anexo.nombreEmpresa}} <br>
+                    <strong>Fecha en la que envio la solicitud: </strong>{{anexo.fechaRespuesta | date:"longDate"}}<br>
+                    <strong>Emitida por el represetnate de la empresa: </strong>{{anexo.nombreRepresentanteEmp}}
+
+                  </mat-card-content>
+                </td>
+
+              </tr>
+            </table>
+
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Procesos Pendientes">
+      <div *ngIf="isexist3">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
+            <mat-label>BUSCAR Proceso ppp Pedientes: </mat-label>
+            <input matInput   placeholder="FILTRAR" [formControl]="myControlp">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <br>
+        <div *ngFor="let anexo of filteredOptionsp | async" align="center">
+          <mat-card class="example-card">
+            <table>
+              <th colspan="4">
+
+              </th>
+
+              <tr aria-colspan="4" style="background: #b7b1b1">
+                <td colspan="4" style="width: 100%">
+                  <mat-card-content>
+                    <strong>Dirigida a la Carrera: </strong>{{anexo.carrera}}<br>
+                    <strong>Perteneciente a la Empresa:</strong> {{anexo.nombreEmpresa}} <br>
+                    <strong>Fecha en la que envio la solicitud: </strong>{{anexo.fechaRespuesta | date:"longDate"}}<br>
+                    <strong>Emitida por el represetnate de la empresa: </strong>{{anexo.nombreRepresentanteEmp}}
+                  </mat-card-content>
+                </td>
+
+              </tr>
+            </table>
+
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Procesos Terminados">
+      <div *ngIf="isexist2">
+        <div align="center">
+          <mat-form-field appearance="outline" style="width: 70%">
+            <mat-label>BUSCAR procesos desiertos: </mat-label>
+            <input matInput   placeholder="FILTRAR" [formControl]="myControlr">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <br>
+        <div *ngFor="let anexo2 of filteredOptionsr | async" align="center">
+          <mat-card class="example-card">
+            <table>
+              <th colspan="4" style="color: #ffe6e5">
+
+              </th>
+              <tr aria-colspan="4" style="background: #cb7b7b">
+                <td colspan="4">
+                  <mat-card-content>
+                    <strong>Dirigida a la Carrera: </strong>{{anexo2.carrera}}<br>
+                    <strong>Perteneciente a la Empresa</strong> {{anexo2.nombreEmpresa}} <br>
+                    <strong>Fecha que envio la Solicitud: </strong>{{anexo2.fechaSolicitudEmp  | date:"longDate"}}<br>
+                    <strong>Emitida por el represetnate de la empresa: </strong>{{anexo2.nombreRepresentanteEmp}}
+                  </mat-card-content>
+                </td>
+
+              </tr>
+            </table>
+
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+<div *ngIf="isexist1==false">
+  <mat-card>
+    <mat-card-title>Aun no existe.</mat-card-title>
+  </mat-card>
+</div>
+
+<ng-container *ngIf="issloading">
+  <div class="bss-loader" style="margin: auto;">
+    <center>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </center>
+  </div>
+</ng-container>

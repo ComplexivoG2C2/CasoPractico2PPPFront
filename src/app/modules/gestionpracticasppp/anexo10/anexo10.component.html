@@ -81,7 +81,7 @@
                 <mat-grid-tile colspan="1"  style="border:1px solid #c7c7c7">
                   <mat-form-field class="example-full-width" appearance="outline">
 
-                    <input matInput type="date"  min="0" max="100" [formControl]="row.get('fechaSeguimiento')"  placeholder="dd/MM/yyyy" [required]>
+                    <input matInput type="date"  [formControl]="row.get('fechaSeguimiento')"  placeholder="dd/MM/yyyy" [required]>
                   </mat-form-field>
                 </mat-grid-tile>
 
@@ -96,7 +96,7 @@
                 <mat-grid-tile colspan="1"  style="border:1px solid #c7c7c7">
                   <mat-form-field class="example-full-width" appearance="outline">
 
-                    <input matInput type="date"  min="0" max="100" [formControl]="row.get('fechaFinPrevista')"  placeholder="dd/MM/yyyy" [required]>
+                    <input matInput type="date"  [formControl]="row.get('fechaFinPrevista')"  placeholder="dd/MM/yyyy" [required]>
                   </mat-form-field>
                 </mat-grid-tile>
 

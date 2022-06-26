@@ -7,7 +7,6 @@ import {map, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class RegistrocconvenioempService {
-
   private urlEndPoint: string = 'http://localhost:8080/api/registroconvenio';
 
   //Token cuando se entra como usuarios
@@ -32,5 +31,11 @@ export class RegistrocconvenioempService {
   getRegistroConvenioByid(id?:Number):Observable<RegistroConvenio>{
     return this.http.get(this.urlEndPoint+"/registroId/"+id,{headers: this.httpHeaders}).pipe(map(Response => Response as RegistroConvenio))
   }
+
+  updateregistro(regitroconvenio:RegistroConvenio): Observable<RegistroConvenio> {
+    console.log(regitroconvenio);
+    return this.http.put<RegistroConvenio>(this.urlEndPoint,regitroconvenio, {headers: this.httpHeaders})
+  }
+
 
 }

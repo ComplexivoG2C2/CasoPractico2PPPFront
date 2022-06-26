@@ -10,10 +10,10 @@
 
   <br>
   <div  *ngIf="isexist">
-    <div *ngFor="let anexo5 of filteredOptions | async">
+    <div *ngFor="let anexo11 of filteredOptions | async">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>Alumno Asignado: {{anexo5.nombreEst}}</mat-card-title>
+          <mat-card-title>Alumno Asignado: {{anexo11.nombreEst}}</mat-card-title>
 
         </mat-card-header>
         <mat-card-content>
@@ -32,8 +32,8 @@
                 <p style="color: white">--------</p>
               </td>
               <td colspan="1">
-                <strong>Carrera:</strong> {{anexo5.carrera}}<br>
-                <strong>Cedula del Estudiante:</strong> {{anexo5.cedulaEst}}<br>
+                <strong>Carrera:</strong> {{anexo11.carrera}}<br>
+                <strong>Cedula del Estudiante:</strong> {{anexo11.cedulaEst}}<br>
 
               </td>
               <td colspan="1">
@@ -49,8 +49,8 @@
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <div align="center">
-                    <button style="width: 50%;margin-top: 2px" mat-raised-button color="primary" (click)="getSafeUrl(anexo5.documento)"><mat-icon>preview</mat-icon>Visualizar Documento</button>
-                    <button style="width: 50%;margin-top: 2px;background: #ffc200" mat-raised-button (click)="convertFile(anexo5.documento)"><mat-icon>file_download</mat-icon>Descargar</button>
+                    <button style="width: 50%;margin-top: 2px" mat-raised-button color="primary" (click)="getSafeUrl(anexo11.documento)"><mat-icon>preview</mat-icon>Visualizar Documento</button>
+                    <button style="width: 50%;margin-top: 2px;background: #ffc200" mat-raised-button (click)="convertFile(anexo11.documento)"><mat-icon>file_download</mat-icon>Descargar</button>
                     <iframe [src]="safeUrl" style="width: 100%; height: 250px; border: none"></iframe>
                   </div>
                 </mat-expansion-panel>
@@ -66,7 +66,7 @@
   </div>
   <div *ngIf="isexist==false">
     <mat-card>
-      <mat-card-title>No tiene deignaciones aun</mat-card-title>
+      <mat-card-title>No hay visitas aun</mat-card-title>
     </mat-card>
   </div>
 </div>

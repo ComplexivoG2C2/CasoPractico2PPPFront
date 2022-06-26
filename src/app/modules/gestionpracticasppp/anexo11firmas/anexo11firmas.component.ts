@@ -127,9 +127,9 @@ export class Anexo11firmasComponent implements OnInit {
   convertFile(docum: any) {
     //console.log(docum)
     //Usage example:
-    var file = this.dataURLtoFile(docum, 'Anexo9.pdf');
+    var file = this.dataURLtoFile(docum, 'Anexo11.pdf');
     // console.log(file);
-    saveAs(file, 'Anexo9.pdf');
+    saveAs(file, 'Anexo11.pdf');
   }
 
   dataURLtoFile(dataurl: any, filename: any) {

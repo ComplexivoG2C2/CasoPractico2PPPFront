@@ -18,6 +18,7 @@ export class Anexo121{
   empresa?:String;
   tutorempPuntaje?:Number ;
   actividades?:ActividadesAnexo121Request[];
+  responsableppp?:String;
 
 }
 export class ActividadesAnexo121Request{

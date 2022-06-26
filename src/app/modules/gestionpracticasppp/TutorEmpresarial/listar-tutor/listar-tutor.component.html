@@ -1,13 +1,13 @@
 <script src="../../../../app.module.ts"></script>
 <div *ngIf="issloading==false">
-  <mat-card>
-    <mat-card-title>TUTORES</mat-card-title>
+  <div align="center" style="width: 80%">
+     <strong>TUTORES </strong>
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>BUSCAR POR: NOMBRES , CEDULA, CORREO</mat-label>
       <input matInput  placeholder="FILTRAR" [formControl]="myControl">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-  </mat-card>
+  </div>
   <br>
   <div *ngIf="isexist">
     <div *ngFor="let e of filteredOptions | async">
@@ -35,8 +35,7 @@
             <th ></th>
             <th></th>
             <th style="background: #455a64;color: white">INFORMACION</th>
-            <th></th>
-            <th style="background: #455a64;color: white">TUTOR</th>
+
             <tr aria-colspan="5">
               <td colspan="1" style="background: #455a64;color: white">
                 <mat-card-title style="padding: 5px">{{e.nombres}}{{e.apellidos}}</mat-card-title>
@@ -48,12 +47,10 @@
               <td colspan="1">
                 <strong>Cedula: </strong>{{e.cedula}}<br>
                 <strong>E-mail: </strong>{{e.correo}}<br>
-                <strong>Télefono de Contacto: </strong>{{e.estado}}<br>
+                <strong>Estado: </strong>{{e.estado}}<br>
+                <strong>Fecha de creacion: </strong>{{e.fecha_designacion | date:"longDate"}}<br>
               </td>
-              <td colspan="1">
-                <p style="color: white">--------
-                </p>
-              </td>
+
             </tr>
           </table>
 

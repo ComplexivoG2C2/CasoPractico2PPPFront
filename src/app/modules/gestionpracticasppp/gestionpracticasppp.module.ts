@@ -68,6 +68,12 @@ import { Anexo11firmasComponent } from './anexo11firmas/anexo11firmas.component'
 import { Anexo13Component } from './anexo13/anexo13.component';
 import { RegistroconvenioComponent } from './registroconvenio/registroconvenio.component';
 import { DescargardocumentoComponent } from './descargardocumento/descargardocumento.component';
+import { RegistroconveniofirmarComponent } from './registroconveniofirmar/registroconveniofirmar.component';
+import { RegistroconvenioempresaverComponent } from './registroconvenioempresaver/registroconvenioempresaver.component';
+import { Anexo15mostrartodosComponent } from './anexo15mostrartodos/anexo15mostrartodos.component';
+import { Anexo121responsablepppComponent } from './anexo121responsableppp/anexo121responsableppp.component';
+import {Anexo12listadoComponent} from "./anexo12listado/anexo12listado.component";
+import { LineadeprocesosComponent } from './lineadeprocesos/lineadeprocesos.component';
 
 
 const routes: Routes = [
@@ -88,9 +94,9 @@ const routes: Routes = [
   },{path:'verconvocatorias/:cedula', component: VerconvocatoriasComponent
 
     ////convenios
-  },{path:'registroconvenio/:cedula', component:RegistroconvenioComponent
-
-
+  },{path:'registroconvenio/:cedula/:nombres', component:RegistroconvenioComponent
+  },{path:'registroconveniofirmar/:cedula/:nombres', component:RegistroconveniofirmarComponent
+  },{path:'registroconveniofirmar2/:id/:nombres', component:RegistroconvenioempresaverComponent
     ////Anexo3
   },{path: 'anexo3/:cedula', component: Anexo3Component
   },{path:'estadossolicitud/:cedula', component:EstadossolicitudComponent
@@ -98,6 +104,8 @@ const routes: Routes = [
     //anexo 3.1 y 4
   },{path:'anexo32y4respuestaaempresa/:cedula', component:Anexo31y4respuestasComponent
   },{path:'anexo32y4listar/:cedula', component:Anexo31y4listarComponent
+  },{path:'lineaprocesos/:cedula', component:LineadeprocesosComponent
+
   //anexo5
   },{path:'asignarTutor/:id/:pro/:carrera/:responsable', component:Anexo5Component
   },{path:'anexo5listar/:nombres', component:Anexo5listarComponent
@@ -130,7 +138,7 @@ const routes: Routes = [
 
 ///anexo9
   },{path:'anexo9/:cedula/:nombres', component:Anexo9Component
-  },{path:'anexo9tutoracademico', component:Anexo9tutoracademicoComponent
+  },{path:'anexo9tutoracademico/:cedula/:nombres', component:Anexo9tutoracademicoComponent
   },{path:'anexo9responsableppp/:cedula', component:Anexo9responsablepppComponent
   },{path:'anexo9firmar/:nombres', component:Anexo9firmarComponent
 
@@ -140,20 +148,23 @@ const routes: Routes = [
 
 //anexo11
   },{path:'anexo11/:cedula/:nombres', component:Anexo11Component
-  },{path:'anexo11listar/:cedula', component:Anexo11listarComponent
+  },{path:'anexo11listar/:cedula/:nombres', component:Anexo11listarComponent
   },{path:'anexo11firmar/:nombres', component:Anexo11firmasComponent
 
     //anexo12
   },{path:'anexo12/:idpro/:nombre/:cedula', component:Anexo12Component
-
+  },{path:'anexo12listar/:nombres', component:Anexo12listarComponent
+  },{path:'anexo12listado/:nombres', component:Anexo12listadoComponent
     ////anexo12.1
-  },{path:'anexo121/:idpro/:nombre', component:Anexo121Component
-
+  },{path:'anexo121/:idpro/:nombre/:cedula', component:Anexo121Component
+  },{path:'anexo121verresponsable/:cedula', component:Anexo121responsablepppComponent
     //anexo14
   },{path:'anexo14/:cedula/:nombres', component:Anexo14Component
-
+  },{path:'anexo14listar/:cedula/:nombres', component:Anexo14listarComponent
 //anexo15
   },{path:'anexo15/:cedula/:nombres', component:Anexo15Component
+  },{path:'anexo15listar/:cedula/:nombres', component:Anexo15verComponent
+  },{path:'anexo15mostrar', component:Anexo15mostrartodosComponent
 
   },{path:'TutorEmpresarial', component: TutorEmpresarialComponent
   },{path:'creartutoremp/:id', component: CreartutorempComponent
@@ -228,7 +239,13 @@ const routes: Routes = [
     Anexo11firmasComponent,
     Anexo13Component,
     RegistroconvenioComponent,
-    DescargardocumentoComponent
+    DescargardocumentoComponent,
+    RegistroconveniofirmarComponent,
+    RegistroconvenioempresaverComponent,
+    Anexo15mostrartodosComponent,
+    Anexo121responsablepppComponent,
+    Anexo12listadoComponent,
+    LineadeprocesosComponent
   ],
   imports: [
     CommonModule,

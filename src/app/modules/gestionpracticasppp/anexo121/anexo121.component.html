@@ -1,5 +1,47 @@
 <div *ngIf="issloading==false">
   <mat-stepper orientation="vertical"  [linear]="isLinear" #stepper>
+
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel><div align="center" style="font-size: large">
+          <p class="title">Estudiantes a Cargo</p>
+        </div></ng-template>
+        <mat-card class="example-card">
+          <mat-card-content>
+
+            <mat-form-field appearance="outline" style="width: 90%">
+              <mat-label>BUSCAR...</mat-label>
+              <input matInput  placeholder="FILTRAR" [formControl]="myControl">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="40" class="example-viewport">
+              <mat-selection-list #shoes [multiple]="false" (selectionChange)="selectionAnexo12($event)" formControlName="anexo12">
+                <mat-list-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  Empresa: {{option.empresa}} :  Estudiante participante: {{option.cedulaEstudiante}} : {{option.nombresEstudiante}}
+                </mat-list-option>
+              </mat-selection-list>
+            </cdk-virtual-scroll-viewport>
+            <br>
+            <p style="font-size: medium">
+              Estudiante Evaluado: {{anexo12select.cedulaEstudiante}} : {{anexo12select.nombresEstudiante}}
+            </p>
+            <mat-divider></mat-divider>
+            <br>
+            <div>
+              <button style="width: 100%" mat-raised-button matStepperNext color="primary">	<mat-icon>expand_more</mat-icon></button>
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+      </form>
+    </mat-step>
+
+
+
+
+
+
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel><div align="center" style="font-size: large">

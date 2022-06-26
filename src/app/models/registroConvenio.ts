@@ -8,7 +8,7 @@ export class RegistroConvenio {
   nombreRepreEmpresa?:String;
   rucEmpresa?:String;
 
-  actividadEconomicaRuc?:ActividadEconomicaRuc[];
+  actividadEconomicaRuc?:ActividadEconomicaRucRequest[]=[];
 
   anioConvenio?:Number;
   nroEstudiantes?:Number;
@@ -36,7 +36,7 @@ export class RegistroConvenio {
   nombreRectorIsta?:String;
   fechaNombramiento?:Date;
 
-  actividadesRealizars?:ActividadesRealizar[];
+  actividadesRealizars?:ActividadesRealizarRequest[]=[];
 
   nroTutoresEmpresa?:Number;
   conclusionesConvenio?:String;
@@ -48,13 +48,13 @@ export class RegistroConvenio {
 
 }
 
-export class ActividadEconomicaRuc {
+export class ActividadEconomicaRucRequest{
   id?:Number;
   codActividad?:String;
   actividades?:String;
 }
 
-export class ActividadesRealizar {
+export class ActividadesRealizarRequest{
   id?:Number;
   actividadesRealizar?:String;
 }

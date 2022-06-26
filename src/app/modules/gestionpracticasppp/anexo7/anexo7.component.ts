@@ -355,7 +355,7 @@ fechaperiodo?:String;
     this.anexo7.horasCumplidas=this.numerominimo;
     this.anexo7.cronogramaActividadesAnexo7s=this.rows.getRawValue();
     this.anexo7.actividadesCumplirAnexo7s=this.rows2.getRawValue();
-    this.anexo7.nombreTutorEmp=this.proyectoselect.nombretutoremp;
+    this.anexo7.nombreTutorEmp=this.proyectoselect.nombreTutoremp;
     this.anexo7.tituloTutorEmp=this.proyectoselect.tituloTutoremp;
 
     this.anexo7.actividadesAnexo7s=this.proyectoselect.actividadeslistProyectos;
@@ -449,6 +449,8 @@ fechaperiodo?:String;
         ciclo: anexo7.ciclo,
         carrera:anexo7.carrera,
         horaInicio:anexo7.horasInicio,
+        tutorEmpresa:anexo7.nombreTutorEmp,
+        titulo:anexo7.tituloTutorEmp,
         lugarReunion:anexo7.lugarReunion,
         horafin:anexo7.horasFin,
         horas:anexo7.horasTotales,
@@ -456,7 +458,7 @@ fechaperiodo?:String;
         tb1:anexo7.actividadesCumplirAnexo7s,
         actividades:anexo7.actividadesAnexo7s,
         horasTotales: anexo7.horasTotales,
-        nombreResponsable: anexo7.nombreResponsable
+        nombreResponsable: anexo7.nombreResponsable,
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
