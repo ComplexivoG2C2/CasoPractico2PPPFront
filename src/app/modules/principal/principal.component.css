@@ -1,0 +1,92 @@
+.mat-toolbar{
+  background-color: #FAC02E;
+  color: white;
+  border-bottom: 0;
+
+}
+.mat-button{
+  color: white;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+
+
+.carousel-item{
+  height: 46rem;
+  background: #888888;
+  color:white;
+  position:relative;
+  background-position: center;
+  background-size: auto;
+  font-size: xx-large;
+
+}
+
+.container{
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: auto;
+  height: 100%;
+  padding-bottom: 50px;
+}
+
+.overlay-image {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.5%;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+}
+
+div > img {
+  display: block;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  min-height: 100%;
+  min-width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.color{
+
+  color: #FAC02E;
+}
+/*.texto{*/
+/*  border-top: 1px black;*/
+/*  border-bottom: 2px black;*/
+/*  border-right: 1px  black;*/
+/*  border-left: 1px black;*/
+/*  !*background-color: #06386B;*!*/
+/*  background-image: linear-gradient(-225deg, #2669a6 0%, #0081f6 100%);*/
+/*  background-image: linear-gradient(to top, #265183 0%, #012756 100%);*/
+/*  box-shadow: 12px 12px 12px #d91414;*/
+/*  border-radius: 25px;*/
+/*  color: #FAC02E;*/
+/*}*/
+.texto{
+  font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+  color: #FAC02E;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  background-image: linear-gradient(-225deg, #2669a6 0%, #0081f6 100%);
+  background-image: linear-gradient(to top, #265183 0%, #012756 100%);
+  margin: 0 0 25px;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 35px 0px 35px 0px;
+  -moz-border-radius: 35px 0px 35px 0px;
+  -webkit-border-radius: 35px 0px 35px 0px;
+}

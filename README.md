@@ -1,27 +1,62 @@
-# Complexivoc2
+# Caso Practico 2  Tercer Examen Complexivo ISTA
+<img src="https://www.tecazuay.edu.ec/assets/img/logo%20desenfocado4.png">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
-## Development server
+## Tabla de Contenidos
+1. [Información General](#general-info)
+2. [Tecnologias Implementadas](#technologies)
+3. [Instalación](#installation)
+4. [Coolaboradores](#collaboration)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+[//]: # (5. [FAQs]&#40;#faqs&#41;)
 
-## Code scaffolding
+### Información General
+Este proyecto fue desarrollado como la parte practica de el tercer examen complexoivo para la carrera de Desarrollo de Software del Instituto Superior Tecnologico del Azuay
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+El objetivo del proyecto es automatizar el proceso de Practicas PreProfesionales de los estudiantes del ISTA en todas las carreras desde el momento en que se genera el convenio con
+las empresas hasta el momento en que se genera el informe final de aprobación para los estudiantes, ademas el proyecto incluye una pagina web informativa para dar una introducción a todos los actores acerca de
+la forma de desarrollar el proceso de Practicas PreProfesionales en el ISTA
 
-## Build
+El flujo del programa consta de de 4 fases `1.-Firma de Convenios`, `2.-Postulación`, `3.-Desarrollo de Prácticas`, `4.-Acreditación` las mismas que fueron subdivididas en 7 modulos para su mejor desarrollo
+`Página web informativa APP móvil informativa`
+`Gestión de coordinación de Vinculación`
+`Gestión de coordinación de carrera:`
+`Gestión Empresa:`
+`Gestión de Responsable de PPP`
+`Gestión de Tutor académico`
+`Gestión Estudiantes`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### Tecnologias Implementadas
+En el desarrollo del proyecto se implementó la tecnologia de Angular en la versión Angular CLI version 13.3.1. lo cual facilito el proceso de desarrollo
+, ademas se implementaron tecnologias Git para facilitar el proceso de desarrollo coolaborativo trabajando en ramas individuales.
+Para el desarrollo del codigo como tal se realizo el consumo de servicios web desde la aplicación backend relacionada y en el desarrollo del front Angular Material.
+### Instalación
+Para el correcto funcionamiento del Proyecto se debe clonar el proyecto usando los siguientes comandos en el directorio de su preferencia :
+```
+git init 
+git clone https://github.com/ComplexivoG2C2/CasoPractico2PPPFront.git
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Una vez clonado el repositorio nos ubicamos en su respectiva carpeta y ejecutamos el comando para instalar las dependencias como se muestra a continuación:
+```
+cd CasoPractico2PPPFront
+npm install --force
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ejecutado ese comando tendremos todas las dependencias instaladas en el programa y podremos desplegarlo de manera local con el comando y se nos desplegara en la ruta `http://localhost:4200/`, en caso de detectar cualquier cambio en el codigo la página web se recargara automaticamente:
+```
+ng serve --o
+```
+### Coolaboradores
+En el desarrollo de este proyecto participaron 10 integrantes:
+* Leonardo Guartambel
+* Daniel Barros
+* Anthony Cardenas
+* Jose Contreras
+* Ana Medina
+* Oscar Cardenas
+* Darwin Tacury
+* Cisne Ludisaca
+* Fernando Andrade
+* Darwin González

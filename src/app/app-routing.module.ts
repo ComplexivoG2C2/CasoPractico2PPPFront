@@ -3,9 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import {UserComponent} from "./layout/user/user.component";
 import {EmpreComponent} from "./layout/empre/empre.component";
 import {TutorempreComponent} from "./layout/tutorempre/tutorempre.component";
+import {PrincipalComponent} from "./modules/principal/principal.component";
+import {InstitucionComponent} from "./modules/principal/institucion/institucion.component";
 
 const routes: Routes = [
-  {path:'',redirectTo:'/auth/inicio_sesion',pathMatch:'full'},
+  {path: "inicio", component:PrincipalComponent},
+
+  {path: "institucion", component:InstitucionComponent},
+  {path:"login",redirectTo:'/auth/inicio_sesion',pathMatch:'full'},
+  {path:'',redirectTo:'inicio',pathMatch:'full'},
   {path:'auth',
     loadChildren:()=>
       import('./modules/auth/auth.module').then((m)=>m.AuthModule)

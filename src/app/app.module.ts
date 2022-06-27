@@ -9,6 +9,10 @@ import {FooterComponent} from "./layout/footer/footer.component";
 import {MaterialModule} from "../material/material.module";
 import {EmpreComponent } from './layout/empre/empre.component';
 import { TutorempreComponent } from './layout/tutorempre/tutorempre.component';
+import { CardsComponent } from './modules/principal/cards/cards.component';
+import { ContactosComponent } from './modules/principal/contactos/contactos.component';
+import { InstitucionComponent } from './modules/principal/institucion/institucion.component';
+import {PrincipalComponent} from "./modules/principal/principal.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import { TutorempreComponent } from './layout/tutorempre/tutorempre.component';
     FooterComponent,
     EmpreComponent,
     TutorempreComponent,
+    PrincipalComponent,
+    CardsComponent,
+    ContactosComponent,
+    InstitucionComponent,
   ],
   imports: [
     BrowserModule,
